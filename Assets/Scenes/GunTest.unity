@@ -916,6 +916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxAmmo: 10
   fireRate: 0.4
+  currentAmmo: 0
   mainCamera: {fileID: 173689908}
   fireArea: {fileID: 1667439098}
   bullet: {fileID: 405267122}

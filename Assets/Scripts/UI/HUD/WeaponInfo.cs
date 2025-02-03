@@ -18,9 +18,4 @@ public class WeaponInfo : MonoBehaviour
     {
         ammoCount.SetText(currentAmmo + "/" + mAmmo);
     }
-
-    void Start()
-    {
-        UpdateWeapon("Handgun",6,10);
-    }
 }

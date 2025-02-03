@@ -5,12 +5,15 @@ public class Handgun :Gun
 {
     float lastFired;
     public Camera mainCamera;
+    WeaponInfo weaponInfo;
     void Awake()
     {
         mainCamera = Camera.main;
+        weaponInfo = FindFirstObjectByType<WeaponInfo>();
     }
     private void Start()
     {
+        weaponInfo.UpdateWeapon("Handgun",currentAmmo,maxAmmo);
         currentAmmo = maxAmmo;
     }
 
@@ -41,12 +44,14 @@ public class Handgun :Gun
                 damagable.Damage(20f);
                 --currentAmmo;
                 Debug.Log(currentAmmo);
+                weaponInfo.UpdateAmmo(currentAmmo);
             }
         }
     }
     protected override void Reload()
     {
         currentAmmo = maxAmmo;
+        weaponInfo.UpdateAmmo(currentAmmo);
     }
     private void OnDrawGizmos()
     {
