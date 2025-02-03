@@ -28,7 +28,6 @@ public class PauseMenu : MonoBehaviour
     void PauseGame()
     {
         gamePaused = true;
-        Time.timeScale = 0f;
         pauseCanvas.enabled = true;
         //disable player input
     }
@@ -36,22 +35,19 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         gamePaused = false;
-        Time.timeScale = 1f;
         pauseCanvas.enabled = false;
         //enable player input
     }
 
     public void Dead()
     {
-        deathCanvas.enabled = true;
-        Time.timeScale = 0f;
+        //deathCanvas.enabled = true;
     }
 
     public void Respawn()
     {
         //respawn pkayer
-        deathCanvas.enabled = false;
-        Time.timeScale = 1f;
+        //deathCanvas.enabled = false;
     }
 
     public void QuitToMainMenu()
