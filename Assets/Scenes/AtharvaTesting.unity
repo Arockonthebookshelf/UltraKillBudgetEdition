@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 66931645}
   - component: {fileID: 66931646}
   m_Layer: 0
-  m_Name: GameMenu
+  m_Name: InGameMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -300,8 +300,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c923008b8466f624fb545287e9a1e2a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseCanvas: {fileID: 1818731929}
-  deathCanvas: {fileID: 0}
+  pauseMenu: {fileID: 1818731925}
+  deathMenu: {fileID: 0}
 --- !u!1 &118641455
 GameObject:
   m_ObjectHideFlags: 0
@@ -2039,7 +2039,7 @@ GameObject:
   - component: {fileID: 1818731928}
   - component: {fileID: 1818731927}
   m_Layer: 0
-  m_Name: PauseCanvas
+  m_Name: PauseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
