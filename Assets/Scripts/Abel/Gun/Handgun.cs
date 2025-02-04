@@ -13,7 +13,10 @@ public class Handgun :Gun
     }
     private void Start()
     {
-        weaponInfo.UpdateWeapon("Handgun",currentAmmo,maxAmmo);
+        if (weaponInfo != null)
+        {
+            weaponInfo.UpdateWeapon("Handgun",currentAmmo,maxAmmo);
+        }
         currentAmmo = maxAmmo;
     }
 
@@ -38,11 +41,11 @@ public class Handgun :Gun
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
+            --currentAmmo;
             IDamagable damagable = hit.collider.GetComponent<IDamagable>();
             if (damagable != null)
             {
                 damagable.Damage(20f);
-                --currentAmmo;
                 Debug.Log(currentAmmo);
                 weaponInfo.UpdateAmmo(currentAmmo);
             }
@@ -51,7 +54,10 @@ public class Handgun :Gun
     protected override void Reload()
     {
         currentAmmo = maxAmmo;
-        weaponInfo.UpdateAmmo(currentAmmo);
+        if (weaponInfo != null)
+        {
+            weaponInfo.UpdateAmmo(currentAmmo);
+        }
     }
     private void OnDrawGizmos()
     {
