@@ -59,7 +59,7 @@ public class BasicEnemyScript : MonoBehaviour, IEnemy
         currentState = EnemyState.Patrol;
         currentTarget = patrolPointA;
 
-        Time.timeScale = 0.5f;
+        //Time.timeScale = 0.5f;
     }
 
     void Update()
