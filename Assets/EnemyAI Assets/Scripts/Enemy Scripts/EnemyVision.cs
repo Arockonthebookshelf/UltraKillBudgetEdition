@@ -26,10 +26,10 @@ public class EnemyVision : MonoBehaviour
             RaycastHit hit;
             direction = (player.transform.position - transform.position).normalized;
 
-            if (Physics.Raycast(transform.position, direction, out hit, rayRangeLength, (~enemyHead & ~enemy)))
+            if (Physics.Raycast(transform.position, direction, out hit, rayRangeLength, (~enemyHead)))
             {
-                //isVisible = hit.transform.gameObject == player;
-                isVisible = hit.collider.CompareTag("Player");
+                isVisible = hit.transform.gameObject == player;
+                //isVisible = hit.collider.CompareTag("Player");
                 Debug.Log(hit.collider.name);
             }
             else
@@ -38,7 +38,7 @@ public class EnemyVision : MonoBehaviour
             }
             Debug.DrawRay(transform.position, direction * rayRangeLength, isVisible ? Color.green : Color.red);
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(5f);
         }
     }
 }
