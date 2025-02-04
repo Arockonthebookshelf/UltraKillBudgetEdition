@@ -4,37 +4,37 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    [Header("Canvas Refrences")]
-    [SerializeField] Canvas mainCanvas;
-    [SerializeField] Canvas levelSelectCanvas;
-    [SerializeField] Canvas settingsCanvas;
-    [SerializeField] Canvas creditsCanvas;
+    [Header("Menu Refrences")]
+    [SerializeField] GameObject mainMenu;
+    [SerializeField] GameObject levelSelectMenu;
+    [SerializeField] GameObject settingsMenu;
+    [SerializeField] GameObject creditsMenu;
 
 
     public void LevelSelect()
     {
-        mainCanvas.enabled = false;
-        levelSelectCanvas.enabled = true;
+        mainMenu.SetActive(false);
+        levelSelectMenu.SetActive(true);
     }
 
     public void Settings()
     {
-        mainCanvas.enabled = false;
-        settingsCanvas.enabled = true;
+        mainMenu.SetActive(false);
+        settingsMenu.SetActive(true);
     }
 
     public void Credits()
     {
-        mainCanvas.enabled = false;
-        creditsCanvas.enabled = true;
+        mainMenu.SetActive(false);
+        creditsMenu.SetActive(true);
     }
 
     public void ReturnToMainMenu()
     {
-        mainCanvas.enabled = true;
-        settingsCanvas.enabled = false;
-        levelSelectCanvas.enabled = false;
-        creditsCanvas.enabled = false;
+        mainMenu.SetActive(true);
+        settingsMenu.SetActive(false);
+        levelSelectMenu.SetActive(false);
+        creditsMenu.SetActive(false);
     }
 
     public void QuitGame()

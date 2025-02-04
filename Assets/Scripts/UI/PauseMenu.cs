@@ -4,14 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] Canvas pauseCanvas;
-    [SerializeField] Canvas deathCanvas;
+    [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject deathMenu;
 
     bool gamePaused;
 
     void Update()
     {
-        //redo inputs using new input system
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             if(!gamePaused)
@@ -28,26 +27,26 @@ public class PauseMenu : MonoBehaviour
     void PauseGame()
     {
         gamePaused = true;
-        pauseCanvas.enabled = true;
+        pauseMenu.SetActive(true);
         //disable player input
     }
 
     public void Resume()
     {
         gamePaused = false;
-        pauseCanvas.enabled = false;
+        pauseMenu.SetActive(false);
         //enable player input
     }
 
     public void Dead()
     {
-        //deathCanvas.enabled = true;
+        if(deathMenu != null) deathMenu.SetActive(true);
     }
 
     public void Respawn()
     {
         //respawn pkayer
-        //deathCanvas.enabled = false;
+        if(deathMenu != null) deathMenu.SetActive(false);
     }
 
     public void QuitToMainMenu()
