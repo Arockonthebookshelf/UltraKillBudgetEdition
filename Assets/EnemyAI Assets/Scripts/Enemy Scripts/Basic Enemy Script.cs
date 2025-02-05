@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BasicEnemyScript : MonoBehaviour, IEnemy
+public class BasicEnemyScript : MonoBehaviour, IEnemy,IDamagable
 {
     public enum EnemyState
     {
@@ -200,9 +200,22 @@ public class BasicEnemyScript : MonoBehaviour, IEnemy
         animator.SetBool("isWalk", false); 
 
     }
-    void Damage(float damage, Collider hitCollider)
+    public void Damage(float damage, Collider hitCollider)
     {
-
+        if (hitCollider == null)
+        {
+            return;
+        }
+        Debug.Log("Enemy hurt");
+            if(hitCollider.gameObject == Head)
+            {
+                //health -= damage * head shoot  multiplier
+        Debug.Log("Enemy  head hurt");
+            }
+            else
+            {
+                // health -= damage;
+            }
     }
     //void PlayHurt()
     //{
