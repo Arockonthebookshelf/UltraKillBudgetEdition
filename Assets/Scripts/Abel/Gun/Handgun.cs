@@ -45,7 +45,7 @@ public class Handgun :Gun
             IDamagable damagable = hit.collider.GetComponent<IDamagable>();
             if (damagable != null)
             {
-                damagable.Damage(20f);
+                damagable.Damage(20f,hit.collider);
                 Debug.Log(currentAmmo);
                 weaponInfo.UpdateAmmo(currentAmmo);
             }

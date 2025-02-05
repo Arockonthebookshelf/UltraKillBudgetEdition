@@ -49,7 +49,7 @@ public class Shotgun : Gun
             --currentAmmo;
             if (damagable != null)
             {
-                damagable.Damage(20f);
+               // damagable.Damage(20f);
             }
         }
         
