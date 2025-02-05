@@ -41,15 +41,16 @@ public class Handgun :Gun
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
+            Debug.Log(hit.collider.name);
             --currentAmmo;
             IDamagable damagable = hit.collider.GetComponent<IDamagable>();
             if (damagable != null)
             {
                 damagable.Damage(20f,hit.collider);
                 Debug.Log(currentAmmo);
-                weaponInfo.UpdateAmmo(currentAmmo);
             }
         }
+                weaponInfo.UpdateAmmo(currentAmmo);
     }
     protected override void Reload()
     {

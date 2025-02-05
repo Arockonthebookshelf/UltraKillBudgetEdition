@@ -32,7 +32,8 @@ public class BasicEnemyScript : MonoBehaviour, IEnemy,IDamagable
     [SerializeField] private float attackRange = 2f;
 
     [Header("Enemy Data", order = 1)]
-    [SerializeField] private int health = 100;
+    [SerializeField] private float health = 100;
+    [SerializeField] private float headShotDamage = 100;
 
     private Animator animator;
     public bool isDeath;
@@ -68,6 +69,10 @@ public class BasicEnemyScript : MonoBehaviour, IEnemy,IDamagable
     void Update()
     {
         UpdateState();
+        if (health < 0)
+        {
+            Death();
+        }
 
     }
 
@@ -150,13 +155,14 @@ public class BasicEnemyScript : MonoBehaviour, IEnemy,IDamagable
             alreadyAttacked = true;
             Debug.Log("Enemy attacks the player!");
 
-
             Invoke(nameof(ResetAttack), 5f);
         }
     }
 
     public void Death()
     {
+        isDeath = true;
+
         animator.SetTrigger("isDeath");
         if (isHeadshot)
         {
@@ -167,6 +173,7 @@ public class BasicEnemyScript : MonoBehaviour, IEnemy,IDamagable
             Destroy(gameObject, 5f);
             Destroy(head, 5f);
         }
+        Destroy(gameObject, 5f);
     }
     void ResetAttack()
     {
@@ -207,15 +214,19 @@ public class BasicEnemyScript : MonoBehaviour, IEnemy,IDamagable
             return;
         }
         Debug.Log("Enemy hurt");
-            if(hitCollider.gameObject == Head)
-            {
-                //health -= damage * head shoot  multiplier
-        Debug.Log("Enemy  head hurt");
-            }
-            else
-            {
-                // health -= damage;
-            }
+        if(hitCollider.gameObject == Head)
+        {
+            isDeath = true;
+            isHeadshot = true;
+            health -= damage * headShotDamage;
+            Death();
+            Debug.Log("Enemy  head hurt");
+        }
+        else
+        {
+            health -= damage;
+            //PlayHurt();
+        }
     }
     //void PlayHurt()
     //{
