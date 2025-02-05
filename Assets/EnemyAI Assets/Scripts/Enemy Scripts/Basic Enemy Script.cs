@@ -1,4 +1,6 @@
 using System;
+using System.Net.NetworkInformation;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -34,6 +36,7 @@ public class BasicEnemyScript : MonoBehaviour, IEnemy,IDamagable
     [Header("Enemy Data", order = 1)]
     [SerializeField] private float health = 100;
     [SerializeField] private float headShotDamage = 100;
+    [SerializeField] private LayerMask enemyHead;
 
     private Animator animator;
     public bool isDeath;
@@ -41,8 +44,10 @@ public class BasicEnemyScript : MonoBehaviour, IEnemy,IDamagable
     public GameObject Head;
     public GameObject SeprateHead;
     public Transform headTransform;
+    private Collider Collider;
 
     private EnemyVision enemyVision;
+    
 
     private void Awake()
     {
@@ -58,6 +63,7 @@ public class BasicEnemyScript : MonoBehaviour, IEnemy,IDamagable
     void Start()
     {
         enemyVision = FindAnyObjectByType<EnemyVision>();
+        Collider = GetComponent<Collider>();
         isDeath = false;
 
         currentState = EnemyState.Patrol;
@@ -79,6 +85,7 @@ public class BasicEnemyScript : MonoBehaviour, IEnemy,IDamagable
     void UpdateState()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        
 
         // Update state based on distance to player
         if (distanceToPlayer <= attackRange && enemyVision.isVisible)
@@ -152,10 +159,20 @@ public class BasicEnemyScript : MonoBehaviour, IEnemy,IDamagable
 
         if (!alreadyAttacked)
         {
+        Vector3 direction = (player.transform.position - transform.position).normalized;
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, direction, out hit, 2, (~enemyHead)))
+        {
+            IDamagable damagable = hit.collider.GetComponentInParent<IDamagable>();
+            if (damagable != null)
+            {
+                damagable.Damage(20f, hit.collider);
+            }
+        }
             alreadyAttacked = true;
             Debug.Log("Enemy attacks the player!");
 
-            Invoke(nameof(ResetAttack), 5f);
+            Invoke(nameof(ResetAttack), 1f);
         }
     }
 
@@ -213,17 +230,18 @@ public class BasicEnemyScript : MonoBehaviour, IEnemy,IDamagable
         {
             return;
         }
-        Debug.Log("Enemy hurt");
-        if(hitCollider.gameObject == Head)
+        Debug.Log(hitCollider.name);
+        if(hitCollider.name == headTransform.name)
         {
+            Debug.Log("Enemy  head hurt");
             isDeath = true;
             isHeadshot = true;
             health -= damage * headShotDamage;
             Death();
-            Debug.Log("Enemy  head hurt");
         }
         else
         {
+            Debug.Log("Enemy hurt");
             health -= damage;
             //PlayHurt();
         }
