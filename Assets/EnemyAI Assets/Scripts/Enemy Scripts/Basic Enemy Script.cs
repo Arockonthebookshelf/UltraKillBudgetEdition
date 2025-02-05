@@ -31,6 +31,9 @@ public class BasicEnemyScript : MonoBehaviour, IEnemy
     [SerializeField] private float chaseRange = 10f;
     [SerializeField] private float attackRange = 2f;
 
+    [Header("Enemy Data", order = 1)]
+    [SerializeField] private int health = 100;
+
     private Animator animator;
     public bool isDeath;
     public bool isHeadshot;
@@ -195,6 +198,10 @@ public class BasicEnemyScript : MonoBehaviour, IEnemy
         animator.SetBool("isChase", false);
 
         animator.SetBool("isWalk", false); 
+
+    }
+    void Damage(float damage, Collider hitCollider)
+    {
 
     }
     //void PlayHurt()

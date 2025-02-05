@@ -13,7 +13,7 @@ public class TestSubject : MonoBehaviour , IDamagable
     {
         
     }
-    public void Damage(float damage)
+    public void Damage(float damage, Collider hitCollider)
     {
         Debug.Log(damage);
     }
