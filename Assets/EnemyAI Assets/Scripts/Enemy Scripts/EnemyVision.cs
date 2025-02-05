@@ -11,7 +11,7 @@ public class EnemyVision : MonoBehaviour
     [SerializeField] private GameObject player;
     Vector3 direction;
 
-    public LayerMask enemyHead, enemy;
+    public LayerMask enemyHead;
 
     private void Start()
     {
@@ -38,7 +38,7 @@ public class EnemyVision : MonoBehaviour
             }
             Debug.DrawRay(transform.position, direction * rayRangeLength, isVisible ? Color.green : Color.red);
 
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(3f);
         }
     }
 }
