@@ -3,13 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags:
-  - Head
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - whatIsGround
+  - WhatisGround
   - Water
   - UI
   - 
@@ -26,8 +25,8 @@ TagManager:
   - 
   - 
   - 
-  - Enemy
-  - EnemyHead
+  - 
+  - 
   - 
   - 
   - 
