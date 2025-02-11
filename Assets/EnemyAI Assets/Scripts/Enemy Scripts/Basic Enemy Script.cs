@@ -34,8 +34,8 @@ public class BasicEnemyScript : MonoBehaviour, IEnemy
     private Animator animator;
     public bool isDeath;
     public bool isHeadshot;
-    public GameObject Head;
-    public GameObject SeprateHead;
+    public GameObject Head;//head which will get delete
+    public GameObject SeprateHead;// head which will spawn
     public Transform headTransform;
 
     private EnemyVision enemyVision;

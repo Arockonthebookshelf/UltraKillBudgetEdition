@@ -9,9 +9,10 @@ public class EnemyVision : MonoBehaviour
 
     [Header("Player Detection")]
     [SerializeField] private GameObject player;
+    [SerializeField] private float rayInterval;
     Vector3 direction;
 
-    public LayerMask enemyHead, enemy;
+    public LayerMask enemyHead;
 
     private void Start()
     {
@@ -26,7 +27,7 @@ public class EnemyVision : MonoBehaviour
             RaycastHit hit;
             direction = (player.transform.position - transform.position).normalized;
 
-            if (Physics.Raycast(transform.position, direction, out hit, rayRangeLength, (~enemyHead)))
+            if (Physics.Raycast(transform.position, direction, out hit, rayRangeLength, ~enemyHead))
             {
                 isVisible = hit.transform.gameObject == player;
                 //isVisible = hit.collider.CompareTag("Player");
@@ -38,7 +39,7 @@ public class EnemyVision : MonoBehaviour
             }
             Debug.DrawRay(transform.position, direction * rayRangeLength, isVisible ? Color.green : Color.red);
 
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(rayInterval);
         }
     }
 }
