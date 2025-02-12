@@ -22,7 +22,6 @@ public abstract class BaseEnemy : MonoBehaviour
     [Header("Detection Ranges")]
     [SerializeField] protected float chaseRange = 10f;
     [SerializeField] protected float attackRange = 2f;
-    [SerializeField] protected float ShootRange = 10f;
 
     protected Animator animator;
     protected bool isDead = false;
@@ -34,14 +33,18 @@ public abstract class BaseEnemy : MonoBehaviour
     [SerializeField] protected Transform headTransform;
 
     private EnemyVision enemyVision;
+    protected float distanceToPlayer;
+
+    // Virtual properties so derived enemies can override detection thresholds.
+    protected virtual float AttackStateRange => attackRange;
+    protected virtual float ChaseStateRange => chaseRange;
 
     protected virtual void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        enemyVision = FindAnyObjectByType<EnemyVision>();
+        enemyVision = GetComponent<EnemyVision>();
     }
 
     void Start()
@@ -54,10 +57,9 @@ public abstract class BaseEnemy : MonoBehaviour
     {
         if (isDead) return;
 
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (distanceToPlayer <= attackRange && enemyVision.isVisible
-            || distanceToPlayer < ShootRange && enemyVision.isVisible)
+        if (distanceToPlayer <= attackRange && enemyVision.isVisible)
         {
             currentState = EnemyState.Attack;
         }
@@ -110,6 +112,13 @@ public abstract class BaseEnemy : MonoBehaviour
 
     protected virtual void Chase()
     {
+        // Smoothly rotate toward the player.
+        Vector3 direction = (player.position - transform.position).normalized;
+        if (direction != Vector3.zero)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        }
         agent.SetDestination(player.position);
     }
 
