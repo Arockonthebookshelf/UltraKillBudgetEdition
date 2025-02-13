@@ -5,6 +5,7 @@ public class Interactor : MonoBehaviour
     InteractionPrompt interactionPrompt;
     [SerializeField] Transform playerCameraTransform;
     [SerializeField] float interactRange;
+    [SerializeField] int clearanceLevel;
     float pressedTime;
     float interactionProgress;
 
@@ -22,15 +23,15 @@ public class Interactor : MonoBehaviour
             {
                 if(interactObj.Visible())
                 {
-                interactionPrompt.UpdateInteractionPrompt(interactObj.canInteract() , interactionProgress,interactObj.InteractionText());
+                interactionPrompt.UpdateInteractionPrompt(interactObj.canInteract(clearanceLevel) , interactionProgress,interactObj.InteractionText());
                 interactionPrompt.ToggleDisplay(true);
-                if(Input.GetKey(KeyCode.E) && interactObj.canInteract())
+                if(Input.GetKey(KeyCode.E) && interactObj.canInteract(clearanceLevel))
                 {
                     pressedTime += Time.deltaTime;
-                    Debug.Log(pressedTime);
                         if(pressedTime >= interactObj.TimeToInteract())
                             {
                                 interactObj.CompleteInteraction();
+                                interactionPrompt.ToggleDisplay(false);
                             }
                         interactionProgress = pressedTime / interactObj.TimeToInteract();
                         Mathf.Clamp(interactionProgress, 0 , 1);

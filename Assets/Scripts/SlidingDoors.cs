@@ -1,8 +1,12 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class SlidingDoors : MonoBehaviour
 {
+[SerializeField] List<Material> unlockedMaterial;
+[SerializeField] List<Material> lockedMaterial;
+MeshRenderer meshRenderer;
 Animator slidingDoorsAnimator;
 bool doorsOpen;
 public bool locked;
@@ -10,6 +14,19 @@ public bool locked;
 void Awake()
 {
     slidingDoorsAnimator = GetComponent<Animator>();
+    meshRenderer = GetComponentInChildren<MeshRenderer>();
+}
+
+void Start()
+{
+       if(locked)
+       {
+            meshRenderer.SetMaterials(lockedMaterial);
+       }
+       else
+       {
+            meshRenderer.SetMaterials(unlockedMaterial);
+       }
 }
 
 void OnTriggerEnter(Collider other)
@@ -30,4 +47,14 @@ void OnTriggerExit(Collider other)
     }
 }
 
+public void UnlockDoor()
+{
+    locked = false;
+    meshRenderer.SetMaterials(unlockedMaterial);
+}
+public void LockDoor()
+{
+    locked = true;
+    meshRenderer.SetMaterials(lockedMaterial);
+}
 }

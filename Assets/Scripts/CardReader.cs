@@ -5,24 +5,24 @@ public class CardReader : MonoBehaviour , IInteractable
 {
     [SerializeField] List<SlidingDoors> doorsToUnlock = new List<SlidingDoors>();
     [SerializeField] List<SlidingDoors> doorsToLock = new List<SlidingDoors>();
-
-    InteractionPrompt interactionPrompt;
-    public bool hasKeycard;
+    [SerializeField] int clearanceLevelRequired;
+    
+    bool hasClearance;
     bool visible = true;
-
-    void Awake()
-    {
-        interactionPrompt = FindFirstObjectByType<InteractionPrompt>();
-    }
 
     public bool Visible()
     {
         return visible;
     }
 
-    public bool canInteract()
+    public bool canInteract(int clearanceLevel)
     {
-        if(hasKeycard)
+        if(clearanceLevel >= clearanceLevelRequired)
+        {
+            hasClearance = true;
+        }
+
+        if(hasClearance)
         return true;
         else
         return false;
@@ -30,7 +30,7 @@ public class CardReader : MonoBehaviour , IInteractable
 
     public float TimeToInteract()
     {
-        if(hasKeycard)
+        if(hasClearance)
         return 1;
         else
         return 0;
@@ -38,22 +38,22 @@ public class CardReader : MonoBehaviour , IInteractable
 
     public string InteractionText()
     {
-        if(hasKeycard)
+        if(hasClearance)
         return "Scan Keycard";
         else
-        return "No keycard";
+        return "Level " + clearanceLevelRequired.ToString() + " Clearance Required" ;
     }
 
     public void CompleteInteraction()
     {
         foreach (SlidingDoors doors in doorsToUnlock)
         {
-            doors.locked = false;
+            doors.UnlockDoor();
         }
 
         foreach (SlidingDoors doors in doorsToLock)
         {
-            doors.locked = true;
+            doors.LockDoor();
         }
 
         visible = false;
