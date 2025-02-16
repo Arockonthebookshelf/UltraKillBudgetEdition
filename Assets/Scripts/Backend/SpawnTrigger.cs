@@ -11,8 +11,9 @@ public class SpawnTrigger : MonoBehaviour
     {
         spawnerPosition = GameObject.FindGameObjectWithTag("Spawner"); 
         RaycastHit hit;
-        if(Physics.SphereCast(transform.position,spawnerDistance,Vector3.zero,out hit))
+        if(Physics.SphereCast(transform.position,spawnerDistance,new Vector3(1,0,1),out hit))
         {
+            Debug.Log("cast");
             hit.collider.CompareTag("Spawner");
         }
         else

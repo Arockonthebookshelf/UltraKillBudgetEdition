@@ -2,30 +2,21 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    
+    public Spawner[] spawners { get { return _spawners; } }
+    private Spawner[] _spawners;
     void Start()
     {
         
+    }
+    public void GetSpawner(Spawner[] _spawners)
+    {
+        this._spawners = _spawners;
     }
     void Update()
     {
         
     }
-    public void WaveStart()
-    {
-
-    }
-    public  void WaveUpdate()
-    {
-
-    }
-    public void WaveStopped()
-    {
-
-    }
+    
     
 }
-public enum Wave
-{
-    Start,Stop
-}
+

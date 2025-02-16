@@ -6,12 +6,14 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class WaveTrigger : MonoBehaviour
 {
-    private GameObject[] spawnersPosition;
     private Spawner[]spawners;
     [SerializeField][Range(0,30)] int triggerDIstance;
+    WaveManager waveManager;
+    private GameObject[] spawnersPosition;
     void Start()
     {
         spawnersPosition =GameObject.FindGameObjectsWithTag("Spawner");//find Gameobject with Spawner tag.
+        waveManager = GameObject.FindGameObjectWithTag("WaveManager").GetComponent<WaveManager>();//find wave manager
        
         int i = 0;
         GameObject[] temp = new GameObject[spawnersPosition.Length];
@@ -59,11 +61,12 @@ public class WaveTrigger : MonoBehaviour
         Debug.Log("Colides");
             if(other.CompareTag("Player"))
             {
-                Debug.Log("Player");
-                foreach(Spawner spawner in spawners)
-            {
-                spawner.Spawn();
-            }
+            //    Debug.Log("Player");
+            //    foreach(Spawner spawner in spawners)
+            //{
+            //    spawner.Spawn();
+            //}
+            waveManager.GetSpawner(spawners);
             }
     }
 }

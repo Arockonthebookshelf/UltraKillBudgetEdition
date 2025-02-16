@@ -21,7 +21,7 @@ public class Spawner : MonoBehaviour
         }
         for (int i = 0; i < batchLimit; i++)
         {
-            Vector3 randomPos = new Vector3(random.Range(-4, 4), 0, random.Range(-4, 4));
+            Vector3 randomPos = new Vector3(random.Range(-2, 2), 0, random.Range(-2, 2));
             GameObject obj = Instantiate(spawnObject, transform.position + randomPos, Quaternion.identity, transform);
             objects.Add(obj);
         }
