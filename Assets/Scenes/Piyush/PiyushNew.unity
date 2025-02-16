@@ -6881,7 +6881,7 @@ MonoBehaviour:
   rb: {fileID: 1858196716}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 136
   whatIsWallrunnable:
     serializedVersion: 2
     m_Bits: 128
@@ -6889,7 +6889,6 @@ MonoBehaviour:
   moveSpeed: 4500
   walkSpeed: 10
   runSpeed: 10
-  jumpForce: 450
   grounded: 0
   onWall: 0
 --- !u!1 &1908865347
