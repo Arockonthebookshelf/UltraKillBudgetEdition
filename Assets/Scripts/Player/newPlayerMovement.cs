@@ -9,12 +9,12 @@ public class newPlayerMovement : MonoBehaviour
     //Other
     private Rigidbody rb;
 
-    //Rotation and look
+    [Header("Camera")]
     private float xRotation;
-    private float sensitivity = 50f;
+    public float sensitivity = 50f;
     private float sensMultiplier = 1f;
 
-    //Movement
+    [Header("Movement")]
     public float moveSpeed = 4500;
     public float maxSpeed = 20;
     public bool grounded;
@@ -24,16 +24,18 @@ public class newPlayerMovement : MonoBehaviour
     private float threshold = 0.01f;
     public float maxSlopeAngle = 35f;
 
-    //Crouch & Slide
-    private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
-    private Vector3 playerScale;
-    public float slideForce = 400;
-    public float slideCounterMovement = 0.2f;
+    public float wallrunSpeed;
 
     //Jumping
     private bool readyToJump = true;
     private float jumpCooldown = 0.25f;
     public float jumpForce = 550f;
+
+    [Header("Crouch and Slide")]
+    private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
+    private Vector3 playerScale;
+    public float slideForce = 400;
+    public float slideCounterMovement = 0.2f;
 
     //Input
     float x, y;
@@ -42,6 +44,17 @@ public class newPlayerMovement : MonoBehaviour
     //Sliding
     private Vector3 normalVector = Vector3.up;
     private Vector3 wallNormalVector;
+
+    public MovementState state;
+    public enum MovementState
+    {
+        walking,
+        wallrunning,
+        crouching,
+        air
+    }
+
+    public bool wallrunning;
 
     void Awake()
     {
@@ -150,6 +163,12 @@ public class newPlayerMovement : MonoBehaviour
         //Apply forces to move player
         rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV);
         rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * multiplier);
+
+        if (wallrunning)
+        {
+            state = MovementState.wallrunning;
+            maxSpeed = wallrunSpeed;
+        }
     }
 
     private void Jump()
