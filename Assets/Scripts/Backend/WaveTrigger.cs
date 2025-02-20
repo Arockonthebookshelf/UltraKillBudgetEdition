@@ -1,46 +1,53 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 public class WaveTrigger : MonoBehaviour
 {
-    private Spawner[]spawners;
+    [Tooltip("Distance where spawner will be added to this trigger")]
     [SerializeField][Range(0,30)] int triggerDIstance;
+    [Tooltip("The total number of wave for the spawner trigger by this trigger")]
+    [SerializeField][Range(1,10)] int waveLimit;
+    [SerializeField]int waveGrowth;
+
+    private List<Spawner>spawners = new List<Spawner>();
     WaveManager waveManager;
-    private GameObject[] spawnersPosition;
+    private List<GameObject> spawnersPosition = new List<GameObject>();
+
+    public static Action<List<Spawner>,int,int> OnSpawnerTriggered;
+    #region spawnerSetUp
     void Start()
     {
-        spawnersPosition =GameObject.FindGameObjectsWithTag("Spawner");//find Gameobject with Spawner tag.
-        waveManager = GameObject.FindGameObjectWithTag("WaveManager").GetComponent<WaveManager>();//find wave manager
+        GameObject.FindGameObjectsWithTag("Spawner",spawnersPosition);//find Gameobject with Spawner tag.
+        waveManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<WaveManager>();//find wave manager
        
-        int i = 0;
-        GameObject[] temp = new GameObject[spawnersPosition.Length];
+        List<GameObject> temp = new List<GameObject>();
         foreach (GameObject spawner in spawnersPosition)
         {
-            //Debug.Log("all"+spawner.name);
-            //Searching for spawner with the given trigger distance and has a spawner script.Removing those without it.
-            if(Mathf.Abs(Vector3.Distance(spawner.transform.position ,transform.position)) < triggerDIstance && spawner.GetComponent<Spawner>() != null)
+            // Debug.Log("all"+spawner.name);
+            // //Searching for spawner with the given trigger distance and has a spawner script.Removing those without it.
+            if(Mathf.Abs(Vector3.Distance(spawner.transform.position ,transform.position)) < triggerDIstance && spawner.GetComponent<Spawner>())
             {
-                temp[i] = spawner;
-                //Debug.Log("temp"+temp[i]);
-                i++;
+                temp.Add(spawner);
+            // Debug.Log(temp.Count);
             }
+            // Debug.Log("spawner only"+spawner.name);
         }
-        spawnersPosition = temp;
-        spawners = new Spawner[spawnersPosition.Length];
-        i = 0;
-        foreach (GameObject spawnerPosition in spawnersPosition)
+        spawnersPosition = new List<GameObject>(temp);
+        //spawnersPosition = temp;
+        //Debug.Log(spawnersPosition.Count);
+        foreach (GameObject spawnerPosition in temp)
         {
-            //Debug.Log("Change" + spawnerPosition);
-            spawners[i] = spawnerPosition.GetComponent<Spawner>();
-            //Debug.Log("Change" + spawners[i]);
-            i++;
+            
+           //Debug.Log(spawners.Count);
+            spawners.Add(spawnerPosition.GetComponent<Spawner>());
         }
-        if (spawnersPosition.Length < 1)
+        if (spawners.Count < 1)
         {
-            Debug.LogWarning("trigger could not find Spawner. Please increase trigger distance or add the spawner in the trigger radius");
+            Debug.LogWarning("trigger could not find Spawner. Please increase trigger distance or add the spawner in the trigger radius or add spawner tag to the spawner");
         }
         if (!gameObject.GetComponent<Collider>().isTrigger)
         {
@@ -49,24 +56,21 @@ public class WaveTrigger : MonoBehaviour
         
         
     }
-
+#endregion
     
-    void Update()
-    {
-        
-    }
-
+    
+#region collisionDetection
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Colides");
             if(other.CompareTag("Player"))
             {
-            //    Debug.Log("Player");
-            //    foreach(Spawner spawner in spawners)
-            //{
-            //    spawner.Spawn();
-            //}
-            waveManager.GetSpawner(spawners);
+            OnSpawnerTriggered?.Invoke(spawners,waveLimit,waveGrowth);
             }
+            gameObject.SetActive(false);
     }
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireCube(transform.position,new Vector3(triggerDIstance,triggerDIstance,triggerDIstance));
+    }
+    #endregion collisionDetection
 }
