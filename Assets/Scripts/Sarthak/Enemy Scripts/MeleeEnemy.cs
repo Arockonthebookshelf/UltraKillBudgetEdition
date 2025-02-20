@@ -36,7 +36,7 @@ public class MeleeEnemy : BaseEnemy
             // Prioritize melee if the player is close enough.
             if (isInMeleeRange)
             {
-                Debug.Log("ShooterEnemy melee attacks the player!");
+                Debug.Log("MeleeEnemy melee attacks the player!");
 
             }
             // Reset attack after a cooldown.

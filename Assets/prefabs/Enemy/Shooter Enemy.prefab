@@ -636,7 +636,7 @@ MonoBehaviour:
   rayInterval: 1
   enemyHead:
     serializedVersion: 2
-    m_Bits: 3145728
+    m_Bits: 0
 --- !u!114 &4305972611782012077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -659,7 +659,7 @@ MonoBehaviour:
   Head: {fileID: 0}
   SeprateHead: {fileID: 0}
   headTransform: {fileID: 0}
-  projectilePrefab: {fileID: 7290793139892758192, guid: 27f6c56a3efc9db4eba8a988e1aaec9b, type: 3}
+  projectilePrefab: {fileID: 7290793139892758192, guid: 7c7e34b34a998fe479b386cc73aed5c9, type: 3}
   shootPoint: {fileID: 8408955827227937834}
   shootingRange: 20
   meleeRange: 2

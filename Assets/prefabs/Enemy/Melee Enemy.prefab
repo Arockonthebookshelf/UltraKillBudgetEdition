@@ -2275,7 +2275,7 @@ MonoBehaviour:
   rayInterval: 3
   enemyHead:
     serializedVersion: 2
-    m_Bits: 3145728
+    m_Bits: 0
 --- !u!114 &3514914387948050197
 MonoBehaviour:
   m_ObjectHideFlags: 0
