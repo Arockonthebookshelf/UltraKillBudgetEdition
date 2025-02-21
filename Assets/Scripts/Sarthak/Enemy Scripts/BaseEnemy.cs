@@ -103,7 +103,7 @@ public abstract class BaseEnemy : MonoBehaviour
     }
     protected virtual void Patrol()
     {
-        if (Vector3.Distance(transform.position, currentTarget.position) < 1f)
+        if (Vector3.Distance(transform.position, currentTarget.position) < 1.2f)
         {
             currentTarget = (currentTarget == patrolPointA) ? patrolPointB : patrolPointA;
         }
@@ -135,9 +135,7 @@ public abstract class BaseEnemy : MonoBehaviour
         Destroy(gameObject, 3f);
     }
 
-
-
-    //Animations
+    #region Aniamtions Function
     protected virtual void PlayWalk()  //Plays Walk Animation Smoothly
     {
         animator.SetBool("isWalk", true);
@@ -165,5 +163,5 @@ public abstract class BaseEnemy : MonoBehaviour
         animator.SetBool("isWalk", false);
 
     }
-    //Aniamtions
+    #endregion
 }

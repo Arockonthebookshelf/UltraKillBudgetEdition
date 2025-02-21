@@ -7,13 +7,16 @@ using random = UnityEngine.Random;
 public class Spawner : MonoBehaviour
 {
     [SerializeField]GameObject spawnObject;
+    GameObject enemyContainer;
     [Tooltip("Total Enemy that can be spawned")]
     [SerializeField] [Range(0,15)]int batchLimit;
     [Tooltip("Enemy number spawn by a spawner. Enemy number increase with wave")]
     [SerializeField] [Range(1,5)] int currentSpawnLimit;
-    private List <GameObject>objects = new List<GameObject>();
+    public List <GameObject>objects = new List<GameObject>();
     public void Start()
     {
+        
+
         if (spawnObject == null)
         {
             Debug.LogWarning("Object to be spawned cannot be empty");
