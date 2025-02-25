@@ -6,6 +6,7 @@ public class ShooterEnemy : BaseEnemy
     [Header("Projectile Settings")]
     public GameObject projectilePrefab;
     public Transform shootPoint;
+    public float projectileSpeed;
 
     [Tooltip("Range within which the enemy will begin attacking (shooting).")]
     public float shootingRange;
@@ -14,6 +15,8 @@ public class ShooterEnemy : BaseEnemy
     public float meleeRange;
 
     private bool alreadyAttacked = false;
+
+    public float yOffset;
 
     // Override the attack range so that the shooter enemy can attack from its shooting range.
     protected override float AttackStateRange => shootingRange;
@@ -59,6 +62,12 @@ public class ShooterEnemy : BaseEnemy
             {
                 Debug.Log("ShooterEnemy shoots the player!");
                 GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation);
+
+                Vector3 targetPosition = player.position - new Vector3(0, yOffset, 0);
+                Vector3 d = (targetPosition - transform.position).normalized;
+
+                projectile.GetComponent<Rigidbody>().AddForce(d * (projectileSpeed * 10));
+
                 Destroy(projectile, 2f);
             }
 

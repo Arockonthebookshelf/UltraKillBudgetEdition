@@ -2,15 +2,12 @@ using UnityEngine;
 
 public class EnemyProjectiile : MonoBehaviour
 {
-    Rigidbody body;
+    GameObject player;
+    Rigidbody rb;
     public float projectileSpeed;
     void Start()
     {
-      body = GetComponent<Rigidbody>(); 
-    }
-
-    void FixedUpdate()
-    {
-       body.AddForce(transform.forward * projectileSpeed);
+        player = GameObject.FindGameObjectWithTag("Player");
+        rb = GetComponent<Rigidbody>();
     }
 }
