@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6002132191280861070}
   m_Layer: 0
   m_Name: GFX
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 4694541068342150850}
   - component: {fileID: 2629527100692597763}
   - component: {fileID: 5470659150305055023}
+  - component: {fileID: 5811944907338229718}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -184,11 +185,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1873182565813784053}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5e54d277170fe34686717e9c6243ae2, type: 3}
+  m_Script: {fileID: 11500000, guid: 03b5ce911b08eb14b96bad93e86010e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerCam: {fileID: 0}
   orientation: {fileID: 4242286990266998432}
+  sensitivity: 50
   moveSpeed: 4500
   maxSpeed: 20
   grounded: 0
@@ -197,9 +199,12 @@ MonoBehaviour:
     m_Bits: 8
   counterMovement: 0.175
   maxSlopeAngle: 35
+  wallrunSpeed: 0
+  jumpForce: 550
   slideForce: 400
   slideCounterMovement: 0.2
-  jumpForce: 550
+  state: 0
+  wallrunning: 0
 --- !u!114 &2629527100692597763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +234,21 @@ MonoBehaviour:
   fireRate: 1
   currentAmmo: 10
   mainCamera: {fileID: 0}
+--- !u!114 &5811944907338229718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873182565813784053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84f75818f33038499f3066ebc2a21ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCameraTransform: {fileID: 0}
+  interactRange: 5
+  clearanceLevel: 0
 --- !u!1 &4346311684933400481
 GameObject:
   m_ObjectHideFlags: 0

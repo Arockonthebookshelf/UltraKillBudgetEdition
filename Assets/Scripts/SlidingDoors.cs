@@ -8,6 +8,7 @@ public class SlidingDoors : MonoBehaviour
 [SerializeField] List<Material> lockedMaterial;
 MeshRenderer meshRenderer;
 Animator slidingDoorsAnimator;
+[SerializeField] BoxCollider doorCollider;
 bool doorsOpen;
 public bool locked;
 
@@ -35,6 +36,7 @@ void OnTriggerEnter(Collider other)
     {
         slidingDoorsAnimator.Play("DoorOpen");
         doorsOpen = true;
+        doorCollider.enabled = false;
     }
 }
 
@@ -44,6 +46,7 @@ void OnTriggerExit(Collider other)
     {
         slidingDoorsAnimator.Play("DoorClose");
         doorsOpen = false;
+        doorCollider.enabled = true;
     }
 }
 
