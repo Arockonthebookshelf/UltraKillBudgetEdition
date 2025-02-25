@@ -103,11 +103,12 @@ public abstract class BaseEnemy : MonoBehaviour
     }
     protected virtual void Patrol()
     {
-        if (Vector3.Distance(transform.position, currentTarget.position) < 1.2f)
+        if (Vector3.Distance(transform.position, currentTarget.position) < 2f)
         {
             currentTarget = (currentTarget == patrolPointA) ? patrolPointB : patrolPointA;
         }
         agent.SetDestination(currentTarget.position);
+        agent.speed = 2;
     }
 
     protected virtual void Chase()
@@ -120,6 +121,7 @@ public abstract class BaseEnemy : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
         }
         agent.SetDestination(player.position);
+        agent.speed = 10;
     }
 
     //Attack
