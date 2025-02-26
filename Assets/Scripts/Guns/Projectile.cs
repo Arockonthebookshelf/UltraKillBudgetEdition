@@ -4,6 +4,7 @@ public class Projectile : MonoBehaviour
 {
     public float lifetime = 5f;  // Time before the projectile self-destructs if no collision occurs
     private float timeAlive;
+    public float damage;
 
     void Start()
     {

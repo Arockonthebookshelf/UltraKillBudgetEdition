@@ -941,6 +941,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 762908958311712452, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
   m_PrefabInstance: {fileID: 4479340840422732973}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &304084791 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 4521331793045679048, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
+  m_PrefabInstance: {fileID: 4479340840422732973}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &304084792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304084786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaf3fc890ad51094b8d82824518af1e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCam: {fileID: 1706649771}
+  orientation: {fileID: 1793962610}
+  rb: {fileID: 304084791}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 128
+  whatIsWallrunnable:
+    serializedVersion: 2
+    m_Bits: 128
+  sensitivity: 50
+  moveSpeed: 4500
+  walkSpeed: 20
+  runSpeed: 10
+  grounded: 0
+  onWall: 0
 --- !u!43 &339263616
 Mesh:
   m_ObjectHideFlags: 0
@@ -6949,10 +6981,14 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1862773189}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4694541068342150850, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1873182565813784053, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 304084792}
   m_SourcePrefab: {fileID: 100100000, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

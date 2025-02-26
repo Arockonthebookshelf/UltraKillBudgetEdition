@@ -105,10 +105,11 @@ public class GunScript : MonoBehaviour
         //Calculate spread
         float x = Random.Range(-spread, spread);
         float y = Random.Range(-spread, spread);
+        float z = Random.Range(-spread, spread);
 
 
         //Calculate new direction with spread
-        Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0); //Just add spread to last direction
+        Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, z); //Just add spread to last direction
 
 
         //Instantiate bullet/projectile
