@@ -309,7 +309,7 @@ MonoBehaviour:
   explosionRange: 2
   explosionForce: 1200
   maxCollisions: 0
-  maxLifetime: 3
+  maxLifetime: 1
   explodeOnTouch: 1
 --- !u!1 &5013947868932069984
 GameObject:

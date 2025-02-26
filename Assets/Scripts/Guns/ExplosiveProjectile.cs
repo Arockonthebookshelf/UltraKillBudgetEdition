@@ -57,8 +57,7 @@ public class ExplosiveProjectile : MonoBehaviour
         }
 
         //Add a little delay, just to make sure everything works fine
-        //Invoke("Delay", 0.05f);
-        Destroy(gameObject);
+        Invoke("Delay", 0.05f);
     }
     private void Delay()
     {

@@ -27,7 +27,6 @@ public class GunScript : MonoBehaviour
     //Reference
     public Camera fpsCam;
     public Transform attackPoint;
-    private WeaponInfo weaponInfo;
 
 
     //Graphics
@@ -44,7 +43,6 @@ public class GunScript : MonoBehaviour
         //make sure magazine is full
         bulletsLeft = magazineSize;
         readyToShoot = true;
-        weaponInfo = FindFirstObjectByType<WeaponInfo>();
     }
 
 
@@ -52,7 +50,6 @@ public class GunScript : MonoBehaviour
     {
         MyInput();
 
-        weaponInfo.UpdateAmmo(bulletsLeft);
 
         //Set ammo display, if it exists :D
         if (ammunitionDisplay != null)
