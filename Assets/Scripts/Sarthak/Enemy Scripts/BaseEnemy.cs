@@ -39,7 +39,7 @@ public abstract class BaseEnemy : MonoBehaviour
     protected virtual float AttackStateRange => attackRange;
     protected virtual float ChaseStateRange => chaseRange;
 
-    protected virtual void Awake()
+    protected void PreInitialize()
     {
         animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
@@ -47,13 +47,13 @@ public abstract class BaseEnemy : MonoBehaviour
         enemyVision = GetComponent<EnemyVision>();
     }
 
-    void Start()
+    protected void Initialize()
     {
         currentState = EnemyState.Patrol;
         currentTarget = patrolPointA;
     }
 
-    protected virtual void Update()
+    protected void StateChanges()
     {
         if (isDead) return;
 
@@ -103,11 +103,12 @@ public abstract class BaseEnemy : MonoBehaviour
     }
     protected virtual void Patrol()
     {
-        if (Vector3.Distance(transform.position, currentTarget.position) < 1.2f)
+        if (Vector3.Distance(transform.position, currentTarget.position) < 2f)
         {
             currentTarget = (currentTarget == patrolPointA) ? patrolPointB : patrolPointA;
         }
         agent.SetDestination(currentTarget.position);
+        agent.speed = 2;
     }
 
     protected virtual void Chase()
@@ -120,6 +121,7 @@ public abstract class BaseEnemy : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
         }
         agent.SetDestination(player.position);
+        agent.speed = 10;
     }
 
     //Attack

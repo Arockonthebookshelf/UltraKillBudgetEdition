@@ -31,7 +31,7 @@ public class EnemyVision : MonoBehaviour
             {
                 isVisible = hit.transform.gameObject == player;
                 //isVisible = hit.collider.CompareTag("Player");
-                Debug.Log(hit.collider.name);
+                //Debug.Log(hit.collider.name);
             }
             else
             {
