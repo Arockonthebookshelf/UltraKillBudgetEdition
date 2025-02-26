@@ -4,9 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Ground
-  - Bullet
-  - Enemy
+  - Spawner
+  - GameManager
   layers:
   - Default
   - TransparentFX
@@ -16,9 +15,9 @@ TagManager:
   - UI
   - WhatisWall
   - Ground
-  - Player
-  - WhatIsBullet
-  - WhatIsEnemy
+  - Melee
+  - Shooter
+  - 
   - 
   - 
   - 

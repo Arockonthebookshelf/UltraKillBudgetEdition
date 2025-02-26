@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour,IDamagable
+public class Player : MonoBehaviour,IDamagable,IPersistenceData
 {
     [SerializeField] private int playerHealth =100;
     void Start()
@@ -19,5 +19,13 @@ public class Player : MonoBehaviour,IDamagable
         {
             Debug.Log("Player is dead");
         }
+    }
+    public void LoadData(GameData gameData)
+    {
+        transform.position = gameData.playerPosition;
+    }
+    public void SaveData(ref GameData gameData)
+    {
+        gameData.playerPosition = this.transform.position;
     }
 }
