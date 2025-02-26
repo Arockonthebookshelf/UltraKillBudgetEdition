@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Spawner
   - GameManager
+  - Bullet
+  - Ground
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -17,8 +20,8 @@ TagManager:
   - Ground
   - Melee
   - Shooter
-  - 
-  - 
+  - WhatIsBullet
+  - Player
   - 
   - 
   - 

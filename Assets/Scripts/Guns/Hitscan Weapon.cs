@@ -21,12 +21,11 @@ public class GunSystem : MonoBehaviour
     public RaycastHit rayHit;
     public LayerMask whatIsEnemy;
 
-    [Header("Graphics")]
-    //Graphics
-    // public GameObject muzzleFlash, bulletHoleGraphic;
-    public TrailRenderer bulletTrail;
-    public TextMeshProUGUI text;
 
+    //Graphics
+    public GameObject muzzleFlash, bulletHoleGraphic;
+    public TextMeshProUGUI text;
+    public TrailRenderer bulletTrail;
 
     private void Awake()
     {
@@ -61,12 +60,6 @@ public class GunSystem : MonoBehaviour
     {
         readyToShoot = false;
 
-        var bullet = Instantiate(bulletTrail, attackPoint.position, Quaternion.identity);
-
-        bullet.AddPosition(attackPoint.position);
-        {
-            bullet.transform.position = transform.position + (fpsCam.transform.forward * 200);
-        }
 
         //Spread
         float x = Random.Range(-spread, spread);
@@ -78,21 +71,32 @@ public class GunSystem : MonoBehaviour
 
 
         //RayCast
-        if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, whatIsEnemy))
+        GameObject flash = Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity, attackPoint);
+        Destroy(flash, 0.1f);
+
+        if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range))
         {
-            Debug.Log(rayHit.collider.name);
-
-
-            if (rayHit.collider.CompareTag("Enemy"))
+            if (((1 << rayHit.collider.gameObject.layer) & whatIsEnemy) != 0)
             {
-                //enemy damage logic
+                Debug.Log(rayHit.collider.name);
+
+                // if (rayHit.collider.CompareTag("Enemy"))
+                // rayHit.collider.GetComponent<ShootingAi>().TakeDamage(damage);
+            }
+            else
+            {
+                Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.LookRotation(rayHit.normal));
             }
         }
 
-        //Graphics
-        //Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.Euler(0, 180, 0));
-        //Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
 
+        var bullet = Instantiate(bulletTrail, attackPoint.position, Quaternion.identity);
+
+        bullet.AddPosition(attackPoint.position);
+        {
+            bullet.transform.position = rayHit.point;
+        }
+        Debug.Log(rayHit.point);
 
         bulletsLeft--;
         bulletsShot--;
@@ -118,4 +122,5 @@ public class GunSystem : MonoBehaviour
         bulletsLeft = magazineSize;
         reloading = false;
     }
+
 }

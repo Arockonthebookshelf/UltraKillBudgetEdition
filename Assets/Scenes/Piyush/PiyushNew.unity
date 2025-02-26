@@ -5814,9 +5814,11 @@ MonoBehaviour:
   attackPoint: {fileID: 356367325}
   whatIsEnemy:
     serializedVersion: 2
-    m_Bits: 1024
-  bulletTrail: {fileID: 2522039281147170095, guid: e7ad7aff87e1c2b45bf34391c93daa60, type: 3}
+    m_Bits: 0
+  muzzleFlash: {fileID: 1000010254994808, guid: 9defeac88977c0d448aa4541073ee9e4, type: 3}
+  bulletHoleGraphic: {fileID: 1000010844420130, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
   text: {fileID: 906998978}
+  bulletTrail: {fileID: 2522039281147170095, guid: e7ad7aff87e1c2b45bf34391c93daa60, type: 3}
 --- !u!23 &1344628361
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6514,7 +6516,7 @@ GameObject:
   - component: {fileID: 1441066534}
   - component: {fileID: 1441066533}
   - component: {fileID: 1441066532}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7214,9 +7216,11 @@ MonoBehaviour:
   attackPoint: {fileID: 1549751119}
   whatIsEnemy:
     serializedVersion: 2
-    m_Bits: 1024
-  bulletTrail: {fileID: 2522039281147170095, guid: 422c28ecaf0e33d48a6ef78904151348, type: 3}
+    m_Bits: 0
+  muzzleFlash: {fileID: 1000010254994808, guid: 9defeac88977c0d448aa4541073ee9e4, type: 3}
+  bulletHoleGraphic: {fileID: 1000010844420130, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
   text: {fileID: 906998978}
+  bulletTrail: {fileID: 2522039281147170095, guid: 422c28ecaf0e33d48a6ef78904151348, type: 3}
 --- !u!43 &1809960949
 Mesh:
   m_ObjectHideFlags: 0
@@ -7723,7 +7727,7 @@ GameObject:
   - component: {fileID: 1858196717}
   - component: {fileID: 1858196716}
   - component: {fileID: 1858196718}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Player
   m_TagString: Enemy
   m_Icon: {fileID: 0}
