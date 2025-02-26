@@ -56,9 +56,5 @@ public class Spawner : MonoBehaviour
             currentSpawnLimit += spawnIncrement;
         }
     }
-   public void GetSpawnerInfo(int CurrentSpawnLimit,int BatchLimit)
-   {
-    
-   }
 
 }

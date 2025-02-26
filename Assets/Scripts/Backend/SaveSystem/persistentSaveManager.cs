@@ -1,9 +1,13 @@
+using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 public class persistentSaveManager : MonoBehaviour
 {
     public static persistentSaveManager instance{get;private set;}
+    [SerializeField] private string FileName;
+    private DataHandler datahandler;
     GameData gameData;
+    private List<IPersistenceData> persistenceDataObjects;
     void Awake()
     {
          if(instance != null)
@@ -13,22 +17,36 @@ public class persistentSaveManager : MonoBehaviour
         }
         instance = this;
     }
-
+    public void Start()
+    {
+        this.datahandler = new DataHandler(Application.persistentDataPath, FileName);
+        this.persistenceDataObjects = FindAllPersistenceDataObjects();
+        LoadGame();
+    }
     public void NewGame()
     {
         //intialize new game data
-        GameData gameData = new GameData();
+        gameData = new GameData();
     }
     public void LoadGame()
     {
-        if(this.gameData == null)
+        gameData = datahandler.LoadData();
+        if(gameData == null)
         {
             NewGame();
+        }
+        foreach(IPersistenceData persistenceData in persistenceDataObjects)
+        {
+            persistenceData.LoadData(gameData);
         }
     }
     public void SaveGame()
     {
-
+        foreach(IPersistenceData persistenceData in persistenceDataObjects)
+        {
+            persistenceData.SaveData(ref gameData);
+        }
+        datahandler.SaveData(gameData);
     }
     public void OnSaveAndQuit()
     {
@@ -37,5 +55,11 @@ public class persistentSaveManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         SaveGame();
+    }
+    private List<IPersistenceData> FindAllPersistenceDataObjects()
+    {
+        //IEnumerable<IPersistenceData> persistenceDatasObjects = FindObjectsOfType<MonoBehaviour>().OfType<IPersistenceData>();
+        IEnumerable<IPersistenceData> persistenceDatasObjects = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IPersistenceData>();
+        return new List<IPersistenceData> (persistenceDatasObjects);
     }
 }
