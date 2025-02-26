@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class BaseEnemy : MonoBehaviour
+public abstract class BaseEnemy : MonoBehaviour, IDamagable
 {
     public enum EnemyState { Patrol, Chase, Attack, Death }
 
     [Header("States")]
-    protected EnemyState currentState;
+    [SerializeField] protected EnemyState currentState;
 
     [Header("NavMesh Agent")]
     protected NavMeshAgent agent;
@@ -31,6 +31,9 @@ public abstract class BaseEnemy : MonoBehaviour
     [SerializeField] protected GameObject Head;
     [SerializeField] protected GameObject SeprateHead;
     [SerializeField] protected Transform headTransform;
+
+    [Header("Enemy Health")]
+    [SerializeField] protected float enemyHealth;
 
     private EnemyVision enemyVision;
     protected float distanceToPlayer;
@@ -129,6 +132,10 @@ public abstract class BaseEnemy : MonoBehaviour
     protected abstract void ResetAttack();
     //Attack
 
+    public void Damage(float damage, Collider collider)
+    {
+        enemyHealth = (enemyHealth - damage);
+    }
     protected virtual void Die()
     {
         isDead = true;
