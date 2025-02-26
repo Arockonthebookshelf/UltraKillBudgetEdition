@@ -20,6 +20,21 @@ public class ShooterEnemy : BaseEnemy
 
     // Override the attack range so that the shooter enemy can attack from its shooting range.
     protected override float AttackStateRange => shootingRange;
+    void Awake()
+    {
+        PreInitialize();
+    }
+    private void Start()
+    {
+        Initialize();
+    }
+    void Update()
+    {
+        StateChanges();
+    }
+
+
+
     protected override void Attack()
     {
         // Stop movement during the attack.

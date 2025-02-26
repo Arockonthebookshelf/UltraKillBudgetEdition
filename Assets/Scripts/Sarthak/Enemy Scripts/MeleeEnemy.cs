@@ -2,6 +2,18 @@ using UnityEngine;
 
 public class MeleeEnemy : BaseEnemy 
 {
+    void Awake()
+    {
+        PreInitialize();
+    }
+    private void Start()
+    {
+        Initialize();
+    }
+    void Update()
+    {
+        StateChanges();
+    }
     private bool alreadyAttacked = false;
 
     protected override void Attack()

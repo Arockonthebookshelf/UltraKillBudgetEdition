@@ -39,7 +39,7 @@ public abstract class BaseEnemy : MonoBehaviour
     protected virtual float AttackStateRange => attackRange;
     protected virtual float ChaseStateRange => chaseRange;
 
-    protected virtual void Awake()
+    protected void PreInitialize()
     {
         animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
@@ -47,13 +47,13 @@ public abstract class BaseEnemy : MonoBehaviour
         enemyVision = GetComponent<EnemyVision>();
     }
 
-    void Start()
+    protected void Initialize()
     {
         currentState = EnemyState.Patrol;
         currentTarget = patrolPointA;
     }
 
-    protected virtual void Update()
+    protected void StateChanges()
     {
         if (isDead) return;
 
