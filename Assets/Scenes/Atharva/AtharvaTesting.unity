@@ -664,6 +664,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6377543647400183430, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
   m_PrefabInstance: {fileID: 1893485616}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &511870391 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7838208572424434375, guid: e3f424c274150ae4b83013bcc6142b9b, type: 3}
+  m_PrefabInstance: {fileID: 4608944085330362154}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &511870396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511870391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9d507f4f71b0eb4385eb7ae1201adbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &553836979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2336,10 +2353,10 @@ MonoBehaviour:
   canPickUpCapacitors: 0
   canPickUpEnergyCells: 0
   canPickUpRockets: 0
-  maxBulletCount: 10
-  maxCapacitorCount: 0
-  maxEnergyCellsCount: 0
-  maxRocketsCount: 0
+  maxBulletCount: 50
+  maxCapacitorCount: 50
+  maxEnergyCellsCount: 100
+  maxRocketsCount: 20
 --- !u!20 &1649195661 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 2265274995652833837, guid: 62e7501d366fcdb4c8e01b281a8d2954, type: 3}
@@ -3243,21 +3260,49 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 588604794068122114, guid: e3f424c274150ae4b83013bcc6142b9b, type: 3}
+      propertyPath: TriggerModule.radiusScale
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 588604794068122114, guid: e3f424c274150ae4b83013bcc6142b9b, type: 3}
       propertyPath: TriggerModule.colliderQueryMode
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1404628034286370031, guid: e3f424c274150ae4b83013bcc6142b9b, type: 3}
+      propertyPath: TriggerModule.radiusScale
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1404628034286370031, guid: e3f424c274150ae4b83013bcc6142b9b, type: 3}
       propertyPath: TriggerModule.colliderQueryMode
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3039130567064442599, guid: e3f424c274150ae4b83013bcc6142b9b, type: 3}
+      propertyPath: TriggerModule.radiusScale
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3039130567064442599, guid: e3f424c274150ae4b83013bcc6142b9b, type: 3}
       propertyPath: TriggerModule.colliderQueryMode
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5215988426551303527, guid: e3f424c274150ae4b83013bcc6142b9b, type: 3}
+      propertyPath: canDropRockets
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5215988426551303527, guid: e3f424c274150ae4b83013bcc6142b9b, type: 3}
       propertyPath: playerCollider
       value: 
       objectReference: {fileID: 1125952980}
+    - target: {fileID: 5215988426551303527, guid: e3f424c274150ae4b83013bcc6142b9b, type: 3}
+      propertyPath: canDropCapacitors
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5215988426551303527, guid: e3f424c274150ae4b83013bcc6142b9b, type: 3}
+      propertyPath: canDropEnergyCells
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6609188763750256147, guid: e3f424c274150ae4b83013bcc6142b9b, type: 3}
+      propertyPath: TriggerModule.radiusScale
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6609188763750256147, guid: e3f424c274150ae4b83013bcc6142b9b, type: 3}
       propertyPath: TriggerModule.colliderQueryMode
       value: 2
@@ -3309,7 +3354,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7838208572424434375, guid: e3f424c274150ae4b83013bcc6142b9b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 511870396}
   m_SourcePrefab: {fileID: 100100000, guid: e3f424c274150ae4b83013bcc6142b9b, type: 3}
 --- !u!1001 &4707242108480968561
 PrefabInstance:
