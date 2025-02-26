@@ -30,6 +30,7 @@ public class WaveManager : MonoBehaviour
     {
         if(waveIsActive)
         {
+            Debug.Log("wave"+ currentWave);
             wave.WaveUpdate();
         }
     }
@@ -46,18 +47,22 @@ public class WaveManager : MonoBehaviour
     }
     void WavesUpdate()
     {
+        Debug.Log("waves change");
         if(currentWave < waveMax)
         {
             currentWave++;
             foreach(Spawner spawner in _spawners)
             {
                 spawner.IncreaseBatchSize(_waveGrowth);
-            };
+            }
+
+            WaitTime();
             wave.WaveSpawn(_spawners);
             waveIsActive = true;
         }
         else
         {
+            Debug.Log("Wave over");
             foreach(Spawner spawner in _spawners)
             {
                 spawner.gameObject.SetActive(false);
@@ -73,11 +78,10 @@ public class WaveManager : MonoBehaviour
     }
     IEnumerator WaitTime()
     {
+        Debug.Log("Cooroutine works");
         while(true)
         {
-            Debug.Log("before wait");
             yield return new WaitForSeconds(waveCountDown);
-            Debug.Log("after wait");
         }
         
     }

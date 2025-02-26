@@ -23,6 +23,7 @@ public class Wave
     public void WaveUpdate()
     {
         //list of enemies and check if they are active
+        Debug.Log("Update");
         if(!enemyIsSet)
         {
             return;
@@ -33,6 +34,7 @@ public class Wave
             if(!obj.activeInHierarchy)
             {
                 i--;
+                 Debug.Log(i);
             }
         }
         if(i > 1)

@@ -2,20 +2,24 @@ using UnityEngine;
 
 public class Player : MonoBehaviour,IDamagable,IPersistenceData
 {
-    [SerializeField] private int playerHealth =100;
+    HealthBar healthBar;
+    [SerializeField] private int maxHealth = 100;
+    int currentHealth;
+
+    void Awake()
+    {
+        healthBar = FindFirstObjectByType<HealthBar>();
+    }
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        healthBar.InitializeHealthBar(maxHealth);
+        currentHealth = maxHealth;
     }
     public void Damage(float damage,Collider hitCollider)
     {
-        playerHealth = playerHealth - (int)damage;
-        if(playerHealth < 0)
+        currentHealth = currentHealth - (int)damage;
+        healthBar.UpdateHealthBar(currentHealth);
+        if(currentHealth < 0)
         {
             Debug.Log("Player is dead");
         }
