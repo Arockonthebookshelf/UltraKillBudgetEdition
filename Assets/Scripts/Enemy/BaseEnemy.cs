@@ -34,6 +34,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
 
     [Header("Enemy Health")]
     [SerializeField] protected float enemyHealth;
+    [SerializeField] public LayerMask enemyHead;
 
     private EnemyVision enemyVision;
     protected float distanceToPlayer;

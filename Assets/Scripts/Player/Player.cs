@@ -19,7 +19,7 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     {
         currentHealth = currentHealth - (int)damage;
         healthBar.UpdateHealthBar(currentHealth);
-        if(currentHealth < 0)
+        if(currentHealth <= 0)
         {
             Debug.Log("Player is dead");
         }

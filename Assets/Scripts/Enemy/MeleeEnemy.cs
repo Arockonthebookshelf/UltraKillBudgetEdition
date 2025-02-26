@@ -13,6 +13,10 @@ public class MeleeEnemy : BaseEnemy
     void Update()
     {
         StateChanges();
+        if(enemyHealth <= 0)
+        {
+            Debug.Log("Dead");
+        }    
     }
     private bool alreadyAttacked = false;
 
@@ -48,8 +52,18 @@ public class MeleeEnemy : BaseEnemy
             // Prioritize melee if the player is close enough.
             if (isInMeleeRange)
             {
-                Debug.Log("MeleeEnemy melee attacks the player!");
-
+                Debug.Log("isInMeleeRange");
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, direction, out hit))
+                {
+                    Debug.Log(hit.collider.name);
+                    IDamagable damagable = hit.collider.GetComponent<IDamagable>();
+                    if (damagable != null)
+                    {
+                        Debug.Log("MeleeEnemy melee attacks the player!");
+                        damagable.Damage(20f, hit.collider);
+                    }
+                }
             }
             // Reset attack after a cooldown.
             Invoke(nameof(ResetAttack), 2f);

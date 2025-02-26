@@ -76,17 +76,22 @@ public class GunSystem : MonoBehaviour
 
         if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range))
         {
-            if (((1 << rayHit.collider.gameObject.layer) & whatIsEnemy) != 0)
+            //if (((1 << rayHit.collider.gameObject.layer) & whatIsEnemy) != 0)
             {
                 Debug.Log(rayHit.collider.name);
+                {
+                    IDamagable damagable = rayHit.collider.GetComponent<IDamagable>();
+                    if (damagable != null)
+                    {
+                        damagable.Damage(20f, rayHit.collider);
+                    }
+                }
 
-                // if (rayHit.collider.CompareTag("Enemy"))
-                // rayHit.collider.GetComponent<ShootingAi>().TakeDamage(damage);
             }
-            else
-            {
-                Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.LookRotation(rayHit.normal));
-            }
+            //else
+            //{
+            //    Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.LookRotation(rayHit.normal));
+            //}
         }
 
 
