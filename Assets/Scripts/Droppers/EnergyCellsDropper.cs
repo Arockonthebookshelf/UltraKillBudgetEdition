@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class BulletsDropper : MonoBehaviour
+public class EnergyCellsDropper : MonoBehaviour
 {
     DropperManager dropperManager;
     PlayerInventory playerInventory;
@@ -12,7 +12,7 @@ public class BulletsDropper : MonoBehaviour
         playerInventory = FindFirstObjectByType<PlayerInventory>();
         bulletParticleSystem = GetComponent<ParticleSystem>();
         bulletParticleSystem.trigger.SetCollider(0, dropperManager.playerCollider);
-        if(!dropperManager.canDropBullets)
+        if(!dropperManager.canDropEnergyCells)
         {
             Destroy(gameObject);
         }
@@ -21,12 +21,12 @@ public class BulletsDropper : MonoBehaviour
     void Start()
     {
         bulletParticleSystem.emission.SetBursts(new ParticleSystem.Burst[] 
-        { new ParticleSystem.Burst(0.0f, dropperManager.bulletsMinDropAmount, dropperManager.bulletsMaxDropAmount, 1, 0) });
+        { new ParticleSystem.Burst(0.0f, dropperManager.energyCellsMinDropAmount, dropperManager.energyCellsMaxDropAmount, 1, 0) });
     }
 
     void OnParticleTrigger()
     {
-        if(playerInventory.canPickUpBullets)
+        if(playerInventory.canPickUpEnergyCells)
         {
             List<ParticleSystem.Particle> enterParticles = new List<ParticleSystem.Particle>();
             int numEnter = GetComponent<ParticleSystem>().GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enterParticles);

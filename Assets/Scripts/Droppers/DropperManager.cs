@@ -4,6 +4,10 @@ using System.Collections;
 public class DropperManager : MonoBehaviour
 {
     public Collider playerCollider;
+    void Awake()
+    {
+        playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>();
+    }
 
     [Header("Bullets Dropper Settings")]
     public bool canDropBullets = true;

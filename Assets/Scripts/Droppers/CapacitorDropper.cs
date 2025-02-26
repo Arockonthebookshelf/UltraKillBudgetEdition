@@ -1,18 +1,18 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class BulletsDropper : MonoBehaviour
+public class CapacitorsDropper : MonoBehaviour
 {
     DropperManager dropperManager;
     PlayerInventory playerInventory;
-    ParticleSystem bulletParticleSystem;
+    ParticleSystem capacitorParticleSystem;
     void Awake()
     {
         dropperManager = GetComponentInParent<DropperManager>();
         playerInventory = FindFirstObjectByType<PlayerInventory>();
-        bulletParticleSystem = GetComponent<ParticleSystem>();
-        bulletParticleSystem.trigger.SetCollider(0, dropperManager.playerCollider);
-        if(!dropperManager.canDropBullets)
+        capacitorParticleSystem = GetComponent<ParticleSystem>();
+        capacitorParticleSystem.trigger.SetCollider(0, dropperManager.playerCollider);
+        if(!dropperManager.canDropCapacitors)
         {
             Destroy(gameObject);
         }
@@ -20,13 +20,13 @@ public class BulletsDropper : MonoBehaviour
 
     void Start()
     {
-        bulletParticleSystem.emission.SetBursts(new ParticleSystem.Burst[] 
-        { new ParticleSystem.Burst(0.0f, dropperManager.bulletsMinDropAmount, dropperManager.bulletsMaxDropAmount, 1, 0) });
+        capacitorParticleSystem.emission.SetBursts(new ParticleSystem.Burst[] 
+        { new ParticleSystem.Burst(0.0f, dropperManager.capacitorsMinDropAmount, dropperManager.capacitorsMaxDropAmount, 1, 0) });
     }
 
     void OnParticleTrigger()
     {
-        if(playerInventory.canPickUpBullets)
+        if(playerInventory.canPickUpCapacitors)
         {
             List<ParticleSystem.Particle> enterParticles = new List<ParticleSystem.Particle>();
             int numEnter = GetComponent<ParticleSystem>().GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enterParticles);
@@ -36,7 +36,7 @@ public class BulletsDropper : MonoBehaviour
                 ParticleSystem.Particle p = enterParticles[i];
                 p.remainingLifetime = 0;
                 enterParticles[i] = p;
-                playerInventory.currentBulletCount++;
+                playerInventory.currentCapacitorCount++;
             }
 
             GetComponent<ParticleSystem>().SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enterParticles);
