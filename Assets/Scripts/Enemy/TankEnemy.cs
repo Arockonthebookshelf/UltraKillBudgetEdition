@@ -34,6 +34,7 @@ public class TankEnemy : BaseEnemy
     private bool alreadyAttacked = false;
     Vector3 startPos;
     Vector3 endPos;
+    bool isjumping;
 
     // Override the attack range so that the shooter enemy can attack from its shooting range.
     protected override float AttackStateRange => MissileRange;
@@ -93,8 +94,8 @@ public class TankEnemy : BaseEnemy
     }
     private void JumpATK()
     {
-        StartCoroutine(performJumpAtk(startPos, endPos, jumpDuration, maxJumpHeight));
-       // Invoke(nameof(ResetAttack), .5f);
+        StartCoroutine(PerformJumpAtk(startPos, endPos, jumpDuration, maxJumpHeight));
+        Invoke(nameof(ResetAttack), 2f);
     }
 
     private void MissileATK()
@@ -125,6 +126,8 @@ public class TankEnemy : BaseEnemy
     #endregion
     protected override void Attack()
     {
+        if(isjumping)
+            return;
         // Stop movement during the attack.
         agent.SetDestination(transform.position);
 
@@ -159,6 +162,8 @@ public class TankEnemy : BaseEnemy
     }
     IEnumerator ShootRockets()
     {
+        if (isjumping)
+            yield break;
         int rocketLaunched = 3;
         for (int i = 1; i < rocketLaunched + 1; i++)
         {
@@ -170,9 +175,9 @@ public class TankEnemy : BaseEnemy
             yield return new WaitForSeconds(0.5f);
         }
     }
-    IEnumerator performJumpAtk(Vector3 startPos, Vector3 endPos, float duration, float maxHeight)
+    IEnumerator PerformJumpAtk(Vector3 startPos, Vector3 endPos, float duration, float maxHeight)
     {
-        Debug.Log("jump enter");
+        isjumping = true;
         agent.enabled = false;
 
         float elapsed = 0;
@@ -196,15 +201,16 @@ public class TankEnemy : BaseEnemy
 
             // Increment the elapsed time by the time passed since the last frame.
             elapsed += Time.deltaTime;
-
-
-            agent.enabled = true;
+            
             // Wait until the next FixedUpdate frame for physics calculations.
             yield return new WaitForFixedUpdate();
 
-            rb.MovePosition(endPos);
+            
             Debug.Log("jump exit");
         }
+        rb.MovePosition(endPos);
+        isjumping = false;
+        agent.enabled = true;
     }
     protected override void ResetAttack()
     {
