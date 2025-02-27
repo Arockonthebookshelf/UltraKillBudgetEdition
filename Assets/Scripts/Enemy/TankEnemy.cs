@@ -34,7 +34,7 @@ public class TankEnemy : BaseEnemy
     private bool alreadyAttacked = false;
     Vector3 startPos;
     Vector3 endPos;
-    bool isjumping;
+    public bool isjumping;
 
     // Override the attack range so that the shooter enemy can attack from its shooting range.
     protected override float AttackStateRange => MissileRange;

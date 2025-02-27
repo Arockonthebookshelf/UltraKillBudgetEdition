@@ -12,7 +12,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
     protected NavMeshAgent agent;
 
     [Header("Player Reference")]
-    [SerializeField] protected Transform player;
+    [SerializeField] protected Transform player;    
 
     [Header("Patrol Points")]
     [SerializeField] protected Transform patrolPointA;
@@ -36,8 +36,12 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
     [SerializeField] protected float enemyHealth;
     [SerializeField] public LayerMask enemyHead;
 
+    [Header("Item Drop")]
+    public GameObject itemDropper;
+
     private EnemyVision enemyVision;
     protected float distanceToPlayer;
+    private TankEnemy TankEnemy;
 
     // Virtual properties so derived enemies can override detection thresholds.
     protected virtual float AttackStateRange => attackRange;
@@ -49,6 +53,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
         agent = GetComponent<NavMeshAgent>();
 
         enemyVision = GetComponent<EnemyVision>();
+        TankEnemy = GetComponent<TankEnemy>();
     }
 
     protected void Initialize()
@@ -76,6 +81,11 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
             currentState = EnemyState.Patrol;
         }
 
+        if(enemyHealth <= 0)
+        {
+            currentState = EnemyState.Death;
+        }
+
         PerformStateAction();
     }
     private void PerformStateAction()
@@ -99,6 +109,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
 
             case EnemyState.Death:
                 Die();
+                PlayDeath();
                 break;
 
             default:
@@ -117,15 +128,20 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
 
     protected virtual void Chase()
     {
-        // Smoothly rotate toward the player.
-        Vector3 direction = (player.position - transform.position).normalized;
-        if (direction != Vector3.zero)
-        {
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        if(TankEnemy.isjumping == true)
+            return;
+        else
+        { // Smoothly rotate toward the player.
+            Vector3 direction = (player.position - transform.position).normalized;
+            if (direction != Vector3.zero)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+            }
+            agent.SetDestination(player.position);
+            agent.speed = 10;
         }
-        agent.SetDestination(player.position);
-        agent.speed = 10;
+        
     }
 
     //Attack
@@ -142,7 +158,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
         isDead = true;
         animator.SetTrigger("Die");
         agent.isStopped = true;
-        Destroy(gameObject, 3f);
+        Debug.Log("Dead");
     }
 
     #region Aniamtions Function
@@ -172,6 +188,12 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
 
         animator.SetBool("isWalk", false);
 
+    }
+    protected virtual void PlayDeath()
+    {
+        animator.SetBool("isDeath", true);
+        Instantiate(itemDropper, transform.position, Quaternion.identity);
+        Destroy(gameObject, 3f);
     }
     #endregion
 }
