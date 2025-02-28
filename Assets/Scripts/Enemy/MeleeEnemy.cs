@@ -12,11 +12,7 @@ public class MeleeEnemy : BaseEnemy
     }
     void Update()
     {
-        StateChanges();
-        if(enemyHealth <= 0)
-        {
-            Debug.Log("Dead");
-        }    
+        StateChanges(); 
     }
     private bool alreadyAttacked = false;
 

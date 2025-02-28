@@ -19665,14 +19665,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCollider: {fileID: 0}
   canDropBullets: 1
-  bulletsMinDropAmount: 3
-  bulletsMaxDropAmount: 5
-  canDropCapacitors: 0
+  bulletsMinDropAmount: 7
+  bulletsMaxDropAmount: 10
+  canDropCapacitors: 1
   capacitorsMinDropAmount: 1
   capacitorsMaxDropAmount: 2
-  canDropEnergyCells: 0
+  canDropEnergyCells: 1
   energyCellsMinDropAmount: 3
   energyCellsMaxDropAmount: 5
-  canDropRockets: 0
+  canDropRockets: 1
   rocketsMinDropAmount: 1
   rocketsMaxDropAmount: 2
