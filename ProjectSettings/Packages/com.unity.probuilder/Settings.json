@@ -85,7 +85,11 @@
                 "type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "ShapeBuilder.ActiveShapeIndex",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 "value": "{\"m_Value\":7}"
+=======
+                "value": "{\"m_Value\":6}"
+>>>>>>> Stashed changes
 =======
                 "value": "{\"m_Value\":6}"
 >>>>>>> Stashed changes
@@ -94,7 +98,11 @@
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.LastSize.Cube",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 "value": "{\"m_Value\":{\"x\":17.691181182861329,\"y\":2.9914169311523439,\"z\":-7.095954895019531}}"
+=======
+                "value": "{\"m_Value\":{\"x\":22.955724716186525,\"y\":124.07994842529297,\"z\":-2.2924041748046877}}"
+>>>>>>> Stashed changes
 =======
                 "value": "{\"m_Value\":{\"x\":22.955724716186525,\"y\":124.07994842529297,\"z\":-2.2924041748046877}}"
 >>>>>>> Stashed changes
