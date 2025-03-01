@@ -24,6 +24,12 @@ public class BulletsDropper : MonoBehaviour
         { new ParticleSystem.Burst(0.0f, dropperManager.bulletsMinDropAmount, dropperManager.bulletsMaxDropAmount, 1, 0) });
     }
 
+    void Update()
+    {
+        var externalForces = bulletParticleSystem.externalForces;
+        externalForces.enabled = playerInventory.canPickUpBullets;
+    }
+
     void OnParticleTrigger()
     {
         if(playerInventory.canPickUpBullets)
@@ -36,7 +42,7 @@ public class BulletsDropper : MonoBehaviour
                 ParticleSystem.Particle p = enterParticles[i];
                 p.remainingLifetime = 0;
                 enterParticles[i] = p;
-                playerInventory.currentBulletCount++;
+                playerInventory.AddBullets(1);
             }
 
             GetComponent<ParticleSystem>().SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enterParticles);
