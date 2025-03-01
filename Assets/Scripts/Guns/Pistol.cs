@@ -2,38 +2,39 @@ using UnityEngine;
 
 public class Pistol : MonoBehaviour
 {
+    PlayerInventory playerInventory;
 
+    RaycastHit rayHit;
+    ParticleSystem muzzleFlash;
+    LineRenderer bulletTrail;
+    bool readyToShoot = true;
+
+    [Header("Pistol Stats")]
     [SerializeField] int damage;
     [SerializeField] float fireRate;
     [SerializeField] float range;
     [SerializeField] float verticalSpread;
     [SerializeField] float horizontalSpread;
-    [SerializeField] float effectsTime;
+    [SerializeField] float effectsTime = 0.25f;
+    [SerializeField] float minTrailDistance = 5f;
 
-    bool readyToShoot = true;
-
+    [Header("References")]
     [SerializeField] Camera playerCamera;
-    RaycastHit rayHit;
     [SerializeField] LayerMask whatIsEnemy;
-
-
-    ParticleSystem muzzleFlash;
-    LineRenderer bulletTrail;
 
     private void Awake()
     {
         bulletTrail = GetComponent<LineRenderer>();
         muzzleFlash = GetComponentInChildren<ParticleSystem>();
+        playerInventory = FindFirstObjectByType<PlayerInventory>();
     }
 
     private void Update()
     {
-        if (readyToShoot && Input.GetKeyDown(KeyCode.Mouse0))
+        if (readyToShoot && playerInventory.currentBulletCount > 0 && Input.GetKeyDown(KeyCode.Mouse0))
         {
             Shoot();
         }
-
-        bulletTrail.SetPosition(0, muzzleFlash.transform.position);
     }
 
     private void Shoot()
@@ -57,7 +58,7 @@ public class Pistol : MonoBehaviour
             }
             else
             {
-                
+                //bullet hole game object or particle effect
             }
 
             trailEndPosition = rayHit.point;
@@ -67,14 +68,22 @@ public class Pistol : MonoBehaviour
             trailEndPosition = playerCamera.transform.position + (playerCamera.transform.forward * range);
         }
 
-        DrawTrail(trailEndPosition);
+        
+        if(Vector3.Distance(muzzleFlash.transform.position, rayHit.point) >= minTrailDistance)
+        {
+            DrawTrail(muzzleFlash.transform.position ,trailEndPosition);
+        }
+    
         muzzleFlash.Play();
 
         Invoke("ResetShot", fireRate);
+
+        playerInventory.RemoveBullets(1);
     }
 
-    void DrawTrail(Vector3 end)
+    void DrawTrail(Vector3 start, Vector3 end)
     {
+        bulletTrail.SetPosition(0, start);
         bulletTrail.SetPosition(1, end);
         bulletTrail.enabled = true;
         Invoke("DisableTrail", effectsTime);

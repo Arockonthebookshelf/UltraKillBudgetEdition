@@ -19664,15 +19664,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCollider: {fileID: 0}
+  bulletsPickupMultiplier: 1
   canDropBullets: 1
   bulletsMinDropAmount: 7
   bulletsMaxDropAmount: 10
+  capacitorsPickupMultiplier: 1
   canDropCapacitors: 1
   capacitorsMinDropAmount: 1
   capacitorsMaxDropAmount: 2
+  energyCellsPickupMultiplier: 1
   canDropEnergyCells: 1
   energyCellsMinDropAmount: 3
   energyCellsMaxDropAmount: 5
+  rocketsPickupMultiplier: 1
   canDropRockets: 1
-  rocketsMinDropAmount: 1
+  rocketsMinDropAmount: 0
   rocketsMaxDropAmount: 2

@@ -10,21 +10,25 @@ public class DropperManager : MonoBehaviour
     }
 
     [Header("Bullets Dropper Settings")]
+    public int bulletsPickupMultiplier = 1;
     public bool canDropBullets = true;
     public short bulletsMinDropAmount = 1;
     public short bulletsMaxDropAmount = 5;
 
     [Header("Capacitor Dropper Settings")]
+    public int capacitorsPickupMultiplier = 1;
     public bool canDropCapacitors = true;
     public short capacitorsMinDropAmount = 1;
     public short capacitorsMaxDropAmount = 2;
 
     [Header("EnergyCells Dropper Settings")]
+    public int energyCellsPickupMultiplier = 1;
     public bool canDropEnergyCells = true;
     public short energyCellsMinDropAmount = 3;
     public short energyCellsMaxDropAmount = 5;
 
     [Header("Rockets Dropper Settings")]
+    public int rocketsPickupMultiplier = 1;
     public bool canDropRockets = true;
     public short rocketsMinDropAmount = 1;
     public short rocketsMaxDropAmount = 2;

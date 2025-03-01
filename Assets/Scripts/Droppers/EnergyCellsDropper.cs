@@ -5,13 +5,13 @@ public class EnergyCellsDropper : MonoBehaviour
 {
     DropperManager dropperManager;
     PlayerInventory playerInventory;
-    ParticleSystem bulletParticleSystem;
+    ParticleSystem energyCellsParticleSystem;
     void Awake()
     {
         dropperManager = GetComponentInParent<DropperManager>();
         playerInventory = FindFirstObjectByType<PlayerInventory>();
-        bulletParticleSystem = GetComponent<ParticleSystem>();
-        bulletParticleSystem.trigger.SetCollider(0, dropperManager.playerCollider);
+        energyCellsParticleSystem = GetComponent<ParticleSystem>();
+        energyCellsParticleSystem.trigger.SetCollider(0, dropperManager.playerCollider);
         if(!dropperManager.canDropEnergyCells)
         {
             Destroy(gameObject);
@@ -20,8 +20,14 @@ public class EnergyCellsDropper : MonoBehaviour
 
     void Start()
     {
-        bulletParticleSystem.emission.SetBursts(new ParticleSystem.Burst[] 
+        energyCellsParticleSystem.emission.SetBursts(new ParticleSystem.Burst[] 
         { new ParticleSystem.Burst(0.0f, dropperManager.energyCellsMinDropAmount, dropperManager.energyCellsMaxDropAmount, 1, 0) });
+    }
+
+    void Update()
+    {
+        var externalForces = energyCellsParticleSystem.externalForces;
+        externalForces.enabled = playerInventory.canPickUpEnergyCells;
     }
 
     void OnParticleTrigger()
@@ -36,7 +42,7 @@ public class EnergyCellsDropper : MonoBehaviour
                 ParticleSystem.Particle p = enterParticles[i];
                 p.remainingLifetime = 0;
                 enterParticles[i] = p;
-                playerInventory.currentBulletCount++;
+                //playerInventory.currentEnergyCellsCount++;
             }
 
             GetComponent<ParticleSystem>().SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enterParticles);

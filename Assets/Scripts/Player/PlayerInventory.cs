@@ -2,6 +2,12 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour , IPersistenceData
 {
+    HUD hud;
+    void Awake()
+    {
+        hud = FindFirstObjectByType<HUD>();
+    }
+
     public void LoadData(GameData gameData)
     {
         ClearanceLevel = gameData.ClearanceLevel;
@@ -19,15 +25,15 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
         gameData.currentRocketsCount = currentRocketsCount;
     }
 
-    [HideInInspector]public int ClearanceLevel = 0;
-    [HideInInspector]public int currentBulletCount;
-    [HideInInspector]public int currentCapacitorCount;
-    [HideInInspector]public int currentEnergyCellsCount;
-    [HideInInspector]public int currentRocketsCount;
-    public bool canPickUpBullets;
-    public bool canPickUpCapacitors;
-    public bool canPickUpEnergyCells;
-    public bool canPickUpRockets;
+    public int ClearanceLevel = 0;
+    public int currentBulletCount;
+    public int currentCapacitorCount;
+    public int currentEnergyCellsCount;
+    public int currentRocketsCount;
+    [HideInInspector]public bool canPickUpBullets;
+    [HideInInspector]public bool canPickUpCapacitors;
+    [HideInInspector]public bool canPickUpEnergyCells;
+    [HideInInspector]public bool canPickUpRockets;
 
     [Header("Ammo Settings")]
     [SerializeField] private int maxBulletCount = 0;
@@ -41,6 +47,17 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
         canPickUpCapacitors = currentCapacitorCount < maxCapacitorCount;
         canPickUpEnergyCells = currentEnergyCellsCount < maxEnergyCellsCount;
         canPickUpRockets = currentRocketsCount < maxRocketsCount;
+    }
+
+    public void AddBullets(int amount)
+    {
+        currentBulletCount += amount;
+        hud.UpdateAmmo(currentBulletCount);
+    }
+    public void RemoveBullets(int amount)
+    {
+        currentBulletCount -= amount;
+        hud.UpdateAmmo(currentBulletCount);
     }
 
 }
