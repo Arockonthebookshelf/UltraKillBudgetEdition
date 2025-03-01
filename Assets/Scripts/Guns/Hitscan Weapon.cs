@@ -1,131 +1,93 @@
 using UnityEngine;
-using TMPro;
 
-public class GunSystem : MonoBehaviour
+public class Pistol : MonoBehaviour
 {
-    //Gun stats
-    public int damage;
-    public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
-    public int magazineSize, bulletsPerTap;
-    public bool allowButtonHold;
-    int bulletsLeft, bulletsShot;
+
+    [SerializeField] int damage;
+    [SerializeField] float fireRate;
+    [SerializeField] float range;
+    [SerializeField] float verticalSpread;
+    [SerializeField] float horizontalSpread;
+    [SerializeField] float effectsTime;
+
+    bool readyToShoot = true;
+
+    [SerializeField] Camera playerCamera;
+    RaycastHit rayHit;
+    [SerializeField] LayerMask whatIsEnemy;
 
 
-    //bools 
-    bool shooting, readyToShoot, reloading;
-
-
-    //Reference
-    public Camera fpsCam;
-    public Transform attackPoint;
-    public RaycastHit rayHit;
-    public LayerMask whatIsEnemy;
-
-
-    //Graphics
-    public GameObject muzzleFlash, bulletHoleGraphic;
-    public TextMeshProUGUI text;
-    public TrailRenderer bulletTrail;
+    ParticleSystem muzzleFlash;
+    LineRenderer bulletTrail;
 
     private void Awake()
     {
-        bulletsLeft = magazineSize;
-        readyToShoot = true;
+        bulletTrail = GetComponent<LineRenderer>();
+        muzzleFlash = GetComponentInChildren<ParticleSystem>();
     }
+
     private void Update()
     {
-        MyInput();
-
-
-        //SetText
-        text.SetText(bulletsLeft + " / " + magazineSize);
-    }
-    private void MyInput()
-    {
-        if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
-        else shooting = Input.GetKeyDown(KeyCode.Mouse0);
-
-
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading) Reload();
-
-
-        //Shoot
-        if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
+        if (readyToShoot && Input.GetKeyDown(KeyCode.Mouse0))
         {
-            bulletsShot = bulletsPerTap;
             Shoot();
         }
+
+        bulletTrail.SetPosition(0, muzzleFlash.transform.position);
     }
+
     private void Shoot()
     {
         readyToShoot = false;
-
+        Vector3 trailEndPosition;
 
         //Spread
-        float x = Random.Range(-spread, spread);
-        float y = Random.Range(-spread, spread);
-
+        float x = Random.Range(-horizontalSpread, horizontalSpread);
+        float y = Random.Range(-verticalSpread, verticalSpread);
 
         //Calculate Direction with Spread
-        Vector3 direction = fpsCam.transform.forward + new Vector3(x, y, 0);
-
-
-        //RayCast
-        GameObject flash = Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity, attackPoint);
-        Destroy(flash, 0.1f);
-
-        if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range))
+        Vector3 direction = playerCamera.transform.forward + new Vector3(x, y, 0);
+        
+        if (Physics.Raycast(playerCamera.transform.position, direction, out rayHit, range))
         {
-            //if (((1 << rayHit.collider.gameObject.layer) & whatIsEnemy) != 0)
+            IDamagable damagable = rayHit.collider.GetComponent<IDamagable>();
+            if (damagable != null)
             {
-                Debug.Log(rayHit.collider.name);
-                {
-                    IDamagable damagable = rayHit.collider.GetComponent<IDamagable>();
-                    if (damagable != null)
-                    {
-                        damagable.Damage(20f, rayHit.collider);
-                    }
-                }
-
+                damagable.Damage(damage, rayHit.collider);
             }
-            //else
-            //{
-            //    Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.LookRotation(rayHit.normal));
-            //}
+            else
+            {
+                
+            }
+
+            trailEndPosition = rayHit.point;
         }
-
-
-        var bullet = Instantiate(bulletTrail, attackPoint.position, Quaternion.identity);
-
-        bullet.AddPosition(attackPoint.position);
+        else
         {
-            bullet.transform.position = rayHit.point;
+            trailEndPosition = playerCamera.transform.position + (playerCamera.transform.forward * range);
         }
-        Debug.Log(rayHit.point);
 
-        bulletsLeft--;
-        bulletsShot--;
+        DrawTrail(trailEndPosition);
+        muzzleFlash.Play();
 
-
-        Invoke("ResetShot", timeBetweenShooting);
-
-
-        if (bulletsShot > 0 && bulletsLeft > 0)
-            Invoke("Shoot", timeBetweenShots);
+        Invoke("ResetShot", fireRate);
     }
-    private void ResetShot()
+
+    void DrawTrail(Vector3 end)
+    {
+        bulletTrail.SetPosition(1, end);
+        bulletTrail.enabled = true;
+        Invoke("DisableTrail", effectsTime);
+    }
+
+    void DisableTrail()
+    {
+        bulletTrail.enabled = false;
+    }
+
+    void ResetShot()
     {
         readyToShoot = true;
-    }
-    private void Reload()
-    {
-        reloading = true;
-        Invoke("ReloadFinished", reloadTime);
-    }
-    private void ReloadFinished()
-    {
-        bulletsLeft = magazineSize;
-        reloading = false;
     }
 
 }
