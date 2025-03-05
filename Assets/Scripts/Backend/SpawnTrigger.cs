@@ -9,12 +9,15 @@ public class SpawnTrigger : MonoBehaviour
     [SerializeField][Range(0,10)]private int spawnerDistance;
     void Start()
     {
-        spawnerPosition = GameObject.FindGameObjectWithTag("Spawner"); 
+        //spawnerPosition = GameObject.FindGameObjectWithTag("Spawner"); 
         RaycastHit hit;
         if(Physics.SphereCast(transform.position,spawnerDistance,new Vector3(1,0,1),out hit))
         {
             Debug.Log("cast");
-            hit.collider.CompareTag("Spawner");
+            if(hit.collider.CompareTag("Spawner") && hit.collider.gameObject.GetComponent<Spawner>())
+            {
+                spawner =hit.collider.gameObject.GetComponent<Spawner>();
+            }
         }
         else
         {
@@ -24,6 +27,10 @@ public class SpawnTrigger : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        
+    }
+    void OnTriggerEnter(Collider other)
     {
         
     }

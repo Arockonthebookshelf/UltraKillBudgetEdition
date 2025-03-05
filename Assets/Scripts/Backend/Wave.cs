@@ -5,11 +5,15 @@ using UnityEngine;
 public class Wave 
 {   
     public Action OnCurrentEventStop;
+    public static Action OnwaveStart;
+    public static Action OnwaveActive;
+    public static Action OnwaveStop;
     bool enemyIsAlive;
     bool enemyIsSet;
     private List<GameObject> enmeyList = new List<GameObject>();
     public void WaveSpawn(List<Spawner>spawners)
     {
+        OnwaveStart?.Invoke();
         foreach(var spawner in spawners)
         {
             spawner.Spawn();
@@ -23,7 +27,6 @@ public class Wave
     public void WaveUpdate()
     {
         //list of enemies and check if they are active
-        Debug.Log("Update");
         if(!enemyIsSet)
         {
             return;
@@ -34,12 +37,12 @@ public class Wave
             if(!obj.activeInHierarchy)
             {
                 i--;
-                 Debug.Log(i);
             }
         }
-        if(i > 1)
+        if(i >= 1)
         {
             enemyIsAlive = true;
+            OnwaveActive?.Invoke();
         }
         else
         {
@@ -51,8 +54,9 @@ public class Wave
     public void waveStop()
     {
         //stop check wave and check if next wave exist or not.
-        if(!enemyIsAlive)
+        if(!enemyIsAlive || enmeyList.Count == 0)
         {
+            OnwaveStop?.Invoke();
             enemyIsSet = false;
             enmeyList.Clear();
             OnCurrentEventStop?.Invoke();

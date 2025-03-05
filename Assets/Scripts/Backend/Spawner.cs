@@ -12,10 +12,13 @@ public class Spawner : MonoBehaviour
     [SerializeField] [Range(0,15)]int batchLimit;
     [Tooltip("Enemy number spawn by a spawner. Enemy number increase with wave")]
     [SerializeField] [Range(1,5)] int currentSpawnLimit;
+    WaveManager waveManager;
+    public bool spawnAt;
+    [SerializeField] int spawnAtWave;
     public List <GameObject>objects = new List<GameObject>();
     public void Start()
     {
-        
+        waveManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<WaveManager>();
 
         if (spawnObject == null)
         {
@@ -38,6 +41,13 @@ public class Spawner : MonoBehaviour
         if (spawnObject == null)
         {
             return;
+        }
+        if(spawnAt)
+        {
+            if(waveManager.currentWave < spawnAtWave)
+            {
+                return;
+            }
         }
         int spawnCounter = 0;
         foreach (GameObject obj in objects)
