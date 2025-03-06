@@ -4,7 +4,7 @@ using UnityEngine;
 using random = UnityEngine.Random;
 
 
-public class Spawner : MonoBehaviour
+public class WaveSpawner : MonoBehaviour
 {
     [SerializeField]GameObject spawnObject;
     GameObject enemyContainer;

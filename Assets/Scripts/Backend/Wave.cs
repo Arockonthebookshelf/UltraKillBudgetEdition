@@ -11,7 +11,7 @@ public class Wave
     bool enemyIsAlive;
     bool enemyIsSet;
     private List<GameObject> enmeyList = new List<GameObject>();
-    public void WaveSpawn(List<Spawner>spawners)
+    public void WaveSpawn(List<WaveSpawner>spawners)
     {
         OnwaveStart?.Invoke();
         foreach(var spawner in spawners)

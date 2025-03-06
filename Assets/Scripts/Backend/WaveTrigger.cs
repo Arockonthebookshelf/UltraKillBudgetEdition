@@ -13,11 +13,11 @@ public class WaveTrigger : MonoBehaviour
     [SerializeField][Range(1,10)] int waveLimit;
     [SerializeField]int waveGrowth;
 
-    private List<Spawner>spawners = new List<Spawner>();
+    private List<WaveSpawner>spawners = new List<WaveSpawner>();
     WaveManager waveManager;
     private List<GameObject> spawnersPosition = new List<GameObject>();
 
-    public static Action<List<Spawner>,int,int> OnSpawnerTriggered;
+    public static Action<List<WaveSpawner>,int,int> OnSpawnerTriggered;
     #region spawnerSetUp
     void Start()
     {
@@ -29,7 +29,7 @@ public class WaveTrigger : MonoBehaviour
         {
             // Debug.Log("all"+spawner.name);
             // //Searching for spawner with the given trigger distance and has a spawner script.Removing those without it.
-            if(Mathf.Abs(Vector3.Distance(spawner.transform.position ,transform.position)) < spawnerDistance && spawner.GetComponent<Spawner>())
+            if(Mathf.Abs(Vector3.Distance(spawner.transform.position ,transform.position)) < spawnerDistance && spawner.GetComponent<WaveSpawner>())
             {
                 temp.Add(spawner);
             // Debug.Log(temp.Count);
@@ -43,7 +43,7 @@ public class WaveTrigger : MonoBehaviour
         {
             
            //Debug.Log(spawners.Count);
-            spawners.Add(spawnerPosition.GetComponent<Spawner>());
+            spawners.Add(spawnerPosition.GetComponent<WaveSpawner>());
         }
         if (spawners.Count < 1)
         {

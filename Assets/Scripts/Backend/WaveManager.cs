@@ -8,14 +8,13 @@ public class WaveManager : MonoBehaviour
     [Tooltip("Gap between waves")]
     public int waveCountDown;
     private Wave wave = new Wave();
-    private List<Spawner> _spawners = new List<Spawner>();
+    private List<WaveSpawner> _spawners = new List<WaveSpawner>();
     public int currentWave;
     private int waveMax;
     bool waitForWave;
     private int _waveGrowth;
     private bool waveIsActive;
 
-    public static Action waveStart;
 
     private void OnEnable()
     {
@@ -39,7 +38,7 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    void WaveStart(List<Spawner> spawners,int waveLimit,int waveGrowth)
+    void WaveStart(List<WaveSpawner> spawners,int waveLimit,int waveGrowth)
     {
         _spawners = spawners;
         waveMax = waveLimit;
@@ -47,12 +46,13 @@ public class WaveManager : MonoBehaviour
         currentWave = 0;
         wave.WaveSpawn(spawners);
         waveIsActive = true;
+
     }
     void WavesUpdate()
     {
         if(currentWave < waveMax)
         {
-            foreach(Spawner spawner in _spawners)
+            foreach(WaveSpawner spawner in _spawners)
             {
                 spawner.IncreaseBatchSize(_waveGrowth);
             }
@@ -65,11 +65,12 @@ public class WaveManager : MonoBehaviour
         else
         {
             Debug.Log("Wave over");
-            foreach(Spawner spawner in _spawners)
+            foreach(WaveSpawner spawner in _spawners)
             {
                 Destroy(spawner.gameObject);
                 //spawner.gameObject.SetActive(false);
             }
+
             waveIsActive = false;
         }
     }

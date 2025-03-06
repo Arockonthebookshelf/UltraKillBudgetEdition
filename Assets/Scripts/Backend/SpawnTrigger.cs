@@ -5,7 +5,7 @@ public class SpawnTrigger : MonoBehaviour
 {
     [SerializeField]GameObject SpawnObject;
     GameObject spawnerPosition;
-    private Spawner spawner;
+    private WaveSpawner spawner;
     [SerializeField][Range(0,10)]private int spawnerDistance;
     void Start()
     {
@@ -14,9 +14,9 @@ public class SpawnTrigger : MonoBehaviour
         if(Physics.SphereCast(transform.position,spawnerDistance,new Vector3(1,0,1),out hit))
         {
             Debug.Log("cast");
-            if(hit.collider.CompareTag("Spawner") && hit.collider.gameObject.GetComponent<Spawner>())
+            if(hit.collider.CompareTag("Spawner") && hit.collider.gameObject.GetComponent<WaveSpawner>())
             {
-                spawner =hit.collider.gameObject.GetComponent<Spawner>();
+                spawner =hit.collider.gameObject.GetComponent<WaveSpawner>();
             }
         }
         else
@@ -32,6 +32,6 @@ public class SpawnTrigger : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        
+        spawner.Spawn();
     }
 }
