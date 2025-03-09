@@ -36,10 +36,10 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
     [HideInInspector]public bool canPickUpRockets;
 
     [Header("Ammo Settings")]
-    [SerializeField] private int maxBulletCount = 0;
-    [SerializeField] private int maxCapacitorCount = 0;
-    [SerializeField] private int maxEnergyCellsCount = 0;
-    [SerializeField] private int maxRocketsCount = 0;
+    public int maxBulletCount = 0;
+    public int maxCapacitorCount = 0;
+    public int maxEnergyCellsCount = 0;
+    public int maxRocketsCount = 0;
 
     void Update()
     {
@@ -51,13 +51,74 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
 
     public void AddBullets(int amount)
     {
-        currentBulletCount += amount;
-        hud.UpdateAmmo(currentBulletCount);
+        if(currentBulletCount + amount > maxBulletCount)
+        {
+            currentBulletCount = maxBulletCount;
+        }
+        else
+        {
+            currentBulletCount += amount;
+        }
+        hud.AmmoPickedUp("Pistol");
     }
     public void RemoveBullets(int amount)
     {
         currentBulletCount -= amount;
-        hud.UpdateAmmo(currentBulletCount);
+        hud.AmmoPickedUp("Pistol");
+    }
+
+    public void AddCapacitors(int amount)
+    {
+        if(currentCapacitorCount + amount > maxCapacitorCount)
+        {
+            currentCapacitorCount = maxCapacitorCount;
+        }
+        else
+        {
+            currentCapacitorCount += amount;
+        }
+        hud.AmmoPickedUp("Shotgun");
+    }
+    public void RemoveCapacitors(int amount)
+    {
+        currentCapacitorCount -= amount;
+        hud.AmmoPickedUp("Shotgun");
+    }
+
+    public void AddEnergyCells(int amount)
+    {
+        if(currentEnergyCellsCount + amount > maxEnergyCellsCount)
+        {
+            currentEnergyCellsCount = maxEnergyCellsCount;
+        }
+        else
+        {
+            currentEnergyCellsCount += amount;
+        }
+        hud.AmmoPickedUp("MiniGun");
+    }
+    public void RemoveEnergyCells(int amount)
+    {
+        currentEnergyCellsCount -= amount;
+        hud.AmmoPickedUp("MiniGun");
+    }
+
+    public void AddRockets(int amount)
+    {
+        if(currentRocketsCount + amount > maxRocketsCount)
+        {
+            currentRocketsCount = maxRocketsCount;
+        }
+        else
+        {
+            currentRocketsCount += amount;
+        }
+        hud.AmmoPickedUp("RocketLauncher");
+    }
+    public void RemoveRockets(int amount)
+    {
+        currentRocketsCount -= amount;
+        hud.AmmoPickedUp("RocketLauncher");
     }
 
 }

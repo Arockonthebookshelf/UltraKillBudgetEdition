@@ -1,9 +1,12 @@
+using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
+    PlayerInventory playerInventory;
+
     [SerializeField] Slider healthSlider;
     [SerializeField] TMP_Text healthText;
     [SerializeField] TMP_Text weaponName;
@@ -14,13 +17,19 @@ public class HUD : MonoBehaviour
     Slider interactionSlider;
     Image interactionButton;
     TMP_Text interactionText;
-    int mAmmo;
+    string currentWeapon;
     
      void Awake()
     {
         interactionSlider = interactionProgressBar.GetComponent<Slider>();
         interactionButton = interactionButtonImage.GetComponent<Image>();
         interactionText = interactionTextGO.GetComponent<TMP_Text>();
+        playerInventory = FindFirstObjectByType<PlayerInventory>();
+    }
+
+    void Start()
+    {
+        
     }
 
     public void InitializeHealthBar(int maxHealth)
@@ -37,12 +46,36 @@ public class HUD : MonoBehaviour
     
     public void UpdateWeapon(string name)
     {
-        weaponName.SetText(name + ":");
+        currentWeapon = name;
+        weaponName.SetText(currentWeapon + ":");
+        switch (name)
+        {
+            case "Pistol":
+               UpdateAmmo(playerInventory.currentBulletCount, playerInventory.maxBulletCount);
+                break;
+            case "Shotgun":
+                UpdateAmmo(playerInventory.currentCapacitorCount, playerInventory.maxCapacitorCount);
+                break;
+            case "MiniGun":
+                UpdateAmmo(playerInventory.currentEnergyCellsCount, playerInventory.maxEnergyCellsCount);
+                break;
+            case "RocketLauncher":
+                UpdateAmmo(playerInventory.currentRocketsCount, playerInventory.maxRocketsCount);
+                break;
+        }
     }
 
-    public void UpdateAmmo(int currentAmmo)
+    public void AmmoPickedUp(string name)
     {
-        ammoCount.SetText(currentAmmo + "/" + mAmmo);
+       if(name == currentWeapon)
+        {
+            UpdateWeapon(name);
+        }
+    }
+
+    public void UpdateAmmo(int currentAmmo, int maxAmmo)
+    {
+        ammoCount.SetText(currentAmmo + "/" + maxAmmo);
     }
 
     public void ToggleDisplay(bool value)
@@ -58,4 +91,5 @@ public class HUD : MonoBehaviour
         interactionSlider.value = progressbar;
         interactionText.SetText(text);
     }
+    
 }

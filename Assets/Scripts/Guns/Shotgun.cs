@@ -1,71 +1,106 @@
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System.Collections.Generic;
 
-public class Shotgun : Gun
+public class Shotgun : MonoBehaviour
 {
-    [SerializeField]private Camera mainCamera;
-    [SerializeField]private Transform fireArea;
-    [SerializeField]private GameObject bullet;
-    [SerializeField]private Transform container;
-    private int bulletLimit = 12;
-    [SerializeField] private List <GameObject> bullets;
-    private float lastFired;
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] float shootForce;
+    [SerializeField] float upwardForce;
+    [SerializeField] float fireRate;
+    [SerializeField] float spread;
+    [SerializeField] int bulletsPerTap;
+    [SerializeField] int poolSize = 10;
 
-    void Start()
+    bool readyToShoot = true;
+    public Camera fpsCam;
+    public Transform attackPoint;
+
+    private Queue<GameObject> bulletPool;
+
+    private void Awake()
     {
-        mainCamera = Camera.main;
-        for (int i = 0; i < bulletLimit; i++)
-        {
-            bullets.Add(Instantiate(bullet));
-            bullets[i].gameObject.SetActive(false);
-        }
+        InitializeBulletPool();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        lastFired = lastFired + Time.deltaTime;
-        if (Input.GetButtonDown("Fire1") && lastFired > fireRate && currentAmmo > 0)
+        HandleInput();
+    }
+
+    private void HandleInput()
+    {
+        if (readyToShoot && Input.GetKeyDown(KeyCode.Mouse0))
         {
-            lastFired = 0;
             Shoot();
         }
-        if (Input.GetKey(KeyCode.R))
+    }
+
+    private void Shoot()
+    {
+        readyToShoot = false;
+
+        for (int i = 0; i < bulletsPerTap; i++)
         {
-            Reload();
+            Vector3 directionWithSpread = CalculateSpread();
+
+            GameObject currentBullet = GetBulletFromPool();
+            currentBullet.transform.position = attackPoint.position;
+            currentBullet.transform.forward = directionWithSpread.normalized;
+            currentBullet.SetActive(true);
+
+            Rigidbody bulletRb = currentBullet.GetComponent<Rigidbody>();
+            bulletRb.linearVelocity = Vector3.zero; // Reset velocity
+            bulletRb.AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
+            bulletRb.AddForce(fpsCam.transform.up * upwardForce, ForceMode.Impulse);
+        }
+
+        Invoke("ResetShot", fireRate);
+    }
+
+    private Vector3 CalculateSpread()
+    {
+        Vector3 directionWithoutSpread = fpsCam.transform.forward;
+        float x = Random.Range(-spread, spread);
+        float y = Random.Range(-spread, spread);
+        float z = Random.Range(-spread, spread);
+        return directionWithoutSpread + new Vector3(x, y, z);
+    }
+
+    private void ResetShot()
+    {
+        readyToShoot = true;
+    }
+
+    private void InitializeBulletPool()
+    {
+        bulletPool = new Queue<GameObject>();
+
+        for (int i = 0; i < poolSize; i++)
+        {
+            GameObject bullet = Instantiate(bulletPrefab);
+            bullet.SetActive(false);
+            bulletPool.Enqueue(bullet);
         }
     }
-    protected override void Shoot()
+
+    private GameObject GetBulletFromPool()
     {
-        Ray ray = new Ray { origin = mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0)), direction = mainCamera.transform.forward };
-        //RaycastHit []hit = new RaycastHit[5];
-        Ray fireRay = new Ray { origin = fireArea.position , direction = mainCamera.transform.forward };
-        RaycastHit hit;
-        if (Physics.Raycast(fireRay, out hit))
+        if (bulletPool.Count > 0)
         {
-            Vector3 pos = hit.point;
-            Debug.Log(pos);
-            IDamagable damagable = hit.collider.GetComponent<IDamagable>();
-            --currentAmmo;
-            if (damagable != null)
-            {
-               // damagable.Damage(20f);
-            }
+            return bulletPool.Dequeue();
         }
-        
+        else
+        {
+            GameObject bullet = Instantiate(bulletPrefab);
+            bullet.SetActive(false);
+            return bullet;
+        }
     }
-    protected override void Reload()
+
+    public void ReturnBulletToPool(GameObject bullet)
     {
-        currentAmmo = maxAmmo;
-    }
-    private void OnDrawGizmos()
-    {
-        Vector3 _fireareacords = fireArea.position;
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0)), mainCamera.transform.forward * 5);
-        Gizmos.color = Color.green;
-        Gizmos.DrawRay(_fireareacords, mainCamera.transform.forward*5);
-        Gizmos.color = Color.blue;
+        bullet.SetActive(false);
+        bulletPool.Enqueue(bullet);
     }
 }
-

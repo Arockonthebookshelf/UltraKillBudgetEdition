@@ -42,7 +42,7 @@ public class CapacitorsDropper : MonoBehaviour
                 ParticleSystem.Particle p = enterParticles[i];
                 p.remainingLifetime = 0;
                 enterParticles[i] = p;
-                //playerInventory.currentCapacitorCount++;
+                playerInventory.AddCapacitors(dropperManager.capacitorsPickupMultiplier);
             }
 
             GetComponent<ParticleSystem>().SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enterParticles);
