@@ -42,7 +42,7 @@ public class EnergyCellsDropper : MonoBehaviour
                 ParticleSystem.Particle p = enterParticles[i];
                 p.remainingLifetime = 0;
                 enterParticles[i] = p;
-                //playerInventory.currentEnergyCellsCount++;
+                playerInventory.AddEnergyCells(dropperManager.energyCellsPickupMultiplier);
             }
 
             GetComponent<ParticleSystem>().SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enterParticles);

@@ -42,7 +42,7 @@ public class BulletsDropper : MonoBehaviour
                 ParticleSystem.Particle p = enterParticles[i];
                 p.remainingLifetime = 0;
                 enterParticles[i] = p;
-                playerInventory.AddBullets(1);
+                playerInventory.AddBullets(dropperManager.bulletsPickupMultiplier);
             }
 
             GetComponent<ParticleSystem>().SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enterParticles);
