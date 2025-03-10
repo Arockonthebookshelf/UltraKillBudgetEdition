@@ -6348,7 +6348,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 2
   simulationSpeed: 5
-  stopAction: 0
+  stopAction: 2
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -17111,6 +17111,10 @@ PrefabInstance:
       value: Blood Splash(Single Hit)
       objectReference: {fileID: 0}
     - target: {fileID: 8501674031311559426, guid: 408c673ab08c8394ca3982900b360960, type: 3}
+      propertyPath: stopAction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8501674031311559426, guid: 408c673ab08c8394ca3982900b360960, type: 3}
       propertyPath: EmissionModule.m_BurstCount
       value: 1
       objectReference: {fileID: 0}
@@ -17198,6 +17202,38 @@ PrefabInstance:
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[1].value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8501674031311559426, guid: 408c673ab08c8394ca3982900b360960, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[0].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 8501674031311559426, guid: 408c673ab08c8394ca3982900b360960, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 8501674031311559426, guid: 408c673ab08c8394ca3982900b360960, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[0].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 8501674031311559426, guid: 408c673ab08c8394ca3982900b360960, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 8501674031311559426, guid: 408c673ab08c8394ca3982900b360960, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 8501674031311559426, guid: 408c673ab08c8394ca3982900b360960, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 8501674031311559426, guid: 408c673ab08c8394ca3982900b360960, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 8501674031311559426, guid: 408c673ab08c8394ca3982900b360960, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17211,6 +17247,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 612460107}
     m_Modifications:
+    - target: {fileID: 1325732887716403645, guid: 7104009c24ef4ef4eae5c64304b2e938, type: 3}
+      propertyPath: stopAction
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2364946769298828043, guid: 7104009c24ef4ef4eae5c64304b2e938, type: 3}
       propertyPath: m_Name
       value: Blood Splash(death)
