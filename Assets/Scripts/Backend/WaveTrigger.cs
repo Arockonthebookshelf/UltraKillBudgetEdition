@@ -8,9 +8,11 @@ using UnityEngine;
 public class WaveTrigger : MonoBehaviour
 {
     [Tooltip("Distance where spawner will be added to this trigger")]
-    [SerializeField][Range(0,30)] int spawnerDistance;
+    [SerializeField][Range(0,60)] int spawnerDistance;
     [Tooltip("The total number of wave for the spawner trigger by this trigger")]
     [SerializeField][Range(1,10)] int waveLimit;
+    [Tooltip("offset spawnerradius")]
+    [SerializeField]Vector3 offset;
     [SerializeField]int waveGrowth;
 
     private List<WaveSpawner>spawners = new List<WaveSpawner>();
@@ -29,7 +31,7 @@ public class WaveTrigger : MonoBehaviour
         {
             // Debug.Log("all"+spawner.name);
             // //Searching for spawner with the given trigger distance and has a spawner script.Removing those without it.
-            if(Mathf.Abs(Vector3.Distance(spawner.transform.position ,transform.position)) < spawnerDistance && spawner.GetComponent<WaveSpawner>())
+            if(Mathf.Abs(Vector3.Distance(spawner.transform.position ,transform.position + offset)) < spawnerDistance && spawner.GetComponent<WaveSpawner>())
             {
                 temp.Add(spawner);
             // Debug.Log(temp.Count);
@@ -70,7 +72,7 @@ public class WaveTrigger : MonoBehaviour
     }
     void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireCube(transform.position,new Vector3(spawnerDistance,spawnerDistance,spawnerDistance));
+        Gizmos.DrawWireCube(transform.position + offset,new Vector3(spawnerDistance,spawnerDistance,spawnerDistance));
     }
     #endregion collisionDetection
 }

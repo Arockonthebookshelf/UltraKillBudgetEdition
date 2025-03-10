@@ -40,6 +40,10 @@ public class WaveManager : MonoBehaviour
 
     void WaveStart(List<WaveSpawner> spawners,int waveLimit,int waveGrowth)
     {
+        if(spawners.Capacity == 0)
+        {
+            return;
+        }
         _spawners = spawners;
         waveMax = waveLimit;
         _waveGrowth = waveGrowth;

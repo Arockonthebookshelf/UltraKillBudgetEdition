@@ -22,7 +22,7 @@ public class WaveSpawner : MonoBehaviour
 
         if (spawnObject == null)
         {
-            Debug.LogWarning("Object to be spawned cannot be empty");
+            Debug.LogError("Object to be spawned cannot be empty");
             return;
         }
         for (int i = 0; i < batchLimit; i++)
@@ -34,6 +34,10 @@ public class WaveSpawner : MonoBehaviour
         foreach (GameObject obj in objects)
         {
             obj.SetActive(false);
+        }
+        if(gameObject.tag != "Spawner")
+        {
+            gameObject.tag = "Spawner";
         }
     }
     public void Spawn()
