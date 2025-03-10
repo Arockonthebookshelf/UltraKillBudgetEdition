@@ -4,7 +4,7 @@ using UnityEngine;
 using random = UnityEngine.Random;
 
 
-public class Spawner : MonoBehaviour
+public class WaveSpawner : MonoBehaviour
 {
     [SerializeField]GameObject spawnObject;
     GameObject enemyContainer;
@@ -12,14 +12,17 @@ public class Spawner : MonoBehaviour
     [SerializeField] [Range(0,15)]int batchLimit;
     [Tooltip("Enemy number spawn by a spawner. Enemy number increase with wave")]
     [SerializeField] [Range(1,5)] int currentSpawnLimit;
+    WaveManager waveManager;
+    public bool spawnAt;
+    [SerializeField] int spawnAtWave;
     public List <GameObject>objects = new List<GameObject>();
     public void Start()
     {
-        
+        waveManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<WaveManager>();
 
         if (spawnObject == null)
         {
-            Debug.LogWarning("Object to be spawned cannot be empty");
+            Debug.LogError("Object to be spawned cannot be empty");
             return;
         }
         for (int i = 0; i < batchLimit; i++)
@@ -32,12 +35,23 @@ public class Spawner : MonoBehaviour
         {
             obj.SetActive(false);
         }
+        if(gameObject.tag != "Spawner")
+        {
+            gameObject.tag = "Spawner";
+        }
     }
     public void Spawn()
     {
         if (spawnObject == null)
         {
             return;
+        }
+        if(spawnAt)
+        {
+            if(waveManager.currentWave < spawnAtWave)
+            {
+                return;
+            }
         }
         int spawnCounter = 0;
         foreach (GameObject obj in objects)
