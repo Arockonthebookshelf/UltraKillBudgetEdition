@@ -5,13 +5,13 @@ public class RocketsDropper : MonoBehaviour
 {
     DropperManager dropperManager;
     PlayerInventory playerInventory;
-    ParticleSystem bulletParticleSystem;
+    ParticleSystem rocketsParticleSystem;
     void Awake()
     {
         dropperManager = GetComponentInParent<DropperManager>();
         playerInventory = FindFirstObjectByType<PlayerInventory>();
-        bulletParticleSystem = GetComponent<ParticleSystem>();
-        bulletParticleSystem.trigger.SetCollider(0, dropperManager.playerCollider);
+        rocketsParticleSystem = GetComponent<ParticleSystem>();
+        rocketsParticleSystem.trigger.SetCollider(0, dropperManager.playerCollider);
         if(!dropperManager.canDropRockets)
         {
             Destroy(gameObject);
@@ -20,8 +20,14 @@ public class RocketsDropper : MonoBehaviour
 
     void Start()
     {
-        bulletParticleSystem.emission.SetBursts(new ParticleSystem.Burst[] 
+        rocketsParticleSystem.emission.SetBursts(new ParticleSystem.Burst[] 
         { new ParticleSystem.Burst(0.0f, dropperManager.rocketsMinDropAmount, dropperManager.rocketsMaxDropAmount, 1, 0) });
+    }
+
+    void Update()
+    {
+        var externalForces = rocketsParticleSystem.externalForces;
+        externalForces.enabled = playerInventory.canPickUpRockets;
     }
 
     void OnParticleTrigger()
@@ -36,7 +42,7 @@ public class RocketsDropper : MonoBehaviour
                 ParticleSystem.Particle p = enterParticles[i];
                 p.remainingLifetime = 0;
                 enterParticles[i] = p;
-                playerInventory.currentBulletCount++;
+                playerInventory.AddRockets(dropperManager.rocketsPickupMultiplier);
             }
 
             GetComponent<ParticleSystem>().SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enterParticles);

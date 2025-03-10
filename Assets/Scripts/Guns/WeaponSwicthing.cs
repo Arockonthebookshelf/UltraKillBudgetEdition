@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class WeaponSwicthing : MonoBehaviour
 {
+    HUD hud;
     [Header("References")]
     [SerializeField] private Transform[] weapons;
 
@@ -9,10 +10,15 @@ public class WeaponSwicthing : MonoBehaviour
     [SerializeField] private KeyCode[] keys;
 
     [Header("Settings")]
-    [SerializeField] private float swicthTime;
+    [SerializeField] private float switchTime;
 
     private int selectedWeapon;
     private float timeSinceLastSwicth;
+
+    void Awake()
+    {
+        hud = FindFirstObjectByType<HUD>();
+    }
 
     void Start()
     {
@@ -40,7 +46,7 @@ public class WeaponSwicthing : MonoBehaviour
 
         for (int i = 0; i < keys.Length; i++)
         {
-            if (Input.GetKeyDown(keys[i]) && timeSinceLastSwicth >= swicthTime)
+            if (Input.GetKeyDown(keys[i]) && timeSinceLastSwicth >= switchTime)
             {
                 selectedWeapon = i;
             }
@@ -68,6 +74,6 @@ public class WeaponSwicthing : MonoBehaviour
 
     private void OnWeaponSelected()
     {
-        Debug.Log("Selected New Weapon");
+        hud.UpdateWeapon(weapons[selectedWeapon].name);
     }
 }

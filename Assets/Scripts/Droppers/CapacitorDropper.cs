@@ -18,6 +18,12 @@ public class CapacitorsDropper : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        var externalForces = capacitorParticleSystem.externalForces;
+        externalForces.enabled = playerInventory.canPickUpCapacitors;
+    }
+
     void Start()
     {
         capacitorParticleSystem.emission.SetBursts(new ParticleSystem.Burst[] 
@@ -36,7 +42,7 @@ public class CapacitorsDropper : MonoBehaviour
                 ParticleSystem.Particle p = enterParticles[i];
                 p.remainingLifetime = 0;
                 enterParticles[i] = p;
-                playerInventory.currentCapacitorCount++;
+                playerInventory.AddCapacitors(dropperManager.capacitorsPickupMultiplier);
             }
 
             GetComponent<ParticleSystem>().SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enterParticles);

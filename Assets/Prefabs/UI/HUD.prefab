@@ -419,7 +419,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1866739355887186340}
   - component: {fileID: 1142226574808619931}
-  - component: {fileID: 4239881818550167651}
   m_Layer: 0
   m_Name: Weapon + Ammo
   m_TagString: Untagged
@@ -455,20 +454,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1399461731074431068}
   m_CullTransparentMesh: 1
---- !u!114 &4239881818550167651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1399461731074431068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5748b9d842a93574eaa71a370cf6257c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponName: {fileID: 6566503653478374704}
-  ammoCount: {fileID: 7188740166804949735}
 --- !u!1 &1739341324501220714
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,7 +553,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6507068621431922182}
   - component: {fileID: 3102231625753969627}
-  - component: {fileID: 321641292812756971}
   m_Layer: 0
   m_Name: Health Bar
   m_TagString: Untagged
@@ -649,20 +633,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &321641292812756971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1939790609493939083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8255b7fd1f503a94584e1e39ef0a31e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthSlider: {fileID: 3102231625753969627}
-  healthText: {fileID: 2843034546409084690}
 --- !u!1 &2381592854205304723
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,7 +678,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6618667608722073385}
-  - component: {fileID: 4855255140407221830}
   m_Layer: 0
   m_Name: InteractionPrompt
   m_TagString: Untagged
@@ -738,21 +707,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 150.00003}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &4855255140407221830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2554417675395071268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b68c5f92d7c722468424e06ebd16b57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionProgressBar: {fileID: 1739341324501220714}
-  interactionButtonImage: {fileID: 5246392224860823376}
-  interactionTextGO: {fileID: 1346266995196785803}
 --- !u!1 &3491896399330008140
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,6 +775,81 @@ MonoBehaviour:
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3540106235246998409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3576489342168430578}
+  - component: {fileID: 4045230691824808407}
+  - component: {fileID: 1462284209732887073}
+  m_Layer: 0
+  m_Name: Crosshair
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3576489342168430578
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3540106235246998409}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5637160463060506124}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 10, y: 10}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4045230691824808407
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3540106235246998409}
+  m_CullTransparentMesh: 1
+--- !u!114 &1462284209732887073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3540106235246998409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -915,6 +944,7 @@ GameObject:
   - component: {fileID: 3428420731527581368}
   - component: {fileID: 3772181282608784149}
   - component: {fileID: 887208005162650949}
+  - component: {fileID: 8630554111764087948}
   m_Layer: 0
   m_Name: HUD
   m_TagString: Untagged
@@ -937,6 +967,7 @@ RectTransform:
   - {fileID: 6507068621431922182}
   - {fileID: 1866739355887186340}
   - {fileID: 6618667608722073385}
+  - {fileID: 3576489342168430578}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1007,6 +1038,25 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8630554111764087948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4837516660008403087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eba64976996aed748be9d4597f0d1566, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 3102231625753969627}
+  healthText: {fileID: 2843034546409084690}
+  weaponName: {fileID: 6566503653478374704}
+  ammoCount: {fileID: 7188740166804949735}
+  interactionProgressBar: {fileID: 1739341324501220714}
+  interactionButtonImage: {fileID: 5246392224860823376}
+  interactionTextGO: {fileID: 1346266995196785803}
 --- !u!1 &5246392224860823376
 GameObject:
   m_ObjectHideFlags: 0

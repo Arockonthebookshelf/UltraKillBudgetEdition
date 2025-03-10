@@ -2,7 +2,7 @@
 
 public class Interactor : MonoBehaviour
 {
-    InteractionPrompt interactionPrompt;
+    HUD hud;
     [SerializeField] Transform playerCameraTransform;
     [SerializeField] float interactRange;
     [SerializeField] int clearanceLevel;
@@ -11,7 +11,7 @@ public class Interactor : MonoBehaviour
 
     void Awake()
     {
-        interactionPrompt = FindFirstObjectByType<InteractionPrompt>();
+        hud = FindFirstObjectByType<HUD>();
     }
 
     void Update()
@@ -23,15 +23,15 @@ public class Interactor : MonoBehaviour
             {
                 if(interactObj.Visible())
                 {
-                interactionPrompt.UpdateInteractionPrompt(interactObj.canInteract(clearanceLevel) , interactionProgress,interactObj.InteractionText());
-                interactionPrompt.ToggleDisplay(true);
+                hud.UpdateInteractionPrompt(interactObj.canInteract(clearanceLevel) , interactionProgress,interactObj.InteractionText());
+                hud.ToggleDisplay(true);
                 if(Input.GetKey(KeyCode.E) && interactObj.canInteract(clearanceLevel))
                 {
                     pressedTime += Time.deltaTime;
                         if(pressedTime >= interactObj.TimeToInteract())
                             {
                                 interactObj.CompleteInteraction();
-                                interactionPrompt.ToggleDisplay(false);
+                                hud.ToggleDisplay(false);
                             }
                         interactionProgress = pressedTime / interactObj.TimeToInteract();
                         Mathf.Clamp(interactionProgress, 0 , 1);
@@ -45,8 +45,7 @@ public class Interactor : MonoBehaviour
         }
         else
         {
-                    interactionPrompt.ToggleDisplay(false);
-                    interactionPrompt.ResetInteractionPrompt();
+                    hud.ToggleDisplay(false);
         }
     }
 }

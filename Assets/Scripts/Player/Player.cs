@@ -2,23 +2,23 @@ using UnityEngine;
 
 public class Player : MonoBehaviour,IDamagable,IPersistenceData
 {
-    HealthBar healthBar;
+    HUD hud;
     [SerializeField] private int maxHealth = 100;
     int currentHealth;
 
     void Awake()
     {
-        healthBar = FindFirstObjectByType<HealthBar>();
+        hud = FindFirstObjectByType<HUD>();
     }
     void Start()
     {
-        healthBar.InitializeHealthBar(maxHealth);
+        hud.InitializeHealthBar(maxHealth);
         currentHealth = maxHealth;
     }
     public void Damage(float damage,Collider hitCollider)
     {
         currentHealth = currentHealth - (int)damage;
-        healthBar.UpdateHealthBar(currentHealth);
+        hud.UpdateHealthBar(currentHealth);
         if(currentHealth <= 0)
         {
             Debug.Log("Player is dead");
@@ -30,6 +30,6 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     }
     public void SaveData(ref GameData gameData)
     {
-        gameData.playerPosition = this.transform.position;
+        gameData.playerPosition = transform.position;
     }
 }
