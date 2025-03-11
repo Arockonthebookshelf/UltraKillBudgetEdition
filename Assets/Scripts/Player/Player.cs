@@ -2,20 +2,24 @@ using UnityEngine;
 
 public class Player : MonoBehaviour,IDamagable,IPersistenceData
 {
-    [SerializeField] private int playerHealth =100;
+    HUD hud;
+    [SerializeField] private int maxHealth = 100;
+    int currentHealth;
+
+    void Awake()
+    {
+        hud = FindFirstObjectByType<HUD>();
+    }
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        hud.InitializeHealthBar(maxHealth);
+        currentHealth = maxHealth;
     }
     public void Damage(float damage,Collider hitCollider)
     {
-        playerHealth = playerHealth - (int)damage;
-        if(playerHealth < 0)
+        currentHealth = currentHealth - (int)damage;
+        hud.UpdateHealthBar(currentHealth);
+        if(currentHealth <= 0)
         {
             Debug.Log("Player is dead");
         }
@@ -26,6 +30,6 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     }
     public void SaveData(ref GameData gameData)
     {
-        gameData.playerPosition = this.transform.position;
+        gameData.playerPosition = transform.position;
     }
 }

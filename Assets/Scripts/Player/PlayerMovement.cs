@@ -721,7 +721,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if ((grounded || wallRunning || surfing) && readyToJump)
         {
-            MonoBehaviour.print("jumping");
             Vector3 velocity = rb.linearVelocity;
             readyToJump = false;
             rb.AddForce(Vector2.up * jumpForce * 1.5f);

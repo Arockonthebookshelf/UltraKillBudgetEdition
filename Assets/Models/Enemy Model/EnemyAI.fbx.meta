@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Ch30_Body
-    second: {fileID: 2100000, guid: 0ea51b2bd31bee0449356f604a146d36, type: 2}
+    second: {fileID: 2100000, guid: 725ec3f5688d19f4f8684930a41768a4, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Ch30_Body1
-    second: {fileID: 2100000, guid: 3e84faa44b7d10d41a1ca9a0767c1a03, type: 2}
+    second: {fileID: 2100000, guid: 725ec3f5688d19f4f8684930a41768a4, type: 2}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
