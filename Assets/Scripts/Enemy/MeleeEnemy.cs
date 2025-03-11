@@ -54,7 +54,7 @@ public class MeleeEnemy : BaseEnemy
                 {
                     Debug.Log(hit.collider.name);
                     IDamagable damagable = hit.collider.GetComponent<IDamagable>();
-                    if (damagable != null)
+                    if (damagable != null ) 
                     {
                         Debug.Log("MeleeEnemy melee attacks the player!");
                         damagable.Damage(20f, hit.collider);

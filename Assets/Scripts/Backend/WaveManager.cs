@@ -33,7 +33,7 @@ public class WaveManager : MonoBehaviour
     {
         if(waveIsActive )
         {
-            Debug.Log("wave"+ currentWave);
+            //Debug.Log("wave"+ currentWave);
             wave.WaveUpdate();
         }
     }
