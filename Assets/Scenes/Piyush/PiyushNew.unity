@@ -8581,7 +8581,7 @@ MonoBehaviour:
   fireRate: 1
   spread: 0.1
   bulletsPerTap: 10
-  poolSize: 10
+  poolSize: 20
   fpsCam: {fileID: 498456463}
   attackPoint: {fileID: 1280056839}
 --- !u!43 &1423103273
