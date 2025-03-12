@@ -6852,7 +6852,7 @@ Transform:
   m_GameObject: {fileID: 1000614311}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.033089142, z: -0, w: 0.9994524}
-  m_LocalPosition: {x: 0.432, y: 0.049000025, z: 0.564}
+  m_LocalPosition: {x: 0.67, y: 0.049000025, z: 0.564}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6869,16 +6869,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000614311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fed5bc375e6bd214c88c8e3a6acc4487, type: 3}
+  m_Script: {fileID: 11500000, guid: ab627256919ec3444b22245473ce2b7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 3602794933351319466, guid: 3e82c7b5f29de6842b6ba636c18d090c, type: 3}
   shootForce: 100
   upwardForce: 0
-  fireRate: 0
-  spread: 0
-  bulletsPerTap: 1
-  poolSize: 10
+  fireRate: 3
   fpsCam: {fileID: 498456463}
   attackPoint: {fileID: 1618414428}
 --- !u!1001 &1056468240

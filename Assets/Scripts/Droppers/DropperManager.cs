@@ -3,11 +3,17 @@ using System.Collections;
 
 public class DropperManager : MonoBehaviour
 {
-    public Collider playerCollider;
+    [HideInInspector] public Collider playerCollider;
     void Awake()
     {
         playerCollider = GameObject.Find("Player").GetComponent<Collider>();
     }
+
+    [Header("Health Dropper Settings")]
+    public int healthPerPickup = 5;
+    public bool canDropHealth = true;
+    public short healthMinDropAmount = 1;
+    public short healthMaxDropAmount = 3;
 
     [Header("Bullets Dropper Settings")]
     public int bulletsPickupMultiplier = 1;

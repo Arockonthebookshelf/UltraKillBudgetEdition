@@ -4,16 +4,20 @@ using System.Collections.Generic;
 
 public class RocketLauncher : MonoBehaviour
 {
+    PlayerInventory playerInventory;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] float shootForce;
     [SerializeField] float upwardForce;
     [SerializeField] float fireRate;
-    [SerializeField] float spread;
-    [SerializeField] int bulletsPerTap;
 
     bool readyToShoot = true;
     public Camera fpsCam;
     public Transform attackPoint;
+
+    private void Awake()
+    {
+        playerInventory = FindFirstObjectByType<PlayerInventory>();
+    }
 
     private void Update()
     {
@@ -22,7 +26,7 @@ public class RocketLauncher : MonoBehaviour
 
     private void HandleInput()
     {
-        if (readyToShoot && Input.GetKeyDown(KeyCode.Mouse0))
+        if (readyToShoot && playerInventory.currentRocketsCount>0 && Input.GetKeyDown(KeyCode.Mouse0))
         {
             Shoot();
         }
@@ -31,7 +35,10 @@ public class RocketLauncher : MonoBehaviour
     private void Shoot()
     {
         readyToShoot = false;
-
+        GameObject rocket = Instantiate(bulletPrefab, attackPoint.position, Quaternion.identity);
+        Rigidbody rocketRB = rocket.GetComponent<Rigidbody>();
+        rocketRB.AddForce(fpsCam.transform.forward * shootForce, ForceMode.Impulse);
+        playerInventory.RemoveRockets(1);
         Invoke("ResetShot", fireRate);
     }
 
