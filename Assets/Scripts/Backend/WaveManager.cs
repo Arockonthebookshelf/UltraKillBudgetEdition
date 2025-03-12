@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,11 +8,13 @@ public class WaveManager : MonoBehaviour
     [Tooltip("Gap between waves")]
     public int waveCountDown;
     private Wave wave = new Wave();
-    private List<Spawner> _spawners = new List<Spawner>();
-    private int currentWave;
+    private List<WaveSpawner> _spawners = new List<WaveSpawner>();
+    public int currentWave;
     private int waveMax;
+    bool waitForWave;
     private int _waveGrowth;
     private bool waveIsActive;
+
 
     private void OnEnable()
     {
@@ -28,45 +31,50 @@ public class WaveManager : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(waveIsActive)
+        if(waveIsActive )
         {
-            Debug.Log("wave"+ currentWave);
+            //Debug.Log("wave"+ currentWave);
             wave.WaveUpdate();
         }
     }
 
-    void WaveStart(List<Spawner> spawners,int waveLimit,int waveGrowth)
+    void WaveStart(List<WaveSpawner> spawners,int waveLimit,int waveGrowth)
     {
+        if(spawners.Capacity == 0)
+        {
+            return;
+        }
         _spawners = spawners;
         waveMax = waveLimit;
         _waveGrowth = waveGrowth;
         currentWave = 0;
-        StartCoroutine(WaitTime());
         wave.WaveSpawn(spawners);
         waveIsActive = true;
+
     }
     void WavesUpdate()
     {
-        Debug.Log("waves change");
         if(currentWave < waveMax)
         {
-            currentWave++;
-            foreach(Spawner spawner in _spawners)
+            foreach(WaveSpawner spawner in _spawners)
             {
                 spawner.IncreaseBatchSize(_waveGrowth);
             }
-
-            WaitTime();
-            wave.WaveSpawn(_spawners);
-            waveIsActive = true;
+            currentWave++;
+            waitForWave = true;
+            StartCoroutine("SpawnAfterWaitTime");
+            // wave.WaveSpawn(_spawners);
+            // waveIsActive = true;
         }
         else
         {
             Debug.Log("Wave over");
-            foreach(Spawner spawner in _spawners)
+            foreach(WaveSpawner spawner in _spawners)
             {
-                spawner.gameObject.SetActive(false);
+                Destroy(spawner.gameObject);
+                //spawner.gameObject.SetActive(false);
             }
+
             waveIsActive = false;
         }
     }
@@ -76,13 +84,14 @@ public class WaveManager : MonoBehaviour
         WaveTrigger.OnSpawnerTriggered -= WaveStart;
         wave.OnCurrentEventStop -= WavesUpdate;
     }
-    IEnumerator WaitTime()
+    IEnumerator SpawnAfterWaitTime()
     {
-        Debug.Log("Cooroutine works");
-        while(true)
+        while(waitForWave)
         {
             yield return new WaitForSeconds(waveCountDown);
+            wave.WaveSpawn(_spawners);
+            waveIsActive = true;
+            waitForWave = false;
         }
-        
     }
 }

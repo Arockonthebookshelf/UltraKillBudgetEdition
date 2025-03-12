@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
+using static UnityEngine.ParticleSystem;
 
 public abstract class BaseEnemy : MonoBehaviour, IDamagable
 {
@@ -15,8 +17,8 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
     [SerializeField] protected Transform player;    
 
     [Header("Patrol Points")]
-    [SerializeField] protected Transform patrolPointA;
-    [SerializeField] protected Transform patrolPointB;
+    [SerializeField] public Transform patrolPointA;
+    [SerializeField] public Transform patrolPointB;
     protected Transform currentTarget;
 
     [Header("Detection Ranges")]
@@ -39,9 +41,18 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
     [Header("Item Drop")]
     public GameObject itemDropper;
 
+
+    [Header("Enemy Particle and Decal")]
+    [SerializeField] GameObject singleShotParticle;
+    [SerializeField] GameObject DeathParticle;
+    [SerializeField] GameObject enemyDeacal;
+
     private EnemyVision enemyVision;
     protected float distanceToPlayer;
     private TankEnemy TankEnemy;
+    private BossEnemy bossEnemy;
+
+    public int resetHealth;
 
     // Virtual properties so derived enemies can override detection thresholds.
     protected virtual float AttackStateRange => attackRange;
@@ -54,6 +65,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
 
         enemyVision = GetComponent<EnemyVision>();
         TankEnemy = GetComponent<TankEnemy>();
+        bossEnemy = GetComponent<BossEnemy>();
     }
 
     protected void Initialize()
@@ -118,19 +130,20 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
     }
     protected virtual void Patrol()
     {
-        if (Vector3.Distance(transform.position, currentTarget.position) < 2f)
         {
-            currentTarget = (currentTarget == patrolPointA) ? patrolPointB : patrolPointA;
+            if (Vector3.Distance(transform.position, currentTarget.position) < 2f)
+            {
+                currentTarget = (currentTarget == patrolPointA) ? patrolPointB : patrolPointA;
+            }
+            agent.SetDestination(currentTarget.position);
+            agent.speed = 2;
         }
-        agent.SetDestination(currentTarget.position);
-        agent.speed = 2;
+        
     }
 
     protected virtual void Chase()
     {
-        if(TankEnemy.isjumping == true)
-            return;
-        else
+        if (!bossEnemy.isdashing)
         { // Smoothly rotate toward the player.
             Vector3 direction = (player.position - transform.position).normalized;
             if (direction != Vector3.zero)
@@ -141,7 +154,13 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
             agent.SetDestination(player.position);
             agent.speed = 10;
         }
-        
+    }
+    public void Reset()
+    {
+        //Debug.Log("Reset");
+        isDead = false;
+        enemyHealth = resetHealth;
+        Initialize();
     }
 
     //Attack
@@ -152,13 +171,14 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
     public void Damage(float damage, Collider collider)
     {
         enemyHealth = (enemyHealth - damage);
+        Instantiate(singleShotParticle, transform.position, Quaternion.identity);
     }
     protected virtual void Die()
     {
         isDead = true;
         animator.SetTrigger("Die");
         agent.isStopped = true;
-        Debug.Log("Dead");
+        //Debug.Log("Dead");
     }
 
     #region Aniamtions Function
@@ -193,7 +213,12 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
     {
         animator.SetBool("isDeath", true);
         Instantiate(itemDropper, transform.position, Quaternion.identity);
-        Destroy(gameObject, 3f);
+        Instantiate(enemyDeacal, transform.position, Quaternion.identity);
+        GameObject particle = Instantiate(DeathParticle, transform.position, Quaternion.identity);
+        Destroy(particle, 0.5f);
+        gameObject.SetActive(false);
+        //Destroy(gameObject, 3f);
+        //Invoke("gameObject.SetActive(false)", 2f);
     }
     #endregion
 }

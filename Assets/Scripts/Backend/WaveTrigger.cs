@@ -8,16 +8,18 @@ using UnityEngine;
 public class WaveTrigger : MonoBehaviour
 {
     [Tooltip("Distance where spawner will be added to this trigger")]
-    [SerializeField][Range(0,30)] int spawnerDistance;
+    [SerializeField][Range(0,60)] int spawnerDistance;
     [Tooltip("The total number of wave for the spawner trigger by this trigger")]
     [SerializeField][Range(1,10)] int waveLimit;
+    [Tooltip("offset spawnerradius")]
+    [SerializeField]Vector3 offset;
     [SerializeField]int waveGrowth;
 
-    private List<Spawner>spawners = new List<Spawner>();
+    private List<WaveSpawner>spawners = new List<WaveSpawner>();
     WaveManager waveManager;
     private List<GameObject> spawnersPosition = new List<GameObject>();
 
-    public static Action<List<Spawner>,int,int> OnSpawnerTriggered;
+    public static Action<List<WaveSpawner>,int,int> OnSpawnerTriggered;
     #region spawnerSetUp
     void Start()
     {
@@ -29,7 +31,7 @@ public class WaveTrigger : MonoBehaviour
         {
             // Debug.Log("all"+spawner.name);
             // //Searching for spawner with the given trigger distance and has a spawner script.Removing those without it.
-            if(Mathf.Abs(Vector3.Distance(spawner.transform.position ,transform.position)) < spawnerDistance && spawner.GetComponent<Spawner>())
+            if(Mathf.Abs(Vector3.Distance(spawner.transform.position ,transform.position + offset)) < spawnerDistance && spawner.GetComponent<WaveSpawner>())
             {
                 temp.Add(spawner);
             // Debug.Log(temp.Count);
@@ -43,7 +45,7 @@ public class WaveTrigger : MonoBehaviour
         {
             
            //Debug.Log(spawners.Count);
-            spawners.Add(spawnerPosition.GetComponent<Spawner>());
+            spawners.Add(spawnerPosition.GetComponent<WaveSpawner>());
         }
         if (spawners.Count < 1)
         {
@@ -70,7 +72,7 @@ public class WaveTrigger : MonoBehaviour
     }
     void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireCube(transform.position,new Vector3(spawnerDistance,spawnerDistance,spawnerDistance));
+        Gizmos.DrawWireCube(transform.position + offset,new Vector3(spawnerDistance,spawnerDistance,spawnerDistance));
     }
     #endregion collisionDetection
 }

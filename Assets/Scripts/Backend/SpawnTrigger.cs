@@ -1,24 +1,20 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
+
 public class SpawnTrigger : MonoBehaviour
 {
-    [SerializeField]GameObject SpawnObject;
-    GameObject spawnerPosition;
-    private Spawner spawner;
-    [SerializeField][Range(0,10)]private int spawnerDistance;
+    [Tooltip("Reference to the spawner")]
+    [SerializeField]private SingleSpawner spawner;
     void Start()
     {
-        spawnerPosition = GameObject.FindGameObjectWithTag("Spawner"); 
-        RaycastHit hit;
-        if(Physics.SphereCast(transform.position,spawnerDistance,new Vector3(1,0,1),out hit))
+      if (!gameObject.GetComponent<Collider>().isTrigger)
         {
-            Debug.Log("cast");
-            hit.collider.CompareTag("Spawner");
+            Debug.LogWarning("Enable isTrigger on colider for spawn trigger to work");
         }
-        else
+        if(spawner == null)
         {
-            Debug.LogWarning("Spawner is not in radius, increase distance or add the spawner near the trigger");
+            Debug.LogWarning("Spawner is not assigned");
         }
     }
 
@@ -26,5 +22,9 @@ public class SpawnTrigger : MonoBehaviour
     void Update()
     {
         
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        spawner.Spawn();
     }
 }
