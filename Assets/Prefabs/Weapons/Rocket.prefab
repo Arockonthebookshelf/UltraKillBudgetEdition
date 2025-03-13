@@ -300,13 +300,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5725810912093063956}
-  explosion: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
+  explosion: {fileID: 1000011797152326, guid: 0f7695dbfff66df46ae71e7a32ffc456, type: 3}
   whatIsEnemies:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 4096
   useGravity: 0
-  explosionDamage: 20
-  explosionRange: 2
+  explosionDamage: 50
+  explosionRange: 3
   explosionForce: 1200
   maxCollisions: 0
   maxLifetime: 1

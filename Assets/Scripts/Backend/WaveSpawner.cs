@@ -15,8 +15,17 @@ public class WaveSpawner : MonoBehaviour
     WaveManager waveManager;
     public bool spawnAt;
     [SerializeField] int spawnAtWave;
+    [SerializeField]private Transform patrolPointA;
+    [SerializeField]private Transform patrolPointB;
     public List <GameObject>objects = new List<GameObject>();
-    public void Start()
+    private void Awake()
+    {
+        if(gameObject.tag != "Spawner")
+        {
+            gameObject.tag = "Spawner";
+        }
+    }
+    private void Start()
     {
         waveManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<WaveManager>();
 
@@ -33,11 +42,16 @@ public class WaveSpawner : MonoBehaviour
         }
         foreach (GameObject obj in objects)
         {
+            if(obj.GetComponent<BaseEnemy>())
+            {
+                obj.GetComponent<BaseEnemy>().patrolPointA = patrolPointA;
+                obj.GetComponent<BaseEnemy>().patrolPointB = patrolPointB;
+            }   
             obj.SetActive(false);
         }
-        if(gameObject.tag != "Spawner")
+        foreach (GameObject obj in objects)
         {
-            gameObject.tag = "Spawner";
+            obj.SetActive(false);
         }
     }
     public void Spawn()
@@ -59,6 +73,12 @@ public class WaveSpawner : MonoBehaviour
             if(spawnCounter >= currentSpawnLimit)
             {
                 break;
+            }
+            Vector3 randomPos = new Vector3(random.Range(-2, 2), 0, random.Range(-2, 2));
+            obj.transform.position = transform.position + randomPos;
+            if(obj.GetComponent<BaseEnemy>())
+            {
+                obj.GetComponent<BaseEnemy>().Reset();
             }
             obj.SetActive(true);
             spawnCounter++;

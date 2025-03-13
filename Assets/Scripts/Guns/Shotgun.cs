@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Shotgun : MonoBehaviour
 {
+    PlayerInventory playerInventory;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] float shootForce;
     [SerializeField] float upwardForce;
@@ -20,6 +21,7 @@ public class Shotgun : MonoBehaviour
 
     private void Awake()
     {
+        playerInventory = FindFirstObjectByType<PlayerInventory>();
         InitializeBulletPool();
     }
 
@@ -30,7 +32,7 @@ public class Shotgun : MonoBehaviour
 
     private void HandleInput()
     {
-        if (readyToShoot && Input.GetKeyDown(KeyCode.Mouse0))
+        if (readyToShoot && playerInventory.currentCapacitorCount > 0 && Input.GetKeyDown(KeyCode.Mouse0))
         {
             Shoot();
         }
@@ -54,6 +56,7 @@ public class Shotgun : MonoBehaviour
             bulletRb.AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
             bulletRb.AddForce(fpsCam.transform.up * upwardForce, ForceMode.Impulse);
         }
+        playerInventory.RemoveCapacitors(1);
 
         Invoke("ResetShot", fireRate);
     }
