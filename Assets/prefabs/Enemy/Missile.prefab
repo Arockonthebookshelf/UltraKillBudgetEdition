@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9005585339642122074}
   - component: {fileID: 8335845240864010259}
   - component: {fileID: 8800541383409087107}
+  - component: {fileID: 4519643529869690785}
   m_Layer: 0
   m_Name: Missile
   m_TagString: Untagged
@@ -152,6 +153,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missileSpeed: 24.5
   missileRotationSpeed: 5
+--- !u!114 &4519643529869690785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252971366136815999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d90c3ea6e8fca2a44aa3fa51dbb97df9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diableTimer: 5
 --- !u!1 &5254014454668539817
 GameObject:
   m_ObjectHideFlags: 0

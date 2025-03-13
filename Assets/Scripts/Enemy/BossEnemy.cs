@@ -141,12 +141,12 @@ public class BossEnemy : BaseEnemy
 
     private void ShootingATK()
     {
-        GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation);
+        GameObject projectile = ObjectPooler.Instance.SpawnFromPool("Projectile", shootPoint.position, shootPoint.rotation);
 
         Vector3 targetPosition = player.position - new Vector3(0, projectile_Y_Offset, 0);
         Vector3 direction = (targetPosition - transform.position).normalized;
         projectile.GetComponent<Rigidbody>().AddForce(direction * (projectileSpeed * 10));
-        Destroy(projectile, 2f);
+        //Destroy(projectile, 2f);
 
         Invoke(nameof(ResetAttack), 0.5f);
     }
@@ -163,10 +163,10 @@ public class BossEnemy : BaseEnemy
         int rocketLaunched = 3;
         for (int i = 1; i <= rocketLaunched; i++)
         {
-            GameObject projectile = Instantiate(RocketPrefab, rocketShootPoint.position, rocketShootPoint.rotation);
+            GameObject projectile = ObjectPooler.Instance.SpawnFromPool("Rockets", shootPoint.position, shootPoint.rotation);
             var p = projectile.GetComponent<EnemyMissile>();
             p.missileSpeed = missileSpeed - (i * 2);
-            Destroy(projectile, 5f);
+            //Destroy(projectile, 5f);
             yield return new WaitForSeconds(0.5f);
         }
     }
