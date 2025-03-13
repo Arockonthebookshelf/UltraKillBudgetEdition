@@ -7,11 +7,14 @@ public class Projectile : MonoBehaviour
 
     private Shotgun shotgun;
     TrailRenderer trail;
-
-    void Start()
+    void Awake()
     {
         shotgun = FindFirstObjectByType<Shotgun>();
         trail = GetComponent<TrailRenderer>();
+    }
+
+    void Start()
+    {
         Invoke("DisableProjectile", lifetime);
     }
 
@@ -35,14 +38,7 @@ public class Projectile : MonoBehaviour
 
     private void DisableProjectile()
     {
-        if (trail == null)
-        {
-           trail = GetComponent<TrailRenderer>();
-        }
-        else
-        {
-            trail.Clear();
-        }
+        trail.Clear();
         shotgun.ReturnBulletToPool(gameObject);
     }
 }

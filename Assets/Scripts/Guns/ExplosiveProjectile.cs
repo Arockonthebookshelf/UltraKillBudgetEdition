@@ -46,14 +46,12 @@ public class ExplosiveProjectile : MonoBehaviour
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);
         for (int i = 0; i < enemies.Length; i++)
         {
-            //Get component of enemy and call Take Damage
-
-            //Just an example!
-            ///enemies[i].GetComponent<ShootingAi>().TakeDamage(explosionDamage);
+            IDamagable damagable = enemies[i].GetComponent<IDamagable>();
+            damagable.Damage(explosionDamage, enemies[i]);
 
             //Add explosion force (if enemy has a rigidbody)
-            if (enemies[i].GetComponent<Rigidbody>())
-                enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange);
+            //if (enemies[i].GetComponent<Rigidbody>())
+                //enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange);
         }
 
         //Add a little delay, just to make sure everything works fine

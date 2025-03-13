@@ -176,7 +176,6 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
     protected virtual void Die()
     {
         isDead = true;
-        animator.SetTrigger("Die");
         agent.isStopped = true;
         //Debug.Log("Dead");
     }
@@ -216,9 +215,20 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
         Instantiate(enemyDeacal, transform.position, Quaternion.identity);
         GameObject particle = Instantiate(DeathParticle, transform.position, Quaternion.identity);
         Destroy(particle, 0.5f);
-        gameObject.SetActive(false);
+        Invoke("DestroyEnemy", 2f);
+        //gameObject.SetActive(false);
         //Destroy(gameObject, 3f);
         //Invoke("gameObject.SetActive(false)", 2f);
     }
     #endregion
+
+    private void DisableEnemy()
+    {
+        gameObject.SetActive(false);
+    }
+
+        private void DestroyEnemy()
+    {
+        Destroy(gameObject);
+    }
 }
