@@ -74,6 +74,6 @@ public class WeaponSwicthing : MonoBehaviour
 
     private void OnWeaponSelected()
     {
-        hud.UpdateWeapon(weapons[selectedWeapon].name);
+        //hud.UpdateWeapon(weapons[selectedWeapon].name);
     }
 }
