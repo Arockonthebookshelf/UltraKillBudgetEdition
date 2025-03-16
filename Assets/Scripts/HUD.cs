@@ -1,8 +1,7 @@
-using System.Diagnostics;
+using System.Collections;
+using System.Threading;
 using TMPro;
 using UnityEngine;
-using UnityEngine.ProBuilder;
-using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
@@ -11,7 +10,6 @@ public class HUD : MonoBehaviour
 
     [SerializeField] Slider healthSlider;
     [SerializeField] TMP_Text healthText;
-    [SerializeField] TMP_Text weaponName;
     [SerializeField] TMP_Text PistolAmmoCount;
     [SerializeField] TMP_Text ShotgunAmmoCount;
     [SerializeField] TMP_Text MinigunAmmoCount;
@@ -23,10 +21,17 @@ public class HUD : MonoBehaviour
     [SerializeField] Color lowAmmoColor;
     [SerializeField] Color noAmmoColor;
     [SerializeField] float lowAmmoPercentage = 0.25f;
+    [SerializeField] Sprite pistolCrosshair;
+    [SerializeField] Sprite shotgunCrosshair;
+    [SerializeField] Sprite minigunCrosshair;
+    [SerializeField] Sprite rocketlauncherCrosshair;
+    [SerializeField] Color normalCrosshairColor;
+    [SerializeField] Color disabledCrosshairColor;
+    
+    [SerializeField]Image currentCrosshair;
     Slider interactionSlider;
     Image interactionButton;
     TMP_Text interactionText;
-    string currentWeapon;
     
      void Awake()
     {
@@ -38,6 +43,7 @@ public class HUD : MonoBehaviour
 
     void Start()
     {
+        currentCrosshair.sprite = pistolCrosshair;
         UpdatePistolAmmo();
         UpdateShotgunAmmo();
         UpdateMiniGunAmmo();
@@ -78,6 +84,32 @@ public class HUD : MonoBehaviour
         RocketLauncherAmmoCount.color = (playerInventory.currentRocketsCount >= playerInventory.maxRocketsCount * lowAmmoPercentage)? normalAmmoColor : (playerInventory.currentRocketsCount == 0)? noAmmoColor : lowAmmoColor;
     }
 
+    public void UpdateWeapon(string weapon)
+    {
+        switch(weapon)
+        {
+            case "Pistol":
+            currentCrosshair.sprite = pistolCrosshair;
+            currentCrosshair.color = normalCrosshairColor;
+            break;
+
+            case "Shotgun":
+            currentCrosshair.sprite = shotgunCrosshair;
+            currentCrosshair.color = normalCrosshairColor;
+            break;
+
+            case "MiniGun":
+            currentCrosshair.sprite = minigunCrosshair;
+            currentCrosshair.color = normalCrosshairColor;
+            break;
+
+            case "RocketLauncher":
+            currentCrosshair.sprite = rocketlauncherCrosshair;
+            currentCrosshair.color = normalCrosshairColor;
+            break;
+        }
+    }
+
     public void ToggleDisplay(bool value)
     {
         interactionProgressBar.SetActive(value);
@@ -91,5 +123,16 @@ public class HUD : MonoBehaviour
         interactionSlider.value = progressbar;
         interactionText.SetText(text);
     }
-    
+
+    public void UpdateCrosshairColor(bool value)
+    {
+        if(value)
+        {
+            currentCrosshair.color = normalCrosshairColor;
+        }
+        else
+        {
+            currentCrosshair.color = disabledCrosshairColor;
+        }
+    }
 }

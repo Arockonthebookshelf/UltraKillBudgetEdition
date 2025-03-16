@@ -2883,6 +2883,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1649195661}
     - target: {fileID: 5811944907338229718, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
+      propertyPath: clearanceLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811944907338229718, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
       propertyPath: playerCameraTransform
       value: 
       objectReference: {fileID: 1649195665}

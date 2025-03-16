@@ -1,4 +1,0 @@
-repository "UltraKillBudgetEdition@rn1098t@cloud"
-  path "/"
-    br "/main"
-    co "/main"

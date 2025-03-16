@@ -5,7 +5,7 @@ using UnityEngine;
 public class MiniGun : MonoBehaviour
 {
     PlayerInventory playerInventory;
-
+    HitIndicator hitIndicator;
     RaycastHit rayHit;
     ParticleSystem muzzleFlash;
     List<LineRenderer> energyTrails = new List<LineRenderer>();
@@ -31,12 +31,12 @@ public class MiniGun : MonoBehaviour
     {
         muzzleFlash = GetComponentInChildren<ParticleSystem>();
         playerInventory = FindFirstObjectByType<PlayerInventory>();
-        InitializeTrails();
+        hitIndicator = FindFirstObjectByType<HitIndicator>();
     }
 
     void Start()
     {
-        initialTrailWidth = energyTrails[0].widthMultiplier;
+         InitializeTrails();
     }
 
     private void Update()
@@ -52,43 +52,41 @@ public class MiniGun : MonoBehaviour
         readyToShoot = false;
         Vector3 trailEndPosition;
 
-        // Spread
-        float x = Random.Range(-horizontalSpread, horizontalSpread);
-        float y = Random.Range(-verticalSpread, verticalSpread);
+        // Generate Random Spread Angles
+        float spreadAngleX = Random.Range(-horizontalSpread, horizontalSpread);
+        float spreadAngleY = Random.Range(-verticalSpread, verticalSpread);
+        float spreadAngleZ = Random.Range(-horizontalSpread, horizontalSpread);
 
-        // Calculate Direction with Spread
-        Vector3 direction = playerCamera.transform.forward + new Vector3(x, y, 0);
-        
+        // Apply Spread Using Rotation
+        Quaternion spreadRotation = Quaternion.Euler(spreadAngleY, spreadAngleX, spreadAngleZ);
+        Vector3 direction = spreadRotation * playerCamera.transform.forward; // Rotating the original forward vector
+
         if (Physics.Raycast(playerCamera.transform.position, direction, out rayHit, range))
         {
             IDamagable damagable = rayHit.collider.GetComponent<IDamagable>();
-            if (damagable != null)
+            if (damagable != null && !rayHit.collider.CompareTag("Player"))
             {
                 damagable.Damage(damage, rayHit.collider);
-            }
-            else
-            {
-                // bullet hole game object or particle effect
+                hitIndicator.Hit();
             }
 
             trailEndPosition = rayHit.point;
         }
         else
         {
-            trailEndPosition = playerCamera.transform.position + (playerCamera.transform.forward * range);
+            trailEndPosition = playerCamera.transform.position + (direction * range);
         }
 
-        if(Vector3.Distance(muzzleFlash.transform.position, rayHit.point) >= minTrailDistance)
+        if (Vector3.Distance(muzzleFlash.transform.position, trailEndPosition) >= minTrailDistance)
         {
-            DrawTrail(muzzleFlash.transform.position + (muzzleFlash.transform.forward * 0.5f), trailEndPosition);
+            DrawTrail(muzzleFlash.transform.position + (muzzleFlash.transform.forward * 0.1f), trailEndPosition);
         }
-    
+
         muzzleFlash.Play();
-
         Invoke("ResetShot", fireRate);
-
         playerInventory.RemoveEnergyCells(1);
     }
+
 
     void DrawTrail(Vector3 start, Vector3 end)
     {
@@ -143,6 +141,19 @@ public class MiniGun : MonoBehaviour
             LineRenderer lineRenderer = lineRendererObject.GetComponent<LineRenderer>();
             lineRenderer.enabled = false;
             energyTrails.Add(lineRenderer);
+        }
+    }
+
+    private void OnDisable()
+    {
+        ResetAllTrails();
+    }
+
+    private void ResetAllTrails()
+    {
+        foreach (LineRenderer trail in energyTrails)
+        {
+            trail.enabled = false;
         }
     }
 }

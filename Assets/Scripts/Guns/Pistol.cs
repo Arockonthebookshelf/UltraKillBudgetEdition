@@ -4,7 +4,7 @@ using UnityEngine;
 public class Pistol : MonoBehaviour
 {
     PlayerInventory playerInventory;
-
+    HitIndicator hitIndicator;
     RaycastHit rayHit;
     ParticleSystem muzzleFlash;
     LineRenderer bulletTrail;
@@ -30,6 +30,7 @@ public class Pistol : MonoBehaviour
         bulletTrail = GetComponent<LineRenderer>();
         muzzleFlash = GetComponentInChildren<ParticleSystem>();
         playerInventory = FindFirstObjectByType<PlayerInventory>();
+        hitIndicator = FindFirstObjectByType<HitIndicator>();
     }
 
     void Start()
@@ -50,19 +51,21 @@ public class Pistol : MonoBehaviour
         readyToShoot = false;
         Vector3 trailEndPosition;
 
-        // Spread
-        float x = Random.Range(-horizontalSpread, horizontalSpread);
-        float y = Random.Range(-verticalSpread, verticalSpread);
+        float spreadAngleX = Random.Range(-horizontalSpread, horizontalSpread);
+        float spreadAngleY = Random.Range(-verticalSpread, verticalSpread);
+        float spreadAngleZ = Random.Range(-horizontalSpread, horizontalSpread);
 
-        // Calculate Direction with Spread
-        Vector3 direction = playerCamera.transform.forward + new Vector3(x, y, 0);
+        // Apply Spread Using Rotation
+        Quaternion spreadRotation = Quaternion.Euler(spreadAngleY, spreadAngleX, spreadAngleZ);
+        Vector3 direction = spreadRotation * playerCamera.transform.forward;
         
         if (Physics.Raycast(playerCamera.transform.position, direction, out rayHit, range))
         {
             IDamagable damagable = rayHit.collider.GetComponent<IDamagable>();
-            if (damagable != null)
+            if (damagable != null && !rayHit.collider.CompareTag("Player"))
             {
                 damagable.Damage(damage, rayHit.collider);
+                hitIndicator.Hit();
             }
             else
             {
@@ -78,7 +81,7 @@ public class Pistol : MonoBehaviour
 
         if(Vector3.Distance(muzzleFlash.transform.position, rayHit.point) >= minTrailDistance)
         {
-            DrawTrail(muzzleFlash.transform.position + (muzzleFlash.transform.forward * 0.5f), trailEndPosition);
+            DrawTrail(muzzleFlash.transform.position + (muzzleFlash.transform.forward * 0.1f), trailEndPosition);
         }
     
         muzzleFlash.Play();
@@ -86,6 +89,7 @@ public class Pistol : MonoBehaviour
         Invoke("ResetShot", fireRate);
 
         playerInventory.RemoveBullets(1);
+        playerInventory.CanShoot(false);
     }
 
     void DrawTrail(Vector3 start, Vector3 end)
@@ -115,6 +119,7 @@ public class Pistol : MonoBehaviour
     void ResetShot()
     {
         readyToShoot = true;
+        playerInventory.CanShoot(true);
     }
 
 }

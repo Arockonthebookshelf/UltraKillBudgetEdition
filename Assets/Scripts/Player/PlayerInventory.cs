@@ -121,4 +121,8 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
         hud.UpdateRocketLauncherAmmo();
     }
 
+    public void CanShoot(bool value)
+    {
+        hud.UpdateCrosshairColor(value);
+    }
 }

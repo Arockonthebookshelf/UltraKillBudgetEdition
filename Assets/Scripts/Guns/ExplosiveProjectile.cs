@@ -19,6 +19,7 @@ public class ExplosiveProjectile : MonoBehaviour
     public int maxCollisions;
     public float maxLifetime;
     public bool explodeOnTouch = true;
+    bool hit = false;
 
     int collisions;
 
@@ -48,7 +49,11 @@ public class ExplosiveProjectile : MonoBehaviour
         {
             IDamagable damagable = enemies[i].GetComponent<IDamagable>();
             damagable.Damage(explosionDamage, enemies[i]);
-
+            if(!hit)
+            {
+                FindFirstObjectByType<HitIndicator>().Hit();
+                hit = true;
+            }
             //Add explosion force (if enemy has a rigidbody)
             //if (enemies[i].GetComponent<Rigidbody>())
                 //enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange);

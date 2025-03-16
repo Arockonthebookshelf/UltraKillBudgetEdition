@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform playerCam;
     public Transform orientation;
     private Collider playerCollider;
-    public Rigidbody rb;
+    [HideInInspector] public Rigidbody rb;
 
     [Space(10)]
 
@@ -104,6 +105,11 @@ public class PlayerMovement : MonoBehaviour
         Look();
     }
 
+    void OnMove(InputValue inputValue)
+    {
+        //x = inputValue.Get<Vector2>().x;
+       // y = inputValue.Get<Vector2>().y;
+    }
     //Player input
     private void MyInput()
     {
@@ -143,65 +149,68 @@ public class PlayerMovement : MonoBehaviour
     //Moving around with WASD
     private void Movement()
     {
-        rb.AddForce(Vector3.down * Time.deltaTime * 10f);
-        Vector2 mag = FindVelRelativeToLook();
-        float num = mag.x;
-        float num2 = mag.y;
-        CounterMovement(x, y, mag);
-        if (readyToJump && jumping)
-        {
-            Jump();
-        }
-        float num3 = walkSpeed;
-        if (sprinting)
-        {
-            num3 = runSpeed;
-        }
-        if (crouching && grounded && readyToJump)
-        {
-            rb.AddForce(Vector3.down * Time.deltaTime * 3000f);
-            return;
-        }
-        if (x > 0f && num > num3)
-        {
-            x = 0f;
-        }
-        if (x < 0f && num < 0f - num3)
-        {
-            x = 0f;
-        }
-        if (y > 0f && num2 > num3)
-        {
-            y = 0f;
-        }
-        if (y < 0f && num2 < 0f - num3)
-        {
-            y = 0f;
-        }
-        float num4 = 1f;
-        float num5 = 1f;
-        if (!grounded)
-        {
-            num4 = 0.5f;
-            num5 = 0.5f;
-        }
-        if (grounded && crouching)
-        {
-            num5 = 0f;
-        }
-        if (wallRunning)
-        {
-            num5 = 0.3f;
-            num4 = 0.3f;
-        }
-        if (surfing)
-        {
-            num4 = 0.7f;
-            num5 = 0.3f;
-        }
-        rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.deltaTime * num4 * num5);
-        rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * num4);
+    // Apply a small downward force to simulate gravity effect
+    rb.AddForce(Vector3.down * Time.fixedDeltaTime * 10f);
+
+    // Get velocity relative to where the player is looking
+    Vector2 velocity = FindVelRelativeToLook();
+    float velocityX = velocity.x;
+    float velocityY = velocity.y;
+
+    // Apply counter movement to reduce unwanted movement
+    CounterMovement(x, y, velocity);
+
+    // Handle jumping
+    if (readyToJump && jumping)
+    {
+        Jump();
     }
+
+    // Determine movement speed based on sprinting state
+    float currentSpeed = sprinting ? runSpeed : walkSpeed;
+
+    // Apply extra downward force when crouching on the ground
+    if (crouching && grounded && readyToJump)
+    {
+        rb.AddForce(Vector3.down * Time.fixedDeltaTime * 3000f);
+        return;
+    }
+
+    // Limit movement speed in all directions
+    if (x > 0f && velocityX > currentSpeed) x = 0f;
+    if (x < 0f && velocityX < -currentSpeed) x = 0f;
+    if (y > 0f && velocityY > currentSpeed) y = 0f;
+    if (y < 0f && velocityY < -currentSpeed) y = 0f;
+
+    // Modify movement control based on different states
+    float forwardMultiplier = 1f;
+    float strafeMultiplier = 1f;
+
+    if (!grounded)
+    {
+        forwardMultiplier = 0.5f;
+        strafeMultiplier = 0.5f;
+    }
+    if (grounded && crouching)
+    {
+        strafeMultiplier = 0f; // No sideways movement when crouching
+    }
+    if (wallRunning)
+    {
+        forwardMultiplier = 0.3f;
+        strafeMultiplier = 0.3f;
+    }
+    if (surfing)
+    {
+        forwardMultiplier = 0.7f;
+        strafeMultiplier = 0.3f;
+    }
+
+    // Apply movement forces based on input and state multipliers
+    rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.fixedDeltaTime * forwardMultiplier * strafeMultiplier);
+    rb.AddForce(orientation.transform.right * x * moveSpeed * Time.fixedDeltaTime * forwardMultiplier);
+}
+
 
     //Ready to jump again
     private void ResetJump()
@@ -263,16 +272,16 @@ public class PlayerMovement : MonoBehaviour
         float num2 = 0.01f;
         if (crouching)
         {
-            rb.AddForce(moveSpeed * Time.deltaTime * -rb.linearVelocity.normalized * slideSlowdown);
+            rb.AddForce(moveSpeed * Time.fixedDeltaTime * -rb.linearVelocity.normalized * slideSlowdown);
             return;
         }
         if ((Math.Abs(mag.x) > num2 && Math.Abs(x) < 0.05f) || (mag.x < 0f - num2 && x > 0f) || (mag.x > num2 && x < 0f))
         {
-            rb.AddForce(moveSpeed * orientation.transform.right * Time.deltaTime * (0f - mag.x) * num);
+            rb.AddForce(moveSpeed * orientation.transform.right * Time.fixedDeltaTime * (0f - mag.x) * num);
         }
         if ((Math.Abs(mag.y) > num2 && Math.Abs(y) < 0.05f) || (mag.y < 0f - num2 && y > 0f) || (mag.y > num2 && y < 0f))
         {
-            rb.AddForce(moveSpeed * orientation.transform.forward * Time.deltaTime * (0f - mag.y) * num);
+            rb.AddForce(moveSpeed * orientation.transform.forward * Time.fixedDeltaTime * (0f - mag.y) * num);
         }
         if (Mathf.Sqrt(Mathf.Pow(rb.linearVelocity.x, 2f) + Mathf.Pow(rb.linearVelocity.z, 2f)) > walkSpeed)
         {
