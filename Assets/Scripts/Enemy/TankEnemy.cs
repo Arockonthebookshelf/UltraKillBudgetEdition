@@ -167,11 +167,11 @@ public class TankEnemy : BaseEnemy
         int rocketLaunched = 3;
         for (int i = 1; i < rocketLaunched + 1; i++)
         {
-            GameObject projectile = Instantiate(RocketPrefab, shootPoint.position, shootPoint.rotation);
+            GameObject projectile = ObjectPooler.Instance.SpawnFromPool("Rockets", shootPoint.position, shootPoint.rotation);
             var p = projectile.GetComponent<EnemyMissile>();
             p.missileSpeed = missileSpeed - (i * 2);
             //print(p.missileSpeed);
-            Destroy(projectile, 5f);
+            //Destroy(projectile, 5f);
             yield return new WaitForSeconds(0.5f);
         }
     }

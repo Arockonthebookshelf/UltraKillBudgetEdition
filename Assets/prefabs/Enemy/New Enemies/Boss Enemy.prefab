@@ -4217,7 +4217,7 @@ MonoBehaviour:
   enemyHead:
     serializedVersion: 2
     m_Bits: 0
-  itemDropper: {fileID: 0}
+  itemDropper: {fileID: 8955315523405718012, guid: e3f424c274150ae4b83013bcc6142b9b, type: 3}
   singleShotParticle: {fileID: 8322986867343221499, guid: 408c673ab08c8394ca3982900b360960, type: 3}
   DeathParticle: {fileID: 2364946769298828043, guid: 7104009c24ef4ef4eae5c64304b2e938, type: 3}
   enemyDeacal: {fileID: 6832742030612134898, guid: 4179239a66347cb41963bac1faad461e, type: 3}

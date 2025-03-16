@@ -1056,7 +1056,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons: []
   keys: 31000000320000003300000034000000
-  swicthTime: 0.5
+  switchTime: 0
 --- !u!1 &245461103
 GameObject:
   m_ObjectHideFlags: 0
@@ -6160,21 +6160,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed5bc375e6bd214c88c8e3a6acc4487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 3602794933351319466, guid: 3e82c7b5f29de6842b6ba636c18d090c, type: 3}
+  bulletPrefab: {fileID: 0}
   shootForce: 100
   upwardForce: 0
-  timeBetweenShooting: 1
+  fireRate: 0
   spread: 0
-  reloadTime: 0
-  timeBetweenShots: 0
-  magazineSize: 20
   bulletsPerTap: 1
-  allowButtonHold: 1
+  poolSize: 10
   fpsCam: {fileID: 498456463}
   attackPoint: {fileID: 1618414428}
-  muzzleFlash: {fileID: 1000010254994808, guid: 9defeac88977c0d448aa4541073ee9e4, type: 3}
-  ammunitionDisplay: {fileID: 906998978}
-  allowInvoke: 1
 --- !u!23 &1000614314
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12518,23 +12512,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  timeBetweenShooting: 0.1
-  spread: 0
+  fireRate: 0
   range: 100
-  reloadTime: 2
-  timeBetweenShots: 0
-  magazineSize: 100
-  bulletsPerTap: 1
-  allowButtonHold: 1
-  fpsCam: {fileID: 498456463}
-  attackPoint: {fileID: 356367325}
+  verticalSpread: 0
+  horizontalSpread: 0
+  effectsTime: 0.25
+  minTrailDistance: 5
+  initialTrailWidth: 0.5
+  playerCamera: {fileID: 0}
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 1024
-  muzzleFlash: {fileID: 1000010254994808, guid: 9defeac88977c0d448aa4541073ee9e4, type: 3}
-  bulletHoleGraphic: {fileID: 1000010844420130, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
-  text: {fileID: 906998978}
-  bulletTrail: {fileID: 2522039281147170095, guid: e7ad7aff87e1c2b45bf34391c93daa60, type: 3}
 --- !u!23 &1344628361
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13040,21 +13028,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed5bc375e6bd214c88c8e3a6acc4487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 6328338227799599400, guid: 4662353896f0498498d7e175e7cfcfe6, type: 3}
+  bulletPrefab: {fileID: 0}
   shootForce: 100
   upwardForce: 0
-  timeBetweenShooting: 1
+  fireRate: 0
   spread: 5
-  reloadTime: 0
-  timeBetweenShots: 0
-  magazineSize: 600
   bulletsPerTap: 20
-  allowButtonHold: 0
+  poolSize: 10
   fpsCam: {fileID: 498456463}
   attackPoint: {fileID: 1280056839}
-  muzzleFlash: {fileID: 1000010254994808, guid: 9defeac88977c0d448aa4541073ee9e4, type: 3}
-  ammunitionDisplay: {fileID: 906998978}
-  allowInvoke: 1
 --- !u!43 &1423103273
 Mesh:
   m_ObjectHideFlags: 0
@@ -13465,6 +13447,10 @@ PrefabInstance:
     - target: {fileID: 2038791061749297104, guid: d4a5407f58edae947bf52d1af139ce66, type: 3}
       propertyPath: m_Layer
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2038791061749297104, guid: d4a5407f58edae947bf52d1af139ce66, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2038791061749297104, guid: d4a5407f58edae947bf52d1af139ce66, type: 3}
       propertyPath: m_TagString
@@ -15383,23 +15369,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  timeBetweenShooting: 0.5
-  spread: 0
+  fireRate: 0
   range: 100
-  reloadTime: 2
-  timeBetweenShots: 0
-  magazineSize: 10
-  bulletsPerTap: 1
-  allowButtonHold: 1
-  fpsCam: {fileID: 498456463}
-  attackPoint: {fileID: 1549751119}
+  verticalSpread: 0
+  horizontalSpread: 0
+  effectsTime: 0.25
+  minTrailDistance: 5
+  initialTrailWidth: 0.5
+  playerCamera: {fileID: 0}
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 0
-  muzzleFlash: {fileID: 1000010254994808, guid: 9defeac88977c0d448aa4541073ee9e4, type: 3}
-  bulletHoleGraphic: {fileID: 1000010844420130, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
-  text: {fileID: 906998978}
-  bulletTrail: {fileID: 2522039281147170095, guid: 422c28ecaf0e33d48a6ef78904151348, type: 3}
 --- !u!43 &1809960949
 Mesh:
   m_ObjectHideFlags: 0
@@ -16017,6 +15997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  canHeal: 0
 --- !u!136 &1858196722
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -17239,6 +17220,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 408c673ab08c8394ca3982900b360960, type: 3}
+--- !u!1001 &5505175664304819932
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1822991177198202829, guid: f4145be5d752fba46b5bb19051eaecef, type: 3}
+      propertyPath: m_Name
+      value: Obejct Pooler
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307736024457516349, guid: f4145be5d752fba46b5bb19051eaecef, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307736024457516349, guid: f4145be5d752fba46b5bb19051eaecef, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307736024457516349, guid: f4145be5d752fba46b5bb19051eaecef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307736024457516349, guid: f4145be5d752fba46b5bb19051eaecef, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307736024457516349, guid: f4145be5d752fba46b5bb19051eaecef, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307736024457516349, guid: f4145be5d752fba46b5bb19051eaecef, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307736024457516349, guid: f4145be5d752fba46b5bb19051eaecef, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307736024457516349, guid: f4145be5d752fba46b5bb19051eaecef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307736024457516349, guid: f4145be5d752fba46b5bb19051eaecef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307736024457516349, guid: f4145be5d752fba46b5bb19051eaecef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f4145be5d752fba46b5bb19051eaecef, type: 3}
 --- !u!1001 &8171046129954488616
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17322,3 +17360,4 @@ SceneRoots:
   - {fileID: 817496334}
   - {fileID: 1526900421}
   - {fileID: 943816292}
+  - {fileID: 5505175664304819932}

@@ -143,7 +143,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
 
     protected virtual void Chase()
     {
-        if (!bossEnemy.isdashing)
+        //if (!bossEnemy.isdashing)
         { // Smoothly rotate toward the player.
             Vector3 direction = (player.position - transform.position).normalized;
             if (direction != Vector3.zero)
@@ -172,6 +172,8 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
     {
         enemyHealth = (enemyHealth - damage);
         Instantiate(singleShotParticle, transform.position, Quaternion.identity);
+
+        Instantiate(enemyDeacal, transform.position, Quaternion.identity);
     }
     protected virtual void Die()
     {

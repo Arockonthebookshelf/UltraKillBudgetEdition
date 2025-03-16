@@ -2,16 +2,11 @@ using UnityEngine;
 
 public class Disable : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
+    public int diableTimer;
     // Update is called once per frame
     void Update()
     {
-        Invoke("disable",1);
+        Invoke("disable", diableTimer);
     }
     void disable()
     {
