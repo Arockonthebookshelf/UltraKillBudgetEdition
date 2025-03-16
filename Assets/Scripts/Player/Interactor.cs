@@ -3,15 +3,16 @@
 public class Interactor : MonoBehaviour
 {
     HUD hud;
+    PlayerInventory playerInventory;
     [SerializeField] Transform playerCameraTransform;
     [SerializeField] float interactRange;
-    [SerializeField] int clearanceLevel;
     float pressedTime;
     float interactionProgress;
 
     void Awake()
     {
         hud = FindFirstObjectByType<HUD>();
+        playerInventory = FindFirstObjectByType<PlayerInventory>();
     }
 
     void Update()
@@ -23,9 +24,9 @@ public class Interactor : MonoBehaviour
             {
                 if(interactObj.Visible())
                 {
-                hud.UpdateInteractionPrompt(interactObj.canInteract(clearanceLevel) , interactionProgress,interactObj.InteractionText());
+                hud.UpdateInteractionPrompt(interactObj.canInteract(playerInventory.ClearanceLevel) , interactionProgress,interactObj.InteractionText());
                 hud.ToggleDisplay(true);
-                if(Input.GetKey(KeyCode.E) && interactObj.canInteract(clearanceLevel))
+                if(Input.GetKey(KeyCode.E) && interactObj.canInteract(playerInventory.ClearanceLevel))
                 {
                     pressedTime += Time.deltaTime;
                         if(pressedTime >= interactObj.TimeToInteract())

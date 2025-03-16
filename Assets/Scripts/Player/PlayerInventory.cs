@@ -59,12 +59,12 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
         {
             currentBulletCount += amount;
         }
-        hud.AmmoPickedUp("Pistol");
+        hud.UpdatePistolAmmo();
     }
     public void RemoveBullets(int amount)
     {
         currentBulletCount -= amount;
-        hud.AmmoPickedUp("Pistol");
+        hud.UpdatePistolAmmo();
     }
 
     public void AddCapacitors(int amount)
@@ -77,12 +77,12 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
         {
             currentCapacitorCount += amount;
         }
-        hud.AmmoPickedUp("Shotgun");
+        hud.UpdateShotgunAmmo();
     }
     public void RemoveCapacitors(int amount)
     {
         currentCapacitorCount -= amount;
-        hud.AmmoPickedUp("Shotgun");
+        hud.UpdateShotgunAmmo();
     }
 
     public void AddEnergyCells(int amount)
@@ -95,12 +95,12 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
         {
             currentEnergyCellsCount += amount;
         }
-        hud.AmmoPickedUp("MiniGun");
+        hud.UpdateMiniGunAmmo();
     }
     public void RemoveEnergyCells(int amount)
     {
         currentEnergyCellsCount -= amount;
-        hud.AmmoPickedUp("MiniGun");
+        hud.UpdateMiniGunAmmo();
     }
 
     public void AddRockets(int amount)
@@ -113,12 +113,16 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
         {
             currentRocketsCount += amount;
         }
-        hud.AmmoPickedUp("RocketLauncher");
+        hud.UpdateRocketLauncherAmmo();
     }
     public void RemoveRockets(int amount)
     {
         currentRocketsCount -= amount;
-        hud.AmmoPickedUp("RocketLauncher");
+        hud.UpdateRocketLauncherAmmo();
     }
 
+    public void CanShoot(bool value)
+    {
+        hud.UpdateCrosshairColor(value);
+    }
 }

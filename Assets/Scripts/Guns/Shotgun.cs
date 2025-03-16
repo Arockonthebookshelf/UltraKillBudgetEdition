@@ -9,7 +9,8 @@ public class Shotgun : MonoBehaviour
     [SerializeField] float shootForce;
     [SerializeField] float upwardForce;
     [SerializeField] float fireRate;
-    [SerializeField] float spread;
+    [SerializeField] float verticleSpread;
+    [SerializeField] float horizontalSpread;
     [SerializeField] int bulletsPerTap;
     [SerializeField] int poolSize = 10;
 
@@ -57,22 +58,26 @@ public class Shotgun : MonoBehaviour
             bulletRb.AddForce(fpsCam.transform.up * upwardForce, ForceMode.Impulse);
         }
         playerInventory.RemoveCapacitors(1);
-
+        playerInventory.CanShoot(false);
         Invoke("ResetShot", fireRate);
     }
 
     private Vector3 CalculateSpread()
     {
-        Vector3 directionWithoutSpread = fpsCam.transform.forward;
-        float x = Random.Range(-spread, spread);
-        float y = Random.Range(-spread, spread);
-        float z = Random.Range(-spread, spread);
-        return directionWithoutSpread + new Vector3(x, y, z);
+        float spreadAngleX = Random.Range(-horizontalSpread, horizontalSpread);
+        float spreadAngleY = Random.Range(-verticleSpread, verticleSpread);
+        float spreadAngleZ = Random.Range(-horizontalSpread, horizontalSpread);
+
+        // Apply Spread Using Rotation
+        Quaternion spreadRotation = Quaternion.Euler(spreadAngleY, spreadAngleX, spreadAngleZ);
+        Vector3 direction = spreadRotation * fpsCam.transform.forward;
+        return direction;
     }
 
     private void ResetShot()
     {
         readyToShoot = true;
+        playerInventory.CanShoot(true);
     }
 
     private void InitializeBulletPool()

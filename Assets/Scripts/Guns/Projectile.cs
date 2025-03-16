@@ -6,11 +6,11 @@ public class Projectile : MonoBehaviour
     [SerializeField] float damage;
 
     private Shotgun shotgun;
-    TrailRenderer trail;
+    HitIndicator hitIndicator;
     void Awake()
     {
         shotgun = FindFirstObjectByType<Shotgun>();
-        trail = GetComponent<TrailRenderer>();
+        hitIndicator = FindFirstObjectByType<HitIndicator>();
     }
 
     void Start()
@@ -31,6 +31,7 @@ public class Projectile : MonoBehaviour
         if (damageable != null)
         {
             damageable.Damage(damage, collision.collider);
+            hitIndicator.Hit();
         }
 
         DisableProjectile();
@@ -38,8 +39,8 @@ public class Projectile : MonoBehaviour
 
     private void DisableProjectile()
     {
-        trail.Clear();
         shotgun.ReturnBulletToPool(gameObject);
     }
+    
 }
 
