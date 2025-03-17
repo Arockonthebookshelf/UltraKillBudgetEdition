@@ -1,5 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 public class ObjectPooler : MonoBehaviour
 {
@@ -12,26 +13,28 @@ public class ObjectPooler : MonoBehaviour
     }
 
     public static ObjectPooler Instance;
+    public Transform parent;
     private void Awake()
     {
         Instance = this;
     }
 
     public List<Pool> pools;
-    public Dictionary<string, Queue<GameObject>> poolDictionary;
+    public Dictionary<string, Queue<GameObject>> poolDictionary = new();
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        poolDictionary = new Dictionary<string, Queue<GameObject>>();
-
-
+        int j = 0;
         foreach (Pool pool in pools)
         {
-            Queue<GameObject> objectPool = new Queue<GameObject>();
+            string parentName = pool.tag;
+            print(j++);
+            Queue<GameObject> objectPool = new();
 
             for (int i = 0; i < pool.size; i++)
             {
-                GameObject obj = Instantiate(pool.prefab);
+                GameObject obj = Instantiate(pool.prefab, parent.Find(parentName));
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
             }
@@ -54,26 +57,13 @@ public class ObjectPooler : MonoBehaviour
         objectToSpawn.transform.position = pos;
         objectToSpawn.transform.rotation = rotation;
 
-        poolDictionary[tag].Enqueue(objectToSpawn);
+        //poolDictionary[tag].Enqueue(objectToSpawn);
 
         return objectToSpawn;
     }
 
-    public GameObject SpawnProjectileFromPool(string tag, Vector3 pos, Quaternion rotation)
+    public void EnqueObject(string tag, GameObject obj)
     {
-        if (!poolDictionary.ContainsKey(tag))
-        {
-            Debug.LogWarning("Pool with tag " + tag + " does not exist.");
-            return null;
-        }
-
-        GameObject objectToSpawn = poolDictionary[tag].Dequeue();
-
-        objectToSpawn.transform.position = pos;
-        objectToSpawn.transform.rotation = rotation;
-
-        poolDictionary[tag].Enqueue(objectToSpawn);
-
-        return objectToSpawn;
+        poolDictionary[tag].Enqueue(obj);
     }
 }

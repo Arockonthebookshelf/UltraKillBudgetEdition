@@ -4,12 +4,14 @@ public class Disable : MonoBehaviour
 {
     public int diableTimer;
     // Update is called once per frame
-    void Update()
+    void OnEnable()
     {
-        Invoke("disable", diableTimer);
+        Invoke(nameof(DisableObj), diableTimer);
     }
-    void disable()
+    void DisableObj()
     {
+        GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+        ObjectPooler.Instance.EnqueObject(transform.parent.name, gameObject);
         gameObject.SetActive(false);
     }
 }

@@ -7,6 +7,10 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     int currentHealth;
     [HideInInspector] public bool canHeal = false;
 
+    [SerializeField] private Animator camAnimator;
+
+    private bool isHurt;
+
     void Awake()
     {
         hud = FindFirstObjectByType<HUD>();
@@ -19,11 +23,17 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     public void Damage(float damage,Collider hitCollider)
     {
         currentHealth = currentHealth - (int)damage;
+        isHurt = true;
+        if (isHurt)
+        {
+            HurtAnimation(); //Plays Hurt Animation 
+        }
         hud.UpdateHealthBar(currentHealth);
         canHeal = true;
         if(currentHealth <= 0)
         {
             Debug.Log("Player is dead");
+            DeathAnimation();
         }
     }
     public void Heal(int healAmount)
@@ -38,6 +48,17 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
         {
             canHeal = false;
         }
+    }
+
+    public void HurtAnimation()
+    {
+        camAnimator.Play("Hurt", 0, 0f);
+
+        isHurt = false;
+    }
+    public void DeathAnimation()
+    {
+        camAnimator.Play("Player Death", 0, 0f);
     }
     public void LoadData(GameData gameData)
     {
