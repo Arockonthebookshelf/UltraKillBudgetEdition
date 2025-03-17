@@ -75,14 +75,14 @@ public class ShooterEnemy : BaseEnemy
             }
             else if (isInShootingRange)
             {
-                Debug.Log("ShooterEnemy shoots the player!");
+                //Debug.Log("ShooterEnemy shoots the player!");
                 //GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation);
-                GameObject projectile = ObjectPooler.Instance.SpawnFromPool("Projectile", shootPoint.position, shootPoint.rotation);
+                GameObject projectile = ObjectPooler.Instance.SpawnFromPool("Projectiles", shootPoint.position, shootPoint.rotation);
 
                 Vector3 targetPosition = player.position - new Vector3(0, yOffset, 0);
                 Vector3 d = (targetPosition - transform.position).normalized;
 
-                projectile.GetComponent<Rigidbody>().AddForce(d * (projectileSpeed * 10));
+                projectile.GetComponent<Rigidbody>().AddForce(d * (projectileSpeed), ForceMode.Impulse);
             }
 
             // Reset attack after a cooldown.
