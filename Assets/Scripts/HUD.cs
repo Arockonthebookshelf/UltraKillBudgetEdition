@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,13 +25,14 @@ public class HUD : MonoBehaviour
     [SerializeField] Sprite rocketlauncherCrosshair;
     [SerializeField] Color normalCrosshairColor;
     [SerializeField] Color disabledCrosshairColor;
-    
-    [SerializeField]Image currentCrosshair;
+    [SerializeField] Animator selectedWeapon;
+
+    [SerializeField] Image currentCrosshair;
     Slider interactionSlider;
     Image interactionButton;
     TMP_Text interactionText;
-    
-     void Awake()
+
+    void Awake()
     {
         interactionSlider = interactionProgressBar.GetComponent<Slider>();
         interactionButton = interactionButtonImage.GetComponent<Image>();
@@ -64,49 +63,53 @@ public class HUD : MonoBehaviour
 
     public void UpdatePistolAmmo()
     {
-        PistolAmmoCount.SetText(playerInventory.currentBulletCount + "/" + playerInventory.maxBulletCount);
-        PistolAmmoCount.color = (playerInventory.currentBulletCount >= (playerInventory.maxBulletCount * lowAmmoPercentage))? normalAmmoColor : (playerInventory.currentBulletCount == 0)? noAmmoColor : lowAmmoColor;
+        PistolAmmoCount.SetText(playerInventory.currentBulletCount + " / " + playerInventory.maxBulletCount);
+        PistolAmmoCount.color = (playerInventory.currentBulletCount >= (playerInventory.maxBulletCount * lowAmmoPercentage)) ? normalAmmoColor : (playerInventory.currentBulletCount == 0) ? noAmmoColor : lowAmmoColor;
     }
 
     public void UpdateShotgunAmmo()
     {
-        ShotgunAmmoCount.SetText(playerInventory.currentCapacitorCount + "/" + playerInventory.maxCapacitorCount);
-        ShotgunAmmoCount.color = (playerInventory.currentCapacitorCount >= playerInventory.maxCapacitorCount * lowAmmoPercentage)? normalAmmoColor : (playerInventory.currentCapacitorCount == 0)? noAmmoColor : lowAmmoColor;
+        ShotgunAmmoCount.SetText(playerInventory.currentCapacitorCount + " / " + playerInventory.maxCapacitorCount);
+        ShotgunAmmoCount.color = (playerInventory.currentCapacitorCount >= playerInventory.maxCapacitorCount * lowAmmoPercentage) ? normalAmmoColor : (playerInventory.currentCapacitorCount == 0) ? noAmmoColor : lowAmmoColor;
     }
     public void UpdateMiniGunAmmo()
     {
-        MinigunAmmoCount.SetText(playerInventory.currentEnergyCellsCount + "/" + playerInventory.maxEnergyCellsCount);
-        MinigunAmmoCount.color = (playerInventory.currentEnergyCellsCount >= playerInventory.maxEnergyCellsCount * lowAmmoPercentage)? normalAmmoColor : (playerInventory.currentEnergyCellsCount == 0)? noAmmoColor : lowAmmoColor;
+        MinigunAmmoCount.SetText(playerInventory.currentEnergyCellsCount + " / " + playerInventory.maxEnergyCellsCount);
+        MinigunAmmoCount.color = (playerInventory.currentEnergyCellsCount >= playerInventory.maxEnergyCellsCount * lowAmmoPercentage) ? normalAmmoColor : (playerInventory.currentEnergyCellsCount == 0) ? noAmmoColor : lowAmmoColor;
     }
     public void UpdateRocketLauncherAmmo()
     {
-        RocketLauncherAmmoCount.SetText(playerInventory.currentRocketsCount + "/" + playerInventory.maxRocketsCount);
-        RocketLauncherAmmoCount.color = (playerInventory.currentRocketsCount >= playerInventory.maxRocketsCount * lowAmmoPercentage)? normalAmmoColor : (playerInventory.currentRocketsCount == 0)? noAmmoColor : lowAmmoColor;
+        RocketLauncherAmmoCount.SetText(playerInventory.currentRocketsCount + " / " + playerInventory.maxRocketsCount);
+        RocketLauncherAmmoCount.color = (playerInventory.currentRocketsCount >= playerInventory.maxRocketsCount * lowAmmoPercentage) ? normalAmmoColor : (playerInventory.currentRocketsCount == 0) ? noAmmoColor : lowAmmoColor;
     }
 
     public void UpdateWeapon(string weapon)
     {
-        switch(weapon)
+        switch (weapon)
         {
             case "Pistol":
-            currentCrosshair.sprite = pistolCrosshair;
-            currentCrosshair.color = normalCrosshairColor;
-            break;
+                currentCrosshair.sprite = pistolCrosshair;
+                currentCrosshair.color = normalCrosshairColor;
+                selectedWeapon.SetInteger("Weapon", 0);
+                break;
 
             case "Shotgun":
-            currentCrosshair.sprite = shotgunCrosshair;
-            currentCrosshair.color = normalCrosshairColor;
-            break;
+                currentCrosshair.sprite = shotgunCrosshair;
+                currentCrosshair.color = normalCrosshairColor;
+                selectedWeapon.SetInteger("Weapon", 1);
+                break;
 
             case "MiniGun":
-            currentCrosshair.sprite = minigunCrosshair;
-            currentCrosshair.color = normalCrosshairColor;
-            break;
+                currentCrosshair.sprite = minigunCrosshair;
+                currentCrosshair.color = normalCrosshairColor;
+                selectedWeapon.SetInteger("Weapon", 2);
+                break;
 
             case "RocketLauncher":
-            currentCrosshair.sprite = rocketlauncherCrosshair;
-            currentCrosshair.color = normalCrosshairColor;
-            break;
+                currentCrosshair.sprite = rocketlauncherCrosshair;
+                currentCrosshair.color = normalCrosshairColor;
+                selectedWeapon.SetInteger("Weapon", 3);
+                break;
         }
     }
 
@@ -117,7 +120,7 @@ public class HUD : MonoBehaviour
         interactionTextGO.SetActive(value);
     }
 
-    public void UpdateInteractionPrompt(bool showButton,float progressbar, string text)
+    public void UpdateInteractionPrompt(bool showButton, float progressbar, string text)
     {
         interactionButton.enabled = showButton;
         interactionSlider.value = progressbar;
@@ -126,7 +129,7 @@ public class HUD : MonoBehaviour
 
     public void UpdateCrosshairColor(bool value)
     {
-        if(value)
+        if (value)
         {
             currentCrosshair.color = normalCrosshairColor;
         }

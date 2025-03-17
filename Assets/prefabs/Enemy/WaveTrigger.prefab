@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c8f587dd87cfba4293934d8d9220c9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnerDistance: 0
+  spawnerDistance: 41
   waveLimit: 6
+  offset: {x: 0, y: 0, z: 0}
   waveGrowth: 1

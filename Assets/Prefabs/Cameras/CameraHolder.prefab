@@ -114,8 +114,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2698176657639178772}
-  - {fileID: 3949549496218953054}
-  - {fileID: 5487454360538531385}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4216002344993488344
@@ -148,7 +146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3949549496218953054
 Transform:
   m_ObjectHideFlags: 0
@@ -157,12 +155,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3322874838663166629}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0006335608, y: 0.042598106, z: 0.00011281034, w: 0.9990921}
-  m_LocalPosition: {x: -0.0228619, y: -0.04714787, z: -0.16761252}
+  m_LocalRotation: {x: -0, y: 0.000000022351742, z: -4.3655746e-11, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 661107662625955746}
+  m_Father: {fileID: 2698176657639178772}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &2298729229767030661
 Camera:
@@ -344,8 +342,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4494241121404610092}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.138, y: -0.096, z: 0}
+  m_LocalRotation: {x: -0.0006335608, y: -0.042598106, z: -0.00011281034, w: 0.9990921}
+  m_LocalPosition: {x: -0.12900358, y: -0.048626848, z: 0.15726334}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -353,7 +351,7 @@ Transform:
   - {fileID: 1262482448434609164}
   - {fileID: 2763349333193955381}
   - {fileID: 6706024340824945926}
-  m_Father: {fileID: 661107662625955746}
+  m_Father: {fileID: 2698176657639178772}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &73230011565886276
 MonoBehaviour:
@@ -598,7 +596,9 @@ Transform:
   m_LocalPosition: {x: -0.0228619, y: -0.04714787, z: -0.16761252}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3949549496218953054}
+  - {fileID: 5487454360538531385}
   m_Father: {fileID: 661107662625955746}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &3538616784311346008
@@ -640,7 +640,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 8191
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

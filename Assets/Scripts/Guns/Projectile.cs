@@ -2,20 +2,14 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float lifetime = 2f; 
+    public float lifetime = 2f;
     [SerializeField] float damage;
+    [SerializeField] private string bulletTag = "Shotgun Projectile";
 
-    private Shotgun shotgun;
     HitIndicator hitIndicator;
     void Awake()
     {
-        shotgun = FindFirstObjectByType<Shotgun>();
         hitIndicator = FindFirstObjectByType<HitIndicator>();
-    }
-
-    void Start()
-    {
-        Invoke("DisableProjectile", lifetime);
     }
 
     private void OnEnable()
@@ -39,8 +33,8 @@ public class Projectile : MonoBehaviour
 
     private void DisableProjectile()
     {
-        shotgun.ReturnBulletToPool(gameObject);
+        gameObject.SetActive(false);
+        ObjectPooler.Instance.poolDictionary[bulletTag].Enqueue(gameObject);
     }
-    
 }
 

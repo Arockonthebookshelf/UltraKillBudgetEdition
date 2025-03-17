@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
     void OnMove(InputValue inputValue)
     {
         //x = inputValue.Get<Vector2>().x;
-       // y = inputValue.Get<Vector2>().y;
+        // y = inputValue.Get<Vector2>().y;
     }
     //Player input
     private void MyInput()
@@ -135,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
         if (rb.linearVelocity.magnitude > 0.1f && grounded)
         {
             rb.AddForce(rb.linearVelocity * slidingBoost);
-            
+
         }
     }
 
@@ -149,67 +149,67 @@ public class PlayerMovement : MonoBehaviour
     //Moving around with WASD
     private void Movement()
     {
-    // Apply a small downward force to simulate gravity effect
-    rb.AddForce(Vector3.down * Time.fixedDeltaTime * 10f);
+        // Apply a small downward force to simulate gravity effect
+        rb.AddForce(Vector3.down * Time.fixedDeltaTime * 10f);
 
-    // Get velocity relative to where the player is looking
-    Vector2 velocity = FindVelRelativeToLook();
-    float velocityX = velocity.x;
-    float velocityY = velocity.y;
+        // Get velocity relative to where the player is looking
+        Vector2 velocity = FindVelRelativeToLook();
+        float velocityX = velocity.x;
+        float velocityY = velocity.y;
 
-    // Apply counter movement to reduce unwanted movement
-    CounterMovement(x, y, velocity);
+        // Apply counter movement to reduce unwanted movement
+        CounterMovement(x, y, velocity);
 
-    // Handle jumping
-    if (readyToJump && jumping)
-    {
-        Jump();
+        // Handle jumping
+        if (readyToJump && jumping)
+        {
+            Jump();
+        }
+
+        // Determine movement speed based on sprinting state
+        float currentSpeed = sprinting ? runSpeed : walkSpeed;
+
+        // Apply extra downward force when crouching on the ground
+        if (crouching && grounded && readyToJump)
+        {
+            rb.AddForce(Vector3.down * Time.fixedDeltaTime * 3000f);
+            return;
+        }
+
+        // Limit movement speed in all directions
+        if (x > 0f && velocityX > currentSpeed) x = 0f;
+        if (x < 0f && velocityX < -currentSpeed) x = 0f;
+        if (y > 0f && velocityY > currentSpeed) y = 0f;
+        if (y < 0f && velocityY < -currentSpeed) y = 0f;
+
+        // Modify movement control based on different states
+        float forwardMultiplier = 1f;
+        float strafeMultiplier = 1f;
+
+        if (!grounded)
+        {
+            forwardMultiplier = 0.5f;
+            strafeMultiplier = 0.5f;
+        }
+        if (grounded && crouching)
+        {
+            strafeMultiplier = 0f; // No sideways movement when crouching
+        }
+        if (wallRunning)
+        {
+            forwardMultiplier = 0.3f;
+            strafeMultiplier = 0.3f;
+        }
+        if (surfing)
+        {
+            forwardMultiplier = 0.7f;
+            strafeMultiplier = 0.3f;
+        }
+
+        // Apply movement forces based on input and state multipliers
+        rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.fixedDeltaTime * forwardMultiplier * strafeMultiplier);
+        rb.AddForce(orientation.transform.right * x * moveSpeed * Time.fixedDeltaTime * forwardMultiplier);
     }
-
-    // Determine movement speed based on sprinting state
-    float currentSpeed = sprinting ? runSpeed : walkSpeed;
-
-    // Apply extra downward force when crouching on the ground
-    if (crouching && grounded && readyToJump)
-    {
-        rb.AddForce(Vector3.down * Time.fixedDeltaTime * 3000f);
-        return;
-    }
-
-    // Limit movement speed in all directions
-    if (x > 0f && velocityX > currentSpeed) x = 0f;
-    if (x < 0f && velocityX < -currentSpeed) x = 0f;
-    if (y > 0f && velocityY > currentSpeed) y = 0f;
-    if (y < 0f && velocityY < -currentSpeed) y = 0f;
-
-    // Modify movement control based on different states
-    float forwardMultiplier = 1f;
-    float strafeMultiplier = 1f;
-
-    if (!grounded)
-    {
-        forwardMultiplier = 0.5f;
-        strafeMultiplier = 0.5f;
-    }
-    if (grounded && crouching)
-    {
-        strafeMultiplier = 0f; // No sideways movement when crouching
-    }
-    if (wallRunning)
-    {
-        forwardMultiplier = 0.3f;
-        strafeMultiplier = 0.3f;
-    }
-    if (surfing)
-    {
-        forwardMultiplier = 0.7f;
-        strafeMultiplier = 0.3f;
-    }
-
-    // Apply movement forces based on input and state multipliers
-    rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.fixedDeltaTime * forwardMultiplier * strafeMultiplier);
-    rb.AddForce(orientation.transform.right * x * moveSpeed * Time.fixedDeltaTime * forwardMultiplier);
-}
 
 
     //Ready to jump again
@@ -353,7 +353,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void CancelWallrun()
     {
-        MonoBehaviour.print("cancelled");
         Invoke("GetReadyToWallrun", 0.1f);
         rb.AddForce(wallNormalVector * 600f);
         readyToWallrun = false;

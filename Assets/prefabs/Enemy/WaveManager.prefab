@@ -45,3 +45,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveCountDown: 4
+  enemyContainer: {fileID: 0}
+  meleeContainer: {fileID: 0}
+  rangeContainer: {fileID: 0}
+  bossContainer: {fileID: 0}
+  tankContainer: {fileID: 0}
+  spawnEnemies: []
+  meleeEnemies: []
+  shooterEnemies: []
+  tankEnemies: []
+  bossEnemies: []
+  currentWave: 0

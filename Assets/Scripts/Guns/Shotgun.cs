@@ -1,29 +1,23 @@
 using UnityEngine;
-using TMPro;
-using System.Collections.Generic;
 
 public class Shotgun : MonoBehaviour
 {
     PlayerInventory playerInventory;
-    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] string bulletTag = "Shotgun Projectile";
     [SerializeField] float shootForce;
     [SerializeField] float upwardForce;
     [SerializeField] float fireRate;
-    [SerializeField] float verticleSpread;
+    [SerializeField] float verticalSpread;
     [SerializeField] float horizontalSpread;
     [SerializeField] int bulletsPerTap;
-    [SerializeField] int poolSize = 10;
 
     bool readyToShoot = true;
     public Camera fpsCam;
     public Transform attackPoint;
 
-    private Queue<GameObject> bulletPool;
-
     private void Awake()
     {
         playerInventory = FindFirstObjectByType<PlayerInventory>();
-        InitializeBulletPool();
     }
 
     private void Update()
@@ -47,25 +41,29 @@ public class Shotgun : MonoBehaviour
         {
             Vector3 directionWithSpread = CalculateSpread();
 
-            GameObject currentBullet = GetBulletFromPool();
-            currentBullet.transform.position = attackPoint.position;
-            currentBullet.transform.forward = directionWithSpread.normalized;
-            currentBullet.SetActive(true);
+            GameObject currentBullet = ObjectPooler.Instance.SpawnProjectileFromPool(bulletTag, attackPoint.position, Quaternion.identity);
+            if (currentBullet != null)
+            {
+                currentBullet.transform.forward = directionWithSpread.normalized;
+                currentBullet.SetActive(true);
 
-            Rigidbody bulletRb = currentBullet.GetComponent<Rigidbody>();
-            bulletRb.linearVelocity = Vector3.zero; // Reset velocity
-            bulletRb.AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
-            bulletRb.AddForce(fpsCam.transform.up * upwardForce, ForceMode.Impulse);
+                Rigidbody bulletRb = currentBullet.GetComponent<Rigidbody>();
+                bulletRb.linearVelocity = Vector3.zero;
+                bulletRb.AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
+                bulletRb.AddForce(fpsCam.transform.up * upwardForce, ForceMode.Impulse);
+            }
         }
+
         playerInventory.RemoveCapacitors(1);
         playerInventory.CanShoot(false);
         Invoke("ResetShot", fireRate);
     }
 
+
     private Vector3 CalculateSpread()
     {
         float spreadAngleX = Random.Range(-horizontalSpread, horizontalSpread);
-        float spreadAngleY = Random.Range(-verticleSpread, verticleSpread);
+        float spreadAngleY = Random.Range(-verticalSpread, verticalSpread);
         float spreadAngleZ = Random.Range(-horizontalSpread, horizontalSpread);
 
         // Apply Spread Using Rotation
@@ -78,37 +76,5 @@ public class Shotgun : MonoBehaviour
     {
         readyToShoot = true;
         playerInventory.CanShoot(true);
-    }
-
-    private void InitializeBulletPool()
-    {
-        bulletPool = new Queue<GameObject>();
-
-        for (int i = 0; i < poolSize; i++)
-        {
-            GameObject bullet = Instantiate(bulletPrefab);
-            bullet.SetActive(false);
-            bulletPool.Enqueue(bullet);
-        }
-    }
-
-    private GameObject GetBulletFromPool()
-    {
-        if (bulletPool.Count > 0)
-        {
-            return bulletPool.Dequeue();
-        }
-        else
-        {
-            GameObject bullet = Instantiate(bulletPrefab);
-            bullet.SetActive(false);
-            return bullet;
-        }
-    }
-
-    public void ReturnBulletToPool(GameObject bullet)
-    {
-        bullet.SetActive(false);
-        bulletPool.Enqueue(bullet);
     }
 }

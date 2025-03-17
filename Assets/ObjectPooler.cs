@@ -1,6 +1,5 @@
-using UnityEngine;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
 {
@@ -21,7 +20,6 @@ public class ObjectPooler : MonoBehaviour
     public List<Pool> pools;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
@@ -61,4 +59,21 @@ public class ObjectPooler : MonoBehaviour
         return objectToSpawn;
     }
 
+    public GameObject SpawnProjectileFromPool(string tag, Vector3 pos, Quaternion rotation)
+    {
+        if (!poolDictionary.ContainsKey(tag))
+        {
+            Debug.LogWarning("Pool with tag " + tag + " does not exist.");
+            return null;
+        }
+
+        GameObject objectToSpawn = poolDictionary[tag].Dequeue();
+
+        objectToSpawn.transform.position = pos;
+        objectToSpawn.transform.rotation = rotation;
+
+        poolDictionary[tag].Enqueue(objectToSpawn);
+
+        return objectToSpawn;
+    }
 }
