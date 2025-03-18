@@ -29,7 +29,6 @@ public class ObjectPooler : MonoBehaviour
         foreach (Pool pool in pools)
         {
             string parentName = pool.tag;
-            print(j++);
             Queue<GameObject> objectPool = new();
 
             for (int i = 0; i < pool.size; i++)
@@ -54,6 +53,23 @@ public class ObjectPooler : MonoBehaviour
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
 
         objectToSpawn.SetActive(true);
+        objectToSpawn.transform.position = pos;
+        objectToSpawn.transform.rotation = rotation;
+
+        //poolDictionary[tag].Enqueue(objectToSpawn);
+
+        return objectToSpawn;
+    }
+    public GameObject SpawnProjectileFromPool(string tag, Vector3 pos, Quaternion rotation)
+    {
+        if (!poolDictionary.ContainsKey(tag))
+        {
+            Debug.LogWarning("Pool with tag " + tag + " does not exist.");
+            return null;
+        }
+
+        GameObject objectToSpawn = poolDictionary[tag].Dequeue();
+
         objectToSpawn.transform.position = pos;
         objectToSpawn.transform.rotation = rotation;
 
