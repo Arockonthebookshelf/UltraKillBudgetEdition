@@ -5508,7 +5508,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -6160,13 +6161,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed5bc375e6bd214c88c8e3a6acc4487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 0}
+  bulletTag: Shotgun Projectile
   shootForce: 100
   upwardForce: 0
   fireRate: 0
-  spread: 0
+  verticalSpread: 0
+  horizontalSpread: 0
   bulletsPerTap: 1
-  poolSize: 10
   fpsCam: {fileID: 498456463}
   attackPoint: {fileID: 1618414428}
 --- !u!23 &1000614314
@@ -13028,13 +13029,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed5bc375e6bd214c88c8e3a6acc4487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 0}
+  bulletTag: Shotgun Projectile
   shootForce: 100
   upwardForce: 0
   fireRate: 0
-  spread: 5
+  verticalSpread: 0
+  horizontalSpread: 0
   bulletsPerTap: 20
-  poolSize: 10
   fpsCam: {fileID: 498456463}
   attackPoint: {fileID: 1280056839}
 --- !u!43 &1423103273
@@ -15967,6 +15968,7 @@ MonoBehaviour:
   moveSpeed: 4500
   walkSpeed: 10
   runSpeed: 10
+  slidingBoost: 20
   grounded: 0
   onWall: 0
 --- !u!114 &1858196720
@@ -15983,7 +15985,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCameraTransform: {fileID: 498456460}
   interactRange: 5
-  clearanceLevel: 0
 --- !u!114 &1858196721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15998,6 +15999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   canHeal: 0
+  camAnimator: {fileID: 0}
 --- !u!136 &1858196722
 CapsuleCollider:
   m_ObjectHideFlags: 0
