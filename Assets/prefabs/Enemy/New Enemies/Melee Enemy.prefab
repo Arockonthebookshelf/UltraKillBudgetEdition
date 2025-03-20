@@ -3166,6 +3166,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5009542955728259291, guid: b8dc0edfcebe495498ba422c7dd59e82, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b8dc0edfcebe495498ba422c7dd59e82, type: 3}
       propertyPath: m_Name
       value: MELEE CHARACTER BODY FULL
@@ -3194,8 +3198,11 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 5322561908313565161, guid: b8dc0edfcebe495498ba422c7dd59e82, type: 3}
+    - {fileID: -5009542955728259291, guid: b8dc0edfcebe495498ba422c7dd59e82, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: -2377678898046858952, guid: b8dc0edfcebe495498ba422c7dd59e82, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8dc0edfcebe495498ba422c7dd59e82, type: 3}
