@@ -35,11 +35,11 @@ public class MainMenuSettingsManager : MonoBehaviour
         // check full screen
         if (Screen.fullScreen == true)
         {
-            fullscreentext.GetComponent<TMP_Text>().text = "on";
+            fullscreentext.GetComponent<TMP_Text>().text = "ON";
         }
         else if (Screen.fullScreen == false)
         {
-            fullscreentext.GetComponent<TMP_Text>().text = "off";
+            fullscreentext.GetComponent<TMP_Text>().text = "OFF";
         }
 
         // check shadow distance/enabled
@@ -72,31 +72,31 @@ public class MainMenuSettingsManager : MonoBehaviour
         // check vsync
         if (QualitySettings.vSyncCount == 0)
         {
-            vsynctext.GetComponent<TMP_Text>().text = "off";
+            vsynctext.GetComponent<TMP_Text>().text = "OFF";
         }
         else if (QualitySettings.vSyncCount == 1)
         {
-            vsynctext.GetComponent<TMP_Text>().text = "on";
+            vsynctext.GetComponent<TMP_Text>().text = "ON";
         }
 
         // check motion blur
         if (PlayerPrefs.GetInt("MotionBlur") == 0)
         {
-            motionblurtext.GetComponent<TMP_Text>().text = "off";
+            motionblurtext.GetComponent<TMP_Text>().text = "OFF";
         }
         else if (PlayerPrefs.GetInt("MotionBlur") == 1)
         {
-            motionblurtext.GetComponent<TMP_Text>().text = "on";
+            motionblurtext.GetComponent<TMP_Text>().text = "ON";
         }
 
         // check ambient occlusion
         if (PlayerPrefs.GetInt("AmbientOcclusion") == 0)
         {
-            ambientocclusiontext.GetComponent<TMP_Text>().text = "off";
+            ambientocclusiontext.GetComponent<TMP_Text>().text = "OFF";
         }
         else if (PlayerPrefs.GetInt("AmbientOcclusion") == 1)
         {
-            ambientocclusiontext.GetComponent<TMP_Text>().text = "on";
+            ambientocclusiontext.GetComponent<TMP_Text>().text = "ON";
         }
 
         // check texture quality
@@ -134,11 +134,11 @@ public class MainMenuSettingsManager : MonoBehaviour
 
         if (Screen.fullScreen == true)
         {
-            fullscreentext.GetComponent<TMP_Text>().text = "on";
+            fullscreentext.GetComponent<TMP_Text>().text = "ON";
         }
         else if (Screen.fullScreen == false)
         {
-            fullscreentext.GetComponent<TMP_Text>().text = "off";
+            fullscreentext.GetComponent<TMP_Text>().text = "OFF";
         }
     }
 
@@ -188,12 +188,12 @@ public class MainMenuSettingsManager : MonoBehaviour
         if (QualitySettings.vSyncCount == 0)
         {
             QualitySettings.vSyncCount = 1;
-            vsynctext.GetComponent<TMP_Text>().text = "on";
+            vsynctext.GetComponent<TMP_Text>().text = "ON";
         }
         else if (QualitySettings.vSyncCount == 1)
         {
             QualitySettings.vSyncCount = 0;
-            vsynctext.GetComponent<TMP_Text>().text = "off";
+            vsynctext.GetComponent<TMP_Text>().text = "OFF";
         }
     }
 
@@ -202,12 +202,12 @@ public class MainMenuSettingsManager : MonoBehaviour
         if (PlayerPrefs.GetInt("MotionBlur") == 0)
         {
             PlayerPrefs.SetInt("MotionBlur", 1);
-            motionblurtext.GetComponent<TMP_Text>().text = "on";
+            motionblurtext.GetComponent<TMP_Text>().text = "ON";
         }
         else if (PlayerPrefs.GetInt("MotionBlur") == 1)
         {
             PlayerPrefs.SetInt("MotionBlur", 0);
-            motionblurtext.GetComponent<TMP_Text>().text = "off";
+            motionblurtext.GetComponent<TMP_Text>().text = "OFF";
         }
     }
 
@@ -216,12 +216,12 @@ public class MainMenuSettingsManager : MonoBehaviour
         if (PlayerPrefs.GetInt("AmbientOcclusion") == 0)
         {
             PlayerPrefs.SetInt("AmbientOcclusion", 1);
-            ambientocclusiontext.GetComponent<TMP_Text>().text = "on";
+            ambientocclusiontext.GetComponent<TMP_Text>().text = "ON";
         }
         else if (PlayerPrefs.GetInt("AmbientOcclusion") == 1)
         {
             PlayerPrefs.SetInt("AmbientOcclusion", 0);
-            ambientocclusiontext.GetComponent<TMP_Text>().text = "off";
+            ambientocclusiontext.GetComponent<TMP_Text>().text = "OFF";
         }
     }
 
@@ -230,12 +230,12 @@ public class MainMenuSettingsManager : MonoBehaviour
         if (PlayerPrefs.GetInt("CameraEffects") == 0)
         {
             PlayerPrefs.SetInt("CameraEffects", 1);
-            vignettetext.GetComponent<TMP_Text>().text = "on";
+            vignettetext.GetComponent<TMP_Text>().text = "ON";
         }
         else if (PlayerPrefs.GetInt("CameraEffects") == 1)
         {
             PlayerPrefs.SetInt("CameraEffects", 0);
-            vignettetext.GetComponent<TMP_Text>().text = "off";
+            vignettetext.GetComponent<TMP_Text>().text = "OFF";
         }
     }
 
