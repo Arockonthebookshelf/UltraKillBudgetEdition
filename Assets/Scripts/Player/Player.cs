@@ -52,7 +52,7 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
 
     public void HurtAnimation()
     {
-        camAnimator.Play("Hurt", 0, 0f);
+        camAnimator.Play("Player Hurt", 0, 0f);
 
         isHurt = false;
     }
