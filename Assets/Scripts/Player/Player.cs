@@ -26,14 +26,14 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
         isHurt = true;
         if (isHurt)
         {
-            HurtAnimation(); //Plays Hurt Animation 
+           // HurtAnimation(); //Plays Hurt Animation 
         }
         hud.UpdateHealthBar(currentHealth);
         canHeal = true;
         if(currentHealth <= 0)
         {
             Debug.Log("Player is dead");
-            DeathAnimation();
+            //DeathAnimation();
         }
     }
     public void Heal(int healAmount)
