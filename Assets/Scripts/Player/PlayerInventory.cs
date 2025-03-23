@@ -41,6 +41,13 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
     public int maxEnergyCellsCount = 0;
     public int maxRocketsCount = 0;
 
+    [Header("Weapons Settings")]
+    public bool hasPistol = true;
+    public bool hasShotgun = false;
+    public bool hasMinigun = false;
+    public bool hasRocketLauncher = false;
+
+
     void Update()
     {
         canPickUpBullets = currentBulletCount < maxBulletCount;
