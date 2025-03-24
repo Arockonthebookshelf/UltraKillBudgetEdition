@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 1
-  damage: 10
+  damage: 5
   bulletTag: Shotgun Projectile
 --- !u!65 &1527167734779253426
 BoxCollider:
