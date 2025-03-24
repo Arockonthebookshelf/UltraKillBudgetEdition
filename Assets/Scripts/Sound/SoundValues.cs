@@ -1,4 +1,4 @@
-namespace SmallHedge.SoundManager
+namespace PrometheanUprising.SoundManager
 {
     public enum SoundType
     {

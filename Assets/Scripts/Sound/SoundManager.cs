@@ -1,11 +1,8 @@
-//Author: Small Hedge Games
-//Updated: 13/06/2024
-
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace SmallHedge.SoundManager
+namespace PrometheanUprising.SoundManager
 {
     [RequireComponent(typeof(AudioSource))]
     public class SoundManager : MonoBehaviour

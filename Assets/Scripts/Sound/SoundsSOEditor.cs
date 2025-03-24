@@ -1,6 +1,3 @@
-//Author: Small Hedge Games
-//Updated: 13/06/2024
-
 #if UNITY_EDITOR
 using System;
 using System.Collections.Generic;
@@ -8,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace SmallHedge.SoundManager
+namespace PrometheanUprising.SoundManager
 {
     [CustomEditor(typeof(SoundsSO))]
     public class SoundsSOEditor : Editor
