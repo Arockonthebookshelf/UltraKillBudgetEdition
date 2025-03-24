@@ -24,7 +24,7 @@ public class MeleeEnemy : BaseEnemy
         // Smoothly face the player.
         if (player != null)
         {
-            Vector3 direction = (player.position - transform.position).normalized;
+            direction = (player.position - transform.position).normalized;
             if (direction != Vector3.zero)
             {
                 Quaternion lookRotation = Quaternion.LookRotation(direction);
@@ -36,10 +36,9 @@ public class MeleeEnemy : BaseEnemy
         bool isInMeleeRange = distanceToPlayer <= attackRange;
         if (!alreadyAttacked)
         {
+            PlayAttack();
             alreadyAttacked = true;
-
-            // Smoothly rotate toward the player.
-            Vector3 direction = (player.position - transform.position).normalized;
+             
             if (direction != Vector3.zero)
             {
                 Quaternion lookRotation = Quaternion.LookRotation(direction);

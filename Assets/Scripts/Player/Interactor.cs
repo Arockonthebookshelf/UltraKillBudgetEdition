@@ -12,6 +12,7 @@ public class Interactor : MonoBehaviour
     void Awake()
     {
         hud = FindFirstObjectByType<HUD>();
+        hud.ToggleDisplay(false);
         playerInventory = FindFirstObjectByType<PlayerInventory>();
     }
 
@@ -32,6 +33,7 @@ public class Interactor : MonoBehaviour
                         if(pressedTime >= interactObj.TimeToInteract())
                             {
                                 interactObj.CompleteInteraction();
+                                pressedTime = 0;
                                 hud.ToggleDisplay(false);
                             }
                         interactionProgress = pressedTime / interactObj.TimeToInteract();
@@ -43,10 +45,12 @@ public class Interactor : MonoBehaviour
                 }
                 }
             }
+            
         }
-        else
+        else 
         {
-                    hud.ToggleDisplay(false);
+            pressedTime = interactionProgress = 0;
+            hud.ToggleDisplay(false);
         }
     }
 }

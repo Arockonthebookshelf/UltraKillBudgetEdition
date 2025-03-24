@@ -41,12 +41,19 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
     public int maxEnergyCellsCount = 0;
     public int maxRocketsCount = 0;
 
+    [Header("Weapons Settings")]
+    public bool hasPistol = true;
+    public bool hasShotgun = false;
+    public bool hasMinigun = false;
+    public bool hasRocketLauncher = false;
+
+
     void Update()
     {
-        canPickUpBullets = currentBulletCount < maxBulletCount;
-        canPickUpCapacitors = currentCapacitorCount < maxCapacitorCount;
-        canPickUpEnergyCells = currentEnergyCellsCount < maxEnergyCellsCount;
-        canPickUpRockets = currentRocketsCount < maxRocketsCount;
+        canPickUpBullets = currentBulletCount < maxBulletCount && hasPistol;
+        canPickUpCapacitors = currentCapacitorCount < maxCapacitorCount && hasShotgun;
+        canPickUpEnergyCells = currentEnergyCellsCount < maxEnergyCellsCount && hasMinigun;
+        canPickUpRockets = currentRocketsCount < maxRocketsCount && hasRocketLauncher;
     }
 
     public void AddBullets(int amount)

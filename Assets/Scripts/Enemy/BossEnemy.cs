@@ -96,7 +96,7 @@ public class BossEnemy : BaseEnemy
 
         if (player != null)
         {
-            Vector3 direction = (player.position - transform.position).normalized;
+            direction = (player.position - transform.position).normalized;
             if (direction != Vector3.zero)
             {
                 Quaternion lookRotation = Quaternion.LookRotation(direction);
@@ -129,26 +129,39 @@ public class BossEnemy : BaseEnemy
 
     private void MeleeATK()
     {
-        Debug.Log("BossEnemy melee attacks the player!");
-        Invoke(nameof(ResetAttack), 0.5f);
+        PlayAttack();
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, direction, out hit))
+        {
+            Debug.Log(hit.collider.name);
+            IDamagable damagable = hit.collider.GetComponent<IDamagable>();
+            if (damagable != null)
+            {
+                Debug.Log("ShooterEnemy melee attacks the player!");
+                damagable.Damage(20f, hit.collider);
+            }
+        }
+        Invoke(nameof(ResetAttack), 1f);
     }
 
     private void DashATK()
     {
         StartCoroutine(PerformDashAtk());
-        Invoke(nameof(ResetAttack), 2f);
+        Invoke(nameof(ResetAttack), 3f);
     }
 
     private void ShootingATK()
     {
+        PlayAttack();
+
         GameObject projectile = ObjectPooler.Instance.SpawnFromPool("Projectile", shootPoint.position, shootPoint.rotation);
 
         Vector3 targetPosition = player.position - new Vector3(0, projectile_Y_Offset, 0);
-        Vector3 direction = (targetPosition - transform.position).normalized;
+        direction = (targetPosition - transform.position).normalized;
         projectile.GetComponent<Rigidbody>().AddForce(direction * (projectileSpeed * 10));
         //Destroy(projectile, 2f);
 
-        Invoke(nameof(ResetAttack), 0.5f);
+        Invoke(nameof(ResetAttack), 2f);
     }
 
     private void MissileATK()

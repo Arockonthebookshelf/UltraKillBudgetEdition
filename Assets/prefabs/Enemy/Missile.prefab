@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90c3ea6e8fca2a44aa3fa51dbb97df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diableTimer: 5
+  diableTimer: 3
 --- !u!114 &-4983602282704285731
 MonoBehaviour:
   m_ObjectHideFlags: 0

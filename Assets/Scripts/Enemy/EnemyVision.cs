@@ -8,12 +8,16 @@ public class EnemyVision : MonoBehaviour
     [SerializeField] private float rayRangeLength = 20f;
 
     [Header("Player Detection")]
-    [SerializeField] private GameObject player;
+    private GameObject player;
     [SerializeField] private float rayInterval;
     Vector3 direction;
 
     public LayerMask enemyHead;
 
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
     private void Start()
     {
         isVisible = false;

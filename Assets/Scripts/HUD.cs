@@ -26,6 +26,9 @@ public class HUD : MonoBehaviour
     [SerializeField] Color normalCrosshairColor;
     [SerializeField] Color disabledCrosshairColor;
     [SerializeField] Animator selectedWeapon;
+    public GameObject shotGunUI;
+    public GameObject miniGunUI;
+    public GameObject rocketLauncherUI;
 
     [SerializeField] Image currentCrosshair;
     Slider interactionSlider;

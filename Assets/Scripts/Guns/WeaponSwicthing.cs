@@ -3,77 +3,79 @@ using UnityEngine;
 public class WeaponSwicthing : MonoBehaviour
 {
     HUD hud;
+    PlayerInventory playerInventory;
     [Header("References")]
-    [SerializeField] private Transform[] weapons;
-
-    [Header("Keys")]
-    [SerializeField] private KeyCode[] keys;
+    [SerializeField] GameObject pistol;
+    [SerializeField] GameObject shotgun;
+    [SerializeField] GameObject minigun;
+    [SerializeField] GameObject rocketLauncher;
 
     [Header("Settings")]
     [SerializeField] private float switchTime;
 
-    private int selectedWeapon;
-    private float timeSinceLastSwicth;
+    GameObject selectedWeapon;
+    GameObject previousSelectedWeapon;
+    float timeSinceLastSwicth;
 
     void Awake()
     {
         hud = FindFirstObjectByType<HUD>();
+        playerInventory = FindFirstObjectByType<PlayerInventory>();
     }
 
     void Start()
     {
-        SetWeapons();
-        Select(selectedWeapon);
-
+        previousSelectedWeapon = pistol;
         timeSinceLastSwicth = 0f;
-    }
-
-    private void SetWeapons()
-    {
-        weapons = new Transform[transform.childCount];
-
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            weapons[i] = transform.GetChild(i);
-        }
-
-        if (keys == null) keys = new KeyCode[weapons.Length];
     }
 
     private void Update()
     {
-        int previousSelectedWeapon = selectedWeapon;
-
-        for (int i = 0; i < keys.Length; i++)
+        if(timeSinceLastSwicth > switchTime)
         {
-            if (Input.GetKeyDown(keys[i]) && timeSinceLastSwicth >= switchTime)
+            if (Input.GetKeyDown(KeyCode.Alpha1) && playerInventory.hasPistol)
             {
-                selectedWeapon = i;
+                selectedWeapon = pistol;
+                CheckWeapon();
             }
-        }
-
-        if (previousSelectedWeapon != selectedWeapon)
-        {
-            Select(selectedWeapon);
+            if (Input.GetKeyDown(KeyCode.Alpha2) && playerInventory.hasShotgun)
+            {
+                selectedWeapon = shotgun;
+                CheckWeapon();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3) && playerInventory.hasMinigun)
+            {
+                selectedWeapon = minigun;
+                CheckWeapon();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4) && playerInventory.hasRocketLauncher)
+            {
+                selectedWeapon = rocketLauncher;
+                CheckWeapon();
+            }
         }
 
         timeSinceLastSwicth += Time.deltaTime;
     }
 
-    private void Select(int weaponIndex)
+    void CheckWeapon()
     {
-        for (int i = 0; i < weapons.Length; i++)
+        if (previousSelectedWeapon != selectedWeapon)
         {
-            weapons[i].gameObject.SetActive(i == weaponIndex);
+            Select(selectedWeapon);
         }
-
+    }
+    private void Select(GameObject weapon)
+    {
+        selectedWeapon.SetActive(true);
+        previousSelectedWeapon.SetActive(false);
+        previousSelectedWeapon = selectedWeapon;
         timeSinceLastSwicth = 0f;
-
         OnWeaponSelected();
     }
 
     private void OnWeaponSelected()
     {
-        hud.UpdateWeapon(weapons[selectedWeapon].name);
+        hud.UpdateWeapon(selectedWeapon.name);
     }
 }
