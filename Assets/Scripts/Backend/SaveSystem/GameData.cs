@@ -1,15 +1,18 @@
 using JetBrains.Annotations;
+using NUnit.Framework;
 using UnityEngine;
 
 [System.Serializable]
 public class GameData 
 {
    public Vector3 playerPosition;
+   public int curHealth;
    public int ClearanceLevel = 0;
    public int currentBulletCount;
    public int currentCapacitorCount;
    public int currentEnergyCellsCount;
    public int currentRocketsCount;
+   public SerializableDictionary<string ,bool> waveActive;
 
    public GameData()
    {
@@ -19,6 +22,7 @@ public class GameData
       currentCapacitorCount = 0;
       currentEnergyCellsCount = 0;
       currentRocketsCount = 0;
-      
+      curHealth =100;  
+      waveActive = new SerializableDictionary<string, bool>();
    }
 }
