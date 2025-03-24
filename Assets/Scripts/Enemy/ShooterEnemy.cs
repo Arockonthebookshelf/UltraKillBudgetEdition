@@ -43,7 +43,7 @@ public class ShooterEnemy : BaseEnemy
         // Smoothly face the player.
         if (player != null)
         {
-            Vector3 direction = (player.position - transform.position).normalized;
+            direction = (player.position - transform.position).normalized;
             if (direction != Vector3.zero)
             {
                 Quaternion lookRotation = Quaternion.LookRotation(direction);
@@ -59,24 +59,36 @@ public class ShooterEnemy : BaseEnemy
         {
             alreadyAttacked = true;
 
-            // Smoothly rotate toward the player.
-            Vector3 direction = (player.position - transform.position).normalized;
-            if (direction != Vector3.zero)
-            {
-                Quaternion lookRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-            }
+            //// Smoothly rotate toward the player.
+            //direction = (player.position - transform.position).normalized;
+            //if (direction != Vector3.zero)
+            //{
+            //    Quaternion lookRotation = Quaternion.LookRotation(direction);
+            //    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+            //}
 
             // Prioritize melee if the player is close enough.
             if (isInMeleeRange)
             {
-                Debug.Log("ShooterEnemy melee attacks the player!");
-                // TODO: Implement melee attack damage or effects here.
+                PlayAttack();
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, direction, out hit))
+                {
+                    Debug.Log(hit.collider.name);
+                    IDamagable damagable = hit.collider.GetComponent<IDamagable>();
+                    if (damagable != null)
+                    {
+                        Debug.Log("ShooterEnemy melee attacks the player!");
+                        damagable.Damage(20f, hit.collider);
+                    }
+                }
             }
             else if (isInShootingRange)
             {
-                //Debug.Log("ShooterEnemy shoots the player!");
-                //GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation);
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
+
+                PlayAttack();
                 GameObject projectile = ObjectPooler.Instance.SpawnFromPool("Projectiles", shootPoint.position, shootPoint.rotation);
 
                 Vector3 targetPosition = player.position - new Vector3(0, yOffset, 0);
@@ -86,7 +98,7 @@ public class ShooterEnemy : BaseEnemy
             }
 
             // Reset attack after a cooldown.
-            Invoke(nameof(ResetAttack), 0.5f);
+            Invoke(nameof(ResetAttack), 2f);
         }
     }
 

@@ -19,7 +19,8 @@ void ToonShading_float(in float3 normal,in float ToonRampSmoothness,in float3 Cl
             half d = dot(normal,light.direction)*0.5+0.5;
             half ToonRamp =  smoothstep(ToonRampOffset,ToonRampOffset+ToonRampSmoothness,d);
             ToonRamp +=  light.shadowAttenuation;
-            ToonRampOutput = light.color * (ToonRampTinting * ToonRamp);
+            
+            ToonRampOutput = light.color.xyz * (ToonRampTinting * ToonRamp);
             _Direction = light.direction;
         #endif
     }
