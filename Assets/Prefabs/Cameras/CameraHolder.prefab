@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6706024340824945926}
   - component: {fileID: 8519032187885997852}
-  m_Layer: 13
+  m_Layer: 5
   m_Name: RocketLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5855748144561742667}
-  m_Layer: 13
+  m_Layer: 5
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 8224
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 0
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
@@ -267,7 +267,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2763349333193955381}
   - component: {fileID: 8578652197642847626}
-  m_Layer: 13
+  m_Layer: 5
   m_Name: MiniGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5487454360538531385}
   - component: {fileID: 73230011565886276}
-  m_Layer: 0
+  - component: {fileID: 2172438677114687636}
+  m_Layer: 5
   m_Name: WeaponHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,9 +366,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8c84dec028402c48833c4dfca2742e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons: []
-  keys: 31000000320000003300000034000000
+  pistol: {fileID: 5497950308303569811}
+  shotgun: {fileID: 7142557172355778341}
+  minigun: {fileID: 4423983246939366384}
+  rocketLauncher: {fileID: 48122624716866901}
   switchTime: 1
+--- !u!114 &2172438677114687636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4494241121404610092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 422266262f74f3842830724084ef6cd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smooth: 10
+  multiplier: 1.5
 --- !u!1 &4969068428593833653
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +394,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3244366885486169197}
-  m_Layer: 13
+  m_Layer: 5
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +427,7 @@ GameObject:
   - component: {fileID: 3447802805261394614}
   - component: {fileID: 9111852081592363767}
   - component: {fileID: 7996950025191040534}
-  m_Layer: 13
+  m_Layer: 5
   m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -593,7 +610,7 @@ Transform:
   m_GameObject: {fileID: 5585558557268820791}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0228619, y: -0.04714787, z: -0.16761252}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -634,13 +651,13 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 16351
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -688,7 +705,7 @@ MonoBehaviour:
   m_Antialiasing: 2
   m_AntialiasingQuality: 2
   m_StopNaN: 0
-  m_Dithering: 0
+  m_Dithering: 1
   m_ClearDepth: 1
   m_AllowXRRendering: 1
   m_AllowHDROutput: 1
@@ -715,7 +732,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1262482448434609164}
   - component: {fileID: 771456827557592057}
-  m_Layer: 13
+  m_Layer: 5
   m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -822,7 +839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7116933145459078465, guid: 3f789c662957e2747b53b7c110f014c4, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8489347325394851020, guid: 3f789c662957e2747b53b7c110f014c4, type: 3}
       propertyPath: lengthInSec
@@ -896,7 +913,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4029465476822505464, guid: 0903293c569303e4e9886b3e56314f8c, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4070014720413744919, guid: 0903293c569303e4e9886b3e56314f8c, type: 3}
       propertyPath: m_LocalScale.x
@@ -952,7 +969,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7175096248409542872, guid: 0903293c569303e4e9886b3e56314f8c, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1034,7 +1051,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6874735605160295105, guid: 19a6f4c84a7c8164d904a7379d658b1f, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1108,7 +1125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7116933145459078465, guid: 3f789c662957e2747b53b7c110f014c4, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7116933145459078465, guid: 3f789c662957e2747b53b7c110f014c4, type: 3}
       propertyPath: m_IsActive
@@ -1190,7 +1207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2962533668340395812, guid: 6bb7e3ce56168124083ef04d7101cdb5, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6396792927560581677, guid: 6bb7e3ce56168124083ef04d7101cdb5, type: 3}
       propertyPath: m_LocalScale.x
@@ -1250,7 +1267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7341965215217573025, guid: 6bb7e3ce56168124083ef04d7101cdb5, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1276,7 +1293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2047916269803686737, guid: 5e7f4c8997c7c7440a5fc0b726634d30, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6033735313637727804, guid: 5e7f4c8997c7c7440a5fc0b726634d30, type: 3}
       propertyPath: m_LocalScale.x

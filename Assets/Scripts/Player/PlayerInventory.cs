@@ -50,10 +50,10 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
 
     void Update()
     {
-        canPickUpBullets = currentBulletCount < maxBulletCount;
-        canPickUpCapacitors = currentCapacitorCount < maxCapacitorCount;
-        canPickUpEnergyCells = currentEnergyCellsCount < maxEnergyCellsCount;
-        canPickUpRockets = currentRocketsCount < maxRocketsCount;
+        canPickUpBullets = currentBulletCount < maxBulletCount && hasPistol;
+        canPickUpCapacitors = currentCapacitorCount < maxCapacitorCount && hasShotgun;
+        canPickUpEnergyCells = currentEnergyCellsCount < maxEnergyCellsCount && hasMinigun;
+        canPickUpRockets = currentRocketsCount < maxRocketsCount && hasRocketLauncher;
     }
 
     public void AddBullets(int amount)

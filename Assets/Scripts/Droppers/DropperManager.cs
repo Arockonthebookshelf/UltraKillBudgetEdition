@@ -8,7 +8,7 @@ public class DropperManager : MonoBehaviour
     {
         playerCollider = GameObject.Find("Player").GetComponent<Collider>();
     }
-
+    
     [Header("Health Dropper Settings")]
     public int healthPerPickup = 5;
     public bool canDropHealth = true;
