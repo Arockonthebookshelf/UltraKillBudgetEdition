@@ -14,7 +14,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
     protected NavMeshAgent agent;
 
     [Header("Player Reference")]
-    [SerializeField] protected Transform player;    
+    protected Transform player;    
 
     [Header("Patrol Points")]
     [SerializeField] public Transform patrolPointA;
@@ -54,12 +54,15 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
 
     public int resetHealth;
 
+    protected Vector3 direction;
+
     // Virtual properties so derived enemies can override detection thresholds.
     protected virtual float AttackStateRange => attackRange;
     protected virtual float ChaseStateRange => chaseRange;
 
     protected void PreInitialize()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
 
@@ -115,13 +118,12 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
                 break;
 
             case EnemyState.Attack:
-                PlayAttack();
                 Attack();
                 break;
 
             case EnemyState.Death:
                 Die();
-                PlayDeath();
+               // PlayDeath();
                 break;
 
             default:
@@ -180,6 +182,12 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
         isDead = true;
         agent.isStopped = true;
         //Debug.Log("Dead");
+
+        Instantiate(itemDropper, transform.position, Quaternion.identity);
+        Instantiate(enemyDeacal, transform.position, Quaternion.identity);
+        GameObject particle = Instantiate(DeathParticle, transform.position, Quaternion.identity);
+        Destroy(particle, 0.5f);
+        Invoke("DestroyEnemy", 0.1f);
     }
 
     #region Aniamtions Function
@@ -213,11 +221,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
     protected virtual void PlayDeath()
     {
         animator.SetBool("isDeath", true);
-        Instantiate(itemDropper, transform.position, Quaternion.identity);
-        Instantiate(enemyDeacal, transform.position, Quaternion.identity);
-        GameObject particle = Instantiate(DeathParticle, transform.position, Quaternion.identity);
-        Destroy(particle, 0.5f);
-        Invoke("DestroyEnemy", 2f);
+        
         //gameObject.SetActive(false);
         //Destroy(gameObject, 3f);
         //Invoke("gameObject.SetActive(false)", 2f);
