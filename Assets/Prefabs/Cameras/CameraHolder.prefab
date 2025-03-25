@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab627256919ec3444b22245473ce2b7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletTag: RocketLauncher Projectile
+  bulletPrefab: {fileID: 3602794933351319466, guid: 3e82c7b5f29de6842b6ba636c18d090c, type: 3}
   shootForce: 100
   upwardForce: 0
   fireRate: 2
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 32
+    m_Bits: 0
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
@@ -328,7 +328,6 @@ GameObject:
   - component: {fileID: 5487454360538531385}
   - component: {fileID: 73230011565886276}
   - component: {fileID: 2172438677114687636}
-  - component: {fileID: 2623725684975915621}
   m_Layer: 5
   m_Name: WeaponHolder
   m_TagString: Untagged
@@ -345,7 +344,7 @@ Transform:
   m_GameObject: {fileID: 4494241121404610092}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0006335608, y: -0.042598106, z: -0.00011281034, w: 0.9990921}
-  m_LocalPosition: {x: -0.243, y: -0.048626848, z: 0.15726334}
+  m_LocalPosition: {x: -0.12900358, y: -0.048626848, z: 0.15726334}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -373,20 +372,6 @@ MonoBehaviour:
   rocketLauncher: {fileID: 48122624716866901}
   switchTime: 1
 --- !u!114 &2172438677114687636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4494241121404610092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 422266262f74f3842830724084ef6cd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  smooth: 10
-  multiplier: 1.5
---- !u!114 &2623725684975915621
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -457,7 +442,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5497950308303569811}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.024524685, y: 0.009952494, z: -0.0030168784, w: 0.9996451}
+  m_LocalRotation: {x: -0.024571259, y: 0.025277767, z: -0.0026403223, w: 0.999375}
   m_LocalPosition: {x: 0.61056757, y: -0.19500734, z: 0.8719879}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -465,7 +450,7 @@ Transform:
   - {fileID: 2376788827759594837}
   - {fileID: 2147014020654496123}
   m_Father: {fileID: 5487454360538531385}
-  m_LocalEulerAnglesHint: {x: -2.807, y: 1.15, z: -0.374}
+  m_LocalEulerAnglesHint: {x: -2.807, y: 2.907, z: -0.374}
 --- !u!114 &9111852081592363767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -642,8 +627,8 @@ Camera:
   m_GameObject: {fileID: 5585558557268820791}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

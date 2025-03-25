@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class RocketLauncher : MonoBehaviour
 {
     PlayerInventory playerInventory;
-    [SerializeField] string bulletTag = "RocketLauncher Projectiles";
+    [SerializeField] GameObject bulletPrefab;
     [SerializeField] float shootForce;
     [SerializeField] float upwardForce;
     [SerializeField] float fireRate;
@@ -54,10 +54,9 @@ private void Shoot()
     // Calculate direction from attack point to target point
     Vector3 direction = (targetPoint - attackPoint.position).normalized;
 
-        // Instantiate Rocket and apply force
-    GameObject rocket = ObjectPooler.Instance.SpawnProjectileFromPool(bulletTag, attackPoint.position, Quaternion.identity); ;
+    // Instantiate bullet and apply force
+    GameObject rocket = Instantiate(bulletPrefab, attackPoint.position, Quaternion.identity);
     Rigidbody rocketRB = rocket.GetComponent<Rigidbody>();
-    rocket.SetActive(true);
     rocketRB.AddForce(direction * shootForce, ForceMode.Impulse);
 
     // Update player inventory

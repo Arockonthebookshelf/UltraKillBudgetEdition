@@ -2,100 +2,89 @@
 
 public class ExplosiveProjectile : MonoBehaviour
 {
-    // Assignables
+    //Assignables
     public Rigidbody rb;
     public GameObject explosion;
     public LayerMask whatIsEnemies;
-    [SerializeField] private string bulletTag = "RocketLauncher Projectiles";
-    [SerializeField] GameObject bloodPrefab;
 
-    // Stats
+    //Stats
     public bool useGravity;
 
-    // Damage
+    //Damage
     public int explosionDamage;
     public float explosionRange;
     public float explosionForce;
 
-    // Lifetime
+    //Lifetime
     public int maxCollisions;
     public float maxLifetime;
     public bool explodeOnTouch = true;
-    private bool hasExploded = false;
+    bool hit = false;
 
-    private int collisions;
-    private float currentLifetime;
+    int collisions;
 
-    private void OnEnable()
+    private void Start()
     {
         Setup();
     }
 
     private void Update()
     {
+        //When to explode:
         if (collisions > maxCollisions) Explode();
 
-        // Countdown lifetime
-        currentLifetime -= Time.deltaTime;
-        if (currentLifetime <= 0) Explode();
+        //Count down lifetime
+        maxLifetime -= Time.deltaTime;
+        if (maxLifetime <= 0) Explode();
     }
 
     private void Explode()
     {
-        if (hasExploded) return; // Prevent multiple explosions
-        hasExploded = true;
-
-        // Instantiate explosion effect
+        //Instantiate explosion
         if (explosion != null) Instantiate(explosion, transform.position, Quaternion.identity);
 
-        // Check for enemies in explosion radius
+        //Check for enemies 
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);
-        foreach (Collider enemy in enemies)
+        for (int i = 0; i < enemies.Length; i++)
         {
-            IDamagable damagable = enemy.GetComponent<IDamagable>();
-            if (damagable != null)
+            IDamagable damagable = enemies[i].GetComponent<IDamagable>();
+            damagable.Damage(explosionDamage, enemies[i]);
+            if(!hit)
             {
-                damagable.Damage(explosionDamage, enemy);
-                Instantiate(bloodPrefab, enemy.transform.position, Quaternion.identity);
+                FindFirstObjectByType<HitIndicator>().Hit();
+                hit = true;
             }
+            //Add explosion force (if enemy has a rigidbody)
+            //if (enemies[i].GetComponent<Rigidbody>())
+                //enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange);
         }
 
-        // Reset & return rocket to object pool
-        Invoke(nameof(ReturnToPool), 0.1f);
+        //Add a little delay, just to make sure everything works fine
+        Invoke("Delay", 0f);
+    }
+    private void Delay()
+    {
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Ignore collisions with other bullets
+        //Don't count collisions with other bullets
         if (collision.collider.CompareTag("Bullet")) return;
 
-        // Increase collision count
+        //Count up collisions
         collisions++;
 
-        // Explode if hitting an enemy directly
-        if (collision.collider.CompareTag("Enemy") && explodeOnTouch)
-        {
-            Explode();
-        }
+        //Explode if bullet hits an enemy directly and explodeOnTouch is activated
+        if (collision.collider.CompareTag("Enemy") && explodeOnTouch) Explode();
     }
 
     private void Setup()
-    {
+    {   
         rb.useGravity = useGravity;
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        hasExploded = false;
-        collisions = 0;
-        currentLifetime = maxLifetime;
     }
 
-    private void ReturnToPool()
-    {
-        gameObject.SetActive(false);
-        ObjectPooler.Instance.EnqueObject(bulletTag, gameObject);
-    }
-
-    /// Visualize explosion range
+    /// Just to visualize the explosion range
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

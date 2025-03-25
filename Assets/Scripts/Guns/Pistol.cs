@@ -23,7 +23,6 @@ public class Pistol : MonoBehaviour
     [Header("References")]
     [SerializeField] Camera playerCamera;
     [SerializeField] LayerMask whatIsEnemy;
-    [SerializeField] GameObject bloodPrefab;
 
 
     private void Awake()
@@ -67,10 +66,6 @@ public class Pistol : MonoBehaviour
             {
                 damagable.Damage(damage, rayHit.collider);
                 hitIndicator.Hit();
-                if(rayHit.collider.CompareTag("Enemy"))
-                {
-                    Instantiate(bloodPrefab, rayHit.point, Quaternion.LookRotation(rayHit.normal));
-                }
             }
             else
             {
