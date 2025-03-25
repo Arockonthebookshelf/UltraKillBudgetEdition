@@ -6,6 +6,7 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     HUD hud;
     public static Action OnPlayerDeath;
     [SerializeField] private int maxHealth = 100;
+    [SerializeField]Vector3 fallHeight;
     int currentHealth;
     Vector3 checkPointPos;
     [HideInInspector] public bool canHeal = false;
@@ -20,11 +21,16 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     }
     void Start()
     {
+        if(fallHeight == null)
+        {
+            fallHeight = new Vector3(0,100,0);
+        }
         hud.InitializeHealthBar(maxHealth);
     }
     void Update()
     {
         hud.UpdateHealthBar(currentHealth);
+       
     }
     public void Damage(float damage,Collider hitCollider)
     {
@@ -56,11 +62,6 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
             canHeal = false;
         }
     }
-    void fall()
-    {
-        transform.position =checkPointPos;
-        currentHealth = currentHealth -10;
-    }
     //public void HurtAnimation()
     //{
     //    camAnimator.Play("Player Hurt", 0, 0f);
@@ -81,5 +82,13 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     {
         gameData.playerPosition = transform.position;
         gameData.curHealth = currentHealth;
+    }
+    void OnTriggerEnter(Collider other)
+    {
+            if(other.CompareTag("Fall"))
+            {
+                Damage(10,other);
+                transform.position = checkPointPos;
+            }
     }
 }
