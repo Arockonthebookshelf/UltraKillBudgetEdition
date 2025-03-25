@@ -26,6 +26,7 @@ public class MiniGun : MonoBehaviour
     [SerializeField] Camera playerCamera;
     [SerializeField] LayerMask whatIsEnemy;
     [SerializeField] GameObject lineRendererPrefab;
+    [SerializeField] GameObject bloodPrefab;
 
     private void Awake()
     {
@@ -68,6 +69,14 @@ public class MiniGun : MonoBehaviour
             {
                 damagable.Damage(damage, rayHit.collider);
                 hitIndicator.Hit();
+                if (rayHit.collider.CompareTag("Enemy"))
+                {
+                    Instantiate(bloodPrefab, rayHit.point, Quaternion.LookRotation(rayHit.normal));
+                }
+            }
+            else
+            {
+                // hit wall game object or particle effect
             }
 
             trailEndPosition = rayHit.point;

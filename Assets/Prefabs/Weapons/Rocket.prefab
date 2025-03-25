@@ -283,6 +283,8 @@ MonoBehaviour:
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 4096
+  bulletTag: RocketLauncher Projectile
+  bloodPrefab: {fileID: 8322986867343221499, guid: 408c673ab08c8394ca3982900b360960, type: 3}
   useGravity: 0
   explosionDamage: 100
   explosionRange: 3
