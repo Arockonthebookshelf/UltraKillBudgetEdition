@@ -20,11 +20,13 @@ public class persistentSaveManager : MonoBehaviour
     void OnEnable()
     {
         CheckPoint.OnTriggered += SaveGame;
+        Finish.OnLevelFinished += NewGame;
         Player.OnPlayerDeath += LoadGame;
     }
     void OnDisable()
     {
         CheckPoint.OnTriggered -= SaveGame;
+        Finish.OnLevelFinished -= NewGame;
         Player.OnPlayerDeath -= LoadGame;
     }
     public void Start()
@@ -58,14 +60,7 @@ public class persistentSaveManager : MonoBehaviour
         }
         datahandler.SaveData(gameData);
     }
-    public void OnSaveAndQuit()
-    {
-
-    }
-    private void OnApplicationQuit()
-    {
-        //SaveGame();
-    }
+    
     private List<IPersistenceData> FindAllPersistenceDataObjects()
     {
         //IEnumerable<IPersistenceData> persistenceDatasObjects = FindObjectsOfType<MonoBehaviour>().OfType<IPersistenceData>();
