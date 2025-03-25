@@ -10,6 +10,7 @@ public class CheckPoint : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             OnTriggered?.Invoke();
+            gameObject.SetActive(false);
         }
     }
 }

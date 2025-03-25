@@ -1,5 +1,3 @@
-using JetBrains.Annotations;
-using NUnit.Framework;
 using UnityEngine;
 
 [System.Serializable]
@@ -18,7 +16,7 @@ public class GameData
    {
       playerPosition = new Vector3(0,0,0);
       ClearanceLevel = 0;
-      currentBulletCount = 0;
+      currentBulletCount = 25;
       currentCapacitorCount = 0;
       currentEnergyCellsCount = 0;
       currentRocketsCount = 0;
