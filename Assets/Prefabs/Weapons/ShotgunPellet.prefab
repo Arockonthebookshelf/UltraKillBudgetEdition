@@ -248,7 +248,6 @@ MonoBehaviour:
   lifetime: 1
   damage: 5
   bulletTag: Shotgun Projectile
-  bloodPrefab: {fileID: 8322986867343221499, guid: 408c673ab08c8394ca3982900b360960, type: 3}
 --- !u!65 &1527167734779253426
 BoxCollider:
   m_ObjectHideFlags: 0
