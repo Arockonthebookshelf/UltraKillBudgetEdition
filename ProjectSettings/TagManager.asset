@@ -10,6 +10,7 @@ TagManager:
   - Ground
   - Enemy
   - PathWay
+  - Fall
   layers:
   - Default
   - TransparentFX
