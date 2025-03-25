@@ -5,6 +5,7 @@ public class Projectile : MonoBehaviour
     public float lifetime = 2f;
     [SerializeField] float damage;
     [SerializeField] private string bulletTag = "Shotgun Projectile";
+    [SerializeField] GameObject bloodPrefab;
 
     HitIndicator hitIndicator;
     void Awake()
@@ -26,6 +27,16 @@ public class Projectile : MonoBehaviour
         {
             damageable.Damage(damage, collision.collider);
             hitIndicator.Hit();
+            if (collision.collider.CompareTag("Enemy"))
+            {
+                Vector3 hitPoint = collision.GetContact(0).point;
+                Vector3 hitNormal = collision.GetContact(0).normal;
+                Instantiate(bloodPrefab, hitPoint, Quaternion.LookRotation(hitNormal));
+            }
+            else
+            {
+                // hit game object or particle effect
+            }
         }
 
         DisableProjectile();

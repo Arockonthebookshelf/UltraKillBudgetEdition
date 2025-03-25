@@ -55,3 +55,6 @@ MonoBehaviour:
   - tag: Shotgun Projectile
     prefab: {fileID: 6328338227799599400, guid: 4662353896f0498498d7e175e7cfcfe6, type: 3}
     size: 20
+  - tag: RocketLauncher Missiles
+    prefab: {fileID: 3602794933351319466, guid: 3e82c7b5f29de6842b6ba636c18d090c, type: 3}
+    size: 2
