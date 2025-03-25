@@ -17,6 +17,16 @@ public class persistentSaveManager : MonoBehaviour
         }
         instance = this;
     }
+    void OnEnable()
+    {
+        CheckPoint.OnTriggered += SaveGame;
+        Player.OnPlayerDeath += LoadGame;
+    }
+    void OnDisable()
+    {
+        CheckPoint.OnTriggered -= SaveGame;
+        Player.OnPlayerDeath -= LoadGame;
+    }
     public void Start()
     {
         this.datahandler = new DataHandler(Application.persistentDataPath, FileName);
@@ -54,7 +64,7 @@ public class persistentSaveManager : MonoBehaviour
     }
     private void OnApplicationQuit()
     {
-        SaveGame();
+        //SaveGame();
     }
     private List<IPersistenceData> FindAllPersistenceDataObjects()
     {
