@@ -282,7 +282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4423983246939366384}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.03177627, y: 0.0144521985, z: 0.00026542644, w: 0.9993905}
+  m_LocalRotation: {x: -0.027038999, y: -0.02128876, z: -0.0007677357, w: 0.99940735}
   m_LocalPosition: {x: 0.42, y: -0.339, z: 0.819}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -290,7 +290,7 @@ Transform:
   - {fileID: 8273144165613302127}
   - {fileID: 3357269588260428734}
   m_Father: {fileID: 5487454360538531385}
-  m_LocalEulerAnglesHint: {x: -3.642, y: 1.658, z: -0.022}
+  m_LocalEulerAnglesHint: {x: -3.1, y: -2.44, z: -0.022}
 --- !u!114 &8578652197642847626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,6 +317,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   lineRendererPrefab: {fileID: 2002598833049578536, guid: 12b5b16ed7b02aa45b061049a4470467, type: 3}
+  bloodPrefab: {fileID: 8322986867343221499, guid: 408c673ab08c8394ca3982900b360960, type: 3}
 --- !u!1 &4494241121404610092
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,7 +329,6 @@ GameObject:
   - component: {fileID: 5487454360538531385}
   - component: {fileID: 73230011565886276}
   - component: {fileID: 2172438677114687636}
-  - component: {fileID: 2623725684975915621}
   m_Layer: 5
   m_Name: WeaponHolder
   m_TagString: Untagged
@@ -386,20 +386,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smooth: 10
   multiplier: 1.5
---- !u!114 &2623725684975915621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4494241121404610092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 422266262f74f3842830724084ef6cd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  smooth: 10
-  multiplier: 1.5
+  bobSpeed: 15
+  bobAmount: 0.01
 --- !u!1 &4969068428593833653
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,6 +478,7 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 4096
+  bloodPrefab: {fileID: 8322986867343221499, guid: 408c673ab08c8394ca3982900b360960, type: 3}
 --- !u!120 &7996950025191040534
 LineRenderer:
   serializedVersion: 2
@@ -611,7 +600,7 @@ GameObject:
   - component: {fileID: 105867561275504808}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

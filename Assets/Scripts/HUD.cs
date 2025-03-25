@@ -7,6 +7,7 @@ public class HUD : MonoBehaviour
     PlayerInventory playerInventory;
 
     [SerializeField] Slider healthSlider;
+    [SerializeField] Slider healthHitSlider;
     [SerializeField] TMP_Text healthText;
     [SerializeField] TMP_Text PistolAmmoCount;
     [SerializeField] TMP_Text ShotgunAmmoCount;
@@ -29,11 +30,12 @@ public class HUD : MonoBehaviour
     public GameObject shotGunUI;
     public GameObject miniGunUI;
     public GameObject rocketLauncherUI;
-
+    Animator HudAnimator;
     [SerializeField] Image currentCrosshair;
     Slider interactionSlider;
     Image interactionButton;
     TMP_Text interactionText;
+    UIBobbing bobbingSway;  
 
     void Awake()
     {
@@ -41,6 +43,8 @@ public class HUD : MonoBehaviour
         interactionButton = interactionButtonImage.GetComponent<Image>();
         interactionText = interactionTextGO.GetComponent<TMP_Text>();
         playerInventory = FindFirstObjectByType<PlayerInventory>();
+        HudAnimator = GetComponent<Animator>();
+        bobbingSway = FindAnyObjectByType<UIBobbing>();
     }
 
     void Start()
@@ -54,14 +58,21 @@ public class HUD : MonoBehaviour
 
     public void InitializeHealthBar(int maxHealth)
     {
-        healthSlider.value = healthSlider.maxValue = maxHealth;
+        healthHitSlider.value = healthHitSlider.maxValue = healthSlider.value = healthSlider.maxValue = maxHealth;
         healthText.SetText(healthSlider.value.ToString());
     }
 
     public void UpdateHealthBar(int currentHealth)
     {
-        healthSlider.value = currentHealth;
-        healthText.SetText(healthSlider.value.ToString());
+        healthHitSlider.value = healthSlider.value = currentHealth;
+        if (currentHealth > 0)
+        {
+            healthText.SetText(healthSlider.value.ToString());
+        }
+        else
+        {
+            healthText.SetText("Dead");
+        }
     }
 
     public void UpdatePistolAmmo()
@@ -140,5 +151,11 @@ public class HUD : MonoBehaviour
         {
             currentCrosshair.color = disabledCrosshairColor;
         }
+    }
+
+    public void DamageEffect()
+    {
+        HudAnimator.SetTrigger("Damaged");
+        bobbingSway.TriggerHitEffect();
     }
 }
