@@ -47,11 +47,13 @@ public class PlayerMovement : MonoBehaviour
     private bool jumping;
     private bool sprinting;
     private bool crouching;
+    private bool isCrouching;
     private bool wallRunning;
     private bool cancelling;
     private bool readyToWallrun = true;
     private bool airborne;
     private bool onGround;
+    private bool sliding;
     private bool surfing;
     private bool cancellingGrounded;
     private bool cancellingWall;
@@ -94,6 +96,10 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //For moving
+        if(sliding)
+        {
+            Debug.Log("Sliding");
+        }
         Movement();
     }
 
@@ -125,6 +131,10 @@ public class PlayerMovement : MonoBehaviour
         {
             StopCrouch();
         }
+        if(isCrouching)
+        {
+            Crouch(0.1f);
+        }
     }
 
     //Scale player down
@@ -132,16 +142,36 @@ public class PlayerMovement : MonoBehaviour
     {
         base.transform.localScale = new Vector3(1f, 0.5f, 1f);
         base.transform.position = new Vector3(base.transform.position.x, base.transform.position.y - 0.5f, base.transform.position.z);
+        isCrouching = true;
         if (rb.linearVelocity.magnitude > 0.1f && grounded)
         {
             rb.AddForce(rb.linearVelocity * slidingBoost);
-
+            sliding = true;
         }
+    }
+
+    private void Crouch(float forwardMultiplier)
+    {
+            Debug.Log("Crouching");
+            if(MathF.Abs(rb.linearVelocity.x) <1 && MathF.Abs(rb.linearVelocity.z) <1 )
+            {
+                sliding = false;
+            }
+            if(sliding)
+            {
+                return;
+            }
+
+                rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.fixedDeltaTime * forwardMultiplier);
+                rb.AddForce(orientation.transform.right * x * moveSpeed * Time.fixedDeltaTime * forwardMultiplier);
+
     }
 
     //Scale player to original size
     private void StopCrouch()
     {
+        isCrouching = false;
+        sliding = false;
         base.transform.localScale = new Vector3(1f, 1f, 1f);
         base.transform.position = new Vector3(base.transform.position.x, base.transform.position.y + 0.5f, base.transform.position.z);
     }
@@ -185,13 +215,12 @@ public class PlayerMovement : MonoBehaviour
         // Modify movement control based on different states
         float forwardMultiplier = 1f;
         float strafeMultiplier = 1f;
-
         if (!grounded)
         {
             forwardMultiplier = 0.5f;
             strafeMultiplier = 0.5f;
         }
-        if (grounded && crouching)
+        if (grounded && sliding)
         {
             strafeMultiplier = 0f; // No sideways movement when crouching
         }
