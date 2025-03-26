@@ -27,6 +27,7 @@ public class PauseMenu : MonoBehaviour
     void PauseGame()
     {
         gamePaused = true;
+        Time.timeScale =0f;
         pauseMenu.SetActive(true);
         //disable player input
     }
@@ -34,6 +35,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         gamePaused = false;
+        Time.timeScale =1f;
         pauseMenu.SetActive(false);
         //enable player input
     }

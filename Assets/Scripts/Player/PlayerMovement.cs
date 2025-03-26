@@ -96,10 +96,6 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //For moving
-        if(sliding)
-        {
-            Debug.Log("Sliding");
-        }
         Movement();
     }
 
@@ -133,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if(isCrouching)
         {
-            Crouch(0.1f);
+            Crouch(0.3f);
         }
     }
 
@@ -152,7 +148,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Crouch(float forwardMultiplier)
     {
-            Debug.Log("Crouching");
             if(MathF.Abs(rb.linearVelocity.x) <1 && MathF.Abs(rb.linearVelocity.z) <1 )
             {
                 sliding = false;

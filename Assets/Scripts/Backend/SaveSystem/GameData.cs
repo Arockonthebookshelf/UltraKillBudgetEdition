@@ -17,10 +17,10 @@ public class GameData
       playerPosition = new Vector3(0,0,0);
       ClearanceLevel = 0;
       currentBulletCount = 25;
-      currentCapacitorCount = 0;
-      currentEnergyCellsCount = 0;
-      currentRocketsCount = 0;
-      curHealth =100;  
+      currentCapacitorCount = 15;
+      currentEnergyCellsCount = 100;
+      currentRocketsCount = 5;
+      curHealth = 100;  
       waveActive = new SerializableDictionary<string, bool>();
    }
 }
