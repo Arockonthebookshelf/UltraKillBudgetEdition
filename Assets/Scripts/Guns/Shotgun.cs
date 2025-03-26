@@ -14,10 +14,17 @@ public class Shotgun : MonoBehaviour
     bool readyToShoot = true;
     public Camera fpsCam;
     public Transform attackPoint;
+    Animator animator;
 
     private void Awake()
     {
         playerInventory = FindFirstObjectByType<PlayerInventory>();
+        animator = GetComponent<Animator>();
+    }
+
+    void OnEnable()
+    {
+        animator.SetFloat("Speed", 1 / fireRate);
     }
 
     private void Update()
@@ -36,7 +43,7 @@ public class Shotgun : MonoBehaviour
     private void Shoot()
     {
         readyToShoot = false;
-
+        animator.SetTrigger("Shot");
         for (int i = 0; i < bulletsPerTap; i++)
         {
             Vector3 directionWithSpread = CalculateSpread();

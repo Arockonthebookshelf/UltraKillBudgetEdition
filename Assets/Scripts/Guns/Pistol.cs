@@ -23,6 +23,7 @@ public class Pistol : MonoBehaviour
     [Header("References")]
     [SerializeField] Camera playerCamera;
     [SerializeField] LayerMask whatIsEnemy;
+    Animator animator;
 
 
     private void Awake()
@@ -31,11 +32,17 @@ public class Pistol : MonoBehaviour
         muzzleFlash = GetComponentInChildren<ParticleSystem>();
         playerInventory = FindFirstObjectByType<PlayerInventory>();
         hitIndicator = FindFirstObjectByType<HitIndicator>();
+        animator = GetComponent<Animator>();
     }
 
     void Start()
     {
         initialTrailWidth = bulletTrail.widthMultiplier;
+    }
+
+    void OnEnable()
+    {
+        animator.SetFloat("Speed", 1 / fireRate);
     }
 
     private void Update()
@@ -50,7 +57,7 @@ public class Pistol : MonoBehaviour
     {
         readyToShoot = false;
         Vector3 trailEndPosition;
-
+        animator.SetTrigger("Shot");
         float spreadAngleX = Random.Range(-horizontalSpread, horizontalSpread);
         float spreadAngleY = Random.Range(-verticalSpread, verticalSpread);
         float spreadAngleZ = Random.Range(-horizontalSpread, horizontalSpread);

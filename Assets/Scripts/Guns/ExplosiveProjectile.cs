@@ -1,93 +1,143 @@
 ﻿using UnityEngine;
 
 public class ExplosiveProjectile : MonoBehaviour
+
 {
-    //Assignables
+    // Assignables
     public Rigidbody rb;
     public GameObject explosion;
     public LayerMask whatIsEnemies;
+    [SerializeField] private string bulletTag = "RocketLauncher Projectile";
+    [SerializeField] GameObject bloodPrefab;
 
-    //Stats
+    // Stats
     public bool useGravity;
 
-    //Damage
+    // Damage
     public int explosionDamage;
     public float explosionRange;
     public float explosionForce;
 
-    //Lifetime
+    // Lifetime
     public int maxCollisions;
     public float maxLifetime;
     public bool explodeOnTouch = true;
-    bool hit = false;
+    private bool hasExploded = false;
+    private int collisions;
+    private float currentLifetime;
 
-    int collisions;
-
-    private void Start()
+    private void OnEnable()
     {
         Setup();
     }
 
     private void Update()
     {
-        //When to explode:
         if (collisions > maxCollisions) Explode();
-
-        //Count down lifetime
-        maxLifetime -= Time.deltaTime;
-        if (maxLifetime <= 0) Explode();
+        // Countdown lifetime
+        currentLifetime -= Time.deltaTime;
+        if (currentLifetime <= 0) Explode();
     }
 
     private void Explode()
+
     {
-        //Instantiate explosion
+        if (hasExploded) return; // Prevent multiple explosions
+
+        hasExploded = true;
+
+        // Instantiate explosion effect
+
         if (explosion != null) Instantiate(explosion, transform.position, Quaternion.identity);
 
-        //Check for enemies 
-        Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            IDamagable damagable = enemies[i].GetComponent<IDamagable>();
-            damagable.Damage(explosionDamage, enemies[i]);
-            if(!hit)
-            {
-                FindFirstObjectByType<HitIndicator>().Hit();
-                hit = true;
-            }
-            //Add explosion force (if enemy has a rigidbody)
-            //if (enemies[i].GetComponent<Rigidbody>())
-                //enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange);
-        }
+        // Check for enemies in explosion radius
 
-        //Add a little delay, just to make sure everything works fine
-        Invoke("Delay", 0f);
-    }
-    private void Delay()
-    {
-        Destroy(gameObject);
+        Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);
+
+        foreach (Collider enemy in enemies)
+
+        {
+            IDamagable damagable = enemy.GetComponent<IDamagable>();
+
+            if (damagable != null)
+            {
+                damagable.Damage(explosionDamage, enemy);
+                Instantiate(bloodPrefab, enemy.transform.position, Quaternion.identity);
+            }
+        }
+        // Reset & return rocket to object pool
+
+        Invoke(nameof(ReturnToPool), 0.1f);
     }
 
     private void OnCollisionEnter(Collision collision)
+
     {
-        //Don't count collisions with other bullets
         if (collision.collider.CompareTag("Bullet")) return;
 
-        //Count up collisions
+        // Increase collision count
+
         collisions++;
 
-        //Explode if bullet hits an enemy directly and explodeOnTouch is activated
-        if (collision.collider.CompareTag("Enemy") && explodeOnTouch) Explode();
+        // Explode if hitting an enemy directly
+
+
+        if (collision.collider.CompareTag("Enemy") && explodeOnTouch)
+        {
+            Explode();
+        }
+
     }
+
+
 
     private void Setup()
-    {   
+
+
+    {
+
         rb.useGravity = useGravity;
+
+
+        rb.linearVelocity = Vector3.zero;
+
+
+        rb.angularVelocity = Vector3.zero;
+
+
+        hasExploded = false;
+
+
+        collisions = 0;
+
+
+        currentLifetime = maxLifetime;
+
+
     }
 
-    /// Just to visualize the explosion range
-    private void OnDrawGizmosSelected()
+
+
+
+
+    private void ReturnToPool()
+
+
     {
+        gameObject.SetActive(false);
+
+        ObjectPooler.Instance.EnqueObject(bulletTag, gameObject);
+    }
+
+
+
+
+    /// Visualize explosion range
+
+    private void OnDrawGizmosSelected()
+
+    {
+
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, explosionRange);
     }
 }

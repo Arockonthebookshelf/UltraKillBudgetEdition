@@ -26,12 +26,15 @@ public class MiniGun : MonoBehaviour
     [SerializeField] Camera playerCamera;
     [SerializeField] LayerMask whatIsEnemy;
     [SerializeField] GameObject lineRendererPrefab;
+    [SerializeField] BarrelRotator barrelRotator;
+    [SerializeField] Animator animator;
 
     private void Awake()
     {
         muzzleFlash = GetComponentInChildren<ParticleSystem>();
         playerInventory = FindFirstObjectByType<PlayerInventory>();
         hitIndicator = FindFirstObjectByType<HitIndicator>();
+        animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -41,9 +44,19 @@ public class MiniGun : MonoBehaviour
 
     private void Update()
     {
-        if (readyToShoot && playerInventory.currentEnergyCellsCount > 0 && Input.GetKey(KeyCode.Mouse0))
+        if (playerInventory.currentEnergyCellsCount > 0 && Input.GetKey(KeyCode.Mouse0))
         {
-            Shoot();
+            barrelRotator.StartRotation();
+            animator.SetBool("Shooting", true);
+            if (readyToShoot)
+            {
+                Shoot();
+            }
+        }
+        else
+        {
+            barrelRotator.StopRotation();
+            animator.SetBool("Shooting", false);
         }
     }
 

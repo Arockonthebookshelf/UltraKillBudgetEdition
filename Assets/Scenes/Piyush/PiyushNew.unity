@@ -5062,6 +5062,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1130243899}
+    - target: {fileID: 2101167509967555547, guid: 2c07c231c6e2b64449c9eb0ab475b605, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 78e2754c489fd2d4c81509258f420437, type: 3}
+    - target: {fileID: 2101167509967555547, guid: 2c07c231c6e2b64449c9eb0ab475b605, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3428459965714698419, guid: 2c07c231c6e2b64449c9eb0ab475b605, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -19552,6 +19560,14 @@ PrefabInstance:
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 362940342}
+    - target: {fileID: 1658537787960032983, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658537787960032983, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2573279270176864995, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
       propertyPath: playerCameraTransform
       value: 
