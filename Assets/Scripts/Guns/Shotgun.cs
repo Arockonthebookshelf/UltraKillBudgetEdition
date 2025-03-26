@@ -3,6 +3,7 @@ using UnityEngine;
 public class Shotgun : MonoBehaviour
 {
     PlayerInventory playerInventory;
+    WeaponSwitching weaponSwitching;
     [SerializeField] string bulletTag = "Shotgun Projectile";
     [SerializeField] float shootForce;
     [SerializeField] float upwardForce;
@@ -14,17 +15,18 @@ public class Shotgun : MonoBehaviour
     bool readyToShoot = true;
     public Camera fpsCam;
     public Transform attackPoint;
-    Animator animator;
+    Animator animatior;
 
     private void Awake()
     {
         playerInventory = FindFirstObjectByType<PlayerInventory>();
-        animator = GetComponent<Animator>();
+        animatior = GetComponent<Animator>();
+        weaponSwitching = GetComponentInParent<WeaponSwitching>();
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
-        animator.SetFloat("Speed", 1 / fireRate);
+        animatior.SetFloat("Speed", 1 / fireRate);
     }
 
     private void Update()
@@ -34,7 +36,7 @@ public class Shotgun : MonoBehaviour
 
     private void HandleInput()
     {
-        if (readyToShoot && playerInventory.currentCapacitorCount > 0 && Input.GetKeyDown(KeyCode.Mouse0))
+        if (readyToShoot && playerInventory.currentCapacitorCount > 0 && Input.GetKeyDown(KeyCode.Mouse0) && !weaponSwitching.isSwitching)
         {
             Shoot();
         }
@@ -43,7 +45,8 @@ public class Shotgun : MonoBehaviour
     private void Shoot()
     {
         readyToShoot = false;
-        animator.SetTrigger("Shot");
+        animatior.SetTrigger("Shoot");
+
         for (int i = 0; i < bulletsPerTap; i++)
         {
             Vector3 directionWithSpread = CalculateSpread();

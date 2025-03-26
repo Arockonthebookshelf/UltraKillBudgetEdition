@@ -5,6 +5,7 @@ public class Pistol : MonoBehaviour
 {
     PlayerInventory playerInventory;
     HitIndicator hitIndicator;
+    WeaponSwitching weaponSwitching;
     RaycastHit rayHit;
     ParticleSystem muzzleFlash;
     LineRenderer bulletTrail;
@@ -23,7 +24,8 @@ public class Pistol : MonoBehaviour
     [Header("References")]
     [SerializeField] Camera playerCamera;
     [SerializeField] LayerMask whatIsEnemy;
-    Animator animator;
+    [SerializeField] GameObject bloodPrefab;
+    Animator animatior;
 
 
     private void Awake()
@@ -32,7 +34,8 @@ public class Pistol : MonoBehaviour
         muzzleFlash = GetComponentInChildren<ParticleSystem>();
         playerInventory = FindFirstObjectByType<PlayerInventory>();
         hitIndicator = FindFirstObjectByType<HitIndicator>();
-        animator = GetComponent<Animator>();
+        animatior = GetComponent<Animator>();
+        weaponSwitching = GetComponentInParent<WeaponSwitching>();
     }
 
     void Start()
@@ -40,14 +43,14 @@ public class Pistol : MonoBehaviour
         initialTrailWidth = bulletTrail.widthMultiplier;
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
-        animator.SetFloat("Speed", 1 / fireRate);
+        animatior.SetFloat("Speed", 1 / fireRate);
     }
 
     private void Update()
     {
-        if (readyToShoot && playerInventory.currentBulletCount > 0 && Input.GetKeyDown(KeyCode.Mouse0))
+        if (readyToShoot && playerInventory.currentBulletCount > 0 && Input.GetKeyDown(KeyCode.Mouse0) && !weaponSwitching.isSwitching)
         {
             Shoot();
         }
@@ -57,7 +60,7 @@ public class Pistol : MonoBehaviour
     {
         readyToShoot = false;
         Vector3 trailEndPosition;
-        animator.SetTrigger("Shot");
+        animatior.SetTrigger("Shoot");
         float spreadAngleX = Random.Range(-horizontalSpread, horizontalSpread);
         float spreadAngleY = Random.Range(-verticalSpread, verticalSpread);
         float spreadAngleZ = Random.Range(-horizontalSpread, horizontalSpread);
@@ -65,7 +68,7 @@ public class Pistol : MonoBehaviour
         // Apply Spread Using Rotation
         Quaternion spreadRotation = Quaternion.Euler(spreadAngleY, spreadAngleX, spreadAngleZ);
         Vector3 direction = spreadRotation * playerCamera.transform.forward;
-        
+
         if (Physics.Raycast(playerCamera.transform.position, direction, out rayHit, range))
         {
             IDamagable damagable = rayHit.collider.GetComponent<IDamagable>();
@@ -73,6 +76,10 @@ public class Pistol : MonoBehaviour
             {
                 damagable.Damage(damage, rayHit.collider);
                 hitIndicator.Hit();
+                if (rayHit.collider.CompareTag("Enemy"))
+                {
+                    Instantiate(bloodPrefab, rayHit.point, Quaternion.LookRotation(rayHit.normal));
+                }
             }
             else
             {
@@ -86,11 +93,11 @@ public class Pistol : MonoBehaviour
             trailEndPosition = playerCamera.transform.position + (playerCamera.transform.forward * range);
         }
 
-        if(Vector3.Distance(muzzleFlash.transform.position, rayHit.point) >= minTrailDistance)
+        if (Vector3.Distance(muzzleFlash.transform.position, rayHit.point) >= minTrailDistance)
         {
             DrawTrail(muzzleFlash.transform.position + (muzzleFlash.transform.forward * 0.1f), trailEndPosition);
         }
-    
+
         muzzleFlash.Play();
 
         Invoke("ResetShot", fireRate);

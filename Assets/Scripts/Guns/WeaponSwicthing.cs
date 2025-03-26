@@ -17,7 +17,7 @@ public class WeaponSwitching : MonoBehaviour
 
     private GameObject selectedWeapon;
     private GameObject previousSelectedWeapon;
-    private bool isSwitching = false;
+    public bool isSwitching = false;
 
     void Awake()
     {

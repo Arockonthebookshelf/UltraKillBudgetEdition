@@ -34,7 +34,7 @@ public class UIBobbing : MonoBehaviour
         {
             Vector2 newPosition = initialPosition;
 
-            if (player.GetVelocity().magnitude > 0.1f)
+            if (player.GetVelocity().magnitude > 0.5f)
             {
                 timer += Time.deltaTime * bobbingSpeed;
                 float bobOffset = Mathf.Sin(timer) * bobbingAmount;

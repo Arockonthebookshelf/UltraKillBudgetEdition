@@ -3,7 +3,8 @@ using UnityEngine;
 public class RocketLauncher : MonoBehaviour
 {
     PlayerInventory playerInventory;
-    [SerializeField] string bulletTag = "RocketLauncher Projectile";
+    WeaponSwitching weaponSwitching;
+    [SerializeField] string bulletTag = "RocketLauncher Projectiles";
     [SerializeField] float shootForce;
     [SerializeField] float upwardForce;
     [SerializeField] float fireRate;
@@ -11,28 +12,28 @@ public class RocketLauncher : MonoBehaviour
     bool readyToShoot = true;
     public Camera fpsCam;
     public Transform attackPoint;
-    Animator animator;
+    Animator animatior;
 
     private void Awake()
     {
         playerInventory = FindFirstObjectByType<PlayerInventory>();
-        animator = GetComponent<Animator>();
+        animatior = GetComponent<Animator>();
+        weaponSwitching = GetComponentInParent<WeaponSwitching>();
     }
-
-    void OnEnable()
-    {
-        animator.SetFloat("Speed", 1 / fireRate);
-    }
-
 
     private void Update()
     {
         HandleInput();
     }
 
+    private void OnEnable()
+    {
+        animatior.SetFloat("Speed", 1 / fireRate);
+    }
+
     private void HandleInput()
     {
-        if (readyToShoot && playerInventory.currentRocketsCount > 0 && Input.GetKeyDown(KeyCode.Mouse0))
+        if (readyToShoot && playerInventory.currentRocketsCount > 0 && Input.GetKeyDown(KeyCode.Mouse0) && !weaponSwitching.isSwitching)
         {
             Shoot();
         }
@@ -41,7 +42,7 @@ public class RocketLauncher : MonoBehaviour
     private void Shoot()
     {
         readyToShoot = false;
-        animator.SetTrigger("Shot");
+        animatior.SetTrigger("Shoot");
         // Calculate direction
         RaycastHit hit;
         Vector3 targetPoint;
@@ -60,7 +61,7 @@ public class RocketLauncher : MonoBehaviour
         // Calculate direction from attack point to target point
         Vector3 direction = (targetPoint - attackPoint.position).normalized;
 
-        // Instantiate bullet and apply force
+        // Instantiate Rocket and apply force
         GameObject rocket = ObjectPooler.Instance.SpawnProjectileFromPool(bulletTag, attackPoint.position, Quaternion.identity); ;
         Rigidbody rocketRB = rocket.GetComponent<Rigidbody>();
         rocket.SetActive(true);

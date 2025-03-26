@@ -6,6 +6,7 @@ public class MiniGun : MonoBehaviour
 {
     PlayerInventory playerInventory;
     HitIndicator hitIndicator;
+    WeaponSwitching weaponSwitching;
     RaycastHit rayHit;
     ParticleSystem muzzleFlash;
     List<LineRenderer> energyTrails = new List<LineRenderer>();
@@ -26,15 +27,17 @@ public class MiniGun : MonoBehaviour
     [SerializeField] Camera playerCamera;
     [SerializeField] LayerMask whatIsEnemy;
     [SerializeField] GameObject lineRendererPrefab;
+    [SerializeField] GameObject bloodPrefab;
     [SerializeField] BarrelRotator barrelRotator;
-    [SerializeField] Animator animator;
+    Animator animatior;
 
     private void Awake()
     {
         muzzleFlash = GetComponentInChildren<ParticleSystem>();
         playerInventory = FindFirstObjectByType<PlayerInventory>();
         hitIndicator = FindFirstObjectByType<HitIndicator>();
-        animator = GetComponent<Animator>();
+        animatior = GetComponent<Animator>();
+        weaponSwitching = GetComponentInParent<WeaponSwitching>();
     }
 
     void Start()
@@ -44,10 +47,11 @@ public class MiniGun : MonoBehaviour
 
     private void Update()
     {
-        if (playerInventory.currentEnergyCellsCount > 0 && Input.GetKey(KeyCode.Mouse0))
+        if (playerInventory.currentEnergyCellsCount > 0 && Input.GetKey(KeyCode.Mouse0) && !weaponSwitching.isSwitching)
         {
             barrelRotator.StartRotation();
-            animator.SetBool("Shooting", true);
+            animatior.SetBool("Shooting", true);
+
             if (readyToShoot)
             {
                 Shoot();
@@ -56,7 +60,7 @@ public class MiniGun : MonoBehaviour
         else
         {
             barrelRotator.StopRotation();
-            animator.SetBool("Shooting", false);
+            animatior.SetBool("Shooting", false);
         }
     }
 
@@ -81,6 +85,14 @@ public class MiniGun : MonoBehaviour
             {
                 damagable.Damage(damage, rayHit.collider);
                 hitIndicator.Hit();
+                if (rayHit.collider.CompareTag("Enemy"))
+                {
+                    Instantiate(bloodPrefab, rayHit.point, Quaternion.LookRotation(rayHit.normal));
+                }
+            }
+            else
+            {
+                // hit wall game object or particle effect
             }
 
             trailEndPosition = rayHit.point;
