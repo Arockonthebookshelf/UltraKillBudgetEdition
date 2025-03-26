@@ -7,7 +7,7 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     public static Action OnPlayerDeath;
     [SerializeField] private int maxHealth = 100;
     [SerializeField]Vector3 fallHeight;
-    int currentHealth;
+    [SerializeField] int currentHealth;
     Vector3 checkPointPos;
     [HideInInspector] public bool canHeal = false;
 
@@ -27,14 +27,12 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
         }
         hud.InitializeHealthBar(maxHealth);
     }
-    void Update()
-    {
-        hud.UpdateHealthBar(currentHealth);
-       
-    }
+
     public void Damage(float damage,Collider hitCollider)
     {
-        if(currentHealth <= 0)
+        hud.UpdateHealthBar(currentHealth);
+        hud.DamageEffect();
+        if (currentHealth <= 0)
         {
             Debug.Log("Player is dead");
             //DeathAnimation();
