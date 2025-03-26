@@ -8,7 +8,8 @@ public class Finish : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            OnLevelFinished.Invoke();
+            Debug.Log("Finish");
+            OnLevelFinished?.Invoke();
         }
     }
 }

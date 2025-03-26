@@ -38,6 +38,7 @@ public class persistentSaveManager : MonoBehaviour
     public void NewGame()
     {
         //intialize new game data
+        gameData = null;
         gameData = new GameData();
     }
     public void LoadGame()
