@@ -40,6 +40,11 @@ public class MiniGun : MonoBehaviour
         weaponSwitching = GetComponentInParent<WeaponSwitching>();
     }
 
+    private void OnEnable()
+    {
+        animatior.SetFloat("Speed", 1 / fireRate);
+    }
+
     void Start()
     {
          InitializeTrails();

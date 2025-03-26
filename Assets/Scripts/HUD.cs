@@ -9,7 +9,6 @@ public class HUD : MonoBehaviour
     [SerializeField] Slider healthSlider;
     [SerializeField] Slider healthHitSlider;
     [SerializeField] TMP_Text healthText;
-    [SerializeField] TMP_Text PistolAmmoCount;
     [SerializeField] TMP_Text ShotgunAmmoCount;
     [SerializeField] TMP_Text MinigunAmmoCount;
     [SerializeField] TMP_Text RocketLauncherAmmoCount;
@@ -50,7 +49,6 @@ public class HUD : MonoBehaviour
     void Start()
     {
         currentCrosshair.sprite = pistolCrosshair;
-        UpdatePistolAmmo();
         UpdateShotgunAmmo();
         UpdateMiniGunAmmo();
         UpdateRocketLauncherAmmo();
@@ -73,12 +71,6 @@ public class HUD : MonoBehaviour
         {
             healthText.SetText("Dead");
         }
-    }
-
-    public void UpdatePistolAmmo()
-    {
-        PistolAmmoCount.SetText(playerInventory.currentBulletCount + " / " + playerInventory.maxBulletCount);
-        PistolAmmoCount.color = (playerInventory.currentBulletCount >= (playerInventory.maxBulletCount * lowAmmoPercentage)) ? normalAmmoColor : (playerInventory.currentBulletCount == 0) ? noAmmoColor : lowAmmoColor;
     }
 
     public void UpdateShotgunAmmo()

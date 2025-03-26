@@ -11,6 +11,7 @@ public class Shotgun : MonoBehaviour
     [SerializeField] float verticalSpread;
     [SerializeField] float horizontalSpread;
     [SerializeField] int bulletsPerTap;
+    [SerializeField] ParticleSystem muzzleFlash;
 
     bool readyToShoot = true;
     public Camera fpsCam;
@@ -46,6 +47,7 @@ public class Shotgun : MonoBehaviour
     {
         readyToShoot = false;
         animatior.SetTrigger("Shoot");
+        muzzleFlash.Play();
 
         for (int i = 0; i < bulletsPerTap; i++)
         {

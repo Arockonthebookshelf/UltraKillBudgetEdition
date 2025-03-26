@@ -25,6 +25,7 @@ public class Pistol : MonoBehaviour
     [SerializeField] Camera playerCamera;
     [SerializeField] LayerMask whatIsEnemy;
     [SerializeField] GameObject bloodPrefab;
+    [SerializeField] GameObject HitDecalPrefab;
     Animator animatior;
 
 
@@ -50,7 +51,7 @@ public class Pistol : MonoBehaviour
 
     private void Update()
     {
-        if (readyToShoot && playerInventory.currentBulletCount > 0 && Input.GetKeyDown(KeyCode.Mouse0) && !weaponSwitching.isSwitching)
+        if (readyToShoot && Input.GetKeyDown(KeyCode.Mouse0) && !weaponSwitching.isSwitching)
         {
             Shoot();
         }
@@ -83,7 +84,7 @@ public class Pistol : MonoBehaviour
             }
             else
             {
-                // bullet hole game object or particle effect
+                Instantiate(HitDecalPrefab, rayHit.point, Quaternion.LookRotation(rayHit.normal));
             }
 
             trailEndPosition = rayHit.point;
@@ -102,7 +103,6 @@ public class Pistol : MonoBehaviour
 
         Invoke("ResetShot", fireRate);
 
-        playerInventory.RemoveBullets(1);
         playerInventory.CanShoot(false);
     }
 
