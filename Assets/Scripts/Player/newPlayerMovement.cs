@@ -135,6 +135,7 @@ public class newPlayerMovement : MonoBehaviour
         float maxSpeed = this.maxSpeed;
 
         //If sliding down a ramp, add force down so player stays grounded and also builds speed
+
         if (crouching && grounded && readyToJump)
         {
             rb.AddForce(Vector3.down * Time.deltaTime * 3000);
@@ -150,6 +151,13 @@ public class newPlayerMovement : MonoBehaviour
         //Some multipliers
         float multiplier = 1f, multiplierV = 1f;
 
+            Debug.Log(Mathf.Abs(rb.linearVelocity.x) < 15);
+        if(crouching && grounded && (Mathf.Abs(rb.linearVelocity.x) < 15 || Mathf.Abs(rb.linearVelocity.z) < 15 ))
+        {
+            Debug.Log("Crouch Walk");
+            rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV);
+            rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * multiplier);
+        }
         // Movement in air
         if (!grounded)
         {
@@ -166,7 +174,7 @@ public class newPlayerMovement : MonoBehaviour
 
         if (wallrunning)
         {
-            state = MovementState.wallrunning;
+            //state = MovementState.wallrunning;
             maxSpeed = wallrunSpeed;
         }
     }

@@ -21,13 +21,13 @@ public class persistentSaveManager : MonoBehaviour
     {
         CheckPoint.OnTriggered += SaveGame;
         Finish.OnLevelFinished += NewGame;
-        Player.OnPlayerDeath += LoadGame;
+        Player.OnPlayerReloaded += LoadGame;
     }
     void OnDisable()
     {
         CheckPoint.OnTriggered -= SaveGame;
         Finish.OnLevelFinished -= NewGame;
-        Player.OnPlayerDeath -= LoadGame;
+        Player.OnPlayerReloaded -= LoadGame;
     }
     public void Start()
     {

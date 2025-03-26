@@ -1,10 +1,13 @@
 using System;
+using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class Player : MonoBehaviour,IDamagable,IPersistenceData
 {
     HUD hud;
+    PlayerMovement movement;
     public static Action OnPlayerDeath;
+    public static Action OnPlayerReloaded;
     [SerializeField] private int maxHealth = 100;
     [SerializeField]Vector3 fallHeight;
     [SerializeField] int currentHealth;
@@ -18,6 +21,14 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     void Awake()
     {
         hud = FindFirstObjectByType<HUD>();
+    }
+    void OnEnable()
+    {
+        OnPlayerDeath += death;
+    }
+    void OnDisable()
+    {
+        OnPlayerDeath -= death;
     }
     void Start()
     {
@@ -34,7 +45,6 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
         hud.DamageEffect();
         if (currentHealth <= 0)
         {
-            Debug.Log("Player is dead");
             //DeathAnimation();
             OnPlayerDeath?.Invoke();
             return;
@@ -60,6 +70,15 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
             canHeal = false;
         }
     }
+    private void death()
+    {
+        //play Animation
+        gameObject.TryGetComponent<PlayerMovement>(out movement);
+        movement.enabled = false;
+        movement.rb.linearVelocity  = Vector3.zero;
+        OnPlayerReloaded?.Invoke();
+        //enable gameover UI
+    }
     //public void HurtAnimation()
     //{
     //    camAnimator.Play("Player Hurt", 0, 0f);
@@ -75,6 +94,8 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
         transform.position = gameData.playerPosition;
         checkPointPos = gameData.playerPosition;
         currentHealth = gameData.curHealth;
+        if(movement!=null)
+        movement.enabled = true;
     }
     public void SaveData(ref GameData gameData)
     {
