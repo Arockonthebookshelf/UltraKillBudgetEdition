@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 199000013880215952}
   - component: {fileID: 114580281806344420}
   m_Layer: 0
-  m_Name: BulletImpactWoodEffect
+  m_Name: BulletImpactPistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

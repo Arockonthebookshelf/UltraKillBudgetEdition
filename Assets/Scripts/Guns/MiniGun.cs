@@ -28,6 +28,7 @@ public class MiniGun : MonoBehaviour
     [SerializeField] LayerMask whatIsEnemy;
     [SerializeField] GameObject lineRendererPrefab;
     [SerializeField] GameObject bloodPrefab;
+    [SerializeField] GameObject hitPrefab;
     [SerializeField] BarrelRotator barrelRotator;
     Animator animatior;
 
@@ -97,7 +98,7 @@ public class MiniGun : MonoBehaviour
             }
             else
             {
-                // hit wall game object or particle effect
+                Instantiate(hitPrefab, rayHit.point, Quaternion.LookRotation(rayHit.normal));
             }
 
             trailEndPosition = rayHit.point;
