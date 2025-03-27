@@ -60,6 +60,7 @@ public class persistentSaveManager : MonoBehaviour
             persistenceData.SaveData(ref gameData);
         }
         datahandler.SaveData(gameData);
+        LoadGame();
     }
     
     private List<IPersistenceData> FindAllPersistenceDataObjects()

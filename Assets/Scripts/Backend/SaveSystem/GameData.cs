@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameData 
 {
    public Vector3 playerPosition;
+   public Quaternion playerRotation;
    public int curHealth;
    public int ClearanceLevel = 0;
    public int currentBulletCount;
@@ -15,6 +16,7 @@ public class GameData
    public GameData()
    {
       playerPosition = new Vector3(0,0,0);
+      playerRotation = Quaternion.identity;
       ClearanceLevel = 0;
       currentBulletCount = 25;
       currentCapacitorCount = 15;
