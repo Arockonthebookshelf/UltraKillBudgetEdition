@@ -44,15 +44,15 @@ Material:
     m_TexEnvs:
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: ff087997850eb264392ba2c98810cf8e, type: 3}
-        m_Scale: {x: 0.5, y: 0.5}
+        m_Scale: {x: 0.2, y: 0.2}
         m_Offset: {x: 10, y: 10}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: 95ebadc9a21c4a24984cb2a80ac10214, type: 3}
-        m_Scale: {x: 0.5, y: 0.5}
+        m_Scale: {x: 0.2, y: 0.2}
         m_Offset: {x: 0, y: 0}
     - _BumpMap2:
         m_Texture: {fileID: 2800000, guid: b716dd162a6238b4fa4930e3e91c0dad, type: 3}
-        m_Scale: {x: 0.5, y: 0.5}
+        m_Scale: {x: 0.2, y: 0.2}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
         m_Texture: {fileID: 0}
@@ -76,7 +76,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _HeightColorsTex:
         m_Texture: {fileID: 2800000, guid: 6d18fb7f791590849976ac649c1e244b, type: 3}
-        m_Scale: {x: 0.5, y: 0.5}
+        m_Scale: {x: 0.2, y: 0.2}
         m_Offset: {x: 0, y: 0}
     - _Layer1:
         m_Texture: {fileID: 0}
@@ -96,11 +96,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 0.5, y: 0.5}
+        m_Scale: {x: 0, y: 0}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 2800000, guid: b3ea11496fd077349a269691b0e87254, type: 3}
-        m_Scale: {x: 0.5, y: 0.5}
+        m_Scale: {x: 0.2, y: 0.2}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 0}
@@ -180,7 +180,7 @@ Material:
     - _CameraFadeStart: 0
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Contrast: 0.57
+    - _Contrast: 1.27
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -202,7 +202,7 @@ Material:
     - _RimStep: 0.459
     - _RimStepSmooth: 0.555
     - _Rim_Intensity: 1
-    - _Saturation: 1
+    - _Saturation: 1.32
     - _ShadowStep: 0.426
     - _ShadowStepSmooth: 0.297
     - _Smoothness: 0.5
