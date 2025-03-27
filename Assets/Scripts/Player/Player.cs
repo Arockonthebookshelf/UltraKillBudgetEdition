@@ -1,5 +1,4 @@
 using System;
-using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class Player : MonoBehaviour,IDamagable,IPersistenceData
@@ -12,6 +11,7 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     [SerializeField]Vector3 fallHeight;
     [SerializeField] int currentHealth;
     Vector3 checkPointPos;
+    Rigidbody rb;
     [HideInInspector] public bool canHeal = false;
 
     //[SerializeField] private Animator camAnimator;
@@ -91,15 +91,19 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     //}
     public void LoadData(GameData gameData)
     {
+        Debug.Log("loading");
         transform.position = gameData.playerPosition;
         checkPointPos = gameData.playerPosition;
+        transform.rotation = gameData.playerRotation;
         currentHealth = gameData.curHealth;
         if(movement!=null)
         movement.enabled = true;
     }
     public void SaveData(ref GameData gameData)
     {
+        Debug.Log("saving");
         gameData.playerPosition = transform.position;
+        gameData.playerRotation = transform.rotation;
         gameData.curHealth = currentHealth;
     }
     void OnTriggerEnter(Collider other)
@@ -108,6 +112,8 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
             {
                 Damage(10,other);
                 transform.position = checkPointPos;
+                gameObject.TryGetComponent<PlayerMovement>(out movement);
+                movement.rb.linearVelocity = Vector3.zero;
             }
     }
 }
