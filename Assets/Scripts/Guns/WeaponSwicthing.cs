@@ -1,21 +1,23 @@
 using UnityEngine;
+using System.Collections;
 
-public class WeaponSwicthing : MonoBehaviour
+public class WeaponSwitching : MonoBehaviour
 {
     HUD hud;
     PlayerInventory playerInventory;
+
     [Header("References")]
-    [SerializeField] GameObject pistol;
-    [SerializeField] GameObject shotgun;
-    [SerializeField] GameObject minigun;
-    [SerializeField] GameObject rocketLauncher;
+    [SerializeField] private GameObject pistol;
+    [SerializeField] private GameObject shotgun;
+    [SerializeField] private GameObject minigun;
+    [SerializeField] private GameObject rocketLauncher;
 
     [Header("Settings")]
-    [SerializeField] private float switchTime;
+    [SerializeField] private float switchTime = 0.5f;
 
-    GameObject selectedWeapon;
-    GameObject previousSelectedWeapon;
-    float timeSinceLastSwicth;
+    private GameObject selectedWeapon;
+    private GameObject previousSelectedWeapon;
+    public bool isSwitching = false;
 
     void Awake()
     {
@@ -26,56 +28,59 @@ public class WeaponSwicthing : MonoBehaviour
     void Start()
     {
         previousSelectedWeapon = pistol;
-        timeSinceLastSwicth = 0f;
     }
 
     private void Update()
     {
-        if(timeSinceLastSwicth > switchTime)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1) && playerInventory.hasPistol)
-            {
-                selectedWeapon = pistol;
-                CheckWeapon();
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2) && playerInventory.hasShotgun)
-            {
-                selectedWeapon = shotgun;
-                CheckWeapon();
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha3) && playerInventory.hasMinigun)
-            {
-                selectedWeapon = minigun;
-                CheckWeapon();
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha4) && playerInventory.hasRocketLauncher)
-            {
-                selectedWeapon = rocketLauncher;
-                CheckWeapon();
-            }
-        }
+        if (isSwitching) return;
 
-        timeSinceLastSwicth += Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Alpha1) && playerInventory.hasPistol)
+            StartCoroutine(SwitchWeaponWithAnimation(pistol));
+
+        if (Input.GetKeyDown(KeyCode.Alpha2) && playerInventory.hasShotgun)
+            StartCoroutine(SwitchWeaponWithAnimation(shotgun));
+
+        if (Input.GetKeyDown(KeyCode.Alpha3) && playerInventory.hasMinigun)
+            StartCoroutine(SwitchWeaponWithAnimation(minigun));
+
+        if (Input.GetKeyDown(KeyCode.Alpha4) && playerInventory.hasRocketLauncher)
+            StartCoroutine(SwitchWeaponWithAnimation(rocketLauncher));
     }
 
-    void CheckWeapon()
+    private IEnumerator SwitchWeaponWithAnimation(GameObject newWeapon)
     {
-        if (previousSelectedWeapon != selectedWeapon)
+        if (previousSelectedWeapon == newWeapon) yield break;
+
+        isSwitching = true;
+        float elapsedTime = 0f;
+        Quaternion startRot = transform.localRotation;
+        Quaternion targetRot = Quaternion.Euler(90, 0, 0);
+
+        while (elapsedTime < switchTime / 2)
         {
-            Select(selectedWeapon);
+            elapsedTime += Time.deltaTime;
+            transform.localRotation = Quaternion.Slerp(startRot, targetRot, elapsedTime / (switchTime / 2));
+            yield return null;
         }
-    }
-    private void Select(GameObject weapon)
-    {
-        selectedWeapon.SetActive(true);
+
         previousSelectedWeapon.SetActive(false);
-        previousSelectedWeapon = selectedWeapon;
-        timeSinceLastSwicth = 0f;
+        newWeapon.SetActive(true);
+        previousSelectedWeapon = newWeapon;
         OnWeaponSelected();
+
+        elapsedTime = 0f;
+        while (elapsedTime < switchTime / 2)
+        {
+            elapsedTime += Time.deltaTime;
+            transform.localRotation = Quaternion.Slerp(targetRot, startRot, elapsedTime / (switchTime / 2));
+            yield return null;
+        }
+
+        isSwitching = false;
     }
 
     private void OnWeaponSelected()
     {
-        hud.UpdateWeapon(selectedWeapon.name);
+        hud.UpdateWeapon(previousSelectedWeapon.name);
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 public class Shotgun : MonoBehaviour
 {
     PlayerInventory playerInventory;
+    WeaponSwitching weaponSwitching;
     [SerializeField] string bulletTag = "Shotgun Projectile";
     [SerializeField] float shootForce;
     [SerializeField] float upwardForce;
@@ -10,14 +11,23 @@ public class Shotgun : MonoBehaviour
     [SerializeField] float verticalSpread;
     [SerializeField] float horizontalSpread;
     [SerializeField] int bulletsPerTap;
+    [SerializeField] ParticleSystem muzzleFlash;
 
     bool readyToShoot = true;
     public Camera fpsCam;
     public Transform attackPoint;
+    Animator animatior;
 
     private void Awake()
     {
         playerInventory = FindFirstObjectByType<PlayerInventory>();
+        animatior = GetComponent<Animator>();
+        weaponSwitching = GetComponentInParent<WeaponSwitching>();
+    }
+
+    private void OnEnable()
+    {
+        animatior.SetFloat("Speed", 1 / fireRate);
     }
 
     private void Update()
@@ -27,7 +37,7 @@ public class Shotgun : MonoBehaviour
 
     private void HandleInput()
     {
-        if (readyToShoot && playerInventory.currentCapacitorCount > 0 && Input.GetKeyDown(KeyCode.Mouse0))
+        if (readyToShoot && playerInventory.currentCapacitorCount > 0 && Input.GetKeyDown(KeyCode.Mouse0) && !weaponSwitching.isSwitching)
         {
             Shoot();
         }
@@ -36,6 +46,8 @@ public class Shotgun : MonoBehaviour
     private void Shoot()
     {
         readyToShoot = false;
+        animatior.SetTrigger("Shoot");
+        muzzleFlash.Play();
 
         for (int i = 0; i < bulletsPerTap; i++)
         {
