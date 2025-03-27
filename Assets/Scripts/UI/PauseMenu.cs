@@ -1,18 +1,24 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    PlayerMovement playerMovement;
+    public static PauseMenu instance = null;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject deathMenu;
 
     bool gamePaused = false;
 
-    private void Awake()
+    void Awake()
     {
-        playerMovement = FindFirstObjectByType<PlayerMovement>();
+        if (!instance)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Update()
@@ -32,48 +38,59 @@ public class PauseMenu : MonoBehaviour
 
     void PauseGame()
     {
-        playerMovement.inputEnabled = false;
+        PlayerMovement.Instance.inputEnabled = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         gamePaused = true;
         Time.timeScale =0f;
         pauseMenu.SetActive(true);
-        //disable player input
     }
 
     public void Resume()
     {
-        playerMovement.inputEnabled = true;
+        PlayerMovement.Instance.inputEnabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         gamePaused = false;
         Time.timeScale =1f;
         pauseMenu.SetActive(false);
-        //enable player input
     }
 
     public void Dead()
     { 
-
-        playerMovement.inputEnabled = false;
+        Cursor.lockState = CursorLockMode.None; 
+        Cursor.visible = true;
+        PlayerMovement.Instance.inputEnabled = false;
         if(deathMenu != null) deathMenu.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void Respawn()
     {
-        playerMovement.inputEnabled = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        PlayerMovement.Instance.inputEnabled = true;
         if (deathMenu != null) deathMenu.SetActive(false);
+    }
+
+    public void Restart()
+    {
+        PlayerMovement.Instance.inputEnabled = true;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void QuitToMainMenu()
     {
-        playerMovement.inputEnabled = true;
+
+        PlayerMovement.Instance.inputEnabled = true;
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
 
     public void QuitToDesktop()
     {
+        Time.timeScale = 1f;
         Application.Quit();
     }
 }

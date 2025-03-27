@@ -11,13 +11,11 @@ public class WeaponSway : MonoBehaviour
     [SerializeField] private float bobAmount = 0.05f;
 
     private Vector3 initialPosition;
-    private PlayerMovement player;
     private float timer;
 
     private void Start()
     {
         initialPosition = transform.localPosition;
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
     }
 
     private void Update()
@@ -28,8 +26,8 @@ public class WeaponSway : MonoBehaviour
 
     private void ApplySway()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * multiplier;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * multiplier;
+        float mouseX = PlayerMovement.Instance.mouseInput.x * multiplier;
+        float mouseY = PlayerMovement.Instance.mouseInput.y * multiplier;
 
         Quaternion rotationX = Quaternion.AngleAxis(-mouseY, Vector3.right);
         Quaternion rotationY = Quaternion.AngleAxis(mouseX, Vector3.up);
@@ -40,7 +38,7 @@ public class WeaponSway : MonoBehaviour
 
     private void ApplyBob()
     {
-        if (player != null && player.GetVelocity().magnitude > 0.5f && player.grounded && !player.IsCrouching())
+        if (PlayerMovement.Instance.GetVelocity().magnitude > 0.5f && PlayerMovement.Instance.grounded && !PlayerMovement.Instance.IsCrouching())
         {
             timer += Time.deltaTime * bobSpeed;
             float bobOffset = Mathf.Sin(timer) * bobAmount;

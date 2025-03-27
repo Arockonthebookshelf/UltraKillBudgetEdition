@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class WeaponUnlock : MonoBehaviour , IInteractable
 {
-    PlayerInventory playerInventory;
-    HUD hud;
+    
+    
     [SerializeField] string weaponName;
     [SerializeField] float pickupTime;
     [SerializeField] string interactionText;
     void Awake()
     {
-        playerInventory = FindFirstObjectByType<PlayerInventory>();
-        hud = FindFirstObjectByType<HUD>();
+        
+        
     }
     public bool Visible()
     {
@@ -34,16 +34,16 @@ public class WeaponUnlock : MonoBehaviour , IInteractable
         switch(weaponName)
         {
             case "Shotgun":
-                playerInventory.hasShotgun = true;
-                hud.shotGunUI.SetActive(true);
+                PlayerInventory.instance.hasShotgun = true;
+                HUD.instance.shotGunUI.SetActive(true);
                 break;
             case "Minigun":
-                playerInventory.hasMinigun = true;
-                hud.miniGunUI.SetActive(true);
+                PlayerInventory.instance.hasMinigun = true;
+                HUD.instance.miniGunUI.SetActive(true);
                 break;
             case "RocketLauncher":
-                playerInventory.hasRocketLauncher = true;
-                hud.rocketLauncherUI.SetActive(true);
+                PlayerInventory.instance.hasRocketLauncher = true;
+                HUD.instance.rocketLauncherUI.SetActive(true);
                 break;
         }
         Destroy(gameObject);

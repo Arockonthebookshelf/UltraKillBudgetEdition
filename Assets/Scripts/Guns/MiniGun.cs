@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MiniGun : MonoBehaviour
 {
-    PlayerInventory playerInventory;
+
     HitIndicator hitIndicator;
     WeaponSwitching weaponSwitching;
     RaycastHit rayHit;
@@ -35,7 +35,6 @@ public class MiniGun : MonoBehaviour
     private void Awake()
     {
         muzzleFlash = GetComponentInChildren<ParticleSystem>();
-        playerInventory = FindFirstObjectByType<PlayerInventory>();
         hitIndicator = FindFirstObjectByType<HitIndicator>();
         animatior = GetComponent<Animator>();
         weaponSwitching = GetComponentInParent<WeaponSwitching>();
@@ -48,12 +47,12 @@ public class MiniGun : MonoBehaviour
 
     void Start()
     {
-         InitializeTrails();
+        InitializeTrails();
     }
 
     private void Update()
     {
-        if (playerInventory.currentEnergyCellsCount > 0 && Input.GetKey(KeyCode.Mouse0) && !weaponSwitching.isSwitching)
+        if (PlayerInventory.instance.currentEnergyCellsCount > 0 && Input.GetKey(KeyCode.Mouse0) && !weaponSwitching.isSwitching && PlayerMovement.Instance.inputEnabled)
         {
             barrelRotator.StartRotation();
             animatior.SetBool("Shooting", true);
@@ -115,7 +114,7 @@ public class MiniGun : MonoBehaviour
 
         muzzleFlash.Play();
         Invoke("ResetShot", fireRate);
-        playerInventory.RemoveEnergyCells(1);
+        PlayerInventory.instance.RemoveEnergyCells(1);
     }
 
 

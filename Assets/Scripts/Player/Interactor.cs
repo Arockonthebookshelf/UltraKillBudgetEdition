@@ -2,18 +2,16 @@
 
 public class Interactor : MonoBehaviour
 {
-    HUD hud;
-    PlayerInventory playerInventory;
+    
+    
     [SerializeField] Transform playerCameraTransform;
     [SerializeField] float interactRange;
     float pressedTime;
     float interactionProgress;
 
-    void Awake()
+    void Start()
     {
-        hud = FindFirstObjectByType<HUD>();
-        hud.ToggleDisplay(false);
-        playerInventory = FindFirstObjectByType<PlayerInventory>();
+        HUD.instance.ToggleDisplay(false);
     }
 
     void Update()
@@ -25,16 +23,16 @@ public class Interactor : MonoBehaviour
             {
                 if(interactObj.Visible())
                 {
-                hud.UpdateInteractionPrompt(interactObj.canInteract(playerInventory.ClearanceLevel) , interactionProgress,interactObj.InteractionText());
-                hud.ToggleDisplay(true);
-                if(Input.GetKey(KeyCode.E) && interactObj.canInteract(playerInventory.ClearanceLevel))
+                HUD.instance.UpdateInteractionPrompt(interactObj.canInteract(PlayerInventory.instance.ClearanceLevel) , interactionProgress,interactObj.InteractionText());
+                HUD.instance.ToggleDisplay(true);
+                if(Input.GetKey(KeyCode.E) && interactObj.canInteract(PlayerInventory.instance.ClearanceLevel))
                 {
                     pressedTime += Time.deltaTime;
                         if(pressedTime >= interactObj.TimeToInteract())
                             {
                                 interactObj.CompleteInteraction();
                                 pressedTime = 0;
-                                hud.ToggleDisplay(false);
+                                HUD.instance.ToggleDisplay(false);
                             }
                         interactionProgress = pressedTime / interactObj.TimeToInteract();
                         Mathf.Clamp(interactionProgress, 0 , 1);
@@ -50,7 +48,7 @@ public class Interactor : MonoBehaviour
         else 
         {
             pressedTime = interactionProgress = 0;
-            hud.ToggleDisplay(false);
+            HUD.instance.ToggleDisplay(false);
         }
     }
 }

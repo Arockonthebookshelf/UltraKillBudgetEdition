@@ -1,18 +1,18 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class RocketsDropper : MonoBehaviour
 {
     DropperManager dropperManager;
-    PlayerInventory playerInventory;
+
     ParticleSystem rocketsParticleSystem;
     void Awake()
     {
         dropperManager = GetComponentInParent<DropperManager>();
-        playerInventory = FindFirstObjectByType<PlayerInventory>();
+
         rocketsParticleSystem = GetComponent<ParticleSystem>();
         rocketsParticleSystem.trigger.SetCollider(0, dropperManager.playerCollider);
-        if(!dropperManager.canDropRockets)
+        if (!dropperManager.canDropRockets)
         {
             Destroy(gameObject);
         }
@@ -20,19 +20,19 @@ public class RocketsDropper : MonoBehaviour
 
     void Start()
     {
-        rocketsParticleSystem.emission.SetBursts(new ParticleSystem.Burst[] 
+        rocketsParticleSystem.emission.SetBursts(new ParticleSystem.Burst[]
         { new ParticleSystem.Burst(0.0f, dropperManager.rocketsMinDropAmount, dropperManager.rocketsMaxDropAmount, 1, 0) });
     }
 
     void Update()
     {
         var externalForces = rocketsParticleSystem.externalForces;
-        externalForces.enabled = playerInventory.canPickUpRockets;
+        externalForces.enabled = PlayerInventory.instance.canPickUpRockets;
     }
 
     void OnParticleTrigger()
     {
-        if(playerInventory.canPickUpRockets)
+        if (PlayerInventory.instance.canPickUpRockets)
         {
             List<ParticleSystem.Particle> enterParticles = new List<ParticleSystem.Particle>();
             int numEnter = GetComponent<ParticleSystem>().GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enterParticles);
@@ -42,7 +42,7 @@ public class RocketsDropper : MonoBehaviour
                 ParticleSystem.Particle p = enterParticles[i];
                 p.remainingLifetime = 0;
                 enterParticles[i] = p;
-                playerInventory.AddRockets(dropperManager.rocketsPickupMultiplier);
+                PlayerInventory.instance.AddRockets(dropperManager.rocketsPickupMultiplier);
             }
 
             GetComponent<ParticleSystem>().SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enterParticles);

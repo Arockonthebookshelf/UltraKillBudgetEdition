@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -64,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 grapplePoint;
     private Vector3 normalVector;
     private Vector3 wallNormalVector;
+    [HideInInspector] public Vector2 mouseInput;
     private Vector3 wallRunPos;
     private Vector3 previousLookdir;
 
@@ -281,6 +281,7 @@ public class PlayerMovement : MonoBehaviour
     //Looking around by using your mouse
     private void Look()
     {
+        mouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         float num = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
         float num2 = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
         desiredX = playerCam.transform.localRotation.eulerAngles.y + num;
