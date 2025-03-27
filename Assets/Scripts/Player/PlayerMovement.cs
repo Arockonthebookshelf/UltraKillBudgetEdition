@@ -58,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
     private bool cancellingGrounded;
     private bool cancellingWall;
     private bool cancellingSurf;
+    [HideInInspector] public bool inputEnabled = true;
 
     //Private Vector3's
     private Vector3 grapplePoint;
@@ -101,17 +102,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        //Input
-        MyInput();
-        //Looking around
-        Look();
+        if(inputEnabled)
+        {
+            //Input
+            MyInput();
+            //Looking around
+            Look();
+        }
     }
 
-    void OnMove(InputValue inputValue)
-    {
-        //x = inputValue.Get<Vector2>().x;
-        // y = inputValue.Get<Vector2>().y;
-    }
     //Player input
     private void MyInput()
     {
