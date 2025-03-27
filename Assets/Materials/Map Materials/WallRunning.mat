@@ -204,7 +204,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 1.49
-    - _OcclusionStrength: 10
+    - _OcclusionStrength: 5
     - _OutlineWidth: 0.438
     - _Parallax: 0.005
     - _QueueControl: -1
