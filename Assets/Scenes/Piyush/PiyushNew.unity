@@ -2171,9 +2171,25 @@ PrefabInstance:
       value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 771456827557592057, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: shootForce
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 771456827557592057, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
       propertyPath: muzzleFlash
       value: 
       objectReference: {fileID: 942617761}
+    - target: {fileID: 771456827557592057, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: bulletsPerTap
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 771456827557592057, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: verticalSpread
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 771456827557592057, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: horizontalSpread
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1195412162430224403, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
       propertyPath: m_Name
       value: CameraHolder
@@ -2222,6 +2238,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8578652197642847626, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: hitPrefab
+      value: 
+      objectReference: {fileID: 1000011945391522, guid: 245dfc7333249684eab96009704d3403, type: 3}
     - target: {fileID: 8578652197642847626, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
       propertyPath: bloodPrefab
       value: 
