@@ -16277,14 +16277,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 712972970708247980, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1558553300948144346, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 376916566}
+    - target: {fileID: 1658537787960032983, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261045844862099183, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
+      propertyPath: m_Height
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2517939837003295840, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.17
+      objectReference: {fileID: 0}
     - target: {fileID: 2573279270176864995, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
       propertyPath: playerCameraTransform
       value: 
       objectReference: {fileID: 376916566}
+    - target: {fileID: 2805278300254577801, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.12
+      objectReference: {fileID: 0}
     - target: {fileID: 4904663452949177519, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
       propertyPath: hasMinigun
       value: 1
