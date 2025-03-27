@@ -1352,7 +1352,7 @@ Transform:
   m_Children:
   - {fileID: 155886826257099014}
   - {fileID: 6412284384014315792}
-  - {fileID: 5982363326793411708}
+  - {fileID: 6518452353360875873}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5498968437174613010
@@ -3136,7 +3136,7 @@ Transform:
   - {fileID: 8493675776025813905}
   m_Father: {fileID: 2369654324598987703}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &6093131437876513687
+--- !u!1001 &6772438145165112970
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -3203,10 +3203,10 @@ PrefabInstance:
     - target: {fileID: -6623426416749401165, guid: f966be1f5c26be64298d44386b231473, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 332165cbf3f0e394a86d9ede28d9ba93, type: 2}
+      objectReference: {fileID: 2100000, guid: e2a8fec24bf59174b92fd86e97fbede6, type: 2}
     - target: {fileID: 919132149155446097, guid: f966be1f5c26be64298d44386b231473, type: 3}
       propertyPath: m_Name
-      value: SHOOTER CHARACTER
+      value: SHOOTER CHARACTER (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: f966be1f5c26be64298d44386b231473, type: 3}
       propertyPath: m_Controller
@@ -3217,8 +3217,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f966be1f5c26be64298d44386b231473, type: 3}
---- !u!4 &5982363326793411708 stripped
+--- !u!4 &6518452353360875873 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f966be1f5c26be64298d44386b231473, type: 3}
-  m_PrefabInstance: {fileID: 6093131437876513687}
+  m_PrefabInstance: {fileID: 6772438145165112970}
   m_PrefabAsset: {fileID: 0}
