@@ -156,9 +156,17 @@ public class PlayerMovement : MonoBehaviour
             {
                 return;
             }
+        Vector2 velocity = FindVelRelativeToLook();
+        float velocityX = velocity.x;
+        float velocityY = velocity.y;
+        float currentSpeed = sprinting ? runSpeed : walkSpeed;
+        if (x > 0f && velocityX > currentSpeed * 0.5) x = 0f;
+        if (x < 0f && velocityX < -currentSpeed * 0.5) x = 0f;
+        if (y > 0f && velocityY > currentSpeed * 0.5) y = 0f;
+        if (y < 0f && velocityY < -currentSpeed * 0.5) y = 0f;
 
-                rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.fixedDeltaTime * forwardMultiplier);
-                rb.AddForce(orientation.transform.right * x * moveSpeed * Time.fixedDeltaTime * forwardMultiplier);
+        rb.AddForce(orientation.transform.forward * y * (int)(moveSpeed * 0.5) * Time.fixedDeltaTime * forwardMultiplier);
+        rb.AddForce(orientation.transform.right * x * (int)(moveSpeed * 0.5) * Time.fixedDeltaTime * forwardMultiplier);
 
     }
 
@@ -217,7 +225,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (grounded && sliding)
         {
-            strafeMultiplier = 0f; // No sideways movement when crouching
+            strafeMultiplier = 0.5f; // No sideways movement when crouching
         }
         if (wallRunning)
         {
