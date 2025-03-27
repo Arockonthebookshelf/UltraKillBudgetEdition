@@ -56,24 +56,6 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
         canPickUpRockets = currentRocketsCount < maxRocketsCount && hasRocketLauncher;
     }
 
-    public void AddBullets(int amount)
-    {
-        if(currentBulletCount + amount > maxBulletCount)
-        {
-            currentBulletCount = maxBulletCount;
-        }
-        else
-        {
-            currentBulletCount += amount;
-        }
-        hud.UpdatePistolAmmo();
-    }
-    public void RemoveBullets(int amount)
-    {
-        currentBulletCount -= amount;
-        hud.UpdatePistolAmmo();
-    }
-
     public void AddCapacitors(int amount)
     {
         if(currentCapacitorCount + amount > maxCapacitorCount)

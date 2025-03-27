@@ -6,6 +6,7 @@ public class MiniGun : MonoBehaviour
 {
     PlayerInventory playerInventory;
     HitIndicator hitIndicator;
+    WeaponSwitching weaponSwitching;
     RaycastHit rayHit;
     ParticleSystem muzzleFlash;
     List<LineRenderer> energyTrails = new List<LineRenderer>();
@@ -26,12 +27,22 @@ public class MiniGun : MonoBehaviour
     [SerializeField] Camera playerCamera;
     [SerializeField] LayerMask whatIsEnemy;
     [SerializeField] GameObject lineRendererPrefab;
+    [SerializeField] GameObject bloodPrefab;
+    [SerializeField] BarrelRotator barrelRotator;
+    Animator animatior;
 
     private void Awake()
     {
         muzzleFlash = GetComponentInChildren<ParticleSystem>();
         playerInventory = FindFirstObjectByType<PlayerInventory>();
         hitIndicator = FindFirstObjectByType<HitIndicator>();
+        animatior = GetComponent<Animator>();
+        weaponSwitching = GetComponentInParent<WeaponSwitching>();
+    }
+
+    private void OnEnable()
+    {
+        animatior.SetFloat("Speed", 1 / fireRate);
     }
 
     void Start()
@@ -41,9 +52,20 @@ public class MiniGun : MonoBehaviour
 
     private void Update()
     {
-        if (readyToShoot && playerInventory.currentEnergyCellsCount > 0 && Input.GetKey(KeyCode.Mouse0))
+        if (playerInventory.currentEnergyCellsCount > 0 && Input.GetKey(KeyCode.Mouse0) && !weaponSwitching.isSwitching)
         {
-            Shoot();
+            barrelRotator.StartRotation();
+            animatior.SetBool("Shooting", true);
+
+            if (readyToShoot)
+            {
+                Shoot();
+            }
+        }
+        else
+        {
+            barrelRotator.StopRotation();
+            animatior.SetBool("Shooting", false);
         }
     }
 
@@ -68,6 +90,14 @@ public class MiniGun : MonoBehaviour
             {
                 damagable.Damage(damage, rayHit.collider);
                 hitIndicator.Hit();
+                if (rayHit.collider.CompareTag("Enemy"))
+                {
+                    Instantiate(bloodPrefab, rayHit.point, Quaternion.LookRotation(rayHit.normal));
+                }
+            }
+            else
+            {
+                // hit wall game object or particle effect
             }
 
             trailEndPosition = rayHit.point;

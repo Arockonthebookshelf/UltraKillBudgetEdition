@@ -15,12 +15,6 @@ public class DropperManager : MonoBehaviour
     public short healthMinDropAmount = 1;
     public short healthMaxDropAmount = 3;
 
-    [Header("Bullets Dropper Settings")]
-    public int bulletsPickupMultiplier = 1;
-    public bool canDropBullets = true;
-    public short bulletsMinDropAmount = 1;
-    public short bulletsMaxDropAmount = 5;
-
     [Header("Capacitor Dropper Settings")]
     public int capacitorsPickupMultiplier = 1;
     public bool canDropCapacitors = true;

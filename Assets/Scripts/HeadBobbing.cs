@@ -21,7 +21,7 @@ public class HeadBobbing : MonoBehaviour
     {
         if (player != null && player.grounded && !player.IsCrouching())
         {
-            if (player.GetVelocity().magnitude > 0.1f)
+            if (player.GetVelocity().magnitude > 0.5f)
             {
                 timer += Time.deltaTime * bobbingSpeed;
                 float bobOffset = Mathf.Sin(timer) * bobbingAmount;

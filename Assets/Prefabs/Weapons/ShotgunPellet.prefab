@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fa67dec19653b8840834b30484e03a73, type: 2}
+  - {fileID: 2100000, guid: f5962527a728c0f4488f79a852bcb4d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -248,6 +248,8 @@ MonoBehaviour:
   lifetime: 1
   damage: 5
   bulletTag: Shotgun Projectile
+  bloodPrefab: {fileID: 8322986867343221499, guid: 408c673ab08c8394ca3982900b360960, type: 3}
+  hitPrefab: {fileID: 1000011945391522, guid: d58b05d0f2e04dc49a75b89ae76e48bc, type: 3}
 --- !u!65 &1527167734779253426
 BoxCollider:
   m_ObjectHideFlags: 0
