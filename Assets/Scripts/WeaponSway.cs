@@ -40,7 +40,7 @@ public class WeaponSway : MonoBehaviour
 
     private void ApplyBob()
     {
-        if (player != null && player.GetVelocity().magnitude > 0.1f && player.grounded && !player.IsCrouching())
+        if (player != null && player.GetVelocity().magnitude > 0.5f && player.grounded && !player.IsCrouching())
         {
             timer += Time.deltaTime * bobSpeed;
             float bobOffset = Mathf.Sin(timer) * bobAmount;
