@@ -61,7 +61,8 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     {
         currentHealth = Mathf.Clamp(currentHealth + healAmount , 0 , maxHealth);
         hud.UpdateHealthBar(currentHealth);
-        if(currentHealth < maxHealth)
+        hud.ShowHealthChangeText(healAmount);
+        if (currentHealth < maxHealth)
         {
             canHeal = true;
         }
