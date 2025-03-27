@@ -2126,6 +2126,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 48122624716866901, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 105867561275504808, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: m_Antialiasing
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 105867561275504808, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 661107662625955746, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.977992
@@ -2166,6 +2178,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 749561128665266461, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0523b4cbdba2fd141a2b91a80b2e95e3, type: 2}
     - target: {fileID: 771456827557592057, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
       propertyPath: fireRate
       value: 0.75
@@ -2178,6 +2194,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraHolder
       objectReference: {fileID: 0}
+    - target: {fileID: 1400107659259704264, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 582ff24a05f0ea945a7a264d0c154db4, type: 2}
+    - target: {fileID: 1512901636626899239, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 582ff24a05f0ea945a7a264d0c154db4, type: 2}
+    - target: {fileID: 2920705727820004364, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 582ff24a05f0ea945a7a264d0c154db4, type: 2}
+    - target: {fileID: 2961642938409372610, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 582ff24a05f0ea945a7a264d0c154db4, type: 2}
+    - target: {fileID: 3538616784311346008, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: m_OcclusionCulling
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4216002344993488344, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
       propertyPath: cameraPosition
       value: 
@@ -2186,6 +2222,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5133032130058297883, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 904d7a03d0d82894090da2e13a9086bc, type: 2}
+    - target: {fileID: 5301668032028331021, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 79b7af3daebd3664fafa4613f8e67791, type: 2}
+    - target: {fileID: 5301668032028331021, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 79b7af3daebd3664fafa4613f8e67791, type: 2}
     - target: {fileID: 5487454360538531385, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9990807
@@ -2218,6 +2266,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5875159201674529366, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6cce7e801a1de2141a50e848e10e50b0, type: 2}
+    - target: {fileID: 6819290774340369867, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 582ff24a05f0ea945a7a264d0c154db4, type: 2}
     - target: {fileID: 7142557172355778341, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2230,6 +2286,14 @@ PrefabInstance:
       propertyPath: effectsTime
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 8666824898455508289, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 904d7a03d0d82894090da2e13a9086bc, type: 2}
+    - target: {fileID: 9110636162065602542, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 582ff24a05f0ea945a7a264d0c154db4, type: 2}
     - target: {fileID: 9111852081592363767, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
       propertyPath: bloodPrefab
       value: 
@@ -2543,6 +2607,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MinigunPickup
       objectReference: {fileID: 0}
+    - target: {fileID: 4685425187054882107, guid: 1a367749858b8c846ac522b800bf53c7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 904d7a03d0d82894090da2e13a9086bc, type: 2}
     - target: {fileID: 5969805591950259034, guid: 1a367749858b8c846ac522b800bf53c7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.0038984
@@ -6323,6 +6391,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.071
       objectReference: {fileID: 0}
+    - target: {fileID: 6519414201205499582, guid: 2d8758c880f0ac74c84c30a06215ab0d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6cce7e801a1de2141a50e848e10e50b0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15605,6 +15677,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RocketLauncherPickup
       objectReference: {fileID: 0}
+    - target: {fileID: 8930078710787048580, guid: 0c877b444742f264aa7b4d80466065e6, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 79b7af3daebd3664fafa4613f8e67791, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
