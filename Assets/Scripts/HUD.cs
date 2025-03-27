@@ -9,6 +9,8 @@ public class HUD : MonoBehaviour
     [SerializeField] Slider healthSlider;
     [SerializeField] Slider healthHitSlider;
     [SerializeField] TMP_Text healthText;
+    [SerializeField] TMP_Text healText;
+    [SerializeField] float healTextTimer;
     [SerializeField] TMP_Text ShotgunAmmoCount;
     [SerializeField] TMP_Text MinigunAmmoCount;
     [SerializeField] TMP_Text RocketLauncherAmmoCount;
@@ -34,8 +36,7 @@ public class HUD : MonoBehaviour
     Slider interactionSlider;
     Image interactionButton;
     TMP_Text interactionText;
-    UIBobbing bobbingSway;  
-
+    UIBobbing bobbingSway;
     void Awake()
     {
         interactionSlider = interactionProgressBar.GetComponent<Slider>();
@@ -149,5 +150,16 @@ public class HUD : MonoBehaviour
     {
         HudAnimator.SetTrigger("Damaged");
         bobbingSway.TriggerHitEffect();
+    }
+
+    public void ShowHealthChangeText(int healAmount)
+    {
+        healText.SetText("+"+healAmount.ToString());
+        Invoke("HideHealthChangeText", healTextTimer);
+    }
+
+    void HideHealthChangeText()
+    {
+        healText.SetText("");
     }
 }

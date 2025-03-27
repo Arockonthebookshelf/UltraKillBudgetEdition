@@ -65,7 +65,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 9d1647af820e91f4d957236e4aa43787, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -85,8 +85,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5855748144561742667}
-  - component: {fileID: 7704117894733598249}
-  - component: {fileID: 3281583217712200045}
+  - component: {fileID: 7547462593951405423}
+  - component: {fileID: 6101021375568685784}
   m_Layer: 5
   m_Name: Barrel
   m_TagString: Untagged
@@ -109,7 +109,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1262482448434609164}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!199 &7704117894733598249
+--- !u!199 &7547462593951405423
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -186,7 +186,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!198 &3281583217712200045
+--- !u!198 &6101021375568685784
 ParticleSystem:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5157,7 +5157,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: f549b0dd384876d44ae99f0506e28551, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -5451,7 +5451,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: ee3750ad25f02f64e80193b0ed671244, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -5657,7 +5657,7 @@ MonoBehaviour:
   verticalSpread: 4
   horizontalSpread: 4
   bulletsPerTap: 10
-  muzzleFlash: {fileID: 3281583217712200045}
+  muzzleFlash: {fileID: 6101021375568685784}
   fpsCam: {fileID: 3538616784311346008}
   attackPoint: {fileID: 5855748144561742667}
 --- !u!95 &7285806561557837055
@@ -5671,7 +5671,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 0985aaf8d96b3ce4a871cc8a1a8c09f3, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0

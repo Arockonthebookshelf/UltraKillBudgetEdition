@@ -4840,7 +4840,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f5962527a728c0f4488f79a852bcb4d9, type: 2}
+  - {fileID: 2100000, guid: b49a6c82ad13ee14798e9a55cccf1848, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4884,7 +4884,7 @@ ParticleSystemRenderer:
   m_VertexStreams: 00010304
   m_UseCustomTrailVertexStreams: 0
   m_TrailVertexStreams: 00010304
-  m_Mesh: {fileID: -7321516171901871987, guid: 4777ecbd3ccb4ee4c81b26b8c3a30d65, type: 3}
+  m_Mesh: {fileID: -1943828292643685956, guid: ef433f622eb71544890ef177193dfe3e, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -4923,7 +4923,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1205154402943439736
 Transform:
   m_ObjectHideFlags: 0
@@ -14650,7 +14650,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 36395db0f3903c74ca5e9b68b9766d60, type: 2}
+  - {fileID: 2100000, guid: d3238a8b554a2f540b9fa2217c1d3032, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14694,7 +14694,7 @@ ParticleSystemRenderer:
   m_VertexStreams: 00010304
   m_UseCustomTrailVertexStreams: 0
   m_TrailVertexStreams: 00010304
-  m_Mesh: {fileID: -4545423930167495100, guid: ca3aa18a46f17cd4bbde19c609c71f22, type: 3}
+  m_Mesh: {fileID: 3332574471204481784, guid: 1323c0307fe3abd4997f1b5f1c235b4c, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -19555,7 +19555,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fa67dec19653b8840834b30484e03a73, type: 2}
+  - {fileID: 2100000, guid: d54d31311ecbeb945b8292b7595a478a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19599,7 +19599,7 @@ ParticleSystemRenderer:
   m_VertexStreams: 00030409
   m_UseCustomTrailVertexStreams: 0
   m_TrailVertexStreams: 00010304
-  m_Mesh: {fileID: 1712101860552982092, guid: 14ab9d9405f8f7045a147595c1d42804, type: 3}
+  m_Mesh: {fileID: -5597002278806442958, guid: 86602ea3ec9171341a77448cd0adcec3, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -19673,10 +19673,6 @@ MonoBehaviour:
   canDropHealth: 1
   healthMinDropAmount: 1
   healthMaxDropAmount: 3
-  bulletsPickupMultiplier: 3
-  canDropBullets: 1
-  bulletsMinDropAmount: 2
-  bulletsMaxDropAmount: 5
   capacitorsPickupMultiplier: 1
   canDropCapacitors: 1
   capacitorsMinDropAmount: 1
