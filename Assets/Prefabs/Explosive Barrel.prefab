@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1000011797152326, guid: 0f7695dbfff66df46ae71e7a32ffc456, type: 3}
-  barrelHealth: 0
+  barrelHealth: 30
   explosionDamage: 50
   explosionRange: 3
   layer:

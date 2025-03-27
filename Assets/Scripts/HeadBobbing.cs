@@ -8,20 +8,18 @@ public class HeadBobbing : MonoBehaviour
     public float midpoint = 0f; 
 
     private float timer = 0f;
-    private PlayerMovement player;
     private Vector3 initialPosition;
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         initialPosition = transform.localPosition;
     }
 
     void Update()
     {
-        if (player != null && player.grounded && !player.IsCrouching())
+        if (PlayerMovement.Instance.grounded && !PlayerMovement.Instance.IsCrouching())
         {
-            if (player.GetVelocity().magnitude > 0.5f)
+            if (PlayerMovement.Instance.GetVelocity().magnitude > 0.5f)
             {
                 timer += Time.deltaTime * bobbingSpeed;
                 float bobOffset = Mathf.Sin(timer) * bobbingAmount;

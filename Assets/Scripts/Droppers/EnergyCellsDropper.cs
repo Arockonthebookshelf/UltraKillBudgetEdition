@@ -4,12 +4,12 @@ using System.Collections.Generic;
 public class EnergyCellsDropper : MonoBehaviour
 {
     DropperManager dropperManager;
-    PlayerInventory playerInventory;
+    
     ParticleSystem energyCellsParticleSystem;
     void Awake()
     {
         dropperManager = GetComponentInParent<DropperManager>();
-        playerInventory = FindFirstObjectByType<PlayerInventory>();
+        
         energyCellsParticleSystem = GetComponent<ParticleSystem>();
         energyCellsParticleSystem.trigger.SetCollider(0, dropperManager.playerCollider);
         if(!dropperManager.canDropEnergyCells)
@@ -27,12 +27,12 @@ public class EnergyCellsDropper : MonoBehaviour
     void Update()
     {
         var externalForces = energyCellsParticleSystem.externalForces;
-        externalForces.enabled = playerInventory.canPickUpEnergyCells;
+        externalForces.enabled = PlayerInventory.instance.canPickUpEnergyCells;
     }
 
     void OnParticleTrigger()
     {
-        if(playerInventory.canPickUpEnergyCells)
+        if(PlayerInventory.instance.canPickUpEnergyCells)
         {
             List<ParticleSystem.Particle> enterParticles = new List<ParticleSystem.Particle>();
             int numEnter = GetComponent<ParticleSystem>().GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enterParticles);
@@ -42,7 +42,7 @@ public class EnergyCellsDropper : MonoBehaviour
                 ParticleSystem.Particle p = enterParticles[i];
                 p.remainingLifetime = 0;
                 enterParticles[i] = p;
-                playerInventory.AddEnergyCells(dropperManager.energyCellsPickupMultiplier);
+                PlayerInventory.instance.AddEnergyCells(dropperManager.energyCellsPickupMultiplier);
             }
 
             GetComponent<ParticleSystem>().SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enterParticles);
