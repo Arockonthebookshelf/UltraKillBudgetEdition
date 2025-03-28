@@ -17,17 +17,24 @@ MonoBehaviour:
     volume: 1
     mixer: {fileID: 0}
     sounds:
-    - {fileID: 8300000, guid: b5602f49241b4fe438bbdf49227b3e9d, type: 3}
+    - {fileID: 8300000, guid: a52d63044e62e43488fc80396b0384eb, type: 3}
   - name: PISTOL_FIRE
     volume: 1
-    mixer: {fileID: 0}
+    mixer: {fileID: 24300002, guid: a66b49eaf93ed414883199977da522c2, type: 2}
     sounds:
-    - {fileID: 8300000, guid: ae6b8b62fdb4d704d8e3f19fc658e7fc, type: 3}
+    - {fileID: 8300000, guid: 19f5b535dc463f840be917cd08aac53f, type: 3}
   - name: SHOTGUN_FIRE
     volume: 1
-    mixer: {fileID: 0}
-    sounds: []
+    mixer: {fileID: 24300002, guid: a66b49eaf93ed414883199977da522c2, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: aeba9b8eea63e6c4f9d58be8996e91d0, type: 3}
   - name: RPG_FIRE
     volume: 1
     mixer: {fileID: 0}
-    sounds: []
+    sounds:
+    - {fileID: 8300000, guid: 5e941df76baeacc47b208f507291ca43, type: 3}
+  - name: RPG_BURST
+    volume: 1
+    mixer: {fileID: 0}
+    sounds:
+    - {fileID: 8300000, guid: 23eadd614d8e81f4aa8fc6391e000430, type: 3}

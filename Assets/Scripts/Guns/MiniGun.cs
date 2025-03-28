@@ -1,3 +1,4 @@
+using PrometheanUprising.SoundManager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -74,6 +75,8 @@ public class MiniGun : MonoBehaviour
     {
         readyToShoot = false;
         Vector3 trailEndPosition;
+
+        SoundManager.PlaySound(SoundType.MINIGUN_FIRE); //plays sound
 
         // Generate Random Spread Angles
         float spreadAngleX = Random.Range(-horizontalSpread, horizontalSpread);

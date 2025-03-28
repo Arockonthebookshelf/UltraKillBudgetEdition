@@ -6,5 +6,6 @@ namespace PrometheanUprising.SoundManager
         PISTOL_FIRE,
         SHOTGUN_FIRE,
         RPG_FIRE,
+        RPG_BURST,
     }
 }

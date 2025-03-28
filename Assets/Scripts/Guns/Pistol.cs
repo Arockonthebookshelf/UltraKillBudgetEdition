@@ -1,3 +1,4 @@
+using PrometheanUprising.SoundManager;
 using System.Collections;
 using UnityEngine;
 
@@ -59,6 +60,7 @@ public class Pistol : MonoBehaviour
 
     private void Shoot()
     {
+        SoundManager.PlaySound(SoundType.PISTOL_FIRE);
         readyToShoot = false;
         Vector3 trailEndPosition;
         animatior.SetTrigger("Shoot");

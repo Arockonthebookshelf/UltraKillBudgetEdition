@@ -1,3 +1,4 @@
+using PrometheanUprising.SoundManager;
 using UnityEngine;
 
 public class Shotgun : MonoBehaviour
@@ -46,6 +47,9 @@ public class Shotgun : MonoBehaviour
     private void Shoot()
     {
         readyToShoot = false;
+
+        SoundManager.PlaySound(SoundType.SHOTGUN_FIRE);
+
         animatior.SetTrigger("Shoot");
         muzzleFlash.Play();
 
