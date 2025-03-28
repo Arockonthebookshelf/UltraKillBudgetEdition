@@ -2179,6 +2179,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4894089163556558080, guid: ff53518482ac96d4c9c54919d6d1eabb, type: 3}
     - target: {fileID: 9111852081592363767, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
+      propertyPath: damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 9111852081592363767, guid: 90406066de5644c4da812d29d02b48c9, type: 3}
       propertyPath: bloodPrefab
       value: 
       objectReference: {fileID: 4894089163556558080, guid: ff53518482ac96d4c9c54919d6d1eabb, type: 3}
