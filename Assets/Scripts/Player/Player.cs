@@ -11,10 +11,7 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     [SerializeField]Vector3 fallHeight;
     [SerializeField] int currentHealth;
     Vector3 checkPointPos;
-    Rigidbody rb;
     [HideInInspector] public bool canHeal = false;
-
-    //[SerializeField] private Animator camAnimator;
 
     private bool isHurt;
 

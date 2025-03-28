@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class MainMenuManager : MonoBehaviour
 {
     private Animator CameraObject;
-
+    [SerializeField] GameObject levelSelectCanvas;
     [Header("MENUS")]
     [Tooltip("The Menu for when the MAIN menu buttons")]
     public GameObject mainMenu;
@@ -103,14 +103,6 @@ public class MainMenuManager : MonoBehaviour
         if (extrasMenu) extrasMenu.SetActive(false);
         exitMenu.SetActive(false);
         mainMenu.SetActive(true);
-    }
-
-    public void LoadScene(string scene)
-    {
-        if (scene != "")
-        {
-            StartCoroutine(LoadAsynchronously(scene));
-        }
     }
 
     public void DisablePlayCampaign()
@@ -246,42 +238,24 @@ public class MainMenuManager : MonoBehaviour
 
     public void QuitGame()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-				Application.Quit();
-#endif
+		Application.Quit();
     }
 
     // Load Bar synching animation
-    IEnumerator LoadAsynchronously(string sceneName)
-    { // scene name is just the name of the current scene being loaded
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
-        operation.allowSceneActivation = false;
-        mainCanvas.SetActive(false);
-        loadingMenu.SetActive(true);
 
-        while (!operation.isDone)
+        public void LoadTutorial()
         {
-            float progress = Mathf.Clamp01(operation.progress / .95f);
-            loadingBar.value = progress;
+            SceneManager.LoadScene(1);
+        }
 
-            if (operation.progress >= 0.9f && waitForInput)
-            {
-                loadPromptText.text = "Press " + userPromptKey.ToString().ToUpper() + " to continue";
-                loadingBar.value = 1;
+        public void LoadLevel1()
+        {
+            SceneManager.LoadScene(2);
+        }
 
-                if (Input.GetKeyDown(userPromptKey))
-                {
-                    operation.allowSceneActivation = true;
-                }
-            }
-            else if (operation.progress >= 0.9f && !waitForInput)
-            {
-                operation.allowSceneActivation = true;
-            }
-
-            yield return null;
+        
+        public void LoadLevel2()
+        {
+            SceneManager.LoadScene(3);
         }
     }
-}
