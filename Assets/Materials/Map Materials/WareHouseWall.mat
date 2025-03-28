@@ -43,16 +43,16 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: c263527afc51a054cb9bfc2d7c8129c4, type: 3}
-        m_Scale: {x: 0.08, y: 0.08}
+        m_Texture: {fileID: 2800000, guid: 39f19d75d9ecd104488a30db1aa3c78b, type: 3}
+        m_Scale: {x: 0.05, y: 0.05}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: e989968f6c4b44d449e6e58791ffcc13, type: 3}
-        m_Scale: {x: 0.08, y: 0.08}
+        m_Texture: {fileID: 2800000, guid: 9189569071f21404da9683123ca26580, type: 3}
+        m_Scale: {x: 0.05, y: 0.05}
         m_Offset: {x: 0, y: 0}
     - _BumpMap2:
-        m_Texture: {fileID: 2800000, guid: e989968f6c4b44d449e6e58791ffcc13, type: 3}
-        m_Scale: {x: 0.08, y: 0.08}
+        m_Texture: {fileID: 2800000, guid: 9189569071f21404da9683123ca26580, type: 3}
+        m_Scale: {x: 0.05, y: 0.05}
         m_Offset: {x: 0, y: 0}
     - _DetailMap:
         m_Texture: {fileID: 0}
@@ -63,8 +63,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HeightColorsTex:
-        m_Texture: {fileID: 2800000, guid: 70b415e3c3088e540b7fde37f30efe88, type: 3}
-        m_Scale: {x: 0.08, y: 0.08}
+        m_Texture: {fileID: 2800000, guid: c7bd1a01f9ed7e44a84d16f5ade67022, type: 3}
+        m_Scale: {x: 0.05, y: 0.05}
         m_Offset: {x: 0, y: 0}
     - _Layer1:
         m_Texture: {fileID: 0}
@@ -79,12 +79,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 39b14b24638623d4287f1e310c5f7f2a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 70193b664081bcd47a18211148978f00, type: 3}
-        m_Scale: {x: 0.08, y: 0.08}
+        m_Texture: {fileID: 2800000, guid: 4dcc160b9e9f4c5468c18d66a51e6db2, type: 3}
+        m_Scale: {x: 0.05, y: 0.05}
         m_Offset: {x: 0, y: 0}
     - _ReflectionMap:
         m_Texture: {fileID: 0}
@@ -149,8 +149,8 @@ Material:
     - _CameraFadeEnd: 0
     - _CameraFadeStart: 0
     - _Contrast: 1
-    - _Metallic: 0
-    - _OcclusionStrength: 10
+    - _Metallic: 1
+    - _OcclusionStrength: 1
     - _QueueControl: -1
     - _QueueOffset: 0
     - _ReflectionMaskWithRim: 0
@@ -165,7 +165,7 @@ Material:
     - Color_C62668C6: {r: 0, g: 0, b: 0, a: 1}
     - Color_D6CD8104: {r: 1, g: 1, b: 1, a: 1}
     - Color_D9A456B0: {r: 1, g: 1, b: 1, a: 0}
-    - _BaseColor: {r: 4, g: 4, b: 4, a: 1}
+    - _BaseColor: {r: 1.8496251, g: 1.9325668, b: 1.5861633, a: 1}
     - _EmissionColor2: {r: 0, g: 0, b: 0, a: 0}
     - _RimDirection: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
