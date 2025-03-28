@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,6 +39,10 @@ public class HUD : MonoBehaviour
     UIBobbing bobbingSway;
     void Awake()
     {
+        if(instance!=this)
+        {
+            Destroy(instance);
+        }
         if (!instance)
         {
             instance = this;

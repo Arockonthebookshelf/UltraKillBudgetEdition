@@ -29,17 +29,16 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     }
     void Start()
     {
+        HUD.instance.InitializeHealthBar(maxHealth);
+        HUD.instance.UpdateHealthBar(currentHealth);
         if(fallHeight == null)
         {
             fallHeight = new Vector3(0,100,0);
         }
-        HUD.instance.InitializeHealthBar(maxHealth);
     }
 
     public void Damage(float damage,Collider hitCollider)
     {
-        HUD.instance.UpdateHealthBar(currentHealth);
-        HUD.instance.DamageEffect();
         if (currentHealth <= 0)
         {
             OnPlayerDeath?.Invoke();
@@ -47,6 +46,8 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
         }
         currentHealth = currentHealth - (int)damage;
         canHeal = true;
+        HUD.instance.UpdateHealthBar(currentHealth);
+        HUD.instance.DamageEffect();
     }
     public void Heal(int healAmount)
     {

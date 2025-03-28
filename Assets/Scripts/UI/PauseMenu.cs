@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,7 @@ public class PauseMenu : MonoBehaviour
     public static PauseMenu instance = null;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject deathMenu;
+    public static Action OnRestart;
 
     bool gamePaused = false;
 
@@ -52,6 +54,7 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         gamePaused = false;
+        OnRestart?.Invoke();
         Time.timeScale =1f;
         pauseMenu.SetActive(false);
     }
