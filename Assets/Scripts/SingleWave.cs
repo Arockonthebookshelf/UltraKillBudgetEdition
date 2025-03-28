@@ -6,6 +6,7 @@ public class SingleWave : MonoBehaviour
 {
     [SerializeField] GameObject nextWave;
     [SerializeField] bool isLastWave;
+    [SerializeField] SlidingDoors doorToUnlock;
     [SerializeField] List<GameObject> enemiess;
     int enemies;
 
@@ -34,6 +35,13 @@ public class SingleWave : MonoBehaviour
                 if(!isLastWave)
                 {
                     nextWave.GetComponent<SingleWave>().SpawnEnemies();
+                }
+                else
+                {
+                    if(doorToUnlock != null)
+                    {
+                        doorToUnlock.UnlockDoor();
+                    }
                 }
 
                 Destroy(gameObject);
