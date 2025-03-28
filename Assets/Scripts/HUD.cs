@@ -4,8 +4,7 @@ using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
-    PlayerInventory playerInventory;
-
+    public static HUD instance = null;
     [SerializeField] Slider healthSlider;
     [SerializeField] Slider healthHitSlider;
     [SerializeField] TMP_Text healthText;
@@ -39,10 +38,15 @@ public class HUD : MonoBehaviour
     UIBobbing bobbingSway;
     void Awake()
     {
+        if (!instance)
+        {
+            instance = this;
+        }
+
         interactionSlider = interactionProgressBar.GetComponent<Slider>();
         interactionButton = interactionButtonImage.GetComponent<Image>();
         interactionText = interactionTextGO.GetComponent<TMP_Text>();
-        playerInventory = FindFirstObjectByType<PlayerInventory>();
+        
         HudAnimator = GetComponent<Animator>();
         bobbingSway = FindAnyObjectByType<UIBobbing>();
     }
@@ -76,18 +80,18 @@ public class HUD : MonoBehaviour
 
     public void UpdateShotgunAmmo()
     {
-        ShotgunAmmoCount.SetText(playerInventory.currentCapacitorCount + " / " + playerInventory.maxCapacitorCount);
-        ShotgunAmmoCount.color = (playerInventory.currentCapacitorCount >= playerInventory.maxCapacitorCount * lowAmmoPercentage) ? normalAmmoColor : (playerInventory.currentCapacitorCount == 0) ? noAmmoColor : lowAmmoColor;
+        ShotgunAmmoCount.SetText(PlayerInventory.instance.currentshotgunAmmoCount + " / " + PlayerInventory.instance.maxshotgunAmmoCount);
+        ShotgunAmmoCount.color = (PlayerInventory.instance.currentshotgunAmmoCount >= PlayerInventory.instance.maxshotgunAmmoCount * lowAmmoPercentage) ? normalAmmoColor : (PlayerInventory.instance.currentshotgunAmmoCount == 0) ? noAmmoColor : lowAmmoColor;
     }
     public void UpdateMiniGunAmmo()
     {
-        MinigunAmmoCount.SetText(playerInventory.currentEnergyCellsCount + " / " + playerInventory.maxEnergyCellsCount);
-        MinigunAmmoCount.color = (playerInventory.currentEnergyCellsCount >= playerInventory.maxEnergyCellsCount * lowAmmoPercentage) ? normalAmmoColor : (playerInventory.currentEnergyCellsCount == 0) ? noAmmoColor : lowAmmoColor;
+        MinigunAmmoCount.SetText(PlayerInventory.instance.currentEnergyCellsCount + " / " + PlayerInventory.instance.maxEnergyCellsCount);
+        MinigunAmmoCount.color = (PlayerInventory.instance.currentEnergyCellsCount >= PlayerInventory.instance.maxEnergyCellsCount * lowAmmoPercentage) ? normalAmmoColor : (PlayerInventory.instance.currentEnergyCellsCount == 0) ? noAmmoColor : lowAmmoColor;
     }
     public void UpdateRocketLauncherAmmo()
     {
-        RocketLauncherAmmoCount.SetText(playerInventory.currentRocketsCount + " / " + playerInventory.maxRocketsCount);
-        RocketLauncherAmmoCount.color = (playerInventory.currentRocketsCount >= playerInventory.maxRocketsCount * lowAmmoPercentage) ? normalAmmoColor : (playerInventory.currentRocketsCount == 0) ? noAmmoColor : lowAmmoColor;
+        RocketLauncherAmmoCount.SetText(PlayerInventory.instance.currentRocketsCount + " / " + PlayerInventory.instance.maxRocketsCount);
+        RocketLauncherAmmoCount.color = (PlayerInventory.instance.currentRocketsCount >= PlayerInventory.instance.maxRocketsCount * lowAmmoPercentage) ? normalAmmoColor : (PlayerInventory.instance.currentRocketsCount == 0) ? noAmmoColor : lowAmmoColor;
     }
 
     public void UpdateWeapon(string weapon)

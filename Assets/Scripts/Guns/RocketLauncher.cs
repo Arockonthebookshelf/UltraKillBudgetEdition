@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RocketLauncher : MonoBehaviour
 {
-    PlayerInventory playerInventory;
+    
     WeaponSwitching weaponSwitching;
     [SerializeField] string bulletTag = "RocketLauncher Projectiles";
     [SerializeField] float shootForce;
@@ -17,7 +17,7 @@ public class RocketLauncher : MonoBehaviour
 
     private void Awake()
     {
-        playerInventory = FindFirstObjectByType<PlayerInventory>();
+        
         animatior = GetComponent<Animator>();
         weaponSwitching = GetComponentInParent<WeaponSwitching>();
     }
@@ -34,7 +34,7 @@ public class RocketLauncher : MonoBehaviour
 
     private void HandleInput()
     {
-        if (readyToShoot && playerInventory.currentRocketsCount > 0 && Input.GetKeyDown(KeyCode.Mouse0) && !weaponSwitching.isSwitching)
+        if (readyToShoot && PlayerInventory.instance.currentRocketsCount > 0 && Input.GetKeyDown(KeyCode.Mouse0) && !weaponSwitching.isSwitching && PlayerMovement.Instance.inputEnabled)
         {
             Shoot();
         }
@@ -72,8 +72,8 @@ public class RocketLauncher : MonoBehaviour
         rocketRB.AddForce(direction * shootForce, ForceMode.Impulse);
 
         // Update player inventory
-        playerInventory.RemoveRockets(1);
-        playerInventory.CanShoot(false);
+        PlayerInventory.instance.RemoveRockets(1);
+        PlayerInventory.instance.CanShoot(false);
 
         // Reset shot after fire rate delay
         Invoke("ResetShot", fireRate);
@@ -83,7 +83,7 @@ public class RocketLauncher : MonoBehaviour
     private void ResetShot()
     {
         readyToShoot = true;
-        playerInventory.CanShoot(true);
+        PlayerInventory.instance.CanShoot(true);
     }
 
 }

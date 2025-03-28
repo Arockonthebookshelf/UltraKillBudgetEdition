@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Shotgun : MonoBehaviour
 {
-    PlayerInventory playerInventory;
+    
     WeaponSwitching weaponSwitching;
     [SerializeField] string bulletTag = "Shotgun Projectile";
     [SerializeField] float shootForce;
@@ -21,7 +21,7 @@ public class Shotgun : MonoBehaviour
 
     private void Awake()
     {
-        playerInventory = FindFirstObjectByType<PlayerInventory>();
+        
         animatior = GetComponent<Animator>();
         weaponSwitching = GetComponentInParent<WeaponSwitching>();
     }
@@ -38,7 +38,7 @@ public class Shotgun : MonoBehaviour
 
     private void HandleInput()
     {
-        if (readyToShoot && playerInventory.currentCapacitorCount > 0 && Input.GetKeyDown(KeyCode.Mouse0) && !weaponSwitching.isSwitching)
+        if (readyToShoot && PlayerInventory.instance.currentshotgunAmmoCount > 0 && Input.GetKeyDown(KeyCode.Mouse0) && !weaponSwitching.isSwitching && PlayerMovement.Instance.inputEnabled)
         {
             Shoot();
         }
@@ -70,8 +70,8 @@ public class Shotgun : MonoBehaviour
             }
         }
 
-        playerInventory.RemoveCapacitors(1);
-        playerInventory.CanShoot(false);
+        PlayerInventory.instance.RemoveShotgunAmmo(1);
+        PlayerInventory.instance.CanShoot(false);
         Invoke("ResetShot", fireRate);
     }
 
@@ -91,6 +91,6 @@ public class Shotgun : MonoBehaviour
     private void ResetShot()
     {
         readyToShoot = true;
-        playerInventory.CanShoot(true);
+        PlayerInventory.instance.CanShoot(true);
     }
 }

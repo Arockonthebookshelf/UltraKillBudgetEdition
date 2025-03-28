@@ -1,18 +1,18 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class CapacitorsDropper : MonoBehaviour
+public class ShotgunAmmoDropper : MonoBehaviour
 {
     DropperManager dropperManager;
-    PlayerInventory playerInventory;
+    
     ParticleSystem capacitorParticleSystem;
     void Awake()
     {
         dropperManager = GetComponentInParent<DropperManager>();
-        playerInventory = FindFirstObjectByType<PlayerInventory>();
+        
         capacitorParticleSystem = GetComponent<ParticleSystem>();
         capacitorParticleSystem.trigger.SetCollider(0, dropperManager.playerCollider);
-        if(!dropperManager.canDropCapacitors)
+        if(!dropperManager.canDropShotgunAmmo)
         {
             Destroy(gameObject);
         }
@@ -21,18 +21,18 @@ public class CapacitorsDropper : MonoBehaviour
     void Update()
     {
         var externalForces = capacitorParticleSystem.externalForces;
-        externalForces.enabled = playerInventory.canPickUpCapacitors;
+        externalForces.enabled = PlayerInventory.instance.canPickUpShotgunAmmo;
     }
 
     void Start()
     {
         capacitorParticleSystem.emission.SetBursts(new ParticleSystem.Burst[] 
-        { new ParticleSystem.Burst(0.0f, dropperManager.capacitorsMinDropAmount, dropperManager.capacitorsMaxDropAmount, 1, 0) });
+        { new ParticleSystem.Burst(0.0f, dropperManager.shotgunAmmoMinDropAmount, dropperManager.shotgunAmmoMaxDropAmount, 1, 0) });
     }
 
     void OnParticleTrigger()
     {
-        if(playerInventory.canPickUpCapacitors)
+        if(PlayerInventory.instance.canPickUpShotgunAmmo)
         {
             List<ParticleSystem.Particle> enterParticles = new List<ParticleSystem.Particle>();
             int numEnter = GetComponent<ParticleSystem>().GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enterParticles);
@@ -42,7 +42,7 @@ public class CapacitorsDropper : MonoBehaviour
                 ParticleSystem.Particle p = enterParticles[i];
                 p.remainingLifetime = 0;
                 enterParticles[i] = p;
-                playerInventory.AddCapacitors(dropperManager.capacitorsPickupMultiplier);
+                PlayerInventory.instance.AddShotgunAmmo(dropperManager.shotgunAmmoPickupMultiplier);
             }
 
             GetComponent<ParticleSystem>().SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enterParticles);

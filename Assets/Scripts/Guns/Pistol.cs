@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Pistol : MonoBehaviour
 {
-    PlayerInventory playerInventory;
     HitIndicator hitIndicator;
     WeaponSwitching weaponSwitching;
     RaycastHit rayHit;
@@ -34,7 +33,6 @@ public class Pistol : MonoBehaviour
     {
         bulletTrail = GetComponent<LineRenderer>();
         muzzleFlash = GetComponentInChildren<ParticleSystem>();
-        playerInventory = FindFirstObjectByType<PlayerInventory>();
         hitIndicator = FindFirstObjectByType<HitIndicator>();
         animatior = GetComponent<Animator>();
         weaponSwitching = GetComponentInParent<WeaponSwitching>();
@@ -52,7 +50,7 @@ public class Pistol : MonoBehaviour
 
     private void Update()
     {
-        if (readyToShoot && Input.GetKeyDown(KeyCode.Mouse0) && !weaponSwitching.isSwitching)
+        if (readyToShoot && Input.GetKeyDown(KeyCode.Mouse0) && !weaponSwitching.isSwitching && PlayerMovement.Instance.inputEnabled)
         {
             Shoot();
         }
@@ -105,7 +103,7 @@ public class Pistol : MonoBehaviour
 
         Invoke("ResetShot", fireRate);
 
-        playerInventory.CanShoot(false);
+        PlayerInventory.instance.CanShoot(false);
     }
 
     void DrawTrail(Vector3 start, Vector3 end)
@@ -135,7 +133,7 @@ public class Pistol : MonoBehaviour
     void ResetShot()
     {
         readyToShoot = true;
-        playerInventory.CanShoot(true);
+        PlayerInventory.instance.CanShoot(true);
     }
 
 }

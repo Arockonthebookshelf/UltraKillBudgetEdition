@@ -15,11 +15,11 @@ public class DropperManager : MonoBehaviour
     public short healthMinDropAmount = 1;
     public short healthMaxDropAmount = 3;
 
-    [Header("Capacitor Dropper Settings")]
-    public int capacitorsPickupMultiplier = 1;
-    public bool canDropCapacitors = true;
-    public short capacitorsMinDropAmount = 1;
-    public short capacitorsMaxDropAmount = 2;
+    [Header("shotgunAmmo Dropper Settings")]
+    public int shotgunAmmoPickupMultiplier = 1;
+    public bool canDropShotgunAmmo = true;
+    public short shotgunAmmoMinDropAmount = 1;
+    public short shotgunAmmoMaxDropAmount = 2;
 
     [Header("EnergyCells Dropper Settings")]
     public int energyCellsPickupMultiplier = 1;

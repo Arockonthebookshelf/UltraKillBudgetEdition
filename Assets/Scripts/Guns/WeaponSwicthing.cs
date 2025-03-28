@@ -3,9 +3,6 @@ using System.Collections;
 
 public class WeaponSwitching : MonoBehaviour
 {
-    HUD hud;
-    PlayerInventory playerInventory;
-
     [Header("References")]
     [SerializeField] private GameObject pistol;
     [SerializeField] private GameObject shotgun;
@@ -19,11 +16,6 @@ public class WeaponSwitching : MonoBehaviour
     private GameObject previousSelectedWeapon;
     public bool isSwitching = false;
 
-    void Awake()
-    {
-        hud = FindFirstObjectByType<HUD>();
-        playerInventory = FindFirstObjectByType<PlayerInventory>();
-    }
 
     void Start()
     {
@@ -34,16 +26,16 @@ public class WeaponSwitching : MonoBehaviour
     {
         if (isSwitching) return;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && playerInventory.hasPistol)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && PlayerInventory.instance.hasPistol)
             StartCoroutine(SwitchWeaponWithAnimation(pistol));
 
-        if (Input.GetKeyDown(KeyCode.Alpha2) && playerInventory.hasShotgun)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && PlayerInventory.instance.hasShotgun)
             StartCoroutine(SwitchWeaponWithAnimation(shotgun));
 
-        if (Input.GetKeyDown(KeyCode.Alpha3) && playerInventory.hasMinigun)
+        if (Input.GetKeyDown(KeyCode.Alpha3) && PlayerInventory.instance.hasMinigun)
             StartCoroutine(SwitchWeaponWithAnimation(minigun));
 
-        if (Input.GetKeyDown(KeyCode.Alpha4) && playerInventory.hasRocketLauncher)
+        if (Input.GetKeyDown(KeyCode.Alpha4) && PlayerInventory.instance.hasRocketLauncher)
             StartCoroutine(SwitchWeaponWithAnimation(rocketLauncher));
     }
 
@@ -81,6 +73,6 @@ public class WeaponSwitching : MonoBehaviour
 
     private void OnWeaponSelected()
     {
-        hud.UpdateWeapon(previousSelectedWeapon.name);
+        HUD.instance.UpdateWeapon(previousSelectedWeapon.name);
     }
 }
