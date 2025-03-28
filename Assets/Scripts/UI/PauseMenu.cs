@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
     public static PauseMenu instance = null;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject deathMenu;
+    [SerializeField] GameObject gameOverMenu;
     public static Action OnRestart;
 
     bool gamePaused = false;
@@ -64,7 +65,7 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None; 
         Cursor.visible = true;
         PlayerMovement.Instance.inputEnabled = false;
-        if(deathMenu != null) deathMenu.SetActive(true);
+        deathMenu.SetActive(true);
         Time.timeScale = 0f;
     }
 
@@ -81,6 +82,13 @@ public class PauseMenu : MonoBehaviour
         PlayerMovement.Instance.inputEnabled = true;
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void GameOver()
+    {
+        PlayerMovement.Instance.inputEnabled = true;
+        Time.timeScale = 0f;
+        gameOverMenu.SetActive(true);
     }
 
     public void QuitToMainMenu()

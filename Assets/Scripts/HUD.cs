@@ -11,6 +11,7 @@ public class HUD : MonoBehaviour
     [SerializeField] TMP_Text healthText;
     [SerializeField] TMP_Text healText;
     [SerializeField] float healTextTimer;
+    [SerializeField] TMP_Text clearanceLevelText;
     [SerializeField] TMP_Text ShotgunAmmoCount;
     [SerializeField] TMP_Text MinigunAmmoCount;
     [SerializeField] TMP_Text RocketLauncherAmmoCount;
@@ -170,5 +171,10 @@ public class HUD : MonoBehaviour
     void HideHealthChangeText()
     {
         healText.SetText("");
+    }
+
+    public void UpdateClearanceLevel()
+    {
+        clearanceLevelText.SetText(PlayerInventory.instance.ClearanceLevel.ToString());
     }
 }

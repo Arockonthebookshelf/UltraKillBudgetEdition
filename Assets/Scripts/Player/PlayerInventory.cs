@@ -119,4 +119,10 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
     {
         HUD.instance.UpdateCrosshairColor(value);
     }
+
+    public void IncreaseClearanceLevel()
+    {
+        ClearanceLevel++;
+        HUD.instance.UpdateClearanceLevel();
+    }
 }

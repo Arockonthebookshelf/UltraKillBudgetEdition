@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1512438194500226996}
   - component: {fileID: 8937009631672329726}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: flame trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 6808553714283302408}
   - component: {fileID: -3403038404639648125}
   - component: {fileID: -7422574112806801871}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Enemy Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
