@@ -43,8 +43,8 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
 
 
     [Header("Enemy Particle and Decal")]
-    [SerializeField] GameObject singleShotParticle;
-    [SerializeField] GameObject DeathParticle;
+    //[SerializeField] GameObject singleShotParticle;
+    //[SerializeField] GameObject DeathParticle;
     [SerializeField] GameObject enemyDeacal;
 
     private EnemyVision enemyVision;
@@ -173,7 +173,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
     public void Damage(float damage, Collider collider)
     {
         enemyHealth = (enemyHealth - damage);
-        Instantiate(singleShotParticle, transform.position, Quaternion.identity);
+       // Instantiate(singleShotParticle, transform.position, Quaternion.identity);
 
         Instantiate(enemyDeacal, transform.position, Quaternion.identity);
     }
@@ -185,8 +185,8 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
 
         Instantiate(itemDropper, transform.position, Quaternion.identity);
         Instantiate(enemyDeacal, transform.position, Quaternion.identity);
-        GameObject particle = Instantiate(DeathParticle, transform.position, Quaternion.identity);
-        Destroy(particle, 0.5f);
+        //GameObject particle = Instantiate(DeathParticle, transform.position, Quaternion.identity);
+        //Destroy(particle, 0.5f);
         Invoke("DestroyEnemy", 0.1f);
     }
 
