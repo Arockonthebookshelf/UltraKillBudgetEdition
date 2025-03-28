@@ -14763,7 +14763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCollider: {fileID: 0}
-  healthPerPickup: 5
+  healthPerPickup: 10
   canDropHealth: 1
   healthMinDropAmount: 1
   healthMaxDropAmount: 3
