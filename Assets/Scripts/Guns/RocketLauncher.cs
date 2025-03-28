@@ -1,3 +1,4 @@
+using PrometheanUprising.SoundManager;
 using UnityEngine;
 
 public class RocketLauncher : MonoBehaviour
@@ -42,6 +43,9 @@ public class RocketLauncher : MonoBehaviour
     private void Shoot()
     {
         readyToShoot = false;
+
+        SoundManager.PlaySound(SoundType.RPG_FIRE);
+
         animatior.SetTrigger("Shoot");
         // Calculate direction
         RaycastHit hit;
