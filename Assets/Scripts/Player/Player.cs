@@ -11,10 +11,7 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     [SerializeField]Vector3 fallHeight;
     [SerializeField] int currentHealth;
     Vector3 checkPointPos;
-    Rigidbody rb;
     [HideInInspector] public bool canHeal = false;
-
-    //[SerializeField] private Animator camAnimator;
 
     private bool isHurt;
 
@@ -42,15 +39,15 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
 
     public void Damage(float damage,Collider hitCollider)
     {
+        currentHealth = currentHealth - (int)damage;
+        canHeal = true;
+        HUD.instance.UpdateHealthBar(currentHealth);
+        HUD.instance.DamageEffect();
         if (currentHealth <= 0)
         {
             OnPlayerDeath?.Invoke();
             return;
         }
-        currentHealth = currentHealth - (int)damage;
-        canHeal = true;
-        HUD.instance.UpdateHealthBar(currentHealth);
-        HUD.instance.DamageEffect();
     }
     public void Heal(int healAmount)
     {
