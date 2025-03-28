@@ -15,14 +15,12 @@ public class UIBobbing : MonoBehaviour
 
     private Vector2 initialPosition;
     private float timer = 0f;
-    private PlayerMovement player;
     private Transform playerCamera;
     private RectTransform rectTransform;
     private float hitEffectTimer = 0f;
 
     void Start()
     {
-        player = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
         playerCamera = Camera.main.transform;
         rectTransform = GetComponent<RectTransform>();
         initialPosition = rectTransform.anchoredPosition;
@@ -30,11 +28,11 @@ public class UIBobbing : MonoBehaviour
 
     void Update()
     {
-        if (player != null && rectTransform != null && player.grounded && !player.IsCrouching())
+        if (rectTransform != null && PlayerMovement.Instance.grounded && !PlayerMovement.Instance.IsCrouching())
         {
             Vector2 newPosition = initialPosition;
 
-            if (player.GetVelocity().magnitude > 0.5f)
+            if (PlayerMovement.Instance.GetVelocity().magnitude > 0.5f)
             {
                 timer += Time.deltaTime * bobbingSpeed;
                 float bobOffset = Mathf.Sin(timer) * bobbingAmount;

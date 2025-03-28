@@ -2,17 +2,22 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour , IPersistenceData
 {
-    HUD hud;
+    
+    public static PlayerInventory instance = null;
     void Awake()
     {
-        hud = FindFirstObjectByType<HUD>();
+        if (!instance)
+        {
+            instance = this;
+        }
+        
     }
 
     public void LoadData(GameData gameData)
     {
         ClearanceLevel = gameData.ClearanceLevel;
         currentBulletCount = gameData.currentBulletCount;
-        currentCapacitorCount = gameData.currentCapacitorCount;
+        currentshotgunAmmoCount = gameData.currentshotgunAmmoCount;
         currentEnergyCellsCount = gameData.currentEnergyCellsCount;
         currentRocketsCount = gameData.currentRocketsCount;
     }
@@ -20,24 +25,24 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
     {
         gameData.ClearanceLevel = ClearanceLevel;
         gameData.currentBulletCount = currentBulletCount;
-        gameData.currentCapacitorCount = currentCapacitorCount;
+        gameData.currentshotgunAmmoCount = currentshotgunAmmoCount;
         gameData.currentEnergyCellsCount = currentEnergyCellsCount;
         gameData.currentRocketsCount = currentRocketsCount;
     }
 
     public int ClearanceLevel = 0;
     public int currentBulletCount;
-    public int currentCapacitorCount;
+    public int currentshotgunAmmoCount;
     public int currentEnergyCellsCount;
     public int currentRocketsCount;
     [HideInInspector]public bool canPickUpBullets;
-    [HideInInspector]public bool canPickUpCapacitors;
+    [HideInInspector]public bool canPickUpShotgunAmmo;
     [HideInInspector]public bool canPickUpEnergyCells;
     [HideInInspector]public bool canPickUpRockets;
 
     [Header("Ammo Settings")]
     public int maxBulletCount = 0;
-    public int maxCapacitorCount = 0;
+    public int maxshotgunAmmoCount = 0;
     public int maxEnergyCellsCount = 0;
     public int maxRocketsCount = 0;
 
@@ -51,27 +56,27 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
     void Update()
     {
         canPickUpBullets = currentBulletCount < maxBulletCount && hasPistol;
-        canPickUpCapacitors = currentCapacitorCount < maxCapacitorCount && hasShotgun;
+        canPickUpShotgunAmmo = currentshotgunAmmoCount < maxshotgunAmmoCount && hasShotgun;
         canPickUpEnergyCells = currentEnergyCellsCount < maxEnergyCellsCount && hasMinigun;
         canPickUpRockets = currentRocketsCount < maxRocketsCount && hasRocketLauncher;
     }
 
-    public void AddCapacitors(int amount)
+    public void AddShotgunAmmo(int amount)
     {
-        if(currentCapacitorCount + amount > maxCapacitorCount)
+        if(currentshotgunAmmoCount + amount > maxshotgunAmmoCount)
         {
-            currentCapacitorCount = maxCapacitorCount;
+            currentshotgunAmmoCount = maxshotgunAmmoCount;
         }
         else
         {
-            currentCapacitorCount += amount;
+            currentshotgunAmmoCount += amount;
         }
-        hud.UpdateShotgunAmmo();
+        HUD.instance.UpdateShotgunAmmo();
     }
-    public void RemoveCapacitors(int amount)
+    public void RemoveShotgunAmmo(int amount)
     {
-        currentCapacitorCount -= amount;
-        hud.UpdateShotgunAmmo();
+        currentshotgunAmmoCount -= amount;
+        HUD.instance.UpdateShotgunAmmo();
     }
 
     public void AddEnergyCells(int amount)
@@ -84,12 +89,12 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
         {
             currentEnergyCellsCount += amount;
         }
-        hud.UpdateMiniGunAmmo();
+        HUD.instance.UpdateMiniGunAmmo();
     }
     public void RemoveEnergyCells(int amount)
     {
         currentEnergyCellsCount -= amount;
-        hud.UpdateMiniGunAmmo();
+        HUD.instance.UpdateMiniGunAmmo();
     }
 
     public void AddRockets(int amount)
@@ -102,16 +107,16 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
         {
             currentRocketsCount += amount;
         }
-        hud.UpdateRocketLauncherAmmo();
+        HUD.instance.UpdateRocketLauncherAmmo();
     }
     public void RemoveRockets(int amount)
     {
         currentRocketsCount -= amount;
-        hud.UpdateRocketLauncherAmmo();
+        HUD.instance.UpdateRocketLauncherAmmo();
     }
 
     public void CanShoot(bool value)
     {
-        hud.UpdateCrosshairColor(value);
+        HUD.instance.UpdateCrosshairColor(value);
     }
 }

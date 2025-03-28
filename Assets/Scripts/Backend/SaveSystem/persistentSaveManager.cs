@@ -22,12 +22,14 @@ public class persistentSaveManager : MonoBehaviour
         CheckPoint.OnTriggered += SaveGame;
         Finish.OnLevelFinished += NewGame;
         Player.OnPlayerReloaded += LoadGame;
+        PauseMenu.OnRestart += NewGame;
     }
     void OnDisable()
     {
         CheckPoint.OnTriggered -= SaveGame;
         Finish.OnLevelFinished -= NewGame;
         Player.OnPlayerReloaded -= LoadGame;
+        PauseMenu.OnRestart -= NewGame;
     }
     public void Start()
     {

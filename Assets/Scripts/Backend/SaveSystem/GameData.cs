@@ -8,7 +8,7 @@ public class GameData
    public int curHealth;
    public int ClearanceLevel = 0;
    public int currentBulletCount;
-   public int currentCapacitorCount;
+   public int currentshotgunAmmoCount;
    public int currentEnergyCellsCount;
    public int currentRocketsCount;
    public SerializableDictionary<string ,bool> waveActive;
@@ -19,7 +19,7 @@ public class GameData
       playerRotation = Quaternion.identity;
       ClearanceLevel = 0;
       currentBulletCount = 25;
-      currentCapacitorCount = 15;
+      currentshotgunAmmoCount = 15;
       currentEnergyCellsCount = 100;
       currentRocketsCount = 5;
       curHealth = 100;  

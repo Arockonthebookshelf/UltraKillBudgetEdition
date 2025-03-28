@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using PrometheanUprising.SoundManager;
+using UnityEngine;
 
 public class ExplosiveProjectile : MonoBehaviour
 {
@@ -44,6 +45,8 @@ public class ExplosiveProjectile : MonoBehaviour
     {
         if (hasExploded) return; // Prevent multiple explosions
         hasExploded = true;
+
+        SoundManager.PlaySound(SoundType.RPG_BURST);
 
         // Instantiate explosion effect
         if (explosion != null) Instantiate(explosion, transform.position, Quaternion.identity);

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour,IDamagable,IPersistenceData
 {
-    HUD hud;
+    
     PlayerMovement movement;
     public static Action OnPlayerDeath;
     public static Action OnPlayerReloaded;
@@ -20,7 +20,7 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
 
     void Awake()
     {
-        hud = FindFirstObjectByType<HUD>();
+        
     }
     void OnEnable()
     {
@@ -32,36 +32,31 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     }
     void Start()
     {
+        HUD.instance.InitializeHealthBar(maxHealth);
+        HUD.instance.UpdateHealthBar(currentHealth);
         if(fallHeight == null)
         {
             fallHeight = new Vector3(0,100,0);
         }
-        hud.InitializeHealthBar(maxHealth);
     }
 
     public void Damage(float damage,Collider hitCollider)
     {
-        hud.UpdateHealthBar(currentHealth);
-        hud.DamageEffect();
         if (currentHealth <= 0)
         {
-            //DeathAnimation();
             OnPlayerDeath?.Invoke();
             return;
         }
         currentHealth = currentHealth - (int)damage;
-        //isHurt = true;
-        //if (isHurt)
-        //{
-        //   // HurtAnimation(); //Plays Hurt Animation 
-        //}
         canHeal = true;
+        HUD.instance.UpdateHealthBar(currentHealth);
+        HUD.instance.DamageEffect();
     }
     public void Heal(int healAmount)
     {
         currentHealth = Mathf.Clamp(currentHealth + healAmount , 0 , maxHealth);
-        hud.UpdateHealthBar(currentHealth);
-        hud.ShowHealthChangeText(healAmount);
+        HUD.instance.UpdateHealthBar(currentHealth);
+        HUD.instance.ShowHealthChangeText(healAmount);
         if (currentHealth < maxHealth)
         {
             canHeal = true;
@@ -73,23 +68,11 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     }
     private void death()
     {
-        //play Animation
-        gameObject.TryGetComponent<PlayerMovement>(out movement);
-        movement.enabled = false;
-        movement.rb.linearVelocity  = Vector3.zero;
-        OnPlayerReloaded?.Invoke();
-        //enable gameover UI
-    }
-    //public void HurtAnimation()
-    //{
-    //    camAnimator.Play("Player Hurt", 0, 0f);
+       PauseMenu.instance.Dead();
+		OnPlayerReloaded?.Invoke();
 
-    //    isHurt = false;
-    //}
-    //public void DeathAnimation()
-    //{
-    //    camAnimator.Play("Player Death", 0, 0f);
-    //}
+    }
+
     public void LoadData(GameData gameData)
     {
         Debug.Log("loading");
