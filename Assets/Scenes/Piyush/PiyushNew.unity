@@ -6937,6 +6937,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 1215905242643653331, guid: 84b16d168b998514f81ef45cac2f722f, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: f966be1f5c26be64298d44386b231473, type: 3}
+    - target: {fileID: 1215905242643653331, guid: 84b16d168b998514f81ef45cac2f722f, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1421185547731588455, guid: 84b16d168b998514f81ef45cac2f722f, type: 3}
       propertyPath: m_Layer
       value: 12
@@ -27983,7 +27991,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2028480513739368047, guid: 3c98be47a24b58e49b44612e629e267b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 318.4041
+      value: 320.47
       objectReference: {fileID: 0}
     - target: {fileID: 2028480513739368047, guid: 3c98be47a24b58e49b44612e629e267b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -28061,6 +28069,10 @@ PrefabInstance:
       propertyPath: m_WarningMessage
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8227324111820417804, guid: 3c98be47a24b58e49b44612e629e267b, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 58b6a7dcb1b79c9469ef1167f57ad16c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
