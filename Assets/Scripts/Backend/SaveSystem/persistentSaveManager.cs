@@ -5,6 +5,7 @@ public class persistentSaveManager : MonoBehaviour
 {
     public static persistentSaveManager instance{get;private set;}
     [SerializeField] private string FileName;
+    [SerializeField]private Transform playerStartPoint;
     private DataHandler datahandler;
     GameData gameData;
     private List<IPersistenceData> persistenceDataObjects;
@@ -42,6 +43,7 @@ public class persistentSaveManager : MonoBehaviour
         //intialize new game data
         gameData = null;
         gameData = new GameData();
+        gameData.playerPosition = playerStartPoint.position;
     }
     public void LoadGame()
     {
