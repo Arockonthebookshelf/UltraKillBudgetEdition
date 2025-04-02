@@ -16,6 +16,7 @@ public abstract class BaseEnemy2 : MonoBehaviour, IDamagable
 
     [Header("Ranges")]
     [SerializeField] protected float attackRange = 2f;
+    [SerializeField] protected float secondaryAttackRange = 10f;
 
     [Header("Enemy Health")]
     [SerializeField] protected float enemyHealth;
