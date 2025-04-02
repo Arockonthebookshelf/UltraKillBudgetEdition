@@ -75,10 +75,6 @@ public class MeleeEnemy : BaseEnemy
         // Ensure gizmos are always visible, even when the object is not selected
         if (!Application.isPlaying) return; // Optional: Only draw gizmos during play mode
 
-        // Draw Shooting Range
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, chaseRange);
-
         // Draw Melee Range
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, attackRange);

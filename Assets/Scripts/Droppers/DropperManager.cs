@@ -6,7 +6,7 @@ public class DropperManager : MonoBehaviour
     [HideInInspector] public Collider playerCollider;
     void Awake()
     {
-        playerCollider = GameObject.Find("Player").GetComponent<Collider>();
+        playerCollider = PlayerMovement.Instance.GetComponent<Collider>();
     }
     
     [Header("Health Dropper Settings")]
