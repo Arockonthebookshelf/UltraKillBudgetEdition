@@ -284,7 +284,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   bulletTag: RocketLauncher Projectile
-  bloodPrefab: {fileID: 4894089163556558080, guid: ff53518482ac96d4c9c54919d6d1eabb, type: 3}
+  bloodPrefab: {fileID: 7580687418149800051, guid: 90e30be9f5425c24cb349653ea443937, type: 3}
   useGravity: 0
   explosionDamage: 100
   explosionRange: 3

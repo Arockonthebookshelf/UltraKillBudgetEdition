@@ -29,12 +29,8 @@ public abstract class BaseEnemy2 : MonoBehaviour, IDamagable
 
     protected Animator animator;
     protected bool isDead = false;
-
     protected float distanceToPlayer;
-
     protected Vector3 direction;
-
-    protected virtual float AttackStateRange => attackRange;
 
     protected void PreInitialize()
     {
@@ -101,7 +97,6 @@ public abstract class BaseEnemy2 : MonoBehaviour, IDamagable
     public void Damage(float damage, Collider collider)
     {
         enemyHealth = (enemyHealth - damage);
-        Instantiate(bloodPS, transform.position, Quaternion.identity);
     }
 
     protected virtual void Die()
@@ -113,11 +108,7 @@ public abstract class BaseEnemy2 : MonoBehaviour, IDamagable
         Invoke("DestroyEnemy", 0.1f);
     }
 
-    #region Aniamtions Function
-    protected virtual void Moving()
-    {
-        animator.SetBool("Moving", true);
-    }
+    #region Animations Function
     protected virtual void PlayAttack()
     {
         animator.SetTrigger("Attack");

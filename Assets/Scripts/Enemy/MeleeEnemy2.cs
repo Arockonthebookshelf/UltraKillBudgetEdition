@@ -2,8 +2,14 @@ using UnityEngine;
 
 public class MeleeEnemy2 : BaseEnemy2
 {
+    [Header("Melee Enemy Stats")]
     [SerializeField] private float attackRate = 2f;
     [SerializeField] private float attackDamage = 10f;
+    [SerializeField] private float moveSpeed = 40f;
+    [SerializeField] private float attackMoveSpeed = 10f;
+    [SerializeField] private float damageDelay = 10f;
+
+    private float currentSpeed;
     void Awake()
     {
         PreInitialize();
@@ -11,10 +17,24 @@ public class MeleeEnemy2 : BaseEnemy2
     private void Start()
     {
         Initialize();
+        agent.speed = attackMoveSpeed;
     }
     void Update()
     {
-        StateChanges(); 
+        StateChanges();
+        if (currentState != EnemyState.Move)
+        {
+            Move();
+        }
+
+        if(agent.speed < moveSpeed)
+        {
+            agent.speed += 10f * Time.deltaTime;
+            Mathf.Clamp(agent.speed, attackMoveSpeed, moveSpeed);
+        }
+
+        currentSpeed = agent.velocity.magnitude;
+        animator.SetFloat("Speed", currentSpeed/moveSpeed);
     }
     private bool alreadyAttacked = false;
 
@@ -23,22 +43,20 @@ public class MeleeEnemy2 : BaseEnemy2
         bool isInMeleeRange = distanceToPlayer <= attackRange;
         if (!alreadyAttacked)
         {
-            PlayAttack();
             alreadyAttacked = true;
-             
-            if (isInMeleeRange)
-            {
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, direction, out hit))
-                {
-                    IDamagable damagable = hit.collider.GetComponent<IDamagable>();
-                    if (damagable != null ) 
-                    {
-                        damagable.Damage(attackDamage, hit.collider);
-                    }
-                }
-            }
-            Invoke(nameof(ResetAttack), attackRate);
+            PlayAttack();
+            Invoke(nameof(DealDamage), 0.5f);
+        }
+    }
+
+    public void DealDamage()
+    {
+        Invoke(nameof(ResetAttack), attackRate);
+
+        if (distanceToPlayer <= attackRange)
+        {
+            player.GetComponent<IDamagable>().Damage(attackDamage, null);
+            agent.speed = attackMoveSpeed;
         }
     }
 
@@ -49,10 +67,8 @@ public class MeleeEnemy2 : BaseEnemy2
 
     private void OnDrawGizmos()
     {
-        if (!Application.isPlaying) return;
-
-        // Draw Shooting Range
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
+
 }
