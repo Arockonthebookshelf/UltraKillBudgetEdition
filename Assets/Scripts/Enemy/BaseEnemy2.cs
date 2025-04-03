@@ -16,7 +16,6 @@ public abstract class BaseEnemy2 : MonoBehaviour, IDamagable
 
     [Header("Ranges")]
     [SerializeField] protected float attackRange = 2f;
-    [SerializeField] protected float secondaryAttackRange = 10f;
 
     [Header("Enemy Health")]
     [SerializeField] protected float enemyHealth;
@@ -31,9 +30,12 @@ public abstract class BaseEnemy2 : MonoBehaviour, IDamagable
     protected bool isDead = false;
     protected float distanceToPlayer;
     protected Vector3 direction;
+    private EnemyVision enemyVision;
+
 
     protected void PreInitialize()
     {
+        enemyVision = GetComponent<EnemyVision>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
@@ -50,7 +52,7 @@ public abstract class BaseEnemy2 : MonoBehaviour, IDamagable
 
         distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (distanceToPlayer <= attackRange)
+        if (distanceToPlayer <= attackRange && enemyVision.isVisible)
         {
             currentState = EnemyState.Attack;
         }
