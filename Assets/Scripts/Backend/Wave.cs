@@ -1,38 +1,45 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
-public class Wave 
-{   
-    public Action OnCurrentEventStop;
+public class Wave : MonoBehaviour
+{
+   WaveSpawner spawner;
+   public Action OnCurrentEventStop;
     public static Action OnwaveStart;
     public static Action OnwaveActive;
     public static Action OnwaveStop;
     bool enemyIsAlive;
     bool enemyIsSet;
-    private List<GameObject> enmeyList = new List<GameObject>();
-    public void WaveSpawn(List<WaveSpawner>spawners)
+    public List<GameObject> enemyList;
+    public void WaveStart(ref List<GameObject> currentWave,WaveSpawner _spawner)
     {
+        spawner = _spawner;
+        enemyList = currentWave;
         OnwaveStart?.Invoke();
-        foreach(var spawner in spawners)
+        foreach(var enemy in spawner.currentWave)
         {
-            spawner.Spawn();
-            foreach (GameObject obj in spawner.objects)
-            {
-                enmeyList.Add(obj);
-                enemyIsSet = true;
-            }
+            enemy.SetActive(true);
         }
+        enemyIsSet = true;
     }
-    public void WaveUpdate()
+        public void WaveUpdate()
     {
         //list of enemies and check if they are active
+        foreach(var enemy in enemyList)
+        {
+            Debug.Log(enemy);
+        }
         if(!enemyIsSet)
         {
             return;
         }
-        int i = enmeyList.Count;
-        foreach(GameObject obj in enmeyList)
+        if(!enemyIsAlive)
+        {
+            waveStop();
+        }
+        int i = enemyList.Count;
+        foreach(GameObject obj in spawner.currentWave)
         {
             if(!obj.activeInHierarchy)
             {
@@ -54,13 +61,17 @@ public class Wave
     public void waveStop()
     {
         //stop check wave and check if next wave exist or not.
-        if(!enemyIsAlive || enmeyList.Count == 0)
+        if(!enemyIsAlive || enemyList.Count == 0)
         {
             OnwaveStop?.Invoke();
             enemyIsSet = false;
-            enmeyList.Clear();
+            spawner.NextWave();
+            if(spawner.wavesIsActive)
+            {
+                spawner.OnwaveStart();
+            }
             OnCurrentEventStop?.Invoke();
         }
-        //event ???
     }
+   
 }
