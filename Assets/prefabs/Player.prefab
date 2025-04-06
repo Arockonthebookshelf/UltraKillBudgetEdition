@@ -129,7 +129,7 @@ ParticleSystemForceField:
   m_Parameters:
     m_Shape: 2
     m_StartRange: 0
-    m_EndRange: 2.5
+    m_EndRange: 3
     m_Length: 1
     m_GravityFocus: 0
     m_RotationRandomness: {x: 0, y: 0}
@@ -824,9 +824,9 @@ MonoBehaviour:
   maxEnergyCellsCount: 200
   maxRocketsCount: 10
   hasPistol: 1
-  hasShotgun: 1
-  hasMinigun: 1
-  hasRocketLauncher: 1
+  hasShotgun: 0
+  hasMinigun: 0
+  hasRocketLauncher: 0
 --- !u!54 &5433516094661199307
 Rigidbody:
   m_ObjectHideFlags: 0
