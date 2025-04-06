@@ -23,7 +23,7 @@ public class WaveSpawner : MonoBehaviour
     }
     public WaveEnemies[] Enemies = new WaveEnemies[10];
     public List<GameObject>currentWave = new List<GameObject>();
-    private List<GameObject>enemyInPool;
+    public List<GameObject>enemyInPool;
     public WaveManager waveManager;
     public bool wavesIsActive = false;
     public Wave wave;
@@ -120,13 +120,13 @@ public class WaveSpawner : MonoBehaviour
   
     public void NextWave()
     {
-        Debug.Log(currentWaveIndex);
         currentWaveIndex++;
-        if(currentWaveIndex > waveLimit-1)
+        if(currentWaveIndex >= waveLimit)
         {
             wavesIsActive = false;
             return;
         }
+        Debug.Log(currentWaveIndex);
         
         currentWaveEnemy = Enemies[currentWaveIndex];
         waveManager.RemoveEnemyFromPool(currentWave);
