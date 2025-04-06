@@ -30,12 +30,10 @@ public abstract class BaseEnemy2 : MonoBehaviour, IDamagable
     protected bool isDead = false;
     protected float distanceToPlayer;
     protected Vector3 direction;
-    private EnemyVision enemyVision;
 
 
     protected void PreInitialize()
     {
-        enemyVision = GetComponent<EnemyVision>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
@@ -52,7 +50,7 @@ public abstract class BaseEnemy2 : MonoBehaviour, IDamagable
 
         distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (distanceToPlayer <= attackRange && enemyVision.isVisible)
+        if (distanceToPlayer <= attackRange)
         {
             currentState = EnemyState.Attack;
         }
