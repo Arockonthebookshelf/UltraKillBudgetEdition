@@ -1,7 +1,22 @@
 using UnityEngine;
 
-public class MeleeEnemy : BaseEnemy 
+public class ShooterEnemy2 : BaseEnemy2
 {
+    [Header("Projectile Settings")]
+    public GameObject projectilePrefab;
+    public Transform shootPoint;
+    public float projectileSpeed;
+
+    [Tooltip("Range within which the enemy will begin attacking (shooting).")]
+    public float shootingRange;
+
+    [Tooltip("Range for melee attacks (takes precedence over shooting if in range).")]
+    public float meleeRange;
+
+
+    private bool alreadyAttacked = false;
+
+    public float yOffset;
     void Awake()
     {
         PreInitialize();
@@ -12,9 +27,8 @@ public class MeleeEnemy : BaseEnemy
     }
     void Update()
     {
-        StateChanges(); 
+        StateChanges();
     }
-    private bool alreadyAttacked = false;
 
     protected override void Attack()
     {
@@ -31,52 +45,49 @@ public class MeleeEnemy : BaseEnemy
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
             }
         }
-
         // Use the distance computed in the base class.
-        bool isInMeleeRange = distanceToPlayer <= attackRange;
+        bool isInMeleeRange = distanceToPlayer <= meleeRange;
+        bool isInShootingRange = distanceToPlayer <= shootingRange;
+
         if (!alreadyAttacked)
         {
-            PlayAttack();
             alreadyAttacked = true;
-             
-            if (direction != Vector3.zero)
-            {
-                Quaternion lookRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-            }
             // Prioritize melee if the player is close enough.
             if (isInMeleeRange)
             {
-                Debug.Log("isInMeleeRange");
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, direction, out hit))
                 {
                     Debug.Log(hit.collider.name);
                     IDamagable damagable = hit.collider.GetComponent<IDamagable>();
-                    if (damagable != null ) 
+                    if (damagable != null)
                     {
-                        Debug.Log("MeleeEnemy melee attacks the player!");
+                        Debug.Log("ShooterEnemy melee attacks the player!");
                         damagable.Damage(20f, hit.collider);
                     }
                 }
             }
+            else if (isInShootingRange)
+            {
+
+                Debug.Log("Eneter shooting range");
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
+
+                GameObject projectile = ObjectPooler.Instance.SpawnFromPool("Projectiles", shootPoint.position, shootPoint.rotation);
+
+                Vector3 targetPosition = player.position - new Vector3(0, yOffset, 0);
+                Vector3 d = (targetPosition - transform.position).normalized;
+
+                projectile.GetComponent<Rigidbody>().AddForce(d * (projectileSpeed), ForceMode.Impulse);
+            }
+
             // Reset attack after a cooldown.
             Invoke(nameof(ResetAttack), 2f);
         }
     }
-
     protected override void ResetAttack()
     {
         alreadyAttacked = false;
-    }
-
-    private void OnDrawGizmos()
-    {
-        // Ensure gizmos are always visible, even when the object is not selected
-        if (!Application.isPlaying) return; // Optional: Only draw gizmos during play mode
-
-        // Draw Melee Range
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

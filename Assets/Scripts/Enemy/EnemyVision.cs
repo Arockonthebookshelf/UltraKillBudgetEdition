@@ -16,7 +16,7 @@ public class EnemyVision : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindWithTag("Player");
     }
     private void Start()
     {
@@ -34,8 +34,6 @@ public class EnemyVision : MonoBehaviour
             if (Physics.Raycast(transform.position, direction, out hit, rayRangeLength, ~enemyHead))
             {
                 isVisible = hit.transform.gameObject == player;
-                //isVisible = hit.collider.CompareTag("Player");
-                //Debug.Log(hit.collider.name);
             }
             else
             {

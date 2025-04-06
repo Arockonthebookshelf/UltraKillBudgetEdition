@@ -1,201 +1,137 @@
-using System;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
-using random = UnityEngine.Random;
-
 
 public class WaveSpawner : MonoBehaviour
 {
-    [SerializeField]GameObject spawnObject;
-    public GameObject SpawnObject{get{return spawnObject;}}
-    GameObject enemyContainer;
-    [Tooltip("Total Enemy that can be spawned")]
-    [Range(0,15)]public int batchLimit;
-    [Tooltip("Enemy number spawn by a spawner. Enemy number increase with wave")]
-    [Range(1,5)]public int intialSpawnLimit;
-     int currentSpawnLimit;
-    WaveManager waveManager;
-    public bool spawnAt;
-    [SerializeField] int spawnAtWave;
-    [SerializeField]private Transform patrolPointA;
-    [SerializeField]private Transform patrolPointB;
-    [SerializeField]private List <Transform> spawnPoints = new List<Transform>();
-    public List <GameObject>objects = new List<GameObject>();
-    public List <GameObject>enemies = new List<GameObject>();
-    private void Awake()
+    [SerializeField]int waveLimit;
+    public enum EnemyType
+    {
+        melee,shooter,tank
+    }
+   
+    [System.Serializable]
+    public class WaveEnemy
+    {
+        public EnemyType waveEnemy = new EnemyType();
+        public Transform spawner;
+    }
+    [System.Serializable]
+    public class WaveEnemies
+    {
+        public WaveEnemy[] waveEnemies = new WaveEnemy[15];
+    }
+    public WaveEnemies[] Enemies = new WaveEnemies[10];
+    public List<GameObject>currentWave = new List<GameObject>();
+    private List<GameObject>enemyInPool;
+    public WaveManager waveManager;
+    public bool wavesIsActive = false;
+    public Wave wave;
+    private WaveEnemies currentWaveEnemy;
+    private int currentWaveIndex=0;
+
+    void Awake()
     {
         if(gameObject.tag != "Spawner")
         {
             gameObject.tag = "Spawner";
         }
+         foreach(var enemy in Enemies)
+        {
+            waveLimit++;
+        }
+        currentWaveEnemy = Enemies[currentWaveIndex];
     }
-    private void Start()
+    void Start()
     {
-        #region dependency
-        waveManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<WaveManager>();
-        enemyContainer = waveManager.enemyContainer;
-        // if(spawnObject.GetComponent<MeleeEnemy>())
-        //     {
-        //        enemies = waveManager.meleeEnemies;
-        //     }
-        //     else if(spawnObject.GetComponent<ShooterEnemy>())
-        //     {
-        //         enemies = waveManager.shooterEnemies;
-        //     }
-        //     else if(spawnObject.GetComponent<TankEnemy>())
-        //     {
-        //         enemies = waveManager.tankEnemies;
-        //     }
-        //     else if(spawnObject.GetComponent<BossEnemy>())
-        //     {
-        //         enemies = waveManager.bossEnemies;
-        //     }
-            enemies = waveManager.GetList(spawnObject);
-            if(spawnPoints.Count < 1)
-            {
-                spawnPoints.Add(gameObject.transform);
-            }
-        #endregion
+       AddEnemyToCurrentWave(currentWaveEnemy);
+    }
 
-        if (spawnObject == null)
-        {
-            Debug.LogError("Object to be spawned cannot be empty");
-            return;
-        }
-        #region instantiate objects
-        // for (int i = 0; i < batchLimit; i++)
-        // {
-        //     Vector3 randomPos = new Vector3(random.Range(-2, 2), 0, random.Range(-2, 2));
-        //     GameObject obj = Instantiate(spawnObject, transform.position + randomPos, Quaternion.identity, enemyContainer.transform);
-        //     waveManager.enemies.Add(obj);
-        // }
-        objects = GetEnemies(currentSpawnLimit);
-       
-        foreach (GameObject obj in objects)
-        {
-            if(obj.GetComponent<BaseEnemy>())
-            {
-                obj.GetComponent<BaseEnemy>().patrolPointA = patrolPointA;
-                obj.GetComponent<BaseEnemy>().patrolPointB = patrolPointB;
-            }   
-        }
-            #endregion
-        foreach (GameObject obj in objects)
-        {
-            obj.SetActive(false);
-        }
-    }
-   
-    public void Spawn()
+    // Update is called once per frame
+    void Update()
     {
-        if (spawnObject == null)
+       enemyInPool = waveManager.GetEnemiesToList(currentWaveEnemy);
+       if(wavesIsActive)
+       {
+            wave.WaveUpdate();
+       }
+    }
+    public void AddEnemyToCurrentWave(WaveEnemies waveEnemies)
+    {
+        List<EnemyType> enemiesType = new List<EnemyType>();
+        foreach(var enemy in waveEnemies.waveEnemies)
         {
-            return;
+        
+            enemiesType.Add(enemy.waveEnemy);
         }
-        if(spawnAt)
+        BaseEnemy2[] enemiesBase= new BaseEnemy2[15];
+        int i=0;
+        foreach(var enemy in enemiesType)
         {
-            if(waveManager.currentWave < spawnAtWave)
-            {
-                return;
-            }
-        }
-        int spawnCounter = 0;
-        int index = 0;
-        foreach (GameObject obj in objects)
-        {
-            if(spawnCounter >= currentSpawnLimit)
+            if(i>14)
             {
                 break;
             }
-            if(index > spawnPoints.Count-1)
-            {
-                index = 0;
-            }
-            Vector3 randomPos = new Vector3(random.Range(-2, 2), 0, random.Range(-2, 2));
-            obj.transform.position = spawnPoints[index].position;
-            index++;
-            if(obj.GetComponent<BaseEnemy>())
-            {
-                obj.GetComponent<BaseEnemy>().Reset();
-            }
-            obj.SetActive(true);
-            spawnCounter++;
+            waveManager.WaveEnemyDictionary.TryGetValue(enemy,out enemiesBase[i]);
+            //Debug.Log(enemiesBase[i]);
+            i++;
         }
-
-    }
-    public void IncreaseBatchSize(int spawnIncrement)
-    {
-        if (currentSpawnLimit < batchLimit)
+        foreach(var enemy in enemiesBase)
         {
-            currentSpawnLimit += spawnIncrement;
-            objects = GetEnemies(batchLimit);
+            if(enemy)
+            {
+                foreach(var InPool in enemyInPool)
+                {
+                    Debug.Log(  InPool.GetComponent<BaseEnemy2>().GetType()); 
+                    if(enemy.GetType() == InPool.GetComponent<BaseEnemy2>().GetType() && !InPool.activeInHierarchy)
+                    {
+                        Debug.Log("time");
+                        currentWave.Add(InPool);
+                        enemyInPool.Remove(InPool);
+                        break;
+                    }
+                }
+            }
+        }
+        List<Transform>enemiesPosition= new List<Transform>();
+        foreach(var enemyPosition in waveEnemies.waveEnemies)
+        {
+            enemiesPosition.Add(enemyPosition.spawner);
+        }
+        i=0;
+        foreach(var enemy in currentWave)
+        {
+            if(enemiesPosition[i] == null)
+            {
+                continue;
+            }
+            enemy.transform.position = enemiesPosition[i].position;
+            i++;
         }
     }
-    public List<GameObject> GetEnemies(int batchLimit)
+    public void OnwaveStart()
     {
-        List<GameObject> temp = new List<GameObject>();
-        int spawnedEnemies =0;
-        foreach(GameObject enemy in enemies)
+        Debug.Log("waveStart");
+        enemyInPool = waveManager.GetEnemiesToList(currentWaveEnemy);
+        wavesIsActive = true;
+        wave.WaveStart(ref currentWave,this);
+    }
+    
+  
+    public void NextWave()
+    {
+        Debug.Log(currentWaveIndex);
+        currentWaveIndex++;
+        if(currentWaveIndex > waveLimit-1)
         {
-            if(!enemy.activeInHierarchy && batchLimit >= temp.Count)
-            {
-                temp.Add(enemy);
-                spawnedEnemies++;
-            } 
-         }
-
-         foreach (var enemy in temp)
-         {
-            waveManager.RemoveEnemy(enemy);
-         }
-        //  if(batchLimit <= temp.Count)
-        //  {
-        //     Debug.Log("return gate");
-        //     return temp;
-        //  }
-         int remaining =  batchLimit - spawnedEnemies;
-        temp = InstiateNewEnemies(temp);
-        //  for(int i=0;i <remaining;i++)
-        //  {
-        //     GameObject obj = Instantiate(spawnObject,enemyContainer.transform);
-        //     waveManager.SetList(obj);
-        //     enemies = waveManager.GetList(spawnObject);
-        //     temp.Add(obj);
-        //     obj.SetActive(false);
-        //  }
-
-        //foreach to check vaiable enemies
-        // add enemies remaining
+            wavesIsActive = false;
+            return;
+        }
         
-        return temp;
+        currentWaveEnemy = Enemies[currentWaveIndex];
+        waveManager.RemoveEnemyFromPool(currentWave);
+        AddEnemyToCurrentWave(currentWaveEnemy);
+        wave.WaveStart(ref currentWave,this);
     }
-    private List<GameObject> InstiateNewEnemies(List <GameObject> currentSpawnerEnemyList)
-    {
-        int counter = 0;
-        foreach(var enemy in currentSpawnerEnemyList)
-        {
-            counter++;
-        }
-        int remaining = batchLimit - counter;
-        for(int i=0;i<remaining;i++)
-        {
-            GameObject obj = Instantiate(spawnObject,enemyContainer.transform);
-            currentSpawnerEnemyList.Add(obj);
-        }
-            return currentSpawnerEnemyList;
-    }
-    public void ReturnEnemyToList(ref List<GameObject> enemyList)
-    {
-        foreach(var enemy in objects)
-        {
-            enemyList.Add(enemy);
-        }
-        objects.Clear();
-    }
-    public void SpawnerReset()
-    {
-        currentSpawnLimit = intialSpawnLimit;
-    }
-
-
+   
 }

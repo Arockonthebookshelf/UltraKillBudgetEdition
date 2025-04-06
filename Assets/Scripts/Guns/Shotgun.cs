@@ -57,7 +57,7 @@ public class Shotgun : MonoBehaviour
         {
             Vector3 directionWithSpread = CalculateSpread();
 
-            GameObject currentBullet = ObjectPooler.Instance.SpawnProjectileFromPool(bulletTag, attackPoint.position, Quaternion.identity);
+            GameObject currentBullet = ObjectPooler.Instance.SpawnProjectileFromPool(bulletTag, fpsCam.transform.position, Quaternion.identity);
             if (currentBullet != null)
             {
                 currentBullet.transform.forward = directionWithSpread.normalized;
