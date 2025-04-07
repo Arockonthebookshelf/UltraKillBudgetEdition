@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 public class persistentSaveManager : MonoBehaviour
 {
     public static persistentSaveManager instance{get;private set;}
@@ -9,6 +10,7 @@ public class persistentSaveManager : MonoBehaviour
     private DataHandler datahandler;
     GameData gameData;
     private List<IPersistenceData> persistenceDataObjects;
+    public static Action newGame;
     void Awake()
     {
          if(instance != null)
@@ -41,9 +43,12 @@ public class persistentSaveManager : MonoBehaviour
     public void NewGame()
     {
         //intialize new game data
-        gameData = null;
         gameData = new GameData();
         gameData.playerPosition = playerStartPoint.position;
+    }
+    public void Restart()
+    {
+        gameData = null;
     }
     public void LoadGame()
     {

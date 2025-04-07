@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour,IDamagable,IPersistenceData
 {
@@ -35,6 +37,7 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
         {
             fallHeight = new Vector3(0,100,0);
         }
+        transform.position = checkPointPos;
     }
 
     public void Damage(float damage,Collider hitCollider)
@@ -87,6 +90,7 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
         gameData.playerRotation = transform.rotation;
         gameData.curHealth = currentHealth;
     }
+    
     void OnTriggerEnter(Collider other)
     {
             if(other.CompareTag("Fall"))
