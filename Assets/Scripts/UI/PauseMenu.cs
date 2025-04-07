@@ -62,7 +62,6 @@ public class PauseMenu : MonoBehaviour
     public void Dead()
     { 
         Cursor.lockState = CursorLockMode.None; 
-        OnRestart?.Invoke();
         Cursor.visible = true;
         PlayerMovement.Instance.inputEnabled = false;
         deathMenu.SetActive(true);
@@ -79,6 +78,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
+        OnRestart?.Invoke();
         PlayerMovement.Instance.inputEnabled = true;
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
