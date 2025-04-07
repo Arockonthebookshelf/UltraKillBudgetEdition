@@ -66,6 +66,7 @@ public class PauseMenu : MonoBehaviour
         PlayerMovement.Instance.inputEnabled = false;
         deathMenu.SetActive(true);
         Time.timeScale = 0f;
+        OnRestart?.Invoke();
     }
 
     public void Respawn()
@@ -82,7 +83,7 @@ public class PauseMenu : MonoBehaviour
         PlayerMovement.Instance.inputEnabled = true;
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Player.OnPlayerReloaded?.Invoke();
+        //Player.OnPlayerReloaded?.Invoke();
     }
 
     public void GameOver()
