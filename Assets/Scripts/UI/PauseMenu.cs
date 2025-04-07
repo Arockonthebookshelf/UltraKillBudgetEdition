@@ -82,6 +82,7 @@ public class PauseMenu : MonoBehaviour
         PlayerMovement.Instance.inputEnabled = true;
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Player.OnPlayerReloaded?.Invoke();
     }
 
     public void GameOver()
