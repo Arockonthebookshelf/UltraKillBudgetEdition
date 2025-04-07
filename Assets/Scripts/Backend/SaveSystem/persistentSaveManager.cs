@@ -43,13 +43,12 @@ public class persistentSaveManager : MonoBehaviour
     public void NewGame()
     {
         //intialize new game data
+        datahandler.DeleteJsonFile();
         gameData = new GameData();
         gameData.playerPosition = playerStartPoint.position;
     }
-    public void Restart()
-    {
-        gameData = null;
-    }
+    
+
     public void LoadGame()
     {
         gameData = datahandler.LoadData();

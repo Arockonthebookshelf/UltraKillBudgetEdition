@@ -59,5 +59,18 @@ public void SaveData(GameData gameData)
      }
           
     }
+    public void DeleteJsonFile()
+    {
+         string fullPath = Path.Combine(dataDirPath, dataFilePath);
+        if (File.Exists(fullPath))
+        {
+            File.Delete(fullPath);
+            Debug.Log("JSON file deleted: " + fullPath);
+        }
+        else
+        {
+            Debug.LogWarning("File to delete not found.");
+        }
+    }
 
 }
