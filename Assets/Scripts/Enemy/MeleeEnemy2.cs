@@ -7,7 +7,7 @@ public class MeleeEnemy2 : BaseEnemy2
     [SerializeField] private float attackDamage = 10f;
     [SerializeField] private float moveSpeed = 40f;
     [SerializeField] private float attackMoveSpeed = 10f;
-    [SerializeField] private float damageDelay = 10f;
+    [SerializeField] private float damageDelay = 0.5f;
 
     private float currentSpeed;
     void Awake()
@@ -45,7 +45,7 @@ public class MeleeEnemy2 : BaseEnemy2
         {
             alreadyAttacked = true;
             PlayAttack();
-            Invoke(nameof(DealDamage), 0.5f);
+            Invoke(nameof(DealDamage), damageDelay);
         }
     }
 
