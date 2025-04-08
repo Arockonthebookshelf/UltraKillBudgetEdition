@@ -10,7 +10,7 @@ public class WaveManager : MonoBehaviour
     public Dictionary<WaveSpawner.EnemyType,BaseEnemy2> WaveEnemyDictionary = new Dictionary<WaveSpawner.EnemyType, BaseEnemy2>();
     public MeleeEnemy2 meleeEnemy;
     public ShooterEnemy2 shooterEnemy;
-    //public TankEnemy tankEnemy;
+    public TankEnemy2 tankEnemy;
 
 
     void Awake()
@@ -25,7 +25,7 @@ public class WaveManager : MonoBehaviour
         }
         WaveEnemyDictionary.Add(WaveSpawner.EnemyType.melee,meleeEnemy);
         WaveEnemyDictionary.Add(WaveSpawner.EnemyType.shooter,shooterEnemy);
-        //WaveEnemyDictionary.Add(WaveSpawner.EnemyType.tank,tankEnemy);
+        WaveEnemyDictionary.Add(WaveSpawner.EnemyType.tank,tankEnemy);
         if(spawnEnemies.Count < 0)
         {
           Debug.LogWarning("SpawnEnemies cannot be empty");
