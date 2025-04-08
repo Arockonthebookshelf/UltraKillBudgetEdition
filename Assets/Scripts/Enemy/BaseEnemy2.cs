@@ -120,6 +120,6 @@ public abstract class BaseEnemy2 : MonoBehaviour, IDamagable
 
     private void DestroyEnemy()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

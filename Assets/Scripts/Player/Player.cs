@@ -85,7 +85,7 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     public void SaveData(ref GameData gameData)
     {
         Debug.Log("saving");
-        gameData.playerPosition = transform.position;
+        gameData.playerPosition = transform.position;  
         gameData.curHealth = currentHealth;
     }
     
