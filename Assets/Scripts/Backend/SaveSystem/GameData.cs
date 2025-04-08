@@ -12,6 +12,9 @@ public class GameData
    public int currentEnergyCellsCount;
    public int currentRocketsCount;
    public SerializableDictionary<string ,bool> waveActive;
+   public bool hasShotgun;
+   public bool hasMinigun;
+   public bool hasRocketLauncher;
 
    public GameData()
    {
@@ -24,5 +27,8 @@ public class GameData
       currentRocketsCount = 5;
       curHealth = 100;  
       waveActive = new SerializableDictionary<string, bool>();
+      hasShotgun = false;
+      hasMinigun = false;
+      hasRocketLauncher = false;
    }
 }

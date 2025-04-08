@@ -1,0 +1,363 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4866780905514545627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7356254410476777712}
+  - component: {fileID: 6088337755364960851}
+  m_Layer: 0
+  m_Name: WaveSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7356254410476777712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4866780905514545627}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 79.25419, y: 296.54147, z: 64.606636}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6088337755364960851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4866780905514545627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ced76de73feb2d46925f527b593c888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveLimit: 0
+  Enemies:
+  - waveEnemies:
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+  - waveEnemies:
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+  - waveEnemies:
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+  - waveEnemies:
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+  - waveEnemies:
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+  - waveEnemies:
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+  - waveEnemies:
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+  - waveEnemies:
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+  - waveEnemies:
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+  - waveEnemies:
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+    - waveEnemy: 0
+      spawner: {fileID: 0}
+  currentWave: []
+  enemyInPool: []
+  waveManager: {fileID: 0}
+  wavesIsActive: 0
+  wave: {fileID: 0}

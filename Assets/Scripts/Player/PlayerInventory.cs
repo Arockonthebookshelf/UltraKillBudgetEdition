@@ -20,6 +20,9 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
         currentshotgunAmmoCount = gameData.currentshotgunAmmoCount;
         currentEnergyCellsCount = gameData.currentEnergyCellsCount;
         currentRocketsCount = gameData.currentRocketsCount;
+        hasMinigun = gameData.hasMinigun;
+        hasShotgun = gameData.hasShotgun;
+        hasRocketLauncher = gameData.hasRocketLauncher;
     }
     public void SaveData(ref GameData gameData)
     {
@@ -28,6 +31,9 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
         gameData.currentshotgunAmmoCount = currentshotgunAmmoCount;
         gameData.currentEnergyCellsCount = currentEnergyCellsCount;
         gameData.currentRocketsCount = currentRocketsCount;
+        gameData.hasShotgun = hasShotgun;
+        gameData.hasMinigun = hasMinigun;
+        gameData.hasRocketLauncher = hasRocketLauncher;
     }
 
     public int ClearanceLevel = 0;
