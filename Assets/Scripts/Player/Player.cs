@@ -78,7 +78,6 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
         Debug.Log("loading");
         transform.position = gameData.playerPosition;
         checkPointPos = gameData.playerPosition;
-        transform.rotation = gameData.playerRotation;
         currentHealth = gameData.curHealth;
         if(movement!=null)
         movement.enabled = true;
@@ -87,7 +86,6 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     {
         Debug.Log("saving");
         gameData.playerPosition = transform.position;
-        gameData.playerRotation = transform.rotation;
         gameData.curHealth = currentHealth;
     }
     
