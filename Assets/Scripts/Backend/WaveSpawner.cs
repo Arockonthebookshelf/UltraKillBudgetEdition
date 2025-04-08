@@ -1,5 +1,5 @@
+using System.Collections;
 using System.Collections.Generic;
-using Unity.Collections;
 using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
 
@@ -41,10 +41,11 @@ public class WaveSpawner : MonoBehaviour
         {
             waveLimit++;
         }
-        currentWaveEnemy = Enemies[currentWaveIndex];
+        currentWaveEnemy = Enemies[0];
     }
     void Start()
     {
+        currentWaveEnemy = Enemies[0];
        AddEnemyToCurrentWave(currentWaveEnemy);
     }
 
@@ -131,7 +132,7 @@ public class WaveSpawner : MonoBehaviour
         if(currentWaveIndex >= waveLimit)
         {
             wavesIsActive = false;
-            if(doors.Length <1)
+            if(doors.Length >0)
             {
                 foreach(var door in doors)
                 {
@@ -147,5 +148,13 @@ public class WaveSpawner : MonoBehaviour
         AddEnemyToCurrentWave(currentWaveEnemy);
         wave.WaveStart(ref currentWave,this);
     }
-   
+   IEnumerator WaitTime()
+   {
+        bool waitForEnemy=true;
+        while(waitForEnemy)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        yield return null;
+   }
 }
