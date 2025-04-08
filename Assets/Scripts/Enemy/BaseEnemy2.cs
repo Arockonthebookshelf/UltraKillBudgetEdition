@@ -31,12 +31,15 @@ public abstract class BaseEnemy2 : MonoBehaviour, IDamagable
     protected float distanceToPlayer;
     protected Vector3 direction;
 
+    protected EnemyVision EnemyVision;
+
 
     protected void PreInitialize()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        EnemyVision = GetComponent<EnemyVision>();
     }
 
     protected void Initialize()
@@ -50,7 +53,7 @@ public abstract class BaseEnemy2 : MonoBehaviour, IDamagable
 
         distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (distanceToPlayer <= attackRange)
+        if (distanceToPlayer <= attackRange && EnemyVision.isVisible)
         {
             currentState = EnemyState.Attack;
         }
