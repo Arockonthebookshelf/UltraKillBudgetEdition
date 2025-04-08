@@ -97,6 +97,7 @@ public class WaveSpawner : MonoBehaviour
         List<Transform>enemiesPosition= new List<Transform>();
         foreach(var enemyPosition in waveEnemies.waveEnemies)
         {
+            
             enemiesPosition.Add(enemyPosition.spawner);
         }
         i=0;
@@ -104,6 +105,7 @@ public class WaveSpawner : MonoBehaviour
         {
             if(enemiesPosition[i] == null)
             {
+                i++;
                 continue;
             }
             enemy.transform.position = enemiesPosition[i].position;

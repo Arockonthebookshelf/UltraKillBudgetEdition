@@ -1,6 +1,7 @@
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
@@ -12,12 +13,16 @@ public class HUD : MonoBehaviour
     [SerializeField] TMP_Text healText;
     [SerializeField] float healTextTimer;
     [SerializeField] TMP_Text clearanceLevelText;
-    [SerializeField] TMP_Text ShotgunAmmoCount;
-    [SerializeField] TMP_Text MinigunAmmoCount;
-    [SerializeField] TMP_Text RocketLauncherAmmoCount;
+    [SerializeField] Image shotgunImage;
+    [SerializeField] Image minigunImage;
+    [SerializeField] Image rocketLauncherImage;
+    [SerializeField] TMP_Text shotgunAmmoCount;
+    [SerializeField] TMP_Text minigunAmmoCount;
+    [SerializeField] TMP_Text rocketLauncherAmmoCount;
     [SerializeField] GameObject interactionProgressBar;
     [SerializeField] GameObject interactionButtonImage;
     [SerializeField] GameObject interactionTextGO;
+    [SerializeField] Color fullAmmoColor;
     [SerializeField] Color normalAmmoColor;
     [SerializeField] Color lowAmmoColor;
     [SerializeField] Color noAmmoColor;
@@ -28,16 +33,25 @@ public class HUD : MonoBehaviour
     [SerializeField] Sprite rocketlauncherCrosshair;
     [SerializeField] Color normalCrosshairColor;
     [SerializeField] Color disabledCrosshairColor;
-    [SerializeField] Animator selectedWeapon;
+    [SerializeField] Volume damageVolume;
+    public GameObject pistolGunUI;
     public GameObject shotGunUI;
     public GameObject miniGunUI;
     public GameObject rocketLauncherUI;
+    [SerializeField] RectTransform weaponLayoutGroup;
+    RectTransform currentWeaponRT;
+    RectTransform pistolRT;
+    RectTransform shotgunRT;
+    RectTransform minigunRT;
+    RectTransform rocketLauncherRT;
     Animator HudAnimator;
     [SerializeField] Image currentCrosshair;
     Slider interactionSlider;
     Image interactionButton;
     TMP_Text interactionText;
     UIBobbing bobbingSway;
+    float _maxHealth;
+
     void Awake()
     {
         if(instance!=this)
@@ -55,10 +69,19 @@ public class HUD : MonoBehaviour
         
         HudAnimator = GetComponent<Animator>();
         bobbingSway = FindAnyObjectByType<UIBobbing>();
+        pistolRT = pistolGunUI.GetComponent<RectTransform>();
+        shotgunRT = shotGunUI.GetComponent<RectTransform>();
+        minigunRT = miniGunUI.GetComponent<RectTransform>();
+        rocketLauncherRT = rocketLauncherUI.GetComponent<RectTransform>();
     }
 
     void Start()
     {
+        pistolGunUI.SetActive(PlayerInventory.instance.hasPistol);
+        shotGunUI.SetActive(PlayerInventory.instance.hasShotgun);
+        miniGunUI.SetActive(PlayerInventory.instance.hasMinigun);
+        rocketLauncherUI.SetActive(PlayerInventory.instance.hasRocketLauncher);
+        currentWeaponRT = pistolRT;
         currentCrosshair.sprite = pistolCrosshair;
         UpdateShotgunAmmo();
         UpdateMiniGunAmmo();
@@ -69,6 +92,7 @@ public class HUD : MonoBehaviour
     {
         healthHitSlider.value = healthHitSlider.maxValue = healthSlider.value = healthSlider.maxValue = maxHealth;
         healthText.SetText(healthSlider.value.ToString());
+        _maxHealth = maxHealth;
     }
 
     public void UpdateHealthBar(int currentHealth)
@@ -77,6 +101,8 @@ public class HUD : MonoBehaviour
         if (currentHealth > 0)
         {
             healthText.SetText(healthSlider.value.ToString());
+            float healthPercentage = currentHealth / _maxHealth;
+            damageVolume.weight = 1 - healthPercentage;
         }
         else
         {
@@ -86,18 +112,39 @@ public class HUD : MonoBehaviour
 
     public void UpdateShotgunAmmo()
     {
-        ShotgunAmmoCount.SetText(PlayerInventory.instance.currentshotgunAmmoCount + " / " + PlayerInventory.instance.maxshotgunAmmoCount);
-        ShotgunAmmoCount.color = (PlayerInventory.instance.currentshotgunAmmoCount >= PlayerInventory.instance.maxshotgunAmmoCount * lowAmmoPercentage) ? normalAmmoColor : (PlayerInventory.instance.currentshotgunAmmoCount == 0) ? noAmmoColor : lowAmmoColor;
+        shotgunAmmoCount.SetText(PlayerInventory.instance.currentshotgunAmmoCount + " / " + PlayerInventory.instance.maxshotgunAmmoCount);
+        if(PlayerInventory.instance.currentshotgunAmmoCount == PlayerInventory.instance.maxshotgunAmmoCount)
+        {
+            shotgunImage.color = shotgunAmmoCount.color = fullAmmoColor;
+        }
+        else
+        {
+            shotgunImage.color = shotgunAmmoCount.color = (PlayerInventory.instance.currentshotgunAmmoCount >= PlayerInventory.instance.maxshotgunAmmoCount * lowAmmoPercentage) ? normalAmmoColor : (PlayerInventory.instance.currentshotgunAmmoCount == 0) ? noAmmoColor : lowAmmoColor;
+        }
     }
     public void UpdateMiniGunAmmo()
     {
-        MinigunAmmoCount.SetText(PlayerInventory.instance.currentEnergyCellsCount + " / " + PlayerInventory.instance.maxEnergyCellsCount);
-        MinigunAmmoCount.color = (PlayerInventory.instance.currentEnergyCellsCount >= PlayerInventory.instance.maxEnergyCellsCount * lowAmmoPercentage) ? normalAmmoColor : (PlayerInventory.instance.currentEnergyCellsCount == 0) ? noAmmoColor : lowAmmoColor;
+        minigunAmmoCount.SetText(PlayerInventory.instance.currentEnergyCellsCount + " / " + PlayerInventory.instance.maxEnergyCellsCount);
+        if (PlayerInventory.instance.currentEnergyCellsCount == PlayerInventory.instance.maxEnergyCellsCount)
+        {
+            minigunImage.color = minigunAmmoCount.color = fullAmmoColor;
+        }
+        else
+        {
+            minigunImage.color = minigunAmmoCount.color = (PlayerInventory.instance.currentEnergyCellsCount >= PlayerInventory.instance.maxEnergyCellsCount * lowAmmoPercentage) ? normalAmmoColor : (PlayerInventory.instance.currentEnergyCellsCount == 0) ? noAmmoColor : lowAmmoColor;
+        }    
     }
     public void UpdateRocketLauncherAmmo()
     {
-        RocketLauncherAmmoCount.SetText(PlayerInventory.instance.currentRocketsCount + " / " + PlayerInventory.instance.maxRocketsCount);
-        RocketLauncherAmmoCount.color = (PlayerInventory.instance.currentRocketsCount >= PlayerInventory.instance.maxRocketsCount * lowAmmoPercentage) ? normalAmmoColor : (PlayerInventory.instance.currentRocketsCount == 0) ? noAmmoColor : lowAmmoColor;
+        rocketLauncherAmmoCount.SetText(PlayerInventory.instance.currentRocketsCount + " / " + PlayerInventory.instance.maxRocketsCount);
+        if (PlayerInventory.instance.currentRocketsCount == PlayerInventory.instance.maxRocketsCount)
+        {
+            rocketLauncherImage.color = rocketLauncherAmmoCount.color = fullAmmoColor;
+        }
+        else
+        {
+            rocketLauncherImage.color = rocketLauncherAmmoCount.color = (PlayerInventory.instance.currentRocketsCount >= PlayerInventory.instance.maxRocketsCount * lowAmmoPercentage) ? normalAmmoColor : (PlayerInventory.instance.currentRocketsCount == 0) ? noAmmoColor : lowAmmoColor;
+        }
     }
 
     public void UpdateWeapon(string weapon)
@@ -107,27 +154,34 @@ public class HUD : MonoBehaviour
             case "Pistol":
                 currentCrosshair.sprite = pistolCrosshair;
                 currentCrosshair.color = normalCrosshairColor;
-                selectedWeapon.SetInteger("Weapon", 0);
+                ChangeSelectedWeaponSize(pistolRT);
                 break;
 
             case "Shotgun":
                 currentCrosshair.sprite = shotgunCrosshair;
                 currentCrosshair.color = normalCrosshairColor;
-                selectedWeapon.SetInteger("Weapon", 1);
+                ChangeSelectedWeaponSize(shotgunRT);
                 break;
 
             case "MiniGun":
                 currentCrosshair.sprite = minigunCrosshair;
                 currentCrosshair.color = normalCrosshairColor;
-                selectedWeapon.SetInteger("Weapon", 2);
+                ChangeSelectedWeaponSize(minigunRT);
                 break;
 
             case "RocketLauncher":
                 currentCrosshair.sprite = rocketlauncherCrosshair;
                 currentCrosshair.color = normalCrosshairColor;
-                selectedWeapon.SetInteger("Weapon", 3);
+                ChangeSelectedWeaponSize(rocketLauncherRT);
                 break;
         }
+    }
+    void ChangeSelectedWeaponSize(RectTransform newWeapon)
+    {
+        currentWeaponRT.sizeDelta = new Vector2(200, 50);
+        currentWeaponRT = newWeapon;
+        currentWeaponRT.sizeDelta = new Vector2(300, 75);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(weaponLayoutGroup);
     }
 
     public void ToggleDisplay(bool value)
