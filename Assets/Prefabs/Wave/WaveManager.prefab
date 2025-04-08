@@ -45,9 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c4442d9588d8a943aa3691d457939dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnEnemies: []
-  meleeEnemy: {fileID: 0}
-  shooterEnemy: {fileID: 0}
+  spawnEnemies:
+  - {fileID: 768332908200575298, guid: d8e44dfc9bcb8b24b8bd979cda99f543, type: 3}
+  - {fileID: 890583766236707314, guid: e4f782f1a0c9f2541b3a368b8da12ae0, type: 3}
+  - {fileID: 8978419948893133599, guid: 554a4c0a888d6e642879bddefc3e056b, type: 3}
+  meleeEnemy: {fileID: 7601829605872160614, guid: d8e44dfc9bcb8b24b8bd979cda99f543, type: 3}
+  shooterEnemy: {fileID: 7839703255203684624, guid: e4f782f1a0c9f2541b3a368b8da12ae0, type: 3}
+  tankEnemy: {fileID: 6516619911254409845, guid: 554a4c0a888d6e642879bddefc3e056b, type: 3}
 --- !u!114 &592004958072821227
 MonoBehaviour:
   m_ObjectHideFlags: 0

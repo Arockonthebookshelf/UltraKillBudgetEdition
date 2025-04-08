@@ -13,18 +13,20 @@ public class ShooterEnemy2 : BaseEnemy2
     [Tooltip("Range for melee attacks (takes precedence over shooting if in range).")]
     public float meleeRange;
 
-
     private bool alreadyAttacked = false;
 
     public float yOffset;
+
     void Awake()
     {
         PreInitialize();
     }
+
     private void Start()
     {
         Initialize();
     }
+
     void Update()
     {
         StateChanges();
@@ -32,10 +34,8 @@ public class ShooterEnemy2 : BaseEnemy2
 
     protected override void Attack()
     {
-        // Stop movement during the attack.
         agent.SetDestination(transform.position);
 
-        // Smoothly face the player.
         if (player != null)
         {
             direction = (player.position - transform.position).normalized;
@@ -45,14 +45,14 @@ public class ShooterEnemy2 : BaseEnemy2
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
             }
         }
-        // Use the distance computed in the base class.
+
         bool isInMeleeRange = distanceToPlayer <= meleeRange;
         bool isInShootingRange = distanceToPlayer <= shootingRange;
 
         if (!alreadyAttacked)
         {
             alreadyAttacked = true;
-            // Prioritize melee if the player is close enough.
+
             if (isInMeleeRange)
             {
                 RaycastHit hit;
@@ -69,7 +69,6 @@ public class ShooterEnemy2 : BaseEnemy2
             }
             else if (isInShootingRange)
             {
-
                 Debug.Log("Eneter shooting range");
                 Quaternion lookRotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
@@ -82,12 +81,22 @@ public class ShooterEnemy2 : BaseEnemy2
                 projectile.GetComponent<Rigidbody>().AddForce(d * (projectileSpeed), ForceMode.Impulse);
             }
 
-            // Reset attack after a cooldown.
             Invoke(nameof(ResetAttack), 2f);
         }
     }
+
     protected override void ResetAttack()
     {
         alreadyAttacked = false;
+    }
+
+    // Draw gizmos for melee and shooting ranges
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, meleeRange);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, shootingRange);
     }
 }
