@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class WaveSpawner : MonoBehaviour
     public Wave wave;
     private WaveEnemies currentWaveEnemy;
     private int currentWaveIndex=0;
-
+    public SlidingDoors[] doors;
     void Awake()
     {
         if(gameObject.tag != "Spawner")
@@ -112,6 +113,10 @@ public class WaveSpawner : MonoBehaviour
     public void OnwaveStart()
     {
         Debug.Log("waveStart");
+        foreach(var door in doors)
+        {
+            door.LockDoor();
+        }
         enemyInPool = waveManager.GetEnemiesToList(currentWaveEnemy);
         wavesIsActive = true;
         wave.WaveStart(ref currentWave,this);
@@ -124,6 +129,13 @@ public class WaveSpawner : MonoBehaviour
         if(currentWaveIndex >= waveLimit)
         {
             wavesIsActive = false;
+            if(doors.Length <1)
+            {
+                foreach(var door in doors)
+                {
+                    door.UnlockDoor();
+                }
+                }
             return;
         }
         Debug.Log(currentWaveIndex);
