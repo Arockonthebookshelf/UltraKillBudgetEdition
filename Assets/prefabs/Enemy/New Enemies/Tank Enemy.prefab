@@ -106,10 +106,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2028480513739368047}
   - component: {fileID: 410636150726659680}
+  - component: {fileID: 797734085227391985}
   - component: {fileID: 2172974668778093275}
   - component: {fileID: 6172760077290275918}
   - component: {fileID: 5420220189790543957}
-  - component: {fileID: 797734085227391985}
   m_Layer: 12
   m_Name: Tank Enemy
   m_TagString: Untagged
@@ -161,6 +161,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &797734085227391985
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262939617850418390}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.4, y: 1.9, z: 1}
+  m_Center: {x: 0, y: -0.04, z: 0.04}
 --- !u!195 &2172974668778093275
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -236,27 +257,6 @@ MonoBehaviour:
   missileSpeed: 15
   shootPoint: {fileID: 0}
   meleeRange: 3.5
---- !u!65 &797734085227391985
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 262939617850418390}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.4, y: 1.9, z: 1}
-  m_Center: {x: 0, y: -0.04, z: 0.04}
 --- !u!1 &492529396589415375
 GameObject:
   m_ObjectHideFlags: 0
@@ -3205,7 +3205,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4109236771736938531}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 6b77cbab00eadc94fb1a04e939a5c567, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 58b6a7dcb1b79c9469ef1167f57ad16c, type: 3}
   m_Controller: {fileID: 9100000, guid: fe80185eb2d1f194fb978730fbde710b, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
