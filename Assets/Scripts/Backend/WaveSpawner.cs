@@ -46,6 +46,7 @@ public class WaveSpawner : MonoBehaviour
     void Start()
     {
         currentWaveEnemy = Enemies[0];
+        enemyInPool =   waveManager.GetEnemiesToList(currentWaveEnemy);
        AddEnemyToCurrentWave(currentWaveEnemy);
     }
 
@@ -84,10 +85,8 @@ public class WaveSpawner : MonoBehaviour
             {
                 foreach(var InPool in enemyInPool)
                 {
-                    Debug.Log(  InPool.GetComponent<BaseEnemy2>().GetType()); 
                     if(enemy.GetType() == InPool.GetComponent<BaseEnemy2>().GetType() && !InPool.activeInHierarchy)
                     {
-                        Debug.Log("time");
                         currentWave.Add(InPool);
                         enemyInPool.Remove(InPool);
                         break;
@@ -120,7 +119,7 @@ public class WaveSpawner : MonoBehaviour
         {
             door.LockDoor();
         }
-        enemyInPool = waveManager.GetEnemiesToList(currentWaveEnemy);
+        
         wavesIsActive = true;
         wave.WaveStart(ref currentWave,this);
     }
@@ -128,6 +127,7 @@ public class WaveSpawner : MonoBehaviour
   
     public void NextWave()
     {
+        Debug.Log("next wave");
         currentWaveIndex++;
         if(currentWaveIndex >= waveLimit)
         {
@@ -157,4 +157,10 @@ public class WaveSpawner : MonoBehaviour
         }
         yield return null;
    }
+
+    public void PlayMusic()
+    {
+        if (wavesIsActive) MusicManager.PlayBattleMusic();
+        else MusicManager.StopBattleMusic();
+    }
 }

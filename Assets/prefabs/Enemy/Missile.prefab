@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 9005585339642122074}
   - component: {fileID: 8335845240864010259}
   - component: {fileID: 8800541383409087107}
-  - component: {fileID: 4519643529869690785}
   - component: {fileID: -4983602282704285731}
   m_Layer: 2
   m_Name: Missile
@@ -113,8 +112,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0000001, y: 3.9, z: 1.0000002}
-  m_Center: {x: 0.000000059604645, y: 0.92, z: -0.00000008940697}
+  m_Size: {x: 1.2734782, y: 3.8999999, z: 1.1959081}
+  m_Center: {x: 0.000000059604645, y: 0.9199999, z: -0.00000008940695}
 --- !u!54 &8335845240864010259
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -154,21 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b56214370b5e0e6478676fa2be8fbb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missileSpeed: 24.5
-  missileRotationSpeed: 5
---- !u!114 &4519643529869690785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 252971366136815999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d90c3ea6e8fca2a44aa3fa51dbb97df9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  diableTimer: 3
+  missileSpeed: 27.5
+  missileRotationSpeed: 7
 --- !u!114 &-4983602282704285731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14061ecaa8c757841bcd1a43c7d2cd33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 30
+  diableTimer: 3
+  Damage: 20
 --- !u!1 &337902525589590665
 GameObject:
   m_ObjectHideFlags: 0

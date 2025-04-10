@@ -15,21 +15,25 @@ public class Wave : MonoBehaviour
     public void WaveStart(ref List<GameObject> currentWave,WaveSpawner _spawner)
     {
         spawner = _spawner;
+        enemyIsAlive = true;
         enemyList = currentWave;
         OnwaveStart?.Invoke();
         foreach(var enemy in spawner.currentWave)
         {
             enemy.SetActive(true);
         }
-        enemyIsSet = true;
+        if(currentWave.Count >0)
+        {
+            enemyIsSet = true;
+        }
     }
         public void WaveUpdate()
     {
         //list of enemies and check if they are active
-        foreach(var enemy in enemyList)
-        {
-            Debug.Log(enemy);
-        }
+        // foreach(var enemy in enemyList)
+        // {
+        //     Debug.Log(enemy);
+        // }
         if(!enemyIsSet)
         {
             return;

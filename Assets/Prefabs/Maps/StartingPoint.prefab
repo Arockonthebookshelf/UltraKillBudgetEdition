@@ -44,3 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd458a9a8515d14cb19de5942658f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shotGun: 1
+  miniGun: 0
+  rocketLauncher: 0
+  inventory: {fileID: 0}

@@ -9,9 +9,9 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     PlayerMovement movement;
     public static Action OnPlayerDeath;
     public static Action OnPlayerReloaded;
-    [SerializeField] private int maxHealth = 100;
+    public int maxHealth = 100;
     [SerializeField]Vector3 fallHeight;
-    [SerializeField] int currentHealth;
+    public int currentHealth;
     Vector3 checkPointPos;
     [HideInInspector] public bool canHeal = false;
 

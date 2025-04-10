@@ -5127,7 +5127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e2609fa40f9c44194518826c850d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 7
   fireRate: 0.1
   range: 100
   verticalSpread: 1
@@ -5316,7 +5316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb3d6e7f4c910ed4f83278babdb6403d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 10
   fireRate: 0.25
   range: 100
   verticalSpread: 0.05
@@ -5652,7 +5652,7 @@ MonoBehaviour:
   fireRate: 0.75
   verticalSpread: 4
   horizontalSpread: 4
-  bulletsPerTap: 10
+  bulletsPerTap: 13
   muzzleFlash: {fileID: 6101021375568685784}
   fpsCam: {fileID: 3538616784311346008}
   attackPoint: {fileID: 5855748144561742667}
