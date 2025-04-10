@@ -31,7 +31,7 @@ public class EnemyVision : MonoBehaviour
             RaycastHit hit;
             direction = (player.transform.position - transform.position).normalized;
 
-            if (Physics.Raycast(transform.position, direction, out hit, rayRangeLength, ~enemyHead))
+            if (Physics.Raycast(transform.position, direction, out hit, rayRangeLength))
             {
                 isVisible = hit.transform.gameObject == player;
             }

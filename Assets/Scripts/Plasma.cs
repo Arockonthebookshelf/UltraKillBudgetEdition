@@ -13,11 +13,11 @@ public class Plasma : MonoBehaviour
     {
         GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
         gameObject.SetActive(false);
+        ObjectPooler.Instance.EnqueObject(transform.parent.name, gameObject);
     }
 
     void OnDisable()
     {
-        ObjectPooler.Instance.EnqueObject(transform.parent.name, gameObject);
     }
 
     private void OnTriggerEnter(Collider other)

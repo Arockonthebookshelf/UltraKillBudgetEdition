@@ -1,130 +1,144 @@
-using System.Collections;
-using UnityEngine;
+    using System.Collections;
+    using UnityEngine;
 
-public class TankEnemy2 : BaseEnemy2
-{
-    public enum AttackState { Melee, Missile }
-
-    [Header("States")]
-    [SerializeField] private AttackState currentAtkState;
-
-    [Header("RocketLauncher Settings")]
-    public GameObject RocketPrefab;
-    [Tooltip("Range within which the enemy will begin attacking (RocketShooting).")]
-    public float MissileRange;
-    public float missileSpeed = 20f;
-    public Transform shootPoint;
-
-    [Header("Melee Settings")]
-    [Tooltip("Range within which the enemy will begin attacking (Melee).")]
-    [SerializeField] public float meleeRange;
-    [SerializeField] private float meleeDamage = 20f;
-
-    private bool alreadyAttacked = false;
-
-    void Awake()
+    public class TankEnemy2 : BaseEnemy2
     {
-        PreInitialize();
-    }
+        public enum AttackState { Melee, Missile }
 
-    private void Start()
-    {
-        Initialize();
-    }
+        [Header("States")]
+        [SerializeField] private AttackState currentAtkState;
 
-    void Update()
-    {
-        StateChanges();
-        animator.SetFloat("Speed", agent.velocity.magnitude);
-    }
-    private void PerformAttackStateAction()
-    {
-        alreadyAttacked = true;
+        [Header("RocketLauncher Settings")]
+        public GameObject RocketPrefab;
+        [Tooltip("Range within which the enemy will begin attacking (RocketShooting).")]
+        public float MissileRange;
+        public float missileSpeed = 20f;
+        public Transform shootPoint;
 
-        switch (currentAtkState)
+        [Header("Melee Settings")]
+        [Tooltip("Range within which the enemy will begin attacking (Melee).")]
+        [SerializeField] public float meleeRange;
+        [SerializeField] private float meleeDamage = 20f;
+
+        private bool alreadyAttacked = false;
+
+        void Awake()
         {
-            case AttackState.Melee:
-                PlayMeleeATK();
-                MeleeATK();
-                break;
-
-            case AttackState.Missile:
-                MissileATK();
-                break;
-
-            default:
-                break;
+            PreInitialize();
         }
-    }
-    #region Attacks
-    private void MeleeATK()
-    {
-        agent.SetDestination(player.transform.position);
 
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, direction, out hit))
+        private void Start()
         {
-            Debug.Log(hit.collider.name);
-            IDamagable damagable = hit.collider.GetComponent<IDamagable>();
+            Initialize();
+        }
 
-            if (damagable != null)
+        void Update()
+        {
+            StateChanges();
+            animator.SetFloat("Speed", agent.velocity.magnitude);
+        }
+        private void PerformAttackStateAction()
+        {
+            alreadyAttacked = true;
+
+            switch (currentAtkState)
             {
-                damagable.Damage(meleeDamage, hit.collider);
+                case AttackState.Melee:
+                    PlayMeleeATK();
+                    MeleeATK();
+                    break;
+
+                case AttackState.Missile:
+                    MissileATK();
+                    break;
+
+                default:
+                    break;
             }
         }
-        Invoke(nameof(ResetAttack), 1f);
-    }
-    private void MissileATK()
-    {
-        StartCoroutine(ShootRockets());
-        Invoke(nameof(ResetAttack), 5f);
-    }
+        #region Attacks
+        private void MeleeATK()
+        {
+
+        Debug.Log("Melee Attack");
+            agent.SetDestination(transform.position);
+
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, direction, out hit))
+            {
+                Debug.Log(hit.collider.name);
+                IDamagable damagable = hit.collider.GetComponent<IDamagable>();
+
+                if (damagable != null)
+                {
+                    damagable.Damage(meleeDamage, hit.collider);
+                }
+            }
+            Invoke(nameof(ResetAttack), 1f);
+        }
+        private void MissileATK()
+        {
+            StartCoroutine(ShootRockets());
+            Invoke(nameof(ResetAttack), 5f);
+        }
+        #endregion
+
+        protected override void Attack()
+        {
+
+            agent.SetDestination(transform.position);
+
+            if (player != null)
+            {
+                direction = (player.position - transform.position).normalized;
+            }
+
+            if (distanceToPlayer <= meleeRange)
+            {
+                currentAtkState = AttackState.Melee;
+            }
+            else 
+            {
+                currentAtkState = AttackState.Missile;
+            }
+            if (!alreadyAttacked)
+            {
+                PerformAttackStateAction();
+            }
+        }
+        IEnumerator ShootRockets()
+        {
+            int rocketLaunched = 3;
+            for (int i = 1; i <= rocketLaunched; i++)
+            {
+                GameObject projectile = ObjectPooler.Instance.SpawnFromPool("Rockets", shootPoint.position, shootPoint.rotation);
+                var p = projectile.GetComponent<EnemyMissile>();
+                p.missileSpeed = missileSpeed - (i * 2);
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
+
+        protected override void ResetAttack()
+        {
+            alreadyAttacked = false;
+        }
+
+        #region Attack Animations
+        private void PlayMeleeATK()
+        {
+            animator.SetTrigger("Attack");
+        }
     #endregion
 
-    protected override void Attack()
+    void OnDrawGizmosSelected()
     {
+        // Melee Range - Red
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, meleeRange);
 
-        agent.SetDestination(transform.position);
-
-        if (player != null)
-        {
-            direction = (player.position - transform.position).normalized;
-        }
-
-        if (distanceToPlayer <= meleeRange)
-        {
-            currentAtkState = AttackState.Melee;
-        }
-        else 
-        {
-            currentAtkState = AttackState.Missile;
-        }
-        if (!alreadyAttacked)
-        {
-            PerformAttackStateAction();
-        }
-    }
-    IEnumerator ShootRockets()
-    {
-        int rocketLaunched = 3;
-        for (int i = 1; i <= rocketLaunched; i++)
-        {
-            GameObject projectile = ObjectPooler.Instance.SpawnFromPool("Rockets", shootPoint.position, shootPoint.rotation);
-            var p = projectile.GetComponent<EnemyMissile>();
-            p.missileSpeed = missileSpeed - (i * 2);
-            yield return new WaitForSeconds(0.5f);
-        }
+        // Missile Range - Blue
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, MissileRange);
     }
 
-    protected override void ResetAttack()
-    {
-        alreadyAttacked = false;
-    }
-
-    #region Attack Animations
-    private void PlayMeleeATK()
-    {
-        animator.SetTrigger("Attack");
-    }
-    #endregion
 }
