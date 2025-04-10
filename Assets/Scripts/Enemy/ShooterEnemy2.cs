@@ -30,6 +30,7 @@ public class ShooterEnemy2 : BaseEnemy2
     void Update()
     {
         StateChanges();
+        animator.SetFloat("Speed", agent.velocity.magnitude);
     }
 
     protected override void Attack()
@@ -64,6 +65,7 @@ public class ShooterEnemy2 : BaseEnemy2
                     {
                         Debug.Log("ShooterEnemy melee attacks the player!");
                         damagable.Damage(20f, hit.collider);
+                        PlayAttack();
                     }
                 }
             }
@@ -79,6 +81,7 @@ public class ShooterEnemy2 : BaseEnemy2
                 Vector3 d = (targetPosition - transform.position).normalized;
 
                 projectile.GetComponent<Rigidbody>().AddForce(d * (projectileSpeed), ForceMode.Impulse);
+                PlayAttack();
             }
 
             Invoke(nameof(ResetAttack), 2f);

@@ -613,6 +613,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3742556574195940149, guid: a1843ddb635abca43b3fda028fd45426, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 2007493947}
     - target: {fileID: 5183591555849032170, guid: a1843ddb635abca43b3fda028fd45426, type: 3}
       propertyPath: m_Name
       value: StartingPoint
@@ -2631,7 +2635,7 @@ PrefabInstance:
       objectReference: {fileID: 1644565183}
     - target: {fileID: 8038456546856218648, guid: f4145be5d752fba46b5bb19051eaecef, type: 3}
       propertyPath: pools.Array.data[2].size
-      value: 23
+      value: 26
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6768,6 +6772,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3726135710789635634, guid: 1e2e62c1a3fc2d847b3501db60346f95, type: 3}
+--- !u!114 &2007493947 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4904663452949177519, guid: ac7d183678aa49c4cae9ac56f9a002a9, type: 3}
+  m_PrefabInstance: {fileID: 1702386307}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff994ac0f69d4147a754995aaff5bcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2023705641 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2708722081226986939, guid: 1e2e62c1a3fc2d847b3501db60346f95, type: 3}
@@ -7204,6 +7219,10 @@ PrefabInstance:
     - target: {fileID: 8978419948893133599, guid: 554a4c0a888d6e642879bddefc3e056b, type: 3}
       propertyPath: m_Name
       value: Tank Enemy2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978419948893133599, guid: 554a4c0a888d6e642879bddefc3e056b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
