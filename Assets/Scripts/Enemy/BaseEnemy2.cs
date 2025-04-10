@@ -49,7 +49,6 @@ public abstract class BaseEnemy2 : MonoBehaviour, IDamagable
 
     protected void StateChanges()
     {
-        Debug.Log(EnemyVision.isVisible);
         if (isDead) return;
 
         distanceToPlayer = Vector3.Distance(transform.position, player.position);

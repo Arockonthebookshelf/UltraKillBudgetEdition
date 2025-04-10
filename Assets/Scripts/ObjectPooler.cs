@@ -22,7 +22,6 @@ public class ObjectPooler : MonoBehaviour
     public List<Pool> pools;
     public Dictionary<string, Queue<GameObject>> poolDictionary = new();
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         foreach (Pool pool in pools)
