@@ -229,6 +229,6 @@ public class HUD : MonoBehaviour
 
     public void UpdateClearanceLevel()
     {
-        clearanceLevelText.SetText(PlayerInventory.instance.ClearanceLevel.ToString());
+        clearanceLevelText.SetText("Clearance: L" + PlayerInventory.instance.ClearanceLevel.ToString());
     }
 }

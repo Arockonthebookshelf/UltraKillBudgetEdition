@@ -3,6 +3,7 @@ using UnityEngine;
 public class KeycardPickup : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed = 1;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

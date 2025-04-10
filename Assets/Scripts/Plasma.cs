@@ -2,17 +2,22 @@ using UnityEngine;
 
 public class Plasma : MonoBehaviour
 {
+    [SerializeField] int diableTimer;
     [SerializeField] float Damage;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    void OnEnable()
     {
-        
+        Invoke(nameof(DisableObj), diableTimer);
+    }
+    void DisableObj()
+    {
+        GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+        gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnDisable()
     {
-        
+        ObjectPooler.Instance.EnqueObject(transform.parent.name, gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -23,6 +28,7 @@ public class Plasma : MonoBehaviour
             if (damagable != null)
             {
                 damagable.Damage(Damage, other);
+                DisableObj();
             }
         }
     }

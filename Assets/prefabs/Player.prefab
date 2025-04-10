@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8128435481395234908}
@@ -638,7 +638,7 @@ Transform:
   m_GameObject: {fileID: 4335948807302404178}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.12, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -826,9 +826,9 @@ MonoBehaviour:
   maxEnergyCellsCount: 200
   maxRocketsCount: 10
   hasPistol: 1
-  hasShotgun: 1
-  hasMinigun: 1
-  hasRocketLauncher: 1
+  hasShotgun: 0
+  hasMinigun: 0
+  hasRocketLauncher: 0
 --- !u!54 &5433516094661199307
 Rigidbody:
   m_ObjectHideFlags: 0

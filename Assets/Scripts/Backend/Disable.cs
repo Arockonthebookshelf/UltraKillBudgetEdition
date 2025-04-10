@@ -11,7 +11,11 @@ public class Disable : MonoBehaviour
     void DisableObj()
     {
         GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
-        ObjectPooler.Instance.EnqueObject(transform.parent.name, gameObject);
         gameObject.SetActive(false);
+    }
+
+    void OnDisable()
+    {
+        ObjectPooler.Instance.EnqueObject(transform.parent.name, gameObject);
     }
 }

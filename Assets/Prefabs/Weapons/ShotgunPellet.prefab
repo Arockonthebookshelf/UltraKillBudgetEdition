@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 1
-  damage: 10
+  damage: 5
   bulletTag: Shotgun Projectile
   bloodPrefab: {fileID: 7580687418149800051, guid: 90e30be9f5425c24cb349653ea443937, type: 3}
   hitPrefab: {fileID: 1000011945391522, guid: d58b05d0f2e04dc49a75b89ae76e48bc, type: 3}
