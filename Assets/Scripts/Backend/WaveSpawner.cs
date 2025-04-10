@@ -157,10 +157,4 @@ public class WaveSpawner : MonoBehaviour
         }
         yield return null;
    }
-
-    public void PlayMusic()
-    {
-        if (wavesIsActive) MusicManager.PlayBattleMusic();
-        else MusicManager.StopBattleMusic();
-    }
 }

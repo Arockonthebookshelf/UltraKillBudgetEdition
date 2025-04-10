@@ -2,7 +2,11 @@ using UnityEngine;
 
 public class HealthPack : MonoBehaviour
 {
-    [SerializeField]Player player;
+    Player player;
+    private void Awake()
+    {
+        player = PlayerInventory.instance.GetComponent<Player>();
+    }
     [SerializeField] int healAmount = 50;
     private void OnTriggerEnter(Collider other)
     {

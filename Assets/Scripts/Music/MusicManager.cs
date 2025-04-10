@@ -2,37 +2,21 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-    public static MusicManager Instance { get; private set; }
-
     public AudioSource battleAudioSource;
 
-    private void Awake()
+    public void PlayBattleMusic()
     {
-        // Singleton pattern
-        if (Instance == null)
+        if (battleAudioSource && !battleAudioSource.isPlaying)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // Optional: Keeps the manager across scenes
-        }
-        else
-        {
-            Destroy(gameObject); // Prevent duplicate instances
+            battleAudioSource.Play();
         }
     }
 
-    public static void PlayBattleMusic()
+    public void StopBattleMusic()
     {
-        if (Instance && Instance.battleAudioSource && !Instance.battleAudioSource.isPlaying)
+        if (battleAudioSource && battleAudioSource.isPlaying)
         {
-            Instance.battleAudioSource.Play();
-        }
-    }
-
-    public static void StopBattleMusic()
-    {
-        if (Instance && Instance.battleAudioSource && Instance.battleAudioSource.isPlaying)
-        {
-            Instance.battleAudioSource.Stop();
+            battleAudioSource.Stop();
         }
     }
 }
