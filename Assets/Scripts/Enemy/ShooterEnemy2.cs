@@ -75,17 +75,22 @@ public class ShooterEnemy2 : BaseEnemy2
                 Quaternion lookRotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
 
-                GameObject projectile = ObjectPooler.Instance.SpawnFromPool("Projectiles", shootPoint.position, shootPoint.rotation);
-
-                Vector3 targetPosition = player.position - new Vector3(0, yOffset, 0);
-                Vector3 d = (targetPosition - transform.position).normalized;
-
-                projectile.GetComponent<Rigidbody>().AddForce(d * (projectileSpeed), ForceMode.Impulse);
+                Invoke(nameof(Shoot), 0.55f);
                 PlayAttack();
             }
 
             Invoke(nameof(ResetAttack), 2f);
         }
+    }
+
+    void Shoot()
+    {
+        GameObject projectile = ObjectPooler.Instance.SpawnFromPool("Projectiles", shootPoint.position, shootPoint.rotation);
+
+        Vector3 targetPosition = player.position - new Vector3(0, yOffset, 0);
+        Vector3 d = (targetPosition - transform.position).normalized;
+
+        projectile.GetComponent<Rigidbody>().AddForce(d * (projectileSpeed), ForceMode.Impulse);
     }
 
     protected override void ResetAttack()
