@@ -2432,7 +2432,7 @@ MonoBehaviour:
   rayInterval: 1
   whatIsEnemy:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
 --- !u!114 &6516619911254409845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2457,4 +2457,6 @@ MonoBehaviour:
   shootPoint: {fileID: 5209043757349616541}
   meleeRange: 2
   meleeDamage: 20
+  whatIsEnemy:
+    serializedVersion: 2
     m_Bits: 4096
