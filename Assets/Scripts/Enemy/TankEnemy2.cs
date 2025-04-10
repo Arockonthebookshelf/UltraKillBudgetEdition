@@ -22,6 +22,8 @@
 
         private bool alreadyAttacked = false;
 
+        public LayerMask whatIsEnemy;
+
         void Awake()
         {
             PreInitialize();
@@ -59,12 +61,10 @@
         #region Attacks
         private void MeleeATK()
         {
-
-        Debug.Log("Melee Attack");
             agent.SetDestination(transform.position);
 
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, direction, out hit))
+            if (Physics.Raycast(transform.position, direction, out hit, ~whatIsEnemy))
             {
                 Debug.Log(hit.collider.name);
                 IDamagable damagable = hit.collider.GetComponent<IDamagable>();

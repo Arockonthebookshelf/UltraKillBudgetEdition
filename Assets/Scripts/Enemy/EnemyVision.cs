@@ -12,7 +12,7 @@ public class EnemyVision : MonoBehaviour
     [SerializeField] private float rayInterval;
     Vector3 direction;
 
-    public LayerMask enemyHead;
+    public LayerMask whatIsEnemy;
 
     private void Awake()
     {
@@ -31,8 +31,9 @@ public class EnemyVision : MonoBehaviour
             RaycastHit hit;
             direction = (player.transform.position - transform.position).normalized;
 
-            if (Physics.Raycast(transform.position, direction, out hit, rayRangeLength))
+            if (Physics.Raycast(transform.position, direction, out hit, rayRangeLength, ~whatIsEnemy))
             {
+                Debug.Log(hit.collider.gameObject.name);
                 isVisible = hit.transform.gameObject == player;
             }
             else

@@ -2430,7 +2430,7 @@ MonoBehaviour:
   isVisible: 0
   rayRangeLength: 20
   rayInterval: 1
-  enemyHead:
+  whatIsEnemy:
     serializedVersion: 2
     m_Bits: 0
 --- !u!114 &6516619911254409845
@@ -2457,3 +2457,4 @@ MonoBehaviour:
   shootPoint: {fileID: 5209043757349616541}
   meleeRange: 2
   meleeDamage: 20
+    m_Bits: 4096
