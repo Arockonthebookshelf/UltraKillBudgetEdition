@@ -18,16 +18,13 @@ public class TankEnemy2 : BaseEnemy2
     [Header("Melee Settings")]
     [Tooltip("Range within which the enemy will begin attacking (Melee).")]
     [SerializeField] public float meleeRange;
+    [SerializeField] private float meleeDamage = 20f;
 
-    private Rigidbody rb;
     private bool alreadyAttacked = false;
-    Vector3 startPos;
-    Vector3 endPos;
 
     void Awake()
     {
         PreInitialize();
-        rb = GetComponent<Rigidbody>();
     }
 
     private void Start()
@@ -38,6 +35,7 @@ public class TankEnemy2 : BaseEnemy2
     void Update()
     {
         StateChanges();
+        animator.SetFloat("Speed", agent.velocity.magnitude);
     }
     private void PerformAttackStateAction()
     {
@@ -51,7 +49,6 @@ public class TankEnemy2 : BaseEnemy2
                 break;
 
             case AttackState.Missile:
-                PlayMissileATK();
                 MissileATK();
                 break;
 
@@ -62,7 +59,6 @@ public class TankEnemy2 : BaseEnemy2
     #region Attacks
     private void MeleeATK()
     {
-        Debug.Log("TankEnemy melee attacks the player!");
         agent.SetDestination(player.transform.position);
 
         RaycastHit hit;
@@ -73,8 +69,7 @@ public class TankEnemy2 : BaseEnemy2
 
             if (damagable != null)
             {
-                Debug.Log("TankEnemy melee attacks the player!");
-                damagable.Damage(20f, hit.collider);
+                damagable.Damage(meleeDamage, hit.collider);
             }
         }
         Invoke(nameof(ResetAttack), 1f);
@@ -82,32 +77,25 @@ public class TankEnemy2 : BaseEnemy2
     private void MissileATK()
     {
         StartCoroutine(ShootRockets());
-        Invoke(nameof(ResetAttack), 8f); // Cooldown before next attack
+        Invoke(nameof(ResetAttack), 5f);
     }
     #endregion
 
     protected override void Attack()
     {
-        // Stop movement during the attack.
+
         agent.SetDestination(transform.position);
 
-        // Smoothly face the player.
         if (player != null)
         {
             direction = (player.position - transform.position).normalized;
-            if (direction != Vector3.zero)
-            {
-                Quaternion lookRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
-            }
         }
 
-        // Select attack based on distance
         if (distanceToPlayer <= meleeRange)
         {
             currentAtkState = AttackState.Melee;
         }
-        else // Use missile attack if not in melee range
+        else 
         {
             currentAtkState = AttackState.Missile;
         }
@@ -136,12 +124,7 @@ public class TankEnemy2 : BaseEnemy2
     #region Attack Animations
     private void PlayMeleeATK()
     {
-        animator.SetBool("isAttack", true);
-    }
-
-    private void PlayMissileATK()
-    {
-        animator.SetBool("isAttack", true);
+        animator.SetTrigger("Attack");
     }
     #endregion
 }

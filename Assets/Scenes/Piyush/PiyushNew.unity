@@ -1008,17 +1008,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Melee Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 768332908200575298, guid: d8e44dfc9bcb8b24b8bd979cda99f543, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8476142922208609602, guid: d8e44dfc9bcb8b24b8bd979cda99f543, type: 3}
       propertyPath: m_LocalPosition.x
       value: 72.34013
       objectReference: {fileID: 0}
     - target: {fileID: 8476142922208609602, guid: d8e44dfc9bcb8b24b8bd979cda99f543, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 320.2
+      value: 322.07
       objectReference: {fileID: 0}
     - target: {fileID: 8476142922208609602, guid: d8e44dfc9bcb8b24b8bd979cda99f543, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5380,10 +5376,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Melee Enemy (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 768332908200575298, guid: d8e44dfc9bcb8b24b8bd979cda99f543, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8476142922208609602, guid: d8e44dfc9bcb8b24b8bd979cda99f543, type: 3}
       propertyPath: m_LocalPosition.x
       value: 78.29625
@@ -7116,10 +7108,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Melee Enemy (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 768332908200575298, guid: d8e44dfc9bcb8b24b8bd979cda99f543, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8476142922208609602, guid: d8e44dfc9bcb8b24b8bd979cda99f543, type: 3}
       propertyPath: m_LocalPosition.x
       value: 59.79706
@@ -7212,14 +7200,6 @@ PrefabInstance:
     - target: {fileID: 2838439366539506345, guid: 554a4c0a888d6e642879bddefc3e056b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6516619911254409845, guid: 554a4c0a888d6e642879bddefc3e056b, type: 3}
-      propertyPath: RocketPrefab
-      value: 
-      objectReference: {fileID: 252971366136815999, guid: f02c611c882097241b4d2582918a9849, type: 3}
-    - target: {fileID: 6516619911254409845, guid: 554a4c0a888d6e642879bddefc3e056b, type: 3}
-      propertyPath: missileSpeed
-      value: 27.5
       objectReference: {fileID: 0}
     - target: {fileID: 8978419948893133599, guid: 554a4c0a888d6e642879bddefc3e056b, type: 3}
       propertyPath: m_Name
@@ -7412,10 +7392,6 @@ PrefabInstance:
     - target: {fileID: 890583766236707314, guid: e4f782f1a0c9f2541b3a368b8da12ae0, type: 3}
       propertyPath: m_Name
       value: Shooter Enemy2
-      objectReference: {fileID: 0}
-    - target: {fileID: 890583766236707314, guid: e4f782f1a0c9f2541b3a368b8da12ae0, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7717906179005387621, guid: e4f782f1a0c9f2541b3a368b8da12ae0, type: 3}
       propertyPath: m_LocalPosition.x
