@@ -22,7 +22,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: WareHouseFloor
   m_Shader: {fileID: -6465566751694194690, guid: 5c42c2ae10c4d04408993ab15da9c222, type: 3}
-  m_Parent: {fileID: 2100000, guid: 7e5ebab2928fed44ea41885d45f9d1bc, type: 2}
+  m_Parent: {fileID: 2100000, guid: 371b4fd56aa66f94ab069fdbe61bcdd6, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - HEIGHT_COLORS_TEX_ON
