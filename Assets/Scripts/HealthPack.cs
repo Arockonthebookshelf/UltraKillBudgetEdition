@@ -3,7 +3,7 @@ using UnityEngine;
 public class HealthPack : MonoBehaviour
 {
     Player player;
-    private void Awake()
+    private void Start()
     {
         player = PlayerInventory.instance.GetComponent<Player>();
     }
