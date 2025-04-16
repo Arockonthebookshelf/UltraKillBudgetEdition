@@ -109,6 +109,8 @@ public class PlayerMovement : MonoBehaviour
             //Looking around
             Look();
         }
+
+        footsteps();
     }
 
     //Player input
@@ -225,11 +227,15 @@ public class PlayerMovement : MonoBehaviour
         if (grounded && sliding)
         {
             strafeMultiplier = 0.5f; // No sideways movement when crouching
+
+            //sliding audio
         }
         if (wallRunning)
         {
             forwardMultiplier = 0.3f;
             strafeMultiplier = 0.3f;
+
+            //wallrunning audio
         }
         if (surfing)
         {
@@ -542,5 +548,13 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody GetRb()
     {
         return rb;
+    }
+
+    void footsteps ()
+    {
+        if (x != 0 &&  y != 0 && !isCrouching && !grounded)
+        {
+            // footstep audio logic here
+        }
     }
 }
