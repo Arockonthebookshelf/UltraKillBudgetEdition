@@ -8,6 +8,8 @@ public class ExplosiveBarrel : MonoBehaviour, IDamagable
     [SerializeField] float explosionRange;
     [SerializeField] LayerMask layer;
 
+    public AudioSource barrelSound;
+
     public void Damage(float damage, Collider collider)
     {
         barrelHealth -= damage;
@@ -19,6 +21,7 @@ public class ExplosiveBarrel : MonoBehaviour, IDamagable
 
     void Explode()
     {
+        barrelSound.Play();
         Instantiate(explosion, transform.position, Quaternion.identity);
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, layer);
         for (int i = 0; i < enemies.Length; i++)

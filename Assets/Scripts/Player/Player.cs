@@ -15,6 +15,8 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
     Vector3 checkPointPos;
     [HideInInspector] public bool canHeal = false;
 
+    public AudioSource hurtSound;
+
     private bool isHurt;
 
     void Awake()
@@ -42,6 +44,7 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
 
     public void Damage(float damage,Collider hitCollider)
     {
+        hurtSound.Play();
         currentHealth = currentHealth - (int)damage;
         canHeal = true;
         HUD.instance.UpdateHealthBar(currentHealth);

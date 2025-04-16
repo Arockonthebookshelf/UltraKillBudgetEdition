@@ -12,7 +12,9 @@ Animator slidingDoorsAnimator;
 bool doorsOpen;
 public bool locked;
 
-void Awake()
+    public AudioSource doorOpenSound;
+    public AudioSource doorCloseSound;
+    void Awake()
 {
     slidingDoorsAnimator = GetComponent<Animator>();
 }
@@ -31,8 +33,10 @@ void Start()
 
 void OnTriggerEnter(Collider other)
 {
+        
     if(other.CompareTag("Player") && !locked)
     {
+        doorOpenSound.Play();
         slidingDoorsAnimator.Play("DoorOpen");
         doorsOpen = true;
         doorCollider.enabled = false;
@@ -41,8 +45,10 @@ void OnTriggerEnter(Collider other)
 
 void OnTriggerExit(Collider other)
 {
-    if(other.CompareTag("Player") && doorsOpen)
+        
+        if (other.CompareTag("Player") && doorsOpen)
     {
+        doorCloseSound.Play();
         slidingDoorsAnimator.Play("DoorClose");
         doorsOpen = false;
         doorCollider.enabled = true;
