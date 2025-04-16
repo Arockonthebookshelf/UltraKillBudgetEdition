@@ -12,6 +12,7 @@ public class Wave : MonoBehaviour
     bool enemyIsAlive;
     bool enemyIsSet;
     public List<GameObject> enemyList;
+
     public void WaveStart(ref List<GameObject> currentWave,WaveSpawner _spawner)
     {
         spawner = _spawner;
@@ -76,6 +77,7 @@ public class Wave : MonoBehaviour
             }
             OnCurrentEventStop?.Invoke();
         }
+
     }
    
 }

@@ -19,4 +19,32 @@ public class MusicManager : MonoBehaviour
             battleAudioSource.Stop();
         }
     }
+
+    public void PauseMusic()
+    {
+        if (battleAudioSource && battleAudioSource.isPlaying)
+        {
+            battleAudioSource.Pause();
+        }
+    }
+
+    public void ResumeMusic()
+    {
+        if (battleAudioSource && battleAudioSource.isPlaying)
+        {
+            battleAudioSource.Pause();
+        }
+    }
+
+    public void OnEnable()
+    {
+        Wave.OnwaveStart += PlayBattleMusic;
+        Wave.OnwaveStop += StopBattleMusic;
+    }
+
+    public void OnDisable()
+    {
+        Wave.OnwaveStart -= PlayBattleMusic;
+        Wave.OnwaveStop -= StopBattleMusic;
+    }
 }
