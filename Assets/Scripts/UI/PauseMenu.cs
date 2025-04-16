@@ -61,16 +61,20 @@ public class PauseMenu : MonoBehaviour
         gamePaused = false;
         Time.timeScale =1f;
         pauseMenu.SetActive(false);
+
+        musicManager.ResumeMusic();
     }
 
     public void Dead()
-    { 
+    {
+        musicManager.PauseMusic();
         Cursor.lockState = CursorLockMode.None; 
         Cursor.visible = true;
         PlayerMovement.Instance.inputEnabled = false;
         deathMenu.SetActive(true);
         Time.timeScale = 0f;
         OnRestart?.Invoke();
+
     }
 
     public void Respawn()
@@ -92,6 +96,7 @@ public class PauseMenu : MonoBehaviour
 
     public void GameOver()
     {
+        musicManager.PauseMusic();
         PlayerMovement.Instance.inputEnabled = true;
         Time.timeScale = 0f;
         gameOverMenu.SetActive(true);

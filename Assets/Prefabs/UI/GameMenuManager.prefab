@@ -2153,6 +2153,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 7520142451002493918}
   deathMenu: {fileID: 8122036058627721484}
   gameOverMenu: {fileID: 1046236971381149658}
+  musicManager: {fileID: 7556316914536854621, guid: e0d667cfb8fefaf4eae1a7e6c9927ee5, type: 3}
 --- !u!1 &4227733802927813522
 GameObject:
   m_ObjectHideFlags: 0

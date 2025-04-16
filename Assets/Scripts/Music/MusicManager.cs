@@ -30,9 +30,9 @@ public class MusicManager : MonoBehaviour
 
     public void ResumeMusic()
     {
-        if (battleAudioSource && battleAudioSource.isPlaying)
+        if (battleAudioSource)
         {
-            battleAudioSource.Pause();
+            battleAudioSource.UnPause();
         }
     }
 

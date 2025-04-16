@@ -67,6 +67,13 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 wallRunPos;
     private Vector3 previousLookdir;
 
+    public AudioSource footstep;
+    [SerializeField] private float footstepInterval = 0.5f; // time between steps
+    private float footstepTimer = 0f;
+
+
+    public AudioSource JumpAudio;
+
     //Private int
     private int nw;
 
@@ -258,6 +265,7 @@ public class PlayerMovement : MonoBehaviour
     //Player go fly
     private void Jump()
     {
+        JumpAudio.Play();
         if ((grounded || wallRunning || surfing) && readyToJump)
         {
             Vector3 velocity = rb.linearVelocity;
@@ -550,11 +558,21 @@ public class PlayerMovement : MonoBehaviour
         return rb;
     }
 
-    void footsteps ()
+    void footsteps()
     {
-        if (x != 0 &&  y != 0 && !isCrouching && !grounded)
+        if ((x != 0 || y != 0) && !isCrouching && grounded)
         {
-            // footstep audio logic here
+            footstepTimer -= Time.deltaTime;
+
+            if (footstepTimer <= 0f)
+            {
+                footstep.Play();
+                footstepTimer = footstepInterval;
+            }
+        }
+        else
+        {
+            footstepTimer = 0f; // reset so it plays immediately next time you start moving
         }
     }
 }
