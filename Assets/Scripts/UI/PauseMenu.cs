@@ -8,6 +8,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject deathMenu;
     [SerializeField] GameObject gameOverMenu;
+
+    public MusicManager musicManager;
     public static Action OnRestart;
 
     bool gamePaused = false;
@@ -47,6 +49,8 @@ public class PauseMenu : MonoBehaviour
         gamePaused = true;
         Time.timeScale =0f;
         pauseMenu.SetActive(true);
+
+        musicManager.PauseMusic();
     }
 
     public void Resume()
