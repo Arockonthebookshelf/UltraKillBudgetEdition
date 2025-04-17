@@ -9,6 +9,7 @@ public class KeycardPickup : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerInventory.instance.IncreaseClearanceLevel();
+            Debug.Log("badh gaya");
             Destroy(gameObject);
         }
     }

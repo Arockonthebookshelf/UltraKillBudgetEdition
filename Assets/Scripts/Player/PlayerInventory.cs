@@ -10,7 +10,7 @@ public class PlayerInventory : MonoBehaviour , IPersistenceData
         {
             instance = this;
         }
-        
+   
     }
 
     public void LoadData(GameData gameData)
