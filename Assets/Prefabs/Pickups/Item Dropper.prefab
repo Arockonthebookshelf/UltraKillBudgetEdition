@@ -14768,16 +14768,16 @@ MonoBehaviour:
   playerCollider: {fileID: 0}
   healthPerPickup: 10
   canDropHealth: 1
-  healthMinDropAmount: 1
-  healthMaxDropAmount: 3
-  shotgunAmmoPickupMultiplier: 1
+  healthMinDropAmount: 0
+  healthMaxDropAmount: 0
+  shotgunAmmoPickupMultiplier: 5
   canDropShotgunAmmo: 1
-  shotgunAmmoMinDropAmount: 1
-  shotgunAmmoMaxDropAmount: 2
-  energyCellsPickupMultiplier: 10
+  shotgunAmmoMinDropAmount: 2
+  shotgunAmmoMaxDropAmount: 5
+  energyCellsPickupMultiplier: 35
   canDropEnergyCells: 1
   energyCellsMinDropAmount: 2
-  energyCellsMaxDropAmount: 3
+  energyCellsMaxDropAmount: 4
   rocketsPickupMultiplier: 1
   canDropRockets: 1
   rocketsMinDropAmount: 0

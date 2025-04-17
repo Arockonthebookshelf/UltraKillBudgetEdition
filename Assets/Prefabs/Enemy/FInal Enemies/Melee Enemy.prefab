@@ -320,7 +320,7 @@ MonoBehaviour:
   currentState: 0
   attackRange: 3
   enemyHealth: 50
-  itemDropper: {fileID: 8955315523405718012, guid: e3f424c274150ae4b83013bcc6142b9b, type: 3}
+  itemDropper: {fileID: 7100833652028226921, guid: e00709ee1afe3e2438928e8619225a93, type: 3}
   bloodPS: {fileID: 4894089163556558080, guid: 144fcd8f2538684458ffaa56392876cb, type: 3}
   attackRate: 1
   attackDamage: 10
