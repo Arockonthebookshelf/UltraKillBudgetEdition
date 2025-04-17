@@ -78,7 +78,7 @@ public class Player : MonoBehaviour,IDamagable,IPersistenceData
 
     public void LoadData(GameData gameData)
     {
-        Debug.Log("loading");
+       
         transform.position = gameData.playerPosition;
         checkPointPos = gameData.playerPosition;
         currentHealth = gameData.curHealth;

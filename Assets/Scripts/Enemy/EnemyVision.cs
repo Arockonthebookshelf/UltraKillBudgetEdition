@@ -33,7 +33,7 @@ public class EnemyVision : MonoBehaviour
 
             if (Physics.Raycast(transform.position, direction, out hit, rayRangeLength, ~whatIsEnemy))
             {
-                Debug.Log(hit.collider.gameObject.name);
+                
                 isVisible = hit.transform.gameObject == player;
             }
             else
