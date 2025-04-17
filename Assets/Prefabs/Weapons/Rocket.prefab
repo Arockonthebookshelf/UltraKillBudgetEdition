@@ -286,8 +286,8 @@ MonoBehaviour:
   bulletTag: RocketLauncher Projectile
   bloodPrefab: {fileID: 7580687418149800051, guid: 90e30be9f5425c24cb349653ea443937, type: 3}
   useGravity: 0
-  explosionDamage: 50
-  explosionRange: 3
+  explosionDamage: 60
+  explosionRange: 5
   explosionForce: 1200
   maxCollisions: 0
   maxLifetime: 1

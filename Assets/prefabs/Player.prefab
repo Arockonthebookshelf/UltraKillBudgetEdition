@@ -671,7 +671,7 @@ Transform:
   m_GameObject: {fileID: 6998922134993564971}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: -0.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -684,7 +684,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6998922134993564971}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2989177116329a1489288c18f0bf8b84, type: 3}
   m_Name: 
@@ -803,9 +803,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd2353812f0626b49b2a0e4f6144e611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 200
   fallHeight: {x: 0, y: 0, z: 0}
-  currentHealth: 100
+  currentHealth: 150
   canHeal: 0
   hurtSound: {fileID: 6269996680835283752}
 --- !u!114 &4904663452949177519
@@ -834,7 +834,7 @@ MonoBehaviour:
   maxEnergyCellsCount: 200
   maxRocketsCount: 10
   hasPistol: 1
-  hasShotgun: 1
+  hasShotgun: 0
   hasMinigun: 0
   hasRocketLauncher: 0
 --- !u!54 &5433516094661199307
