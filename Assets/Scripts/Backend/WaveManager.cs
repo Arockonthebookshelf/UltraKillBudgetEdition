@@ -11,6 +11,7 @@ public class WaveManager : MonoBehaviour
     public MeleeEnemy2 meleeEnemy;
     public ShooterEnemy2 shooterEnemy;
     public TankEnemy2 tankEnemy;
+    public Transform tempSpawn;
 
 
     void Awake()
@@ -35,7 +36,7 @@ public class WaveManager : MonoBehaviour
         {
           for(int i =0;i<15;i++)
           {
-            GameObject temp = Instantiate(enemy);
+            GameObject temp = Instantiate(enemy,tempSpawn.position,tempSpawn.rotation);
             EnemyList.Add(temp);
             temp.SetActive(false);
           }
