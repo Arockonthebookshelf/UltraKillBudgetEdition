@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.ProBuilder.Shapes;
+
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -42,12 +42,14 @@ public class WaveSpawner : MonoBehaviour
             waveLimit++;
         }
         currentWaveEnemy = Enemies[0];
+        enemyInPool =   waveManager.GetEnemiesToList(currentWaveEnemy);
+        foreach(var enemy in enemyInPool)
+        {
+            Debug.Log(enemy.name);
+        }
     }
     void Start()
     {
-        currentWaveEnemy = Enemies[0];
-        enemyInPool =   waveManager.GetEnemiesToList(currentWaveEnemy);
-       AddEnemyToCurrentWave(currentWaveEnemy);
     }
 
     // Update is called once per frame
@@ -114,7 +116,16 @@ public class WaveSpawner : MonoBehaviour
     }
     public void OnwaveStart()
     {
+        AddEnemyToCurrentWave(currentWaveEnemy);
         Debug.Log("waveStart");
+        foreach(var enemy in currentWave)
+        {
+            Debug.Log(enemy.name);
+        }
+        if(currentWave.Count < 1)
+        {
+            Debug.Log("Empty List");
+        }
         foreach(var door in doors)
         {
             door.LockDoor();

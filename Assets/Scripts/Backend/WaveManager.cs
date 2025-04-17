@@ -6,7 +6,7 @@ public class WaveManager : MonoBehaviour
   public static WaveManager Instance;
   [Tooltip("Use right enemy prefabs ,enemies with subfix 2 are meant to be used")]
     public List<GameObject> spawnEnemies= new List<GameObject>();
-    private List<GameObject> EnemyList = new List<GameObject>();
+    public List<GameObject> EnemyList = new List<GameObject>();
     public Dictionary<WaveSpawner.EnemyType,BaseEnemy2> WaveEnemyDictionary = new Dictionary<WaveSpawner.EnemyType, BaseEnemy2>();
     public MeleeEnemy2 meleeEnemy;
     public ShooterEnemy2 shooterEnemy;
