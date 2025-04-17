@@ -153,11 +153,15 @@ public class WaveSpawner : MonoBehaviour
             return;
         }
         Debug.Log(currentWaveIndex);
-        
+        waveManager.ReturnToList(currentWave);
         currentWaveEnemy = Enemies[currentWaveIndex];
         waveManager.RemoveEnemyFromPool(currentWave);
         AddEnemyToCurrentWave(currentWaveEnemy);
         wave.WaveStart(ref currentWave,this);
+    }
+    public void ReturnEnemies(List<GameObject>enemies)
+    {
+        waveManager.ReturnToList(currentWave);
     }
    IEnumerator WaitTime()
    {

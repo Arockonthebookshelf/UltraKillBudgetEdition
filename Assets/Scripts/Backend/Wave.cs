@@ -75,6 +75,10 @@ public class Wave : MonoBehaviour
             {
                 spawner.OnwaveStart();
             }
+            else{
+                Debug.Log("wave over");
+                spawner.ReturnEnemies(enemyList);
+            }
             OnCurrentEventStop?.Invoke();
         }
 

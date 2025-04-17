@@ -71,5 +71,13 @@ public class WaveManager : MonoBehaviour
         EnemyList.Add(enemy);
       }
     }
+    public void ReturnToList(List<GameObject> objectsToBeAdded)
+    {
+      foreach(var enemy in objectsToBeAdded)
+      {
+        EnemyList.Add(enemy);
+      }
+      objectsToBeAdded.Clear();
+    }
   
 }
