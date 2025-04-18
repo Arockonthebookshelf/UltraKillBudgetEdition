@@ -100,6 +100,7 @@ public abstract class BaseEnemy2 : MonoBehaviour, IDamagable
     public void Damage(float damage, Collider collider)
     {
         enemyHealth = (enemyHealth - damage);
+        Mathf.Clamp(enemyHealth, 0, enemyHealth);
     }
 
     protected virtual void Die()

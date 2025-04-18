@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: MINIGUN_FIRE
-    volume: 1
+    volume: 0.7
     mixer: {fileID: 0}
     sounds:
     - {fileID: 8300000, guid: a52d63044e62e43488fc80396b0384eb, type: 3}
