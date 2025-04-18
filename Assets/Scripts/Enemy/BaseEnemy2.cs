@@ -130,5 +130,7 @@ public abstract class BaseEnemy2 : MonoBehaviour, IDamagable
     {
         enemyHealth = maxEnemyHealth;
         currentState = EnemyState.Move;
+        agent.isStopped = false;
+        isDead = false; 
     }
 }
