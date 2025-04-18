@@ -20,7 +20,7 @@ public class Plasma : MonoBehaviour
     {
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnColliderEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
@@ -30,6 +30,11 @@ public class Plasma : MonoBehaviour
                 damagable.Damage(Damage, other);
                 DisableObj();
             }
+        }
+
+        if (other.gameObject.layer != LayerMask.NameToLayer("Player"))
+        {
+            DisableObj();
         }
     }
 }
