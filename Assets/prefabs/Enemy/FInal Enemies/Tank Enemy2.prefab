@@ -2447,7 +2447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   attackRange: 100
-  enemyHealth: 150
+  maxEnemyHealth: 200
   itemDropper: {fileID: 6554447452045145642, guid: c43a1f7f25a604443b8b13c7a7bb6b47, type: 3}
   bloodPS: {fileID: 4894089163556558080, guid: 144fcd8f2538684458ffaa56392876cb, type: 3}
   currentAtkState: 0

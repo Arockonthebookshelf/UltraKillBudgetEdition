@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diableTimer: 3
-  Damage: 20
+  Damage: 15
 --- !u!1 &337902525589590665
 GameObject:
   m_ObjectHideFlags: 0

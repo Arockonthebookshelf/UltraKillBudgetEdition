@@ -18,7 +18,8 @@ public abstract class BaseEnemy2 : MonoBehaviour, IDamagable
     [SerializeField] protected float attackRange = 2f;
 
     [Header("Enemy Health")]
-    [SerializeField] protected float enemyHealth;
+    [SerializeField] protected float maxEnemyHealth;
+    protected float enemyHealth;
 
     [Header("Item Drop")]
     public GameObject itemDropper;
@@ -45,6 +46,7 @@ public abstract class BaseEnemy2 : MonoBehaviour, IDamagable
     protected void Initialize()
     {
         currentState = EnemyState.Move;
+        enemyHealth = maxEnemyHealth;
     }
 
     protected void StateChanges()
@@ -112,6 +114,7 @@ public abstract class BaseEnemy2 : MonoBehaviour, IDamagable
         Invoke("DestroyEnemy", 0.1f);
     }
 
+
     #region Animations Function
     protected virtual void PlayAttack()
     {
@@ -122,5 +125,10 @@ public abstract class BaseEnemy2 : MonoBehaviour, IDamagable
     private void DestroyEnemy()
     {
         gameObject.SetActive(false);
+    }
+    void OnDisable()
+    {
+        enemyHealth = maxEnemyHealth;
+        currentState = EnemyState.Move;
     }
 }
