@@ -219,7 +219,7 @@ MonoBehaviour:
   isVisible: 0
   rayRangeLength: 30
   rayInterval: 1
-  enemyHead:
+  whatIsEnemy:
     serializedVersion: 2
     m_Bits: 0
 --- !u!114 &5420220189790543957
