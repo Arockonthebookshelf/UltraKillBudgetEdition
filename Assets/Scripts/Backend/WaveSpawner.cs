@@ -139,6 +139,7 @@ public class WaveSpawner : MonoBehaviour
     public void NextWave()
     {
         Debug.Log("next wave");
+        StartCoroutine("WaitTime");
         currentWaveIndex++;
         if(currentWaveIndex >= waveLimit)
         {
