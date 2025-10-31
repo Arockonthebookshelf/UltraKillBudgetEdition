@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isVisible: 0
-  rayRangeLength: 100
+  rayRangeLength: 200
   rayInterval: 1
   whatIsEnemy:
     serializedVersion: 2
@@ -329,7 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  attackRange: 80
+  attackRange: 150
   maxEnemyHealth: 70
   itemDropper: {fileID: 7100833652028226921, guid: e00709ee1afe3e2438928e8619225a93, type: 3}
   bloodPS: {fileID: 4894089163556558080, guid: 144fcd8f2538684458ffaa56392876cb, type: 3}
