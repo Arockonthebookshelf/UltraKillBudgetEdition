@@ -169,7 +169,7 @@ public class WaveSpawner : MonoBehaviour
         bool waitForEnemy=true;
         while(waitForEnemy)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1.5f);
         }
         yield return null;
    }
